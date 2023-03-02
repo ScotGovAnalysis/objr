@@ -1,12 +1,12 @@
 Package: objectiveR
-Title: What the Package Does (One Line, Title Case)
+Title: Interact with Objective Product APIs
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Scottish Government", , , "statistics.enquiries@gov.scot", role = "cph"),
+    person("Alice", "Byers", , "alice.byers@gov.scot", c("aut", "cre"))
+  )
+Description: This package provides helper functions for using APIs to interact with Objective products such as Connect and eRDM. 
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
