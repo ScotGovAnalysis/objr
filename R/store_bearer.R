@@ -12,16 +12,16 @@ store_bearer <- function(response, store_env = .GlobalEnv) {
 
   # Check request is in expected format
   if(!inherits(response, "httr2_response")) {
-    cli::cli_abort(
+    cli::cli_abort(c(
       "x" = "{.var response} must be an HTTP response object"
-    )
+    ))
   }
 
   # Check Authorization header exists
   if(!httr2::resp_header_exists(response, "Authorization")) {
-    cli::cli_abort(
+    cli::cli_abort(c(
       "x" = "{.var response} must have Authorization header"
-    )
+    ))
   }
 
   token <- gsub("bearer ", "", httr2::resp_header(response, "Authorization"))
