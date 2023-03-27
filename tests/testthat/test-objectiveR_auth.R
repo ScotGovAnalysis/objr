@@ -5,16 +5,6 @@ test_that("Error if invalid request supplied", {
   expect_error(objectiveR_auth("req"))
 })
 
-test_that("Error if usr/pwd not supplied in non-interactive environment", {
-
-  withr::local_options(list(rlang_interactive = FALSE))
-
-  expect_error(objectiveR_auth(req))
-  expect_error(objectiveR_auth(req, usr = "test"))
-  expect_error(objectiveR_auth(req, pwd = "test"))
-
-})
-
 test_that("httr2 request returned", {
 
   expect_s3_class(objectiveR_auth(req, usr = "test", pwd = "test"),

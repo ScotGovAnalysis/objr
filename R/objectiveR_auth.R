@@ -1,3 +1,49 @@
+#' Helper function for getting valid credentials
+#'
+#' @param type Either 'usr' (username) or 'pwd' (password).
+#' @param value Credential value to verify.
+#'
+#' @return
+
+credential_helper <- function(type = c("usr", "pwd"), value = NULL) {
+
+  type <- match.arg(type)
+
+  # If not interactive, value must be supplied
+  if(!rlang::is_interactive() & is.null(value)) {
+    cli::cli_abort(c(
+      "x" = paste0("{.var ", type, "} must be supplied.")
+    ))
+  }
+
+  # If interactive and value not supplied, prompt user to enter
+  prompt <- if(type == "usr") {
+    "Enter email registered with Objective Connect:"
+  } else {
+    "Enter Objective Connect password:"
+  }
+
+  if(rlang::is_interactive() & is.null(value)) {
+    value <- rstudioapi::askForPassword(prompt)
+  }
+
+  # Check value is not null
+  if(is.null(value)) {
+    cli::cli_abort(c("x" = paste0("{.var ", type, "} must not be null")))
+  }
+
+  # Check value is at least 1 character long
+  if(!nchar(value) > 0) {
+    cli::cli_abort(c(
+      "x" = paste0("{.var ", type, "} must be more than 0 characters")
+    ))
+  }
+
+  value
+
+}
+
+
 #' Authenticate HTTP request
 #'
 #' @description This sets the authorisation header of an HTTP request. If a
@@ -38,8 +84,9 @@ objectiveR_auth <- function(req, usr = NULL, pwd = NULL) {
   bearer_token <-
     if(exists("bearer", where = .GlobalEnv)) {
       get("bearer", pos = .GlobalEnv)
-    } else
+    } else {
       NULL
+    }
 
   if(!is.null(bearer_token)) {
 
@@ -47,35 +94,8 @@ objectiveR_auth <- function(req, usr = NULL, pwd = NULL) {
 
   } else {
 
-    # If usr isn't supplied, prompt user to enter if interactive
-    if(is.null(usr)) {
-
-      usr <- if(rlang::is_interactive()) {
-        rstudioapi::askForPassword(
-          "Enter email registered with Objective Connect:"
-        )
-      } else {
-        cli::cli_abort(c(
-          "x" = "{.var usr} must be supplied."
-        ))
-      }
-
-    }
-
-    # If pwd isn't supplied, prompt user to enter if interactive
-    if(is.null(pwd)) {
-
-      pwd <- if(rlang::is_interactive()) {
-        rstudioapi::askForPassword(
-          "Enter email registered with Objective Connect:"
-        )
-      } else {
-        cli::cli_abort(c(
-          "x" = "{.var pwd} must be supplied."
-        ))
-      }
-
-    }
+    usr <- credential_helper("usr", usr)
+    pwd <- credential_helper("pwd", pwd)
 
     httr2::req_auth_basic(req, usr, pwd)
 
