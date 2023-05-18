@@ -13,7 +13,6 @@ RoxygenNote: 7.2.3
 Imports:
     cli,
     httr2,
-    magrittr,
     rstudioapi,
     rlang
 Suggests: 

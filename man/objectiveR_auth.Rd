@@ -24,14 +24,14 @@ the user is prompted to enter an authenticating username and password.
 }
 \examples{
 req <-
-  httr2::request("http://example.com") \%>\%
+  httr2::request("http://example.com") |>
   objectiveR_auth(usr = "ex-usr", pwd = "ex-pwd")
 req
-req \%>\% httr2::req_dry_run()
+req |> httr2::req_dry_run()
 
 bearer <- "test-bearer"
-req <- httr2::request("http://example.com") \%>\% objectiveR_auth()
+req <- httr2::request("http://example.com") |> objectiveR_auth()
 req
-req \%>\% httr2::req_dry_run()
+req |> httr2::req_dry_run()
 
 }
