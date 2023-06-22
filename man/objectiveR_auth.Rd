@@ -19,7 +19,7 @@ A modified httr2 \link[=request]{httr2::request()}
 }
 \description{
 This sets the authorisation header of an HTTP request. If a
-bearer variable exists in global environment, this is used, otherwise,
+token variable exists in global environment, this is used, otherwise,
 the user is prompted to enter an authenticating username and password.
 }
 \examples{
@@ -29,7 +29,7 @@ req <-
 req
 req |> httr2::req_dry_run()
 
-bearer <- "test-bearer"
+token <- "test"
 req <- httr2::request("http://example.com") |> objectiveR_auth()
 req
 req |> httr2::req_dry_run()

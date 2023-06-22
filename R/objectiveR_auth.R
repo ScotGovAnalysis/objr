@@ -1,7 +1,7 @@
 #' Authenticate HTTP request
 #'
 #' @description This sets the authorisation header of an HTTP request. If a
-#' bearer variable exists in global environment, this is used, otherwise,
+#' token variable exists in global environment, this is used, otherwise,
 #' the user is prompted to enter an authenticating username and password.
 #'
 #' @param req An httr2 [httr2::request()][request]
@@ -19,7 +19,7 @@
 #' req
 #' req |> httr2::req_dry_run()
 #'
-#' bearer <- "test-bearer"
+#' token <- "test"
 #' req <- httr2::request("http://example.com") |> objectiveR_auth()
 #' req
 #' req |> httr2::req_dry_run()
@@ -35,16 +35,16 @@ objectiveR_auth <- function(req, usr = NULL, pwd = NULL) {
     ))
   }
 
-  bearer_token <-
-    if(exists("bearer", where = .GlobalEnv)) {
-      get("bearer", pos = .GlobalEnv)
+  session_token <-
+    if(exists("token", where = parent.frame())) {
+      get("token", pos = parent.frame())
     } else {
       NULL
     }
 
-  if(!is.null(bearer_token)) {
+  if(!is.null(session_token)) {
 
-    httr2::req_auth_bearer_token(req, bearer_token)
+    httr2::req_headers(req, Authorization = session_token)
 
   } else {
 
