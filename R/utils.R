@@ -3,7 +3,7 @@
 #' @param type One of 'usr' (username), 'pwd' (password), or 'proxy'.
 #' @param value Value to verify. If NULL, user will be prompted to enter.
 #'
-#' @return
+#' @return Validated value
 
 valid_input <- function(type = c("usr", "pwd", "proxy"), value = NULL) {
 

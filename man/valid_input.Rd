@@ -11,6 +11,9 @@ valid_input(type = c("usr", "pwd", "proxy"), value = NULL)
 
 \item{value}{Value to verify. If NULL, user will be prompted to enter.}
 }
+\value{
+Validated value
+}
 \description{
 Helper function for getting valid input value
 }
