@@ -14,9 +14,13 @@ get_user_id <- function(use_proxy = FALSE) {
     objectiveR_auth() |>
     httr2::req_user_agent("objectiveR")
 
-  request <- httr2::req_proxy(request, get_proxy())
+  if(use_proxy) {
+    request <- httr2::req_proxy(request, get_proxy())
+  }
 
   response <- httr2::req_perform(request)
+
+  store_token(response, store_env = parent.frame())
 
   httr2::resp_body_json(response)$uuid
 
