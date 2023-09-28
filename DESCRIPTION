@@ -1,11 +1,11 @@
 Package: objectiveR
-Title: Interact with Objective Product APIs
+Title: R wrapper for Objective APIs
 Version: 0.0.0.9000
 Authors@R: c(
     person("Scottish Government", , , "statistics.enquiries@gov.scot", role = "cph"),
     person("Alice", "Byers", , "alice.byers@gov.scot", c("aut", "cre"))
   )
-Description: This package provides helper functions for using APIs to interact with Objective products such as Connect and eRDM. 
+Description: An R package wrapper for Objective APIs including Objective Connect.
 License: MIT + file LICENCE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
