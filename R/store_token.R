@@ -7,9 +7,9 @@
 #' @return Returns the token invisibly. This function is primarily used
 #' for its side effect - an environment variable is created called "token".
 
-store_token <- function(response, store_env = parent.frame()) {
+store_token <- function(response, store_env = globalenv()) {
 
-  # Check request is in expected format
+  # Check response is in expected format
   if(!inherits(response, "httr2_response")) {
     cli::cli_abort(c(
       "x" = "{.var response} must be an HTTP response object"

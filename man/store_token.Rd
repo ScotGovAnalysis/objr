@@ -4,7 +4,7 @@
 \alias{store_token}
 \title{Store session token from API response}
 \usage{
-store_token(response, store_env = parent.frame())
+store_token(response, store_env = globalenv())
 }
 \arguments{
 \item{response}{An httr2 response object; must contain an 'Authorization'
