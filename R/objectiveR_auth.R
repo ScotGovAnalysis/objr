@@ -13,16 +13,11 @@
 #' @return A modified httr2 [httr2::request()][request]
 #'
 #' @examples
-#' req <-
-#'   httr2::request("http://example.com") |>
+#' httr2::request("http://example.com") |>
 #'   objectiveR_auth(usr = "ex-usr", pwd = "ex-pwd")
-#' req
-#' req |> httr2::req_dry_run()
 #'
 #' token <- "test"
-#' req <- httr2::request("http://example.com") |> objectiveR_auth()
-#' req
-#' req |> httr2::req_dry_run()
+#' httr2::request("http://example.com") |> objectiveR_auth()
 #'
 #' @export
 
