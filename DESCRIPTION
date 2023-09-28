@@ -6,7 +6,7 @@ Authors@R: c(
     person("Alice", "Byers", , "alice.byers@gov.scot", c("aut", "cre"))
   )
 Description: This package provides helper functions for using APIs to interact with Objective products such as Connect and eRDM. 
-License: MIT + file LICENSE
+License: MIT + file LICENCE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
