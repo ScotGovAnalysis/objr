@@ -4,15 +4,10 @@
 \alias{objectiveR_auth}
 \title{Authenticate HTTP request}
 \usage{
-objectiveR_auth(req, usr = NULL, pwd = NULL)
+objectiveR_auth(req)
 }
 \arguments{
 \item{req}{An httr2 \link[=request]{httr2::request()}}
-
-\item{usr, pwd}{Username and password for basic authentication.
-These arguments are required when using basic authentication in a
-non-interactive environment. If working interactively, these
-can be ignored and RStudio will prompt you to enter.}
 }
 \value{
 A modified httr2 \link[=request]{httr2::request()}
@@ -23,8 +18,10 @@ token variable exists in global environment, this is used, otherwise,
 the user is prompted to enter an authenticating username and password.
 }
 \examples{
+\dontrun{
 httr2::request("http://example.com") |>
-  objectiveR_auth(usr = "ex-usr", pwd = "ex-pwd")
+  objectiveR_auth()
+}
 
 token <- "test"
 httr2::request("http://example.com") |> objectiveR_auth()

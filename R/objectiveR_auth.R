@@ -5,23 +5,21 @@
 #' the user is prompted to enter an authenticating username and password.
 #'
 #' @param req An httr2 [httr2::request()][request]
-#' @param usr,pwd Username and password for basic authentication.
-#' These arguments are required when using basic authentication in a
-#' non-interactive environment. If working interactively, these
-#' can be ignored and RStudio will prompt you to enter.
 #'
 #' @return A modified httr2 [httr2::request()][request]
 #'
 #' @examples
+#' \dontrun{
 #' httr2::request("http://example.com") |>
-#'   objectiveR_auth(usr = "ex-usr", pwd = "ex-pwd")
+#'   objectiveR_auth()
+#' }
 #'
 #' token <- "test"
 #' httr2::request("http://example.com") |> objectiveR_auth()
 #'
 #' @export
 
-objectiveR_auth <- function(req, usr = NULL, pwd = NULL) {
+objectiveR_auth <- function(req) {
 
   # Check request is correct type
   if(!inherits(req, "httr2_request")) {
@@ -30,23 +28,20 @@ objectiveR_auth <- function(req, usr = NULL, pwd = NULL) {
     ))
   }
 
-  session_token <-
-    if(exists("token", where = parent.frame())) {
-      get("token", pos = parent.frame())
-    } else {
-      NULL
-    }
+  if(exists("token", where = parent.frame())) {
 
-  if(!is.null(session_token)) {
-
-    httr2::req_headers(req, Authorization = session_token)
+    httr2::req_headers(
+      req,
+      Authorization = get("token", pos = parent.frame())
+    )
 
   } else {
 
-    usr <- valid_input("usr", usr)
-    pwd <- valid_input("pwd", pwd)
-
-    httr2::req_auth_basic(req, usr, pwd)
+    httr2::req_auth_basic(
+      req,
+      input_value("usr"),
+      input_value("pwd")
+    )
 
   }
 

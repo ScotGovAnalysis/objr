@@ -1,43 +1,100 @@
-#' Helper function for getting valid input value
+#' Helper function for validating input value
 #'
-#' @param type One of 'usr' (username), 'pwd' (password), or 'proxy'.
-#' @param value Value to verify. If NULL, user will be prompted to enter.
+#' @param value Value to verify
+#' @param warn Logical. Indicates whether to produce warning if value is invalid
 #'
 #' @return Validated value
 
-valid_input <- function(type = c("usr", "pwd", "proxy"), value = NULL) {
+check_valid <- function(value, warn = FALSE) {
 
-  type <- match.arg(type)
-
-  # If not interactive, value must be supplied
-  if(!rlang::is_interactive() & is.null(value)) {
+  # Works for single value only (not vectorised)
+  if(length(value) > 1) {
     cli::cli_abort(
-      c("x" = paste0("{.var ", type, "} value must be supplied.")),
-      class = "objectiveR_value-not-supplied"
+      c("x" = "Value must be length 1"),
+      class = "objectiveR_value-invalid-length"
     )
   }
 
-  # Set text for pop up prompt, if required
-  prompt <- switch(
-    type,
-    "usr" = "Enter email registered with Objective Connect:",
-    "pwd" = "Enter Objective Connect password:",
-    "proxy" = "Please enter proxy URL:"
-  )
+  valid <- !(is.null(value) || is.na(value) || !nchar(value) > 0)
 
-  if(rlang::is_interactive() & is.null(value)) {
-    value <- rstudioapi::askForPassword(prompt)
-  }
-
-  # Check value is not null and at least 1 character long
-  if(is.null(value) || !nchar(value) > 0) {
-    cli::cli_abort(
-      c("x" = paste0("{.var ", type, "} value must not be null and must be ",
-                     "more than 0 characters in length.")),
+  # If invalid and warn = TRUE, return warning
+  if(!valid & warn) {
+    cli::cli_warn(
+      c("!" = "`value` must exist and be at least 1 character in length"),
       class = "objectiveR_value-invalid"
     )
   }
 
+  # Return logical
+  valid
+
+}
+
+
+#' Look for or ask for input value
+#'
+#' @description The function looks for the relevant value from environment
+#' variables. If this doesn't exist and the session is interactive, the user
+#' will be prompted to input a value. The value is then validated using
+#' \code{check_valid()}.
+#'
+#' Expected environment variables for each \code{type} are as follows:
+#' * usr: `OBJECTIVER_USR`
+#' * pwd: `OBJECTIVER_PWD`
+#' * proxy: `OBJECTIVER_PROXY`
+#'
+#' @param type One of 'usr' (username), 'pwd' (password), or 'proxy'.
+#'
+#' @return Validated value
+
+input_value <- function(type = c("usr", "pwd", "proxy")) {
+
+  type <- match.arg(type)
+
+  envvar <- switch(
+    type,
+    "usr" = "OBJECTIVER_USR",
+    "pwd" = "OBJECTIVER_PWD",
+    "proxy" = "OBJECTIVER_PROXY"
+  )
+
+  # Get environment variable
+  value <- Sys.getenv(envvar)
+
+  # If environment variable doesn't exist or not valid
+  if(!check_valid(value)) {
+
+    # Error if session not interactive
+    if(!rlang::is_interactive()) {
+      cli::cli_abort(
+        c("x" = "Environment variable (`{envvar}`) doesn't exist"),
+        class = "objectiveR_invalid-envvar"
+      )
+    }
+
+    # Set text for pop up prompt
+    prompt <- switch(
+      type,
+      "usr" = "Enter email registered with Objective Connect:",
+      "pwd" = "Enter Objective Connect password:",
+      "proxy" = "Please enter proxy URL:"
+    )
+
+    # Give user 2 attempts to enter valid input
+    for(i in 1:2) {
+      value <- rstudioapi::askForPassword(prompt)
+      if(check_valid(value)) break
+    }
+
+    if(!check_valid(value)) {
+      cli::cli_abort(
+        c("x" = "Failed to provide valid input")
+      )
+    }
+
+  }
+
+  # Return value
   value
 
 }
