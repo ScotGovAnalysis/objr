@@ -1,8 +1,13 @@
 #' Get user ID for current authenticated user
 #'
-#' @param use_proxy Logical; to indicate whether proxy required.
+#' @inheritParams objectiveR
 #'
 #' @return A character value of the authenticated user's ID
+#'
+#' @examples
+#' \dontrun{
+#' my_user_id()
+#' }
 #'
 #' @export
 

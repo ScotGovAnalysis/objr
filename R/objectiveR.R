@@ -3,7 +3,7 @@
 #' @param endpoint The endpoint to append to the API server address
 #' @param method HTTP method to use; e.g. `GET`, `POST`, `PUT`.
 #' Defaults to `GET`.
-#' @param ... Named parameters to pass to header
+#' @param ... Named parameters to pass to request body
 #' @param accept Accept header
 #' @param use_proxy Logical to indicate whether to use proxy
 #'
@@ -17,18 +17,16 @@ objectiveR <- function(endpoint,
                        accept = "application/json",
                        use_proxy = FALSE) {
 
-  # Define header parameters
-  params <- list(
-    #...,
-    accept = accept
-  )
+  # Define body parameters
+  params <- list(...)
 
   # Build request
   request <-
     httr2::request("https://secure.objectiveconnect.co.uk/publicapi/1") |>
     httr2::req_url_path_append(endpoint) |>
     httr2::req_method(method) |>
-    httr2::req_headers(!!!params) |>
+    httr2::req_headers(accept = accept) |>
+    httr2::req_body_json(params) |>
     objectiveR_auth() |>
     httr2::req_user_agent(
       "objectiveR (https://github.com/DataScienceScotland/objectiveR)"

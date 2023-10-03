@@ -18,7 +18,7 @@ objectiveR(
 \item{method}{HTTP method to use; e.g. \code{GET}, \code{POST}, \code{PUT}.
 Defaults to \code{GET}.}
 
-\item{...}{Named parameters to pass to header}
+\item{...}{Named parameters to pass to request body}
 
 \item{accept}{Accept header}
 
