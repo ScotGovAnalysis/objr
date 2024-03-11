@@ -43,7 +43,7 @@ remotes::install_local(
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT
-License](LICENCE).
+Licence](LICENCE).
 This covers both the codebase and any sample code in
 the documentation.
 
