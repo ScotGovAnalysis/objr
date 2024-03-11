@@ -20,4 +20,25 @@ without_internet({
 
   })
 
+
+
+})
+
+with_mock_api({
+
+  withr::with_envvar(
+
+    new = c("OBJECTIVER_USR" = "test_usr",
+            "OBJECTIVER_PWD" = "test_pwd",
+            "OBJECTIVER_PROXY" = "test_proxy"),
+
+    code = {
+
+      test_that("Valid response", {
+        user <- objectiveR("me", use_proxy = TRUE)
+        expect_equal(user$uuid, "1234")
+      })
+
+    })
+
 })

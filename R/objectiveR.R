@@ -30,7 +30,8 @@ objectiveR <- function(endpoint,
     objectiveR_auth() |>
     httr2::req_user_agent(
       "objectiveR (https://github.com/ScotGovAnalysis/objectiveR)"
-    )
+    ) |>
+    httr2::req_error(body = error)
 
   # Add proxy details
   if(use_proxy) {
@@ -49,4 +50,20 @@ objectiveR <- function(endpoint,
   # Parse the response
   httr2::resp_body_json(response)
 
+}
+
+
+#' Translate error code into helpful message
+#'
+#' @param response An httr2 [httr2::response()][response]
+#'
+#' @return A character vector to include in error message.
+
+error <- function(response) {
+  code <- httr2::resp_status(response)
+  if(code == 401) {
+    "Authorisation failed. Check username / password / token."
+  } else {
+    NULL
+  }
 }
