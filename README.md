@@ -4,8 +4,8 @@
 <!-- badges: start -->
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/DataScienceScotland/objectiveR)](https://github.com/DataScienceScotland/objectiveR/releases/latest)
-[![R build status](https://github.com/DataScienceScotland/objectiveR/workflows/R-CMD-check/badge.svg)](https://github.com/DataScienceScotland/objectiveR/actions)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/scotgovanalysis/objectiveR)](https://github.com/scotgovanalysis/objectiveR/releases/latest)
+[![R build status](https://github.com/scotgovanalysis/objectiveR/workflows/R-CMD-check/badge.svg)](https://github.com/scotgovanalysis/objectiveR/actions)
 
 <!-- badges: end -->
 
@@ -19,14 +19,14 @@ Note that this method requires the `remotes` package and may not work from withi
 
 ``` r
 remotes::install_github(
-  "DataScienceScotland/objectiveR",
+  "ScotGovAnalysis/objectiveR",
   upgrade = "never",
   build_vignettes = TRUE
 )
 ```
 
 Finally, the package can also be installed by downloading the [zip of the
-repository](https://github.com/DataScienceScotland/objectiveR/archive/main.zip)
+repository](https://github.com/ScotGovAnalysis/objectiveR/archive/main.zip)
 and running the following code, replacing the section marked `<>`
 (including the arrows themselves) with the location of the downloaded
 zip:
