@@ -20,44 +20,52 @@ without_internet({
 
 with_mock_api({
 
-  test_that("Function returns invisible", {
+  withr::with_envvar(
 
-    expect_invisible(
-      suppressMessages(create_folder(
-        folder_name = "test_folder_name",
-        workspace_uuid = "test_workspace"
-      ))
-    )
+    new = c("OBJECTIVER_USR" = "test_usr",
+            "OBJECTIVER_PWD" = "test_pwd"),
 
-  })
+    code = {
 
-  test_that("Valid response without parent folder", {
+      test_that("Function returns invisible", {
 
-    resp <- suppressMessages(create_folder(
-      folder_name = "test_folder_name",
-      workspace_uuid = "test_workspace"
-    ))
+        expect_invisible(
+          suppressMessages(create_folder(
+            folder_name = "test_folder_name",
+            workspace_uuid = "test_workspace"
+          ))
+        )
 
-    expect_equal(resp$type, "FOLDER")
-    expect_equal(resp$name, "test_folder_name")
-    expect_equal(resp$workspaceUuid, "test_workspace")
+      })
 
-  })
+      test_that("Valid response without parent folder", {
 
+        resp <- suppressMessages(create_folder(
+          folder_name = "test_folder_name",
+          workspace_uuid = "test_workspace"
+        ))
 
-  test_that("Valid response with parent folder", {
+        expect_equal(resp$type, "FOLDER")
+        expect_equal(resp$name, "test_folder_name")
+        expect_equal(resp$workspaceUuid, "test_workspace")
 
-    resp <- suppressMessages(create_folder(
-      folder_name = "test_folder_name",
-      workspace_uuid = "test_workspace",
-      parent_uuid = "test_parent"
-    ))
+      })
 
-    expect_equal(resp$type, "FOLDER")
-    expect_equal(resp$name, "test_folder_name")
-    expect_equal(resp$workspaceUuid, "test_workspace")
-    expect_equal(resp$parentUuid, "test_parent")
+      test_that("Valid response with parent folder", {
 
-  })
+        resp <- suppressMessages(create_folder(
+          folder_name = "test_folder_name",
+          workspace_uuid = "test_workspace",
+          parent_uuid = "test_parent"
+        ))
+
+        expect_equal(resp$type, "FOLDER")
+        expect_equal(resp$name, "test_folder_name")
+        expect_equal(resp$workspaceUuid, "test_workspace")
+        expect_equal(resp$parentUuid, "test_parent")
+
+      })
+
+    })
 
 })
