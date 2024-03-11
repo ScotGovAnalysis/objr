@@ -1,5 +1,5 @@
 Package: objectiveR
-Title: R wrapper for Objective APIs
+Title: Wrapper for Objective APIs
 Version: 0.0.0.9000
 Authors@R: c(
     person("Scottish Government", , , "statistics.enquiries@gov.scot", role = "cph"),
@@ -7,6 +7,10 @@ Authors@R: c(
   )
 Description: An R package wrapper for Objective APIs including Objective Connect.
 License: MIT + file LICENCE
+URL:
+  https://github.com/ScotGovAnalysis/objectiveR, 
+  https://ScotGovAnalysis.github.io/objectiveR
+BugReports: https://github.com/ScotGovAnalysis/objectiveR/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
