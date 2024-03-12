@@ -60,10 +60,11 @@ objectiveR <- function(endpoint,
 #' @return A character vector to include in error message.
 
 error <- function(response) {
-  code <- httr2::resp_status(response)
-  if(code == 401) {
-    "Authorisation failed. Check username / password / token."
-  } else {
-    NULL
-  }
+
+  switch(
+    as.character(httr2::resp_status(response)),
+    "401" = "Authorisation failed. Check username / password / token.",
+    "403" = paste("Operation not permitted.")
+  )
+
 }
