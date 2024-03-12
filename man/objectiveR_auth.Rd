@@ -7,10 +7,10 @@
 objectiveR_auth(req)
 }
 \arguments{
-\item{req}{An httr2 \link[=request]{httr2::request()}}
+\item{req}{An \href{https://httr2.r-lib.org/reference/request.html}{httr2 request}}
 }
 \value{
-A modified httr2 \link[=request]{httr2::request()}
+A modified \href{https://httr2.r-lib.org/reference/request.html}{httr2 request}
 }
 \description{
 This sets the authorisation header of an HTTP request. If a

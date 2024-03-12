@@ -4,9 +4,9 @@
 #' token variable exists in global environment, this is used, otherwise,
 #' the user is prompted to enter an authenticating username and password.
 #'
-#' @param req An httr2 [httr2::request()][request]
+#' @param req An [httr2 request](https://httr2.r-lib.org/reference/request.html)
 #'
-#' @return A modified httr2 [httr2::request()][request]
+#' @return A modified [httr2 request](https://httr2.r-lib.org/reference/request.html)
 #'
 #' @examples
 #' \dontrun{
