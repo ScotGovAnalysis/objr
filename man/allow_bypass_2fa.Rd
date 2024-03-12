@@ -15,5 +15,6 @@ selected participants to bypass two step workspace verification.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \description{
-Allow/disallow bypassing of two factor authentication for workgroup
+More information on two factor authentication can be found in
+\code{vignette("faqs")}.
 }

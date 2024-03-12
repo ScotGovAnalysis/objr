@@ -1,5 +1,8 @@
 #' Allow/disallow bypassing of two factor authentication for workgroup
 #'
+#' @description More information on two factor authentication can be found in
+#' `vignette("faqs")`.
+#'
 #' @param workgroup_uuid Workgroup UUID
 #' @param allow_bypass Logical to indicate whether the workgroup should allow
 #' selected participants to bypass two step workspace verification.
@@ -32,13 +35,15 @@ allow_bypass_2fa <- function(workgroup_uuid,
 
 #' Allow/disallow bypassing of two factor authentication for participant
 #'
+#' @description Note that this setting can only be updated by a workspace owner.
+#' More information on two factor authentication can be found in
+#' `vignette("faqs")`.
+#'
 #' @param participant_uuid Participant UUID (note that this is different to the
 #' user UUID)
 #' @param allow_bypass Logical to indicate whether the participant should be
 #' able to bypass two step verification for workspace.
 #' @inheritParams objectiveR
-#'
-#' @details Note: This setting can only be updated by a workspace owner.
 #'
 #' @export
 

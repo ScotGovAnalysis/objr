@@ -20,8 +20,7 @@ able to bypass two step verification for workspace.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \description{
-Allow/disallow bypassing of two factor authentication for participant
-}
-\details{
-Note: This setting can only be updated by a workspace owner.
+Note that this setting can only be updated by a workspace owner.
+More information on two factor authentication can be found in
+\code{vignette("faqs")}.
 }
