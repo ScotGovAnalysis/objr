@@ -1,0 +1,13 @@
+structure(list(method = "GET", url = "https://api/participants?workspaceUuid=test_workspace_uuid",
+    status_code = 200L, headers = structure(list(Date = "Tue, 12 Mar 2024 10:41:27 GMT",
+        `Content-Type` = "application/json", `Transfer-Encoding` = "chunked",
+        Connection = "close", `X-CONNECT-MDC` = "apiNZiBWDNO",
+        `X-Frame-Options` = "deny", `X-XSS-Protection` = "1; mode=block",
+        `Cache-Control` = "no-cache, no-store", Expires = "0",
+        Pragma = "no-cache", `Strict-Transport-Security` = "max-age=31536000 ; includeSubDomains",
+        `Content-Security-Policy` = "script-src 'self' 'unsafe-inline'",
+        `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin",
+        `Feature-Policy` = "vibrate 'none'; geolocation 'none'",
+        Authorization = "REDACTED", `Set-Cookie` = "REDACTED"), class = "httr2_headers"),
+    body = charToRaw("{\"content\":[{\"model\":\"Participant\",\"uuid\":\"test_participant_uuid\",\"userUuid\":\"test_user_uuid\",\"workspaceUuid\":\"test_workspace_uuid\",\"user\":{\"uuid\":\"test_user_uuid\",\"email\":\"test_user_email\",\"givenName\":\"test_user_name1\",\"familyName\":\"test_user_name2\",\"isMachineUser\":false},\"workspace\":{\"uuid\":\"test_workspace_uuid\",\"name\":\"test_workspace_name\"},\"bypassTwoStep\":true}],\"metadata\":{\"totalElements\":[1],\"totalPages\":[1],\"page\":[0],\"offset\":[0]}}"),
+    cache = new.env(parent = emptyenv())), class = "httr2_response")
