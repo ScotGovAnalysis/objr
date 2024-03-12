@@ -24,7 +24,8 @@ create_folder <- function(folder_name,
     parentUuid = parent_uuid,
     description = folder_description,
     use_proxy = use_proxy
-  )
+  ) |>
+    httr2::resp_body_json()
 
   if(tolower(response$status) == "complete") {
     cli::cli_alert_success("New folder created: {folder_name}.")

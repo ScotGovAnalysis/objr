@@ -15,6 +15,6 @@ my_user_id <- function(use_proxy = FALSE) {
 
   response <- objectiveR("me", use_proxy = use_proxy)
 
-  response$uuid
+  httr2::resp_body_json(response)$uuid
 
 }

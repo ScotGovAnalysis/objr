@@ -36,7 +36,7 @@ with_mock_api({
 
       test_that("Valid response", {
         user <- objectiveR("me", use_proxy = TRUE)
-        expect_equal(user$uuid, "1234")
+        expect_equal(httr2::resp_body_json(user)$uuid, "1234")
       })
 
     })

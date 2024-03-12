@@ -47,8 +47,8 @@ objectiveR <- function(endpoint,
   # Store token for future requests
   store_token(response)
 
-  # Parse the response
-  httr2::resp_body_json(response)
+  # Return response
+  response
 
 }
 
