@@ -29,7 +29,7 @@ objectiveR <- function(endpoint,
     httr2::req_body_json(params) |>
     objectiveR_auth() |>
     httr2::req_user_agent(
-      "objectiveR (https://github.com/ScotGovAnalysis/objectiveR)"
+      "objectiveR (https://scotgovanalysis.github.io/objectiveR/)"
     ) |>
     httr2::req_error(body = error)
 
