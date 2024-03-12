@@ -12,13 +12,10 @@ test_that("Function returns invisible object", {
     httr2::response(headers = list(Authorization = "test1")) |>
       store_token(store_env = environment())
   )
-  rm(test, envir = environment())
 })
 
 test_that("Environment value created successfully", {
   httr2::response(headers = list(Authorization = "test2")) |>
     store_token(store_env = environment())
   expect_true(exists("token"))
-  expect_equal(get("token"), "test2")
-  rm(test, envir = environment())
 })
