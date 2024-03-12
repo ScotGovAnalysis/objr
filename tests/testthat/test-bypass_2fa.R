@@ -17,14 +17,14 @@ without_internet({
     )
 
     expect_PUT(
-      user_bypass_2fa(user_uuid = "test_user"),
+      participant_bypass_2fa(user_uuid = "test_user"),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/participants/",
              "test_user/bypassTwoStep"),
       "{\"bypassTwoStep\":\"true\"}"
     )
 
     expect_PUT(
-      user_bypass_2fa(user_uuid = "test_user", allow_bypass = FALSE),
+      participant_bypass_2fa(user_uuid = "test_user", allow_bypass = FALSE),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/participants/",
              "test_user/bypassTwoStep"),
       "{\"bypassTwoStep\":\"false\"}"

@@ -30,23 +30,24 @@ allow_bypass_2fa <- function(workgroup_uuid,
 }
 
 
-#' Allow/disallow bypassing of two factor authentication for user
+#' Allow/disallow bypassing of two factor authentication for participant
 #'
-#' @param user_uuid Workgroup UUID
-#' @param allow_bypass Logical to indicate whether the user should be able
-#' to bypass two step verification for workspace.
+#' @param participant_uuid Participant UUID (note that this is different to the
+#' user UUID)
+#' @param allow_bypass Logical to indicate whether the participant should be
+#' able to bypass two step verification for workspace.
 #' @inheritParams objectiveR
 #'
 #' @details Note: This setting can only be updated by a workspace owner.
 #'
 #' @export
 
-user_bypass_2fa <- function(user_uuid,
-                            allow_bypass = TRUE,
-                            use_proxy = FALSE) {
+participant_bypass_2fa <- function(participant_uuid,
+                                   allow_bypass = TRUE,
+                                   use_proxy = FALSE) {
 
   response <- objectiveR(
-    endpoint = paste("participants", user_uuid, "bypassTwoStep",
+    endpoint = paste("participants", participant_uuid, "bypassTwoStep",
                      sep = "/"),
     method = "PUT",
     bypassTwoStep = tolower(allow_bypass),
@@ -54,7 +55,9 @@ user_bypass_2fa <- function(user_uuid,
   )
 
   if(httr2::resp_status(response) == 204) {
-    cli::cli_alert_success("Bypass 2FA setting successfully updated for user.")
+    cli::cli_alert_success(
+      "Bypass 2FA setting successfully updated for participant."
+    )
   }
 
   invisible(response)

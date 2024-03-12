@@ -43,13 +43,20 @@ reference:
   - objectiveR
   - my_user_id
   - create_folder
+  - participants
 
-- title: Authorisation
+- title: Authentication
   contents:
   - objectiveR_auth
+
+- title: Two factor authentication
+  contents:
+  - allow_bypass_2fa
+  - participant_bypass_2fa
 
 - title: internal
   contents:
   - input_value
   - store_token
   - check_valid
+  - error
