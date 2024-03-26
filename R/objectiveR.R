@@ -5,6 +5,7 @@
 #' Defaults to `GET`.
 #' @param ... Named parameters to pass to request body
 #' @param accept Accept header
+#' @param content_type Content-Type header
 #' @param use_proxy Logical to indicate whether to use proxy
 #'
 #' @return An httr2 [httr2::response()][response]
@@ -15,23 +16,28 @@ objectiveR <- function(endpoint,
                        method = "GET",
                        ...,
                        accept = "application/json",
+                       content_type = NULL,
                        use_proxy = FALSE) {
-
-  # Define body parameters
-  params <- list(...)
 
   # Build request
   request <-
     httr2::request("https://secure.objectiveconnect.co.uk/publicapi/1") |>
     httr2::req_url_path_append(endpoint) |>
     httr2::req_method(method) |>
-    httr2::req_headers(accept = accept) |>
-    httr2::req_body_json(params) |>
+    httr2::req_headers(accept = accept,
+                       `content-type` = content_type) |>
     objectiveR_auth() |>
     httr2::req_user_agent(
       "objectiveR (https://scotgovanalysis.github.io/objectiveR/)"
     ) |>
     httr2::req_error(body = error)
+
+  # Add request body
+  if(!is.null(content_type) && content_type == "multipart/form-data") {
+    request <- httr2::req_body_multipart(request, ...)
+  } else {
+    request <- httr2::req_body_json(request, list(...))
+  }
 
   # Add proxy details
   if(use_proxy) {

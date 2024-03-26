@@ -9,6 +9,7 @@ objectiveR(
   method = "GET",
   ...,
   accept = "application/json",
+  content_type = NULL,
   use_proxy = FALSE
 )
 }
@@ -21,6 +22,8 @@ Defaults to \code{GET}.}
 \item{...}{Named parameters to pass to request body}
 
 \item{accept}{Accept header}
+
+\item{content_type}{Content-Type header}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
