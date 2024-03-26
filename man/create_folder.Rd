@@ -7,7 +7,7 @@
 create_folder(
   folder_name,
   workspace_uuid,
-  folder_description = NULL,
+  description = NULL,
   parent_uuid = NULL,
   use_proxy = FALSE
 )
@@ -17,7 +17,7 @@ create_folder(
 
 \item{workspace_uuid}{UUID of the workspace to create the new folder in}
 
-\item{folder_description}{Optional description of folder}
+\item{description}{Optional description of folder}
 
 \item{parent_uuid}{UUID of another folder in the workspace to create the new
 folder within. If not supplied, the folder will be created in the top-level
