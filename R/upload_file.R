@@ -1,4 +1,4 @@
-#' Upload a new document
+#' Create a new document
 #'
 #' @param file File path of document to upload
 #' @param name Name to give document. If this isn't provided, the name of the
@@ -12,37 +12,71 @@
 #'
 #' @export
 
-upload_file <- function(file,
-                        name = NULL,
-                        workspace_uuid,
-                        description = NULL,
-                        parent_uuid = NULL,
-                        use_proxy = FALSE) {
+new_document <- function(file,
+                         name = NULL,
+                         workspace_uuid,
+                         description = NULL,
+                         parent_uuid = NULL,
+                         use_proxy = FALSE) {
 
   # If name not provided, use file name
   name <- if(is.null(name)) {
     tools::file_path_sans_ext(basename(file))
   } else {name}
 
-  name_with_ext <- paste0(name, ".", tools::file_ext(file))
-
   response <- objectiveR(
     endpoint = "documents",
     method = "POST",
     content_type = "multipart/form-data",
-    file = curl::form_file(file),
     name = name,
     description = description,
     workspaceUuid = workspace_uuid,
     parentUuid = parent_uuid,
+    file = curl::form_file(file),
     use_proxy = use_proxy
-  ) |>
-    httr2::resp_body_json()
+  )
 
-  if(tolower(response$status) == "complete") {
-    cli::cli_alert_success("New file created: {name_with_ext}.")
+  if(httr2::resp_status(response) == 200) {
+    cli::cli_alert_success(
+      "New document created: {paste(name, tools::file_ext(file), sep = \".\")}."
+    )
   }
 
   invisible(response)
 
 }
+
+
+#' Create a new document version
+#'
+#' @param file File path of document to upload
+#' @param document_uuid UUID of existing document
+#' @inheritParams objectiveR
+#'
+#' @export
+
+new_document_version <- function(file,
+                                 document_uuid,
+                                 use_proxy = FALSE) {
+
+  response <- objectiveR(
+    endpoint = paste("documents", document_uuid, "upload", sep = "/"),
+    method = "POST",
+    content_type = "multipart/form-data",
+    file = curl::form_file(file),
+    use_proxy = use_proxy
+  )
+
+  # Get asset info
+  info <- asset_info(document_uuid)
+
+  if(httr2::resp_status(response) == 204) {
+    cli::cli_alert_success(
+      "New version created: {paste(info$name, info$extension, sep = \".\")}."
+    )
+  }
+
+  invisible(response)
+
+}
+
