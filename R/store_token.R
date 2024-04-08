@@ -6,6 +6,8 @@
 #'
 #' @return Returns the token invisibly. This function is primarily used
 #' for its side effect - an environment variable is created called "token".
+#'
+#' @noRd
 
 store_token <- function(response, store_env = globalenv()) {
 

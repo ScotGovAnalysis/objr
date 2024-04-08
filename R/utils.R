@@ -4,6 +4,8 @@
 #' @param warn Logical. Indicates whether to produce warning if value is invalid
 #'
 #' @return Validated value
+#'
+#' @noRd
 
 check_valid <- function(value, warn = FALSE) {
 
@@ -46,6 +48,8 @@ check_valid <- function(value, warn = FALSE) {
 #' @param type One of 'usr' (username), 'pwd' (password), or 'proxy'.
 #'
 #' @return Validated value
+#'
+#' @noRd
 
 input_value <- function(type = c("usr", "pwd", "proxy")) {
 
