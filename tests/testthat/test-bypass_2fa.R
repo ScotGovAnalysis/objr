@@ -51,6 +51,19 @@ with_mock_api({
           )
         )
 
+        expect_invisible(
+          suppressMessages(
+            participant_bypass_2fa("test_participant")
+          )
+        )
+
+      })
+
+      test_that("Functions return success message", {
+
+        expect_message(allow_bypass_2fa("test_workgroup"))
+        expect_message(participant_bypass_2fa("test_participant"))
+
       })
 
     })
