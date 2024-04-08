@@ -18,16 +18,21 @@ objectiveR(
 \arguments{
 \item{endpoint}{The endpoint to append to the API server address}
 
+\item{url_path}{A list of values to be added to the request URL path.
+Values will be separated with \code{/}.}
+
+\item{url_query}{A list of named values to define query parameters}
+
 \item{method}{HTTP method to use; e.g. \code{GET}, \code{POST}, \code{PUT}.
 Defaults to \code{GET}.}
 
-\item{accept}{Accept header}
+\item{body}{A list of named values to be passed to the request body}
 
-\item{content_type}{Content-Type header}
+\item{accept}{Accept header. Defaults to 'application/json'.}
+
+\item{content_type}{Content-Type header. Defaults to 'application/json'.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
-
-\item{...}{Named parameters to pass to request body}
 }
 \value{
 An httr2 \link[=response]{httr2::response()}

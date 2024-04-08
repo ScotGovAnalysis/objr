@@ -1,11 +1,14 @@
 #' Core request function
 #'
 #' @param endpoint The endpoint to append to the API server address
+#' @param url_path A list of values to be added to the request URL path.
+#' Values will be separated with `/`.
+#' @param url_query A list of named values to define query parameters
 #' @param method HTTP method to use; e.g. `GET`, `POST`, `PUT`.
 #' Defaults to `GET`.
-#' @param ... Named parameters to pass to request body
-#' @param accept Accept header
-#' @param content_type Content-Type header
+#' @param body A list of named values to be passed to the request body
+#' @param accept Accept header. Defaults to 'application/json'.
+#' @param content_type Content-Type header. Defaults to 'application/json'.
 #' @param use_proxy Logical to indicate whether to use proxy
 #'
 #' @return An httr2 [httr2::response()][response]
