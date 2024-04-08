@@ -17,12 +17,14 @@ create_folder <- function(folder_name,
                           use_proxy = FALSE) {
 
   response <- objectiveR(
-    "folders",
+    endpoint = "folders",
     method = "POST",
-    name = folder_name,
-    workspaceUuid = workspace_uuid,
-    parentUuid = parent_uuid,
-    description = description,
+    body = list(
+      name = folder_name,
+      workspaceUuid = workspace_uuid,
+      parentUuid = parent_uuid,
+      description = description
+    ),
     use_proxy = use_proxy
   ) |>
     httr2::resp_body_json()

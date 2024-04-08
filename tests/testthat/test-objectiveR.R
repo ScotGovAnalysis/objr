@@ -11,16 +11,14 @@ without_internet({
       objectiveR(
         "folders",
         method = "POST",
-        name = "test_folder",
-        workspaceUuid = "test_workspace"
+        body = list(name = "test_folder",
+                    workspaceUuid = "test_workspace")
       ),
       "https://secure.objectiveconnect.co.uk/publicapi/1/folders",
       '{"name":"test_folder","workspaceUuid":"test_workspace"}'
     )
 
   })
-
-
 
 })
 

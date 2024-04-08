@@ -6,10 +6,12 @@
 \usage{
 objectiveR(
   endpoint,
+  url_path = NULL,
+  url_query = NULL,
   method = "GET",
-  ...,
+  body = NULL,
   accept = "application/json",
-  content_type = NULL,
+  content_type = "application/json",
   use_proxy = FALSE
 )
 }
@@ -19,13 +21,13 @@ objectiveR(
 \item{method}{HTTP method to use; e.g. \code{GET}, \code{POST}, \code{PUT}.
 Defaults to \code{GET}.}
 
-\item{...}{Named parameters to pass to request body}
-
 \item{accept}{Accept header}
 
 \item{content_type}{Content-Type header}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
+
+\item{...}{Named parameters to pass to request body}
 }
 \value{
 An httr2 \link[=response]{httr2::response()}

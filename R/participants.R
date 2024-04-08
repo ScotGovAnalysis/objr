@@ -10,10 +10,8 @@
 participants <- function(workspace_uuid, use_proxy = FALSE) {
 
   response <- objectiveR(
-    endpoint = paste0(
-      "participants?",
-      "workspaceUuid=", workspace_uuid
-    )
+    endpoint = "participants",
+    url_query = list(workspaceUuid = workspace_uuid)
   )
 
   content <-

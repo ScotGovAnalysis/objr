@@ -13,11 +13,24 @@
 #' @export
 
 objectiveR <- function(endpoint,
+                       url_path = NULL,
+                       url_query = NULL,
                        method = "GET",
-                       ...,
+                       body = NULL,
                        accept = "application/json",
-                       content_type = NULL,
+                       content_type = "application/json",
                        use_proxy = FALSE) {
+
+  # Check lists supplied (better way to do this)
+  stopifnot(
+    "`url_path` must be a list" = class(url_path) %in% c("NULL", "list")
+  )
+  stopifnot(
+    "`url_query` must be a list" = class(url_query) %in% c("NULL", "list")
+  )
+  stopifnot(
+    "`body` must be a list" = class(body) %in% c("NULL", "list")
+  )
 
   # Build request
   request <-
@@ -32,11 +45,26 @@ objectiveR <- function(endpoint,
     ) |>
     httr2::req_error(body = error)
 
+  # Modify the URL path
+  request <- rlang::inject(
+    httr2::req_url_path_append(request, !!!url_path)
+  )
+
+  # Add URL query parameters
+  request <- rlang::inject(
+    httr2::req_url_query(request, !!!url_query)
+  )
+
   # Add request body
-  if(!is.null(content_type) && content_type == "multipart/form-data") {
-    request <- httr2::req_body_multipart(request, ...)
-  } else {
-    request <- httr2::req_body_json(request, list(...))
+  if(!is.null(content_type) && !is.null(body)) {
+    if(content_type == "multipart/form-data") {
+      request <- rlang::inject(
+        httr2::req_body_multipart(request, !!!body)
+      )
+    }
+    if(content_type == "application/json") {
+      request <- httr2::req_body_json(request, body)
+    }
   }
 
   # Add proxy details
@@ -64,6 +92,8 @@ objectiveR <- function(endpoint,
 #' @param response An httr2 [httr2::response()][response]
 #'
 #' @return A character vector to include in error message.
+#'
+#' @noRd
 
 error <- function(response) {
 
