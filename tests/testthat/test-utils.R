@@ -1,4 +1,31 @@
 
+# check_valid ----
+
+test_that("Error if vector of values supplied", {
+
+  expect_error(check_valid(c("test1", "test2")),
+               class = "objectiveR_value-invalid-length")
+
+})
+
+test_that("Correct value returned", {
+
+  expect_true(check_valid("test1"))
+  expect_false(check_valid(""))
+  expect_false(check_valid(NA))
+  expect_false(check_valid(NULL))
+
+})
+
+test_that("Warning returned if invalid value and warn = FALSE", {
+
+  expect_warning(check_valid("", warn = TRUE))
+
+})
+
+
+# input_value ----
+
 test_that("Error if invalid type supplied", {
   expect_error(input_value("test"))
 })
@@ -55,5 +82,16 @@ test_that("Popup input works", {
   expect_no_error(input_value("usr"))
   expect_no_error(input_value("pwd"))
   expect_no_error(input_value("proxy"))
+
+})
+
+
+# form_data_null ----
+
+test_that("Correct value returned", {
+
+  expect_null(form_data_null(NULL))
+
+  expect_s3_class(form_data_null("test"), "form_data")
 
 })

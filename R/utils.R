@@ -102,3 +102,20 @@ input_value <- function(type = c("usr", "pwd", "proxy")) {
   value
 
 }
+
+
+#' Helper function to use curl::form_data when value is not null
+#'
+#' @param value Value to pass to curl::form_data
+#'
+#' @noRd
+
+form_data_null <- function(value) {
+
+  if(is.null(value)) {
+    NULL
+  } else {
+    curl::form_data(value)
+  }
+
+}
