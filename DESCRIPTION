@@ -19,7 +19,8 @@ Imports:
     httr2,
     curl,
     rstudioapi,
-    rlang
+    rlang,
+    dplyr
 Suggests: 
     httptest2,
     knitr,
