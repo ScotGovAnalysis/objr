@@ -1,4 +1,4 @@
-structure(list(method = "GET", url = "https://api/assets/f27a-84c6-2a6b-4881-94e2-f2c9-5241-25b9",
+structure(list(method = "GET", url = "https://api/assets/test_asset",
     status_code = 200L, headers = structure(list(Date = "Mon, 08 Apr 2024 16:38:16 GMT",
         `Content-Type` = "application/json", `Transfer-Encoding` = "chunked",
         Connection = "keep-alive", `X-CONNECT-MDC` = "apigyQdrHej",
