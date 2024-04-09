@@ -1,0 +1,13 @@
+structure(list(method = "POST", url = "https://api/documents",
+    status_code = 200L, headers = structure(list(Date = "Tue, 09 Apr 2024 13:20:11 GMT",
+        `Content-Type` = "application/json", `Transfer-Encoding` = "chunked",
+        Connection = "keep-alive", `X-CONNECT-MDC` = "apisyjgCiSS",
+        `X-Frame-Options` = "deny", `X-XSS-Protection` = "1; mode=block",
+        `Cache-Control` = "no-cache, no-store", Expires = "0",
+        Pragma = "no-cache", `Strict-Transport-Security` = "max-age=31536000 ; includeSubDomains",
+        `Content-Security-Policy` = "script-src 'self' 'unsafe-inline'",
+        `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin",
+        `Feature-Policy` = "vibrate 'none'; geolocation 'none'",
+        Authorization = "REDACTED", `Set-Cookie` = "REDACTED"), class = "httr2_headers"),
+    body = charToRaw("{\"model\":[\"Asset\"],\"uuid\":[\"test_asset\"],\"name\":[\"test\"],\"workspaceUuid\":[\"test_workspace\"],\"type\":[\"DOCUMENT\"],\"annotationCount\":[0],\"commentCount\":[0],\"contentVersion\":[1],\"createdTime\":[1712668787000],\"modifiedTime\":[1712668788000],\"extension\":[\"txt\"],\"fileSize\":[0],\"isLocked\":[false],\"isLockedInOffice\":[false],\"modifiedByUuid\":[\"test_modified\"],\"previewStatus\":[\"PROCESSING\"],\"status\":[\"COMPLETE\"],\"mandatoryTagsPresent\":[true]}"),
+    cache = new.env(parent = emptyenv())), class = "httr2_response")

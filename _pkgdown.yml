@@ -45,6 +45,16 @@ reference:
   - create_folder
   - participants
 
+- subtitle: Assets
+  contents:
+  - workspace_assets
+  - asset_info
+
+- subtitle: Documents
+  contents:
+  - new_document
+  - new_document_version
+
 - title: API authentication
   contents:
   - objectiveR_auth

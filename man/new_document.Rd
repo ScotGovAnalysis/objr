@@ -6,8 +6,8 @@
 \usage{
 new_document(
   file,
-  name = NULL,
   workspace_uuid,
+  name = NULL,
   description = NULL,
   parent_uuid = NULL,
   use_proxy = FALSE
@@ -16,10 +16,10 @@ new_document(
 \arguments{
 \item{file}{File path of document to upload}
 
+\item{workspace_uuid}{UUID of the workspace to create the new document in}
+
 \item{name}{Name to give document. If this isn't provided, the name of the
 file will be used.}
-
-\item{workspace_uuid}{UUID of the workspace to create the new document in}
 
 \item{description}{Optional description of document}
 

@@ -13,8 +13,8 @@
 #' @export
 
 new_document <- function(file,
-                         name = NULL,
                          workspace_uuid,
+                         name = NULL,
                          description = NULL,
                          parent_uuid = NULL,
                          use_proxy = FALSE) {
@@ -28,11 +28,13 @@ new_document <- function(file,
     endpoint = "documents",
     method = "POST",
     content_type = "multipart/form-data",
-    name = name,
-    description = description,
-    workspaceUuid = workspace_uuid,
-    parentUuid = parent_uuid,
-    file = curl::form_file(file),
+    body = list(
+      name = curl::form_data(name),
+      description = form_data_null(description),
+      workspaceUuid = curl::form_data(workspace_uuid),
+      parentUuid = form_data_null(parent_uuid),
+      file = curl::form_file(file)
+    ),
     use_proxy = use_proxy
   )
 
@@ -60,10 +62,11 @@ new_document_version <- function(file,
                                  use_proxy = FALSE) {
 
   response <- objectiveR(
-    endpoint = paste("documents", document_uuid, "upload", sep = "/"),
+    endpoint = "documents",
+    url_path = list(document_uuid, "upload"),
     method = "POST",
     content_type = "multipart/form-data",
-    file = curl::form_file(file),
+    body = list(file = curl::form_file(file)),
     use_proxy = use_proxy
   )
 
