@@ -7,6 +7,8 @@
 #' @param method HTTP method to use; e.g. `GET`, `POST`, `PUT`.
 #' Defaults to `GET`.
 #' @param body A list of named values to be passed to the request body
+#' @param path Optional file path to save body of request (mainly used when
+#' downloading files)
 #' @param accept Accept header. Defaults to 'application/json'.
 #' @param content_type Content-Type header. Defaults to 'application/json'.
 #' @param use_proxy Logical to indicate whether to use proxy
@@ -20,6 +22,7 @@ objectiveR <- function(endpoint,
                        url_query = NULL,
                        method = "GET",
                        body = NULL,
+                       path = NULL,
                        accept = "application/json",
                        content_type = "application/json",
                        use_proxy = FALSE) {
@@ -76,7 +79,7 @@ objectiveR <- function(endpoint,
   }
 
   # Perform request
-  response <- httr2::req_perform(request)
+  response <- httr2::req_perform(request, path = path)
 
   # Check status of response
   httr2::resp_check_status(response)

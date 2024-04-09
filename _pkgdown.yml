@@ -58,6 +58,7 @@ reference:
   - create_folder
   - new_document
   - new_document_version
+  - download_file
 
 - title: API authentication
   contents:

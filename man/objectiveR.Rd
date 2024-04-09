@@ -10,6 +10,7 @@ objectiveR(
   url_query = NULL,
   method = "GET",
   body = NULL,
+  path = NULL,
   accept = "application/json",
   content_type = "application/json",
   use_proxy = FALSE
@@ -27,6 +28,9 @@ Values will be separated with \code{/}.}
 Defaults to \code{GET}.}
 
 \item{body}{A list of named values to be passed to the request body}
+
+\item{path}{Optional file path to save body of request (mainly used when
+downloading files)}
 
 \item{accept}{Accept header. Defaults to 'application/json'.}
 
