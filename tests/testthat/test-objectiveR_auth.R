@@ -19,7 +19,7 @@ test_that("httr2 request returned", {
 
 test_that("Correct authentication used", {
 
-  withr::with_envvar(
+  with_envvar(
     new = c("OBJECTIVER_USR" = "test_usr",
             "OBJECTIVER_PWD" = "test_pwd"),
     code = {
@@ -34,7 +34,7 @@ test_that("Correct authentication used", {
   expect_equal(exp_token1$headers$Authorization, "test")
 
   # Token used even when username and password supplied
-  withr::with_envvar(
+  with_envvar(
     new = c("OBJECTIVER_USR" = "test_usr",
             "OBJECTIVER_PWD" = "test_pwd"),
     code = {

@@ -1,4 +1,4 @@
-withr::with_file("test", {
+with_file("test", {
 
   file.create("test")
 
@@ -43,7 +43,7 @@ withr::with_file("test", {
 
   with_mock_api({
 
-    withr::with_envvar(
+    with_envvar(
 
       new = c("OBJECTIVER_USR" = "test_usr",
               "OBJECTIVER_PWD" = "test_pwd"),

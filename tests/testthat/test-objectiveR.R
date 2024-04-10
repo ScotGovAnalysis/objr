@@ -24,7 +24,7 @@ without_internet({
 
 with_mock_api({
 
-  withr::with_envvar(
+  with_envvar(
 
     new = c("OBJECTIVER_USR" = "test_usr",
             "OBJECTIVER_PWD" = "test_pwd",
