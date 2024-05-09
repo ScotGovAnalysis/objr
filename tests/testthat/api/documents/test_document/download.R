@@ -1,0 +1,13 @@
+structure(list(method = "GET", url = "https://api/documents/test_document/download",
+    status_code = 200L, headers = structure(list(Date = "Wed, 10 Apr 2024 15:19:02 GMT",
+        `Content-Type` = "application/json", `Content-Length` = "29179",
+        Connection = "keep-alive", `X-CONNECT-MDC` = "apiOcfLjCpc",
+        `X-Frame-Options` = "deny", `X-XSS-Protection` = "1; mode=block",
+        `Cache-Control` = "no-cache, no-store", Expires = "0",
+        Pragma = "no-cache", `Strict-Transport-Security` = "max-age=31536000 ; includeSubDomains",
+        `Content-Security-Policy` = "script-src 'self' 'unsafe-inline'",
+        `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin",
+        `Feature-Policy` = "vibrate 'none'; geolocation 'none'",
+        Authorization = "REDACTED", `Set-Cookie` = "REDACTED",
+        `Content-Disposition` = "attachment; filename=\"test_document_name.txt\"; filename*=UTF-8''test_document_name.txt"), class = "httr2_headers"),
+    body = charToRaw(""), cache = new.env(parent = emptyenv())), class = "httr2_response")
