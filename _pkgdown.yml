@@ -38,14 +38,29 @@ figures:
 
 reference:
 
-- title: API Calls
+- title: API calls
   contents:
   - objectiveR
   - my_user_id
-  - create_folder
+
+- subtitle: Workspaces
+  desc: >
+    Workspaces are the containers that connect a collection of documents and
+    folders (Assets) with a collection of Users (Participants)
+  contents:
   - participants
 
-- title: Authentication
+- subtitle: Assets
+  desc: Assets represent Documents and Folders that are added to Workspaces
+  contents:
+  - workspace_assets
+  - asset_info
+  - create_folder
+  - new_document
+  - new_document_version
+  - download_file
+
+- title: API authentication
   contents:
   - objectiveR_auth
 
@@ -53,10 +68,3 @@ reference:
   contents:
   - allow_bypass_2fa
   - participant_bypass_2fa
-
-- title: internal
-  contents:
-  - input_value
-  - store_token
-  - check_valid
-  - error

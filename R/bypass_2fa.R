@@ -15,10 +15,10 @@ allow_bypass_2fa <- function(workgroup_uuid,
                              use_proxy = FALSE) {
 
   response <- objectiveR(
-    endpoint = paste("workgroups", workgroup_uuid, "bypassTwoStepAllowed",
-                     sep = "/"),
+    endpoint = "workgroups",
+    url_path = list(workgroup_uuid, "bypassTwoStepAllowed"),
     method = "PUT",
-    bypassTwoStepAllowed = tolower(allow_bypass),
+    body = list(bypassTwoStepAllowed = tolower(allow_bypass)),
     use_proxy = use_proxy
   )
 
@@ -52,10 +52,10 @@ participant_bypass_2fa <- function(participant_uuid,
                                    use_proxy = FALSE) {
 
   response <- objectiveR(
-    endpoint = paste("participants", participant_uuid, "bypassTwoStep",
-                     sep = "/"),
+    endpoint = "participants",
+    url_path = list(participant_uuid, "bypassTwoStep"),
     method = "PUT",
-    bypassTwoStep = tolower(allow_bypass),
+    body = list(bypassTwoStep = tolower(allow_bypass)),
     use_proxy = use_proxy
   )
 

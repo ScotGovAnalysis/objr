@@ -36,7 +36,7 @@ without_internet({
 
 with_mock_api({
 
-  withr::with_envvar(
+  with_envvar(
 
     new = c("OBJECTIVER_USR" = "test_usr",
             "OBJECTIVER_PWD" = "test_pwd"),
@@ -50,6 +50,19 @@ with_mock_api({
             allow_bypass_2fa("test_workgroup")
           )
         )
+
+        expect_invisible(
+          suppressMessages(
+            participant_bypass_2fa("test_participant")
+          )
+        )
+
+      })
+
+      test_that("Functions return success message", {
+
+        expect_message(allow_bypass_2fa("test_workgroup"))
+        expect_message(participant_bypass_2fa("test_participant"))
 
       })
 

@@ -4,6 +4,8 @@
 #' @param warn Logical. Indicates whether to produce warning if value is invalid
 #'
 #' @return Validated value
+#'
+#' @noRd
 
 check_valid <- function(value, warn = FALSE) {
 
@@ -46,6 +48,8 @@ check_valid <- function(value, warn = FALSE) {
 #' @param type One of 'usr' (username), 'pwd' (password), or 'proxy'.
 #'
 #' @return Validated value
+#'
+#' @noRd
 
 input_value <- function(type = c("usr", "pwd", "proxy")) {
 
@@ -96,5 +100,22 @@ input_value <- function(type = c("usr", "pwd", "proxy")) {
 
   # Return value
   value
+
+}
+
+
+#' Helper function to use curl::form_data when value is not null
+#'
+#' @param value Value to pass to curl::form_data
+#'
+#' @noRd
+
+form_data_null <- function(value) {
+
+  if(is.null(value)) {
+    NULL
+  } else {
+    curl::form_data(value)
+  }
 
 }

@@ -6,21 +6,35 @@
 \usage{
 objectiveR(
   endpoint,
+  url_path = NULL,
+  url_query = NULL,
   method = "GET",
-  ...,
+  body = NULL,
+  path = NULL,
   accept = "application/json",
+  content_type = "application/json",
   use_proxy = FALSE
 )
 }
 \arguments{
 \item{endpoint}{The endpoint to append to the API server address}
 
+\item{url_path}{A list of values to be added to the request URL path.
+Values will be separated with \code{/}.}
+
+\item{url_query}{A list of named values to define query parameters}
+
 \item{method}{HTTP method to use; e.g. \code{GET}, \code{POST}, \code{PUT}.
 Defaults to \code{GET}.}
 
-\item{...}{Named parameters to pass to request body}
+\item{body}{A list of named values to be passed to the request body}
 
-\item{accept}{Accept header}
+\item{path}{Optional file path to save body of request (mainly used when
+downloading files)}
+
+\item{accept}{Accept header. Defaults to 'application/json'.}
+
+\item{content_type}{Content-Type header. Defaults to 'application/json'.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
