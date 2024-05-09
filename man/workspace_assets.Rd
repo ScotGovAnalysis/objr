@@ -2,7 +2,7 @@
 % Please edit documentation in R/assets.R
 \name{workspace_assets}
 \alias{workspace_assets}
-\title{Get data frame of workspace assets}
+\title{Get data frame of assets in workspace}
 \usage{
 workspace_assets(
   workspace_uuid,
@@ -28,5 +28,5 @@ document, folder and link.}
 Data frame
 }
 \description{
-Get data frame of workspace assets
+Get data frame of assets in workspace
 }
