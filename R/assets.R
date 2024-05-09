@@ -1,4 +1,4 @@
-#' Get data frame of workspace assets
+#' Get data frame of assets in workspace
 #'
 #' @param workspace_uuid UUID of workspace
 #' @param type List of asset types to return. Defaults to all types;
