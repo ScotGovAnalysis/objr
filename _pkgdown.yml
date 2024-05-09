@@ -48,6 +48,7 @@ reference:
     Workspaces are the containers that connect a collection of documents and
     folders (Assets) with a collection of Users (Participants)
   contents:
+  - my_workspaces
   - participants
 
 - subtitle: Assets
