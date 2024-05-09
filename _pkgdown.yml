@@ -1,5 +1,8 @@
 url: https://scotgovanalysis.github.io/objectiveR
 
+development:
+  mode: auto
+
 template:
   bootstrap: 5
 
