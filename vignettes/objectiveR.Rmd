@@ -1,0 +1,143 @@
+---
+title: "Introduction to objectiveR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to objectiveR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE
+)
+```
+
+objectiveR aims to provide a convenient method of interacting with [Objective Connect](https://secure.objectiveconnect.co.uk) using R, making use of the [Objective Connect API](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html).
+
+This article demonstrates a simple workflow for using the package, with the ultimate aim of downloading or uploading a file to an Objective Connect workspace.
+
+Start by loading the package in your R session:
+
+```{r setup}
+library(objectiveR)
+```
+
+
+## Universally Unique Identifiers
+
+It is useful to be aware that everything on Objective Connect is associated with a Universally Unique Identifier (UUID). This includes users, workgroups, workspaces, participants in a workspace and assets in a workspace. 
+
+Objective Connect UUIDs take the form of a string of eight chunks of four lower case letters and numbers, separated by dashes. For example: 
+
+``` 
+84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f
+```
+
+Use of the API and the objectiveR package depends on these UUIDs. UUIDs are mostly findable using the functions in objectiveR (as demonstrated in this article), however you can often also find relevant UUIDs in the webpage URLs. For example, this is an example URL when viewing a workspace:
+
+```
+https://secure.objectiveconnect.co.uk/share/2vo2-dd3s-1nn9-y20r-b906-u4s2-
+7134-b352?workgroupUuid=2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44
+```
+
+The UUID for the workspace is `2vo2-dd3s-1nn9-y20r-b906-u4s2-7134-b352` and the UUID for the workgroup is `2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44`.
+
+
+## Test your authentication
+
+To interact with the Objective Connect API, you must provide valid authentication. This is explained in more detail in `vignette("authentication")`.
+
+It might be a good idea to test your authentication, especially if it's your first time using the package. There is no specific function for this, but the following simple function to get your own user ID requires no input and is an easy way to test that you can get a successful response from the API.
+
+```{r user}
+me <- my_user_id()
+```
+
+
+## Workspaces
+
+To see workspaces you are a member of:
+
+```{r workspaces}
+workspaces <- my_workspaces()
+```
+
+This returns a data frame with a row for each workspace you are a member of. Among other things, there will be a column containing the workspace name and another containing the workspace UUID. For example:
+
+```{r workspaces-output, eval = TRUE, echo = FALSE}
+data.frame(
+  workspace_name = c("Project 1", "Project 2"),
+  workspace_uuid = sapply(1:2, objectiveR:::random_uuid)
+)
+```
+
+
+## Assets
+
+Maybe you would like to download a file from one of your workspaces. In Objective Connect, files are also known as 'assets'. To download an asset, you'll need its UUID.
+
+Use the workspace UUID from `workspaces` to get a data frame of assets in the workspace:
+
+```{r assets}
+assets <- workspace_assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+```
+
+This returns a data frame with a row for each asset in the workspace. Among other things, there will be a column containing the asset name and another containing the asset UUID.
+
+```{r assets-output, eval = TRUE, echo = FALSE}
+data.frame(
+  uuid = sapply(3:4, objectiveR:::random_uuid),
+  name = c("asset1", "asset2")
+)
+```
+
+
+## Download file
+
+To download a document, use its UUID and the file path of the folder you'd like the downloaded file to be saved to:
+
+```{r download}
+download_file(document_uuid = "2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44",
+              folder = here::here("data"))
+```
+
+This function doesn't return anything but will display a message in the R console to indicate the download has been a success and to confirm the location of the file:
+
+```{r download-output, eval = TRUE, echo = FALSE, message = TRUE}
+cli::cli_alert_success(
+  "File downloaded: project-1/data/file1.csv."
+)
+```
+
+
+## Upload file
+
+To upload a file to a workspace, use the UUID of the workspace and the file path of the file to upload:
+
+```{r upload}
+new_document(here::here("data", "file2.csv"),
+             workspace_uuid = "84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+```
+
+This function doesn't return anything but will display a message in the R console to indicate the upload has been a success and to confirm the name of the file.
+
+```{r upload-output, eval = TRUE, echo = FALSE, message = TRUE}
+cli::cli_alert_success(
+  "New document created: file2.csv."
+)
+```
+
+Now, if you rerun the previous step to get a data frame of workspace assets, you should see an additional row for the file you've just uploaded.
+
+```{r assets2}
+assets <- workspace_assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+```
+
+```{r assets2-output, eval = TRUE, echo = FALSE}
+data.frame(
+  uuid = sapply(3:5, objectiveR:::random_uuid),
+  name = c("Asset 1", "Asset 2", "file2")
+)
+```
+
