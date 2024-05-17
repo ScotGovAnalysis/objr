@@ -1,0 +1,87 @@
+---
+title: "Authentication"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Authentication}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  eval = FALSE
+)
+```
+
+## How authentication works
+
+The first time you send a request, the API requires your Objective Connect user email address and password to authenticate. 
+
+Each successful response from the API includes a token. This token can then be used to authenticate subsequent requests in your session, negating the need to repeatedly supply your email address and password.
+
+The rest of this article details how to manage authentication when using the `objectiveR` package.
+
+
+## First request
+
+You will need your Objective Connect user email address and password to make a first request to the API. These can be provided in two ways.
+
+### R Environment variables
+
+Add two variables to your `.Renviron` file to define your email address and password.
+  
+* Open your `.Renviron` file to edit:
+  
+  ```{r open_renviron}
+  usethis::edit_r_environ()
+  ```
+  
+* Add two variables as follows:
+
+  ```{r add_vars}
+  OBJECTIVER_USR = "XXX"
+  OBJECTIVER_PWD = "XXX"
+  ```
+
+* Save and close the `.Renviron` file.
+
+* To check this has worked as expected, first restart your R session then:
+
+  ```{r check_vars}
+  Sys.getenv("OBJECTIVER_USR")
+  Sys.getenv("OBJECTIVER_PWD")
+  ```
+  
+  Your credentials should be printed in the console. 
+  
+  Note: For this reason, it is important not to save your R session workspace on close as your console may contain your Objective Connect credentials.
+
+The benefit of this method is that you can leave this information in your `.Renviron` file and `objectiveR` will automatically find them here each time you use the package. 
+
+
+### Supply credentials when prompted
+
+If you don't have these variables defined in your `.Renviron` file, `objectiveR` will prompt you to supply them if you're working in an interactive session.
+
+<br>
+
+```{r}
+#| eval: true
+#| echo: false
+#| fig-align: "center"
+#| fig-alt: >
+#|    A small pop-up window with prompt 'Enter email registered with Objective
+#|    Connect' followed by a text input box and buttons to select 'OK' or 
+#|    'Cancel'.
+knitr::include_graphics("auth_prompt.png", dpi = "retina")
+```
+
+
+## Subsequent requests
+
+Each successful API response includes a token that can be used for subsequent requests. `objectiveR` functions automatically parse this token from the API response and store it in your R session's global environment. 
+
+Where this object exists, `objectiveR` will automatically use it to authenticate subsequent requests. 
+
+If this object doesn't exist, `objectiveR` will resort to using your username and password, as it did for your [first request](#first-request).
+
