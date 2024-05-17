@@ -5,6 +5,8 @@ development:
 
 template:
   bootstrap: 5
+  bslib:
+    base_font: {google: "Roboto"}
 
 home:
   sidebar:
