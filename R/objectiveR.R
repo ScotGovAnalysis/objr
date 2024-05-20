@@ -87,6 +87,8 @@ objectiveR <- function(endpoint,
   # Store token for future requests
   store_token(response)
 
+  check_pages(response)
+
   # Return response
   response
 
@@ -110,3 +112,57 @@ error <- function(response) {
   )
 
 }
+
+
+check_pages <- function(response, call = rlang::caller_env()) {
+
+  metadata <- if(httr2::resp_has_body(response)) {
+    try(httr2::resp_body_json(response)$metadata)
+  }
+
+  if(!is.null(metadata)) {
+
+    if(any(!c("totalPages", "page") %in%  names(metadata))) {
+      cli::cli_abort(
+        "{.code totalPages} and {.code page} must exist in {.arg metadata}.",
+        class = "metadata-values-dont-exist"
+      )
+    }
+
+    if(metadata$page > metadata$totalPages) {
+      cli::cli_abort(
+        paste(
+          "Page requested doesn't exist.",
+          "Pages available: {0:(metadata$totalPages-1)}."
+        ),
+        class = "page-doesnt-exist",
+        call = call
+      )
+    }
+
+    more_available <- metadata$totalPages > 1
+
+    if(more_available) {
+
+      cli::cli_warn(paste(
+        "More results are available.",
+        "Returning page {metadata$page + 1} of {metadata$totalPages}."
+      ))
+
+      cli::cli_li(c(
+        paste(
+          "Use the {.arg size} argument to control the number of results",
+          "returned per page."
+        ),
+        paste(
+          "Use the {.arg page} argument to determine which page of results",
+          "is returned."
+        )
+      ))
+
+    }
+
+  }
+
+}
+

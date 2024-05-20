@@ -36,9 +36,24 @@ workspace_assets <- function(workspace_uuid,
     httr2::resp_body_json(response)$content |>
     lapply(
       \(content) {
-        content$workspace <- NULL
-        content$modifiedBy <- NULL
-        data.frame(content)
+        data.frame(
+          asset_name       = content$name,
+          asset_ext        = ifelse(is.null(content$extension),
+                                  NA_character_,
+                                  content$extension),
+          asset_type       = content$type,
+          asset_uuid       = content$uuid,
+          last_modified_by = paste(content$modifiedBy$givenName,
+                                 content$modifiedBy$familyName),
+          parent_name      = ifelse(is.null(content$parent),
+                                  NA_character_,
+                                  content$parent$name),
+          parent_uuid      = ifelse(is.null(content$parent),
+                                  NA_character_,
+                                  content$parent$uuid),
+          workspace_name   = content$workspace$name,
+          workspace_uuid   = content$workspace$uuid
+        )
       }
     )
 

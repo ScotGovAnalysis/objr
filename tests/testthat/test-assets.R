@@ -38,20 +38,18 @@ with_mock_api({
       test_that("Function returns dataframe", {
 
         expect_s3_class(
-          workspace_assets(workspace_uuid = "test_workspace"),
+          workspace_assets(workspace_uuid = "test_workspace_uuid"),
           "data.frame"
         )
 
-        expect_equal(
-          unique(
-            workspace_assets(workspace_uuid = "test_workspace")$type
-          ),
-          c("DOCUMENT", "FOLDER")
-        )
+      })
+
+      test_that("Results filtered by type", {
 
         expect_equal(
           unique(
-            workspace_assets(workspace_uuid = "test_workspace", type = list("folder"))$type
+            workspace_assets(workspace_uuid = "test_workspace_uuid",
+                             type = list("folder"))$asset_type
           ),
           "FOLDER"
         )

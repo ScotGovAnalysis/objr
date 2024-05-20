@@ -11,5 +11,5 @@ structure(list(method = "GET", url = "https://api/assets?workspaceUuid=test_work
         `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin",
         `Feature-Policy` = "vibrate 'none'; geolocation 'none'",
         Authorization = "REDACTED", `Set-Cookie` = "REDACTED"), class = "httr2_headers"),
-    body = charToRaw("{\"content\":[{\"model\":\"Asset\",\"uuid\":\"test_asset_2_uuid\",\"name\":\"test_asset_2_name\",\"workspaceUuid\":\"test_workspace\",\"type\":\"FOLDER\",\"annotationCount\":0,\"commentCount\":0,\"createdTime\":1712572827000,\"modifiedTime\":1712572827000,\"isLocked\":false,\"isLockedInOffice\":false,\"modifiedByUuid\":\"test_modified_uuid\",\"status\":\"COMPLETE\",\"mandatoryTagsPresent\":true}],\"metadata\":{\"totalElements\":[2],\"totalPages\":[1],\"page\":[0],\"offset\":[0]}}"),
+    body = charToRaw("{\"content\":[{\"uuid\":\"test_asset_uuid\",\"name\":\"test_asset_name\",\"type\":\"FOLDER\",\"workspace\":{\"uuid\":\"test_workspace_uuid\",\"name\":\"test_workspace_name\"},\"modifiedBy\":{\"givenName\":\"test_modified_name1\",\"familyName\":\"test_modified_name2\"}}],\"metadata\":{\"totalElements\":1,\"totalPages\":1,\"page\":0,\"offset\":0}}"),
     cache = new.env(parent = emptyenv())), class = "httr2_response")
