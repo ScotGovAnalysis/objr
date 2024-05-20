@@ -87,8 +87,8 @@ This returns a data frame with a row for each asset in the workspace. Among othe
 
 ```{r assets-output, eval = TRUE, echo = FALSE}
 data.frame(
-  uuid = sapply(3:4, objectiveR:::random_uuid),
-  name = c("asset1", "asset2")
+  asset_name = c("asset1", "asset2"),
+  asset_uuid = sapply(3:4, objectiveR:::random_uuid)
 )
 ```
 
@@ -136,8 +136,8 @@ assets <- workspace_assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 
 ```{r assets2-output, eval = TRUE, echo = FALSE}
 data.frame(
-  uuid = sapply(3:5, objectiveR:::random_uuid),
-  name = c("Asset 1", "Asset 2", "file2")
+  asset_name = c("Asset 1", "Asset 2", "file2"),
+  asset_uuid = sapply(3:5, objectiveR:::random_uuid)
 )
 ```
 
