@@ -36,7 +36,7 @@ Add two variables to your `.Renviron` file to define your email address and pass
   usethis::edit_r_environ()
   ```
   
-* Add two variables as follows:
+* Add two variables as follows (replacing `XXX` with your credentials):
 
   ```{r add_vars}
   OBJECTIVER_USR = "XXX"
@@ -45,7 +45,7 @@ Add two variables to your `.Renviron` file to define your email address and pass
 
 * Save and close the `.Renviron` file.
 
-* To check this has worked as expected, first restart your R session then:
+* To check this has worked as expected, first restart your R session then run:
 
   ```{r check_vars}
   Sys.getenv("OBJECTIVER_USR")
@@ -54,7 +54,7 @@ Add two variables to your `.Renviron` file to define your email address and pass
   
   Your credentials should be printed in the console. 
   
-  Note: For this reason, it is important not to save your R session workspace on close as your console may contain your Objective Connect credentials.
+  Note: It is important not to save your R session workspace on close as your console may contain your Objective Connect credentials.
 
 The benefit of this method is that you can leave this information in your `.Renviron` file and `objectiveR` will automatically find them here each time you use the package. 
 
