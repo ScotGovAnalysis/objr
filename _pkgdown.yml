@@ -62,9 +62,9 @@ reference:
   - workspace_assets
   - asset_info
   - create_folder
-  - new_document
-  - new_document_version
   - download_file
+  - upload_file
+  - new_version
 
 - title: API authentication
   contents:

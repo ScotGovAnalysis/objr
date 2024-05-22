@@ -1,4 +1,4 @@
-#' Download file
+#' Download a file
 #'
 #' @param document_uuid UUID of existing document
 #' @param folder Folder to save downloaded file to

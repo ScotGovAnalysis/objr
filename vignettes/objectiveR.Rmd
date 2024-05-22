@@ -116,8 +116,8 @@ cli::cli_alert_success(
 To upload a file to a workspace, use the UUID of the workspace and the file path of the file to upload:
 
 ```{r upload}
-new_document(here::here("data", "file2.csv"),
-             workspace_uuid = "84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+upload_file(here::here("data", "file2.csv"),
+            workspace_uuid = "84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 ```
 
 This function doesn't return anything but will display a message in the R console to indicate the upload has been a success and to confirm the name of the file.

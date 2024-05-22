@@ -1,4 +1,4 @@
-#' Create a new document
+#' Upload a file to create a new document
 #'
 #' @param file File path of document to upload
 #' @param name Name to give document. If this isn't provided, the name of the
@@ -12,12 +12,12 @@
 #'
 #' @export
 
-new_document <- function(file,
-                         workspace_uuid,
-                         name = NULL,
-                         description = NULL,
-                         parent_uuid = NULL,
-                         use_proxy = FALSE) {
+upload_file <- function(file,
+                        workspace_uuid,
+                        name = NULL,
+                        description = NULL,
+                        parent_uuid = NULL,
+                        use_proxy = FALSE) {
 
   # If name not provided, use file name
   name <- if(is.null(name)) {
@@ -49,7 +49,7 @@ new_document <- function(file,
 }
 
 
-#' Create a new document version
+#' Upload a file to create a new document version
 #'
 #' @param file File path of document to upload
 #' @param document_uuid UUID of existing document
@@ -57,9 +57,9 @@ new_document <- function(file,
 #'
 #' @export
 
-new_document_version <- function(file,
-                                 document_uuid,
-                                 use_proxy = FALSE) {
+new_version <- function(file,
+                        document_uuid,
+                        use_proxy = FALSE) {
 
   response <- objectiveR(
     endpoint = "documents",
@@ -82,4 +82,3 @@ new_document_version <- function(file,
   invisible(response)
 
 }
-

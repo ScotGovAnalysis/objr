@@ -7,7 +7,7 @@ with_file("test", {
     test_that("Valid request", {
 
       expect_POST(
-        new_document(file = "test",
+        upload_file(file = "test",
                      workspace_uuid = "test_workspace"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
                "Multipart form:\n  ",
@@ -17,7 +17,7 @@ with_file("test", {
       )
 
       expect_POST(
-        new_document(file = "test",
+        upload_file(file = "test",
                      name = "test_file_name",
                      workspace_uuid = "test_workspace"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
@@ -28,7 +28,7 @@ with_file("test", {
       )
 
       expect_POST(
-        new_document_version(file = "test",
+        new_version(file = "test",
                              document_uuid = "test_asset"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/",
                "documents/test_asset/upload ",
@@ -53,12 +53,12 @@ with_file("test", {
         test_that("Function returns invisible", {
 
           expect_invisible(
-            suppressMessages(new_document_version(file = "test",
+            suppressMessages(new_version(file = "test",
                                                   document_uuid = "test_asset"))
           )
 
           expect_invisible(
-            suppressMessages(new_document(file = "test",
+            suppressMessages(upload_file(file = "test",
                                           workspace_uuid = "test_workspace"))
           )
 
@@ -66,7 +66,7 @@ with_file("test", {
 
         test_that("Function returns success message", {
 
-          expect_message(new_document_version(file = "test",
+          expect_message(new_version(file = "test",
                                               document_uuid = "test_asset"))
 
         })
