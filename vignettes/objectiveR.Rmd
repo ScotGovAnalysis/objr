@@ -87,8 +87,8 @@ This returns a data frame with a row for each asset in the workspace. Among othe
 
 ```{r assets-output, eval = TRUE, echo = FALSE}
 data.frame(
-  uuid = sapply(3:4, objectiveR:::random_uuid),
-  name = c("asset1", "asset2")
+  asset_name = c("asset1", "asset2"),
+  asset_uuid = sapply(3:4, objectiveR:::random_uuid)
 )
 ```
 
@@ -116,8 +116,8 @@ cli::cli_alert_success(
 To upload a file to a workspace, use the UUID of the workspace and the file path of the file to upload:
 
 ```{r upload}
-new_document(here::here("data", "file2.csv"),
-             workspace_uuid = "84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+upload_file(here::here("data", "file2.csv"),
+            workspace_uuid = "84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 ```
 
 This function doesn't return anything but will display a message in the R console to indicate the upload has been a success and to confirm the name of the file.
@@ -136,8 +136,8 @@ assets <- workspace_assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 
 ```{r assets2-output, eval = TRUE, echo = FALSE}
 data.frame(
-  uuid = sapply(3:5, objectiveR:::random_uuid),
-  name = c("Asset 1", "Asset 2", "file2")
+  asset_name = c("Asset 1", "Asset 2", "file2"),
+  asset_uuid = sapply(3:5, objectiveR:::random_uuid)
 )
 ```
 
