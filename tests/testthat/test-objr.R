@@ -1,16 +1,16 @@
-# objectiveR ----
+# objr ----
 
 without_internet({
 
   test_that("Valid request created", {
 
     expect_GET(
-      objectiveR("me"),
+      objr("me"),
       "https://secure.objectiveconnect.co.uk/publicapi/1/me"
     )
 
     expect_POST(
-      objectiveR(
+      objr(
         "folders",
         method = "POST",
         body = list(name = "test_folder",
@@ -28,14 +28,14 @@ with_mock_api({
 
   with_envvar(
 
-    new = c("OBJECTIVER_USR" = "test_usr",
-            "OBJECTIVER_PWD" = "test_pwd",
-            "OBJECTIVER_PROXY" = "test_proxy"),
+    new = c("OBJR_USR" = "test_usr",
+            "OBJR_PWD" = "test_pwd",
+            "OBJR_PROXY" = "test_proxy"),
 
     code = {
 
       test_that("Valid response", {
-        user <- objectiveR("me", use_proxy = TRUE)
+        user <- objr("me", use_proxy = TRUE)
         expect_equal(httr2::resp_body_json(user)$uuid, "1234")
       })
 
@@ -44,21 +44,19 @@ with_mock_api({
 })
 
 
-# objectiveR_auth ----
+# objr_auth ----
 
 req <- httr2::request("www.example.com")
 
 test_that("Error if invalid request supplied", {
-  expect_error(objectiveR_auth("req"))
+  expect_error(objr_auth("req"))
 })
 
 test_that("httr2 request returned", {
 
-  # expect_s3_class(objectiveR_auth(req, usr = "test", pwd = "test"),
-  #                 "httr2_request")
-
   .GlobalEnv$token <- "test"
-  expect_s3_class(objectiveR_auth(req), "httr2_request")
+
+  expect_s3_class(objr_auth(req), "httr2_request")
 
   rm(token, pos = .GlobalEnv)
 
@@ -67,25 +65,25 @@ test_that("httr2 request returned", {
 test_that("Correct authentication used", {
 
   with_envvar(
-    new = c("OBJECTIVER_USR" = "test_usr",
-            "OBJECTIVER_PWD" = "test_pwd"),
+    new = c("OBJR_USR" = "test_usr",
+            "OBJR_PWD" = "test_pwd"),
     code = {
-      exp_usr_pwd <- objectiveR_auth(req)
+      exp_usr_pwd <- objr_auth(req)
       expect_true(grepl("^Basic ", exp_usr_pwd$headers$Authorization))
     }
   )
 
   .GlobalEnv$token <- "test"
 
-  exp_token1 <- objectiveR_auth(req)
+  exp_token1 <- objr_auth(req)
   expect_equal(exp_token1$headers$Authorization, "test")
 
   # Token used even when username and password supplied
   with_envvar(
-    new = c("OBJECTIVER_USR" = "test_usr",
-            "OBJECTIVER_PWD" = "test_pwd"),
+    new = c("OBJR_USR" = "test_usr",
+            "OBJR_PWD" = "test_pwd"),
     code = {
-      exp_token2 <- objectiveR_auth(req)
+      exp_token2 <- objr_auth(req)
       expect_equal(exp_token1$headers$Authorization, "test")
     }
   )

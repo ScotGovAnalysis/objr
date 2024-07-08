@@ -2,7 +2,7 @@
 #'
 #' @param document_uuid UUID of existing document
 #' @param folder Folder to save downloaded file to
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @export
 
@@ -16,7 +16,7 @@ download_file <- function(document_uuid,
 
   file.create(path)
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "documents",
     url_path = list(document_uuid, "download"),
     method = "GET",

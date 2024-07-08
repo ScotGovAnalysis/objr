@@ -8,7 +8,7 @@
 #' @param parent_uuid UUID of folder in the workspace to create the new
 #' document within. If not supplied, the document will be created in the
 #' top-level of the workspace.
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @export
 
@@ -24,7 +24,7 @@ upload_file <- function(file,
     tools::file_path_sans_ext(basename(file))
   } else {name}
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "documents",
     method = "POST",
     content_type = "multipart/form-data",
@@ -53,7 +53,7 @@ upload_file <- function(file,
 #'
 #' @param file File path of document to upload
 #' @param document_uuid UUID of existing document
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @export
 
@@ -61,7 +61,7 @@ new_version <- function(file,
                         document_uuid,
                         use_proxy = FALSE) {
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "documents",
     url_path = list(document_uuid, "upload"),
     method = "POST",

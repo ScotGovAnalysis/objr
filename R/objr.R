@@ -17,15 +17,15 @@
 #'
 #' @export
 
-objectiveR <- function(endpoint,
-                       url_path = NULL,
-                       url_query = NULL,
-                       method = "GET",
-                       body = NULL,
-                       path = NULL,
-                       accept = "application/json",
-                       content_type = "application/json",
-                       use_proxy = FALSE) {
+objr <- function(endpoint,
+                 url_path = NULL,
+                 url_query = NULL,
+                 method = "GET",
+                 body = NULL,
+                 path = NULL,
+                 accept = "application/json",
+                 content_type = "application/json",
+                 use_proxy = FALSE) {
 
   # Check lists supplied (better way to do this)
   stopifnot(
@@ -45,9 +45,9 @@ objectiveR <- function(endpoint,
     httr2::req_method(method) |>
     httr2::req_headers(accept = accept,
                        `content-type` = content_type) |>
-    objectiveR_auth() |>
+    objr_auth() |>
     httr2::req_user_agent(
-      "objectiveR (https://scotgovanalysis.github.io/objectiveR/)"
+      "objr (https://scotgovanalysis.github.io/objr/)"
     ) |>
     httr2::req_error(body = error)
 
@@ -108,15 +108,15 @@ objectiveR <- function(endpoint,
 #' @examples
 #' \dontrun{
 #' httr2::request("http://example.com") |>
-#'   objectiveR_auth()
+#'   objr_auth()
 #' }
 #'
 #' token <- "test"
-#' httr2::request("http://example.com") |> objectiveR_auth()
+#' httr2::request("http://example.com") |> objr_auth()
 #'
 #' @export
 
-objectiveR_auth <- function(req) {
+objr_auth <- function(req) {
 
   # Check request is correct type
   if(!inherits(req, "httr2_request")) {

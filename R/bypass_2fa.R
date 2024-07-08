@@ -6,7 +6,7 @@
 #' @param workgroup_uuid Workgroup UUID
 #' @param allow_bypass Logical to indicate whether the workgroup should allow
 #' selected participants to bypass two step workspace verification.
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @export
 
@@ -14,7 +14,7 @@ allow_bypass_2fa <- function(workgroup_uuid,
                              allow_bypass = TRUE,
                              use_proxy = FALSE) {
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "workgroups",
     url_path = list(workgroup_uuid, "bypassTwoStepAllowed"),
     method = "PUT",
@@ -43,7 +43,7 @@ allow_bypass_2fa <- function(workgroup_uuid,
 #' user UUID)
 #' @param allow_bypass Logical to indicate whether the participant should be
 #' able to bypass two step verification for workspace.
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @export
 
@@ -51,7 +51,7 @@ participant_bypass_2fa <- function(participant_uuid,
                                    allow_bypass = TRUE,
                                    use_proxy = FALSE) {
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "participants",
     url_path = list(participant_uuid, "bypassTwoStep"),
     method = "PUT",

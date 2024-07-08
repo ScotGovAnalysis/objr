@@ -4,7 +4,7 @@
 test_that("Error if vector of values supplied", {
 
   expect_error(check_valid(c("test1", "test2")),
-               class = "objectiveR_value-invalid-length")
+               class = "objr_value-invalid-length")
 
 })
 
@@ -33,17 +33,17 @@ test_that("Error if invalid type supplied", {
 test_that("Correct value returned when environment variable exists", {
 
   with_envvar(
-    new = c("OBJECTIVER_USR" = "test_usr"),
+    new = c("OBJR_USR" = "test_usr"),
     code = expect_equal(input_value("usr"), "test_usr")
   )
 
   with_envvar(
-    new = c("OBJECTIVER_PWD" = "test_pwd"),
+    new = c("OBJR_PWD" = "test_pwd"),
     code = expect_equal(input_value("pwd"), "test_pwd")
   )
 
   with_envvar(
-    new = c("OBJECTIVER_PROXY" = "test_proxy"),
+    new = c("OBJR_PROXY" = "test_proxy"),
     code = expect_equal(input_value("proxy"), "test_proxy")
   )
 
@@ -54,18 +54,18 @@ test_that("Error if envvar doesn't exist and not interactive", {
   local_options(list(rlang_interactive = FALSE))
 
   with_envvar(
-    new = c("OBJECTIVER_USR" = NA),
-    code = expect_error(input_value("usr"), class = "objectiveR_invalid-envvar")
+    new = c("OBJR_USR" = NA),
+    code = expect_error(input_value("usr"), class = "objr_invalid-envvar")
   )
 
   with_envvar(
-    new = c("OBJECTIVER_PWD" = NA),
-    code = expect_error(input_value("pwd"), class = "objectiveR_invalid-envvar")
+    new = c("OBJR_PWD" = NA),
+    code = expect_error(input_value("pwd"), class = "objr_invalid-envvar")
   )
 
   with_envvar(
-    new = c("OBJECTIVER_PROXY" = NA),
-    code = expect_error(input_value("proxy"), class = "objectiveR_invalid-envvar")
+    new = c("OBJR_PROXY" = NA),
+    code = expect_error(input_value("proxy"), class = "objr_invalid-envvar")
   )
 
 })

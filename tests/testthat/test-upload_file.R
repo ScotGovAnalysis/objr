@@ -45,8 +45,8 @@ with_file("test", {
 
     with_envvar(
 
-      new = c("OBJECTIVER_USR" = "test_usr",
-              "OBJECTIVER_PWD" = "test_pwd"),
+      new = c("OBJR_USR" = "test_usr",
+              "OBJR_PWD" = "test_pwd"),
 
       code = {
 

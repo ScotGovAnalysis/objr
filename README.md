@@ -1,15 +1,15 @@
 
-# objectiveR
+# objr
 
 <!-- badges: start -->
 
 [![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/scotgovanalysis/objectiveR)](https://github.com/scotgovanalysis/objectiveR/releases/latest)
-[![R build status](https://github.com/scotgovanalysis/objectiveR/workflows/R-CMD-check/badge.svg)](https://github.com/scotgovanalysis/objectiveR/actions)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/scotgovanalysis/objr)](https://github.com/scotgovanalysis/objr/releases/latest)
+[![R build status](https://github.com/scotgovanalysis/objr/workflows/R-CMD-check/badge.svg)](https://github.com/scotgovanalysis/objr/actions)
 
 <!-- badges: end -->
 
-objectiveR aims to provide a convenient method of interacting with [Objective Connect](https://secure.objectiveconnect.co.uk) using R, making use of the [Objective Connect API](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html).
+objr aims to provide a convenient method of interacting with [Objective Connect](https://secure.objectiveconnect.co.uk) using R, making use of the [Objective Connect API](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html).
 
 ## Installation
 
@@ -18,21 +18,21 @@ Note that this method requires the `remotes` package and may not work from withi
 
 ``` r
 remotes::install_github(
-  "ScotGovAnalysis/objectiveR",
+  "ScotGovAnalysis/objr",
   upgrade = "never",
   build_vignettes = TRUE
 )
 ```
 
 Finally, the package can also be installed by downloading the [zip of the
-repository](https://github.com/ScotGovAnalysis/objectiveR/archive/main.zip)
+repository](https://github.com/ScotGovAnalysis/objr/archive/main.zip)
 and running the following code, replacing the section marked `<>`
 (including the arrows themselves) with the location of the downloaded
 zip:
 
 ``` r
 remotes::install_local(
-  "<FILEPATH OF ZIPPED FILE>/objectiveR-main.zip",
+  "<FILEPATH OF ZIPPED FILE>/objr-main.zip",
   upgrade = "never",
   build_vignettes = TRUE
 )

@@ -5,7 +5,7 @@
 #' document, folder and link.
 #' @param page Page number of responses to return (0..N).
 #' @param size Number of results to be returned per page.
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @return Data frame
 #'
@@ -24,7 +24,7 @@ workspace_assets <- function(workspace_uuid,
 
   type <- paste(toupper(type), collapse = "|")
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "assets",
     url_query = list(workspaceUuid = workspace_uuid,
                      type = type,
@@ -65,7 +65,7 @@ workspace_assets <- function(workspace_uuid,
 #' Get asset information
 #'
 #' @param asset_uuid UUID of asset
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @return Named list containing: uuid, name, type, extension, description.
 #'
@@ -74,7 +74,7 @@ workspace_assets <- function(workspace_uuid,
 asset_info <- function(asset_uuid,
                        use_proxy = FALSE) {
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "assets",
     url_path = list(asset_uuid),
     use_proxy = use_proxy

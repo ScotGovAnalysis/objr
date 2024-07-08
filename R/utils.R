@@ -13,7 +13,7 @@ check_valid <- function(value, warn = FALSE) {
   if(length(value) > 1) {
     cli::cli_abort(
       c("x" = "Value must be length 1"),
-      class = "objectiveR_value-invalid-length"
+      class = "objr_value-invalid-length"
     )
   }
 
@@ -23,7 +23,7 @@ check_valid <- function(value, warn = FALSE) {
   if(!valid & warn) {
     cli::cli_warn(
       c("!" = "`value` must exist and be at least 1 character in length"),
-      class = "objectiveR_value-invalid"
+      class = "objr_value-invalid"
     )
   }
 
@@ -41,9 +41,9 @@ check_valid <- function(value, warn = FALSE) {
 #' \code{check_valid()}.
 #'
 #' Expected environment variables for each \code{type} are as follows:
-#' * usr: `OBJECTIVER_USR`
-#' * pwd: `OBJECTIVER_PWD`
-#' * proxy: `OBJECTIVER_PROXY`
+#' * usr: `OBJR_USR`
+#' * pwd: `OBJR_PWD`
+#' * proxy: `OBJR_PROXY`
 #'
 #' @param type One of 'usr' (username), 'pwd' (password), or 'proxy'.
 #'
@@ -57,9 +57,9 @@ input_value <- function(type = c("usr", "pwd", "proxy")) {
 
   envvar <- switch(
     type,
-    "usr" = "OBJECTIVER_USR",
-    "pwd" = "OBJECTIVER_PWD",
-    "proxy" = "OBJECTIVER_PROXY"
+    "usr" = "OBJR_USR",
+    "pwd" = "OBJR_PWD",
+    "proxy" = "OBJR_PROXY"
   )
 
   # Get environment variable
@@ -72,7 +72,7 @@ input_value <- function(type = c("usr", "pwd", "proxy")) {
     if(!rlang::is_interactive()) {
       cli::cli_abort(
         c("x" = "Environment variable (`{envvar}`) doesn't exist"),
-        class = "objectiveR_invalid-envvar"
+        class = "objr_invalid-envvar"
       )
     }
 
