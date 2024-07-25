@@ -1,8 +1,8 @@
 ---
-title: "Authentication"
+title: "API Authentication"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Authentication}
+  %\VignetteIndexEntry{API Authentication}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
