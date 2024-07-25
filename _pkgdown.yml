@@ -74,3 +74,11 @@ reference:
   contents:
   - allow_bypass_2fa
   - participant_bypass_2fa
+
+articles:
+- title: Articles
+  navbar: ~
+  contents:
+  - authentication
+  - two-factor
+  - faqs
