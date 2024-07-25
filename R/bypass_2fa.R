@@ -1,7 +1,7 @@
 #' Allow/disallow bypassing of two factor authentication for workgroup
 #'
 #' @description More information on two factor authentication can be found in
-#' `vignette("faqs")`.
+#' `vignette("two-factor")`.
 #'
 #' @param workgroup_uuid Workgroup UUID
 #' @param allow_bypass Logical to indicate whether the workgroup should allow
@@ -37,7 +37,7 @@ allow_bypass_2fa <- function(workgroup_uuid,
 #'
 #' @description Note that this setting can only be updated by a workspace owner.
 #' More information on two factor authentication can be found in
-#' `vignette("faqs")`.
+#' `vignette("two-factor")`.
 #'
 #' @param participant_uuid Participant UUID (note that this is different to the
 #' user UUID)

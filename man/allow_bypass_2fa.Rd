@@ -16,5 +16,5 @@ selected participants to bypass two step workspace verification.}
 }
 \description{
 More information on two factor authentication can be found in
-\code{vignette("faqs")}.
+\code{vignette("two-factor")}.
 }

@@ -22,5 +22,5 @@ able to bypass two step verification for workspace.}
 \description{
 Note that this setting can only be updated by a workspace owner.
 More information on two factor authentication can be found in
-\code{vignette("faqs")}.
+\code{vignette("two-factor")}.
 }
