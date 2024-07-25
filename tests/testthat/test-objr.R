@@ -127,7 +127,10 @@ test_that("Expect character value returned", {
   )
 
   expect_type(
-    error(httr2::response(status_code = 403)),
+    error(httr2::response_json(
+      status_code = 403,
+      body = list(description = "REQUIRES_2FA")
+    )),
     "character"
   )
 
