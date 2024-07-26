@@ -65,6 +65,7 @@ reference:
   - download_file
   - upload_file
   - new_version
+  - delete_asset
 
 - title: API authentication
   contents:

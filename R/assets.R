@@ -85,3 +85,30 @@ asset_info <- function(asset_uuid,
   response[c("uuid", "name", "type", "extension", "description")]
 
 }
+
+
+#' Delete an asset
+#'
+#' @param asset_uuid UUID of asset
+#' @inheritParams objr
+#'
+#' @export
+
+delete_asset <- function(asset_uuid,
+                         use_proxy = FALSE) {
+
+  response <- objr(
+    endpoint = "assets",
+    method = "DELETE",
+    url_path = list(asset_uuid),
+    use_proxy = use_proxy
+  ) |>
+    httr2::resp_body_json()
+
+  if(tolower(response$status) == "complete") {
+    cli::cli_alert_success("Asset deleted: {asset_uuid}.")
+  }
+
+  invisible(response)
+
+}
