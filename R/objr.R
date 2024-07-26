@@ -204,12 +204,14 @@ error <- function(response) {
     )
   } else {
     if (status == 403) {
-      if (grepl("REQUIRES_2FA", httr2::resp_body_json(response)$description)) {
-        c(
-          "This action requires two-factor authentication (2FA).",
-          "See `help(participant_bypass_2fa)`."
-        )
-      }
+      desc <- httr2::resp_body_json(response)$description
+
+      c(
+        desc,
+        if (grepl("REQUIRES_2FA", desc)) {
+          "See https://scotgovanalysis.github.io/objr/articles/two-factor.html"
+        }
+      )
     }
   }
 }
