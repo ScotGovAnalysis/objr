@@ -77,6 +77,8 @@ data.frame(
 
 Maybe you would like to download a file from one of your workspaces. In Objective Connect, files are also known as 'assets'. To download an asset, you'll need its UUID.
 
+> Note: Where workspaces have two-factor authentication (2FA) enabled, participants cannot use the API for workspace level actions unless they have been given permission to bypass 2FA. See `vignette("two-factor")` for more information.
+
 Use the workspace UUID from `workspaces` to get a data frame of assets in the workspace:
 
 ```{r assets}
