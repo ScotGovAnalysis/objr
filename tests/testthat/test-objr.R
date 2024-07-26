@@ -26,31 +26,21 @@ without_internet({
 
 with_mock_api({
 
-  with_envvar(
-
-    new = c("OBJR_USR" = "test_usr",
-            "OBJR_PWD" = "test_pwd",
-            "OBJR_PROXY" = "test_proxy"),
-
-    code = {
-
-      test_that("Valid response", {
-        user <- objr("me", use_proxy = TRUE)
-        expect_equal(httr2::resp_body_json(user)$uuid, "1234")
-      })
-
-    })
+  test_that("Valid response", {
+    user <- objr("me", use_proxy = TRUE)
+    expect_equal(httr2::resp_body_json(user)$uuid, "1234")
+  })
 
 })
 
 
 # objr_auth ----
 
-req <- httr2::request("www.example.com")
-
 test_that("Error if invalid request supplied", {
   expect_error(objr_auth("req"))
 })
+
+req <- httr2::request("www.example.com")
 
 test_that("httr2 request returned", {
 
@@ -64,27 +54,20 @@ test_that("httr2 request returned", {
 
 test_that("Correct authentication used", {
 
-  with_envvar(
-    new = c("OBJR_USR" = "test_usr",
-            "OBJR_PWD" = "test_pwd"),
-    code = {
-      exp_usr_pwd <- objr_auth(req)
-      expect_true(grepl("^Basic ", exp_usr_pwd$headers$Authorization))
-    }
-  )
+  expect_true(grepl("^Basic ", objr_auth(req)$headers$Authorization))
 
   .GlobalEnv$token <- "test"
 
   exp_token1 <- objr_auth(req)
   expect_equal(exp_token1$headers$Authorization, "test")
 
-  # Token used even when username and password supplied
+  # Token used even when no username and password supplied
   with_envvar(
-    new = c("OBJR_USR" = "test_usr",
-            "OBJR_PWD" = "test_pwd"),
+    new = c("OBJR_USR" = "",
+            "OBJR_PWD" = ""),
     code = {
       exp_token2 <- objr_auth(req)
-      expect_equal(exp_token1$headers$Authorization, "test")
+      expect_equal(exp_token2$headers$Authorization, "test")
     }
   )
 

@@ -36,36 +36,27 @@ without_internet({
 
 with_mock_api({
 
-  with_envvar(
+  test_that("Functions returns invisible", {
 
-    new = c("OBJR_USR" = "test_usr",
-            "OBJR_PWD" = "test_pwd"),
+    expect_invisible(
+      suppressMessages(
+        allow_bypass_2fa("test_workgroup")
+      )
+    )
 
-    code = {
+    expect_invisible(
+      suppressMessages(
+        participant_bypass_2fa("test_participant")
+      )
+    )
 
-      test_that("Functions returns invisible", {
+  })
 
-        expect_invisible(
-          suppressMessages(
-            allow_bypass_2fa("test_workgroup")
-          )
-        )
+  test_that("Functions return success message", {
 
-        expect_invisible(
-          suppressMessages(
-            participant_bypass_2fa("test_participant")
-          )
-        )
+    expect_message(allow_bypass_2fa("test_workgroup"))
+    expect_message(participant_bypass_2fa("test_participant"))
 
-      })
-
-      test_that("Functions return success message", {
-
-        expect_message(allow_bypass_2fa("test_workgroup"))
-        expect_message(participant_bypass_2fa("test_participant"))
-
-      })
-
-    })
+  })
 
 })

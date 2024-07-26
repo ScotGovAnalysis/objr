@@ -14,37 +14,28 @@ without_internet({
 
 with_mock_api({
 
-  with_envvar(
+  test_that("Function returns invisible", {
 
-    new = c("OBJR_USR" = "test_usr",
-            "OBJR_PWD" = "test_pwd"),
-
-    code = {
-
-      test_that("Function returns invisible", {
-
-        expect_invisible(
-          suppressMessages(download_file(document_uuid = "test_document",
-                                         folder = tempdir()))
-        )
-
-      })
-
-      test_that("Function returns success message", {
-
-        expect_message(download_file(document_uuid = "test_document",
+    expect_invisible(
+      suppressMessages(download_file(document_uuid = "test_document",
                                      folder = tempdir()))
+    )
 
-      })
+  })
 
-      test_that("Function creates new file", {
-        suppressMessages(download_file(document_uuid = "test_document",
-                                       folder = tempdir()))
-        expect_true(file.exists(paste0(tempdir(), "/test_document_name.txt")))
-      })
+  test_that("Function returns success message", {
 
-      file.remove(paste0(tempdir(), "/test_document_name.txt"))
+    expect_message(download_file(document_uuid = "test_document",
+                                 folder = tempdir()))
 
-    })
+  })
+
+  test_that("Function creates new file", {
+    suppressMessages(download_file(document_uuid = "test_document",
+                                   folder = tempdir()))
+    expect_true(file.exists(paste0(tempdir(), "/test_document_name.txt")))
+  })
+
+  file.remove(paste0(tempdir(), "/test_document_name.txt"))
 
 })
