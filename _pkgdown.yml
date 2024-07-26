@@ -70,7 +70,7 @@ reference:
   contents:
   - objr_auth
 
-- title: Two factor authentication
+- title: Two-factor authentication
   contents:
   - allow_bypass_2fa
   - participant_bypass_2fa

@@ -2,7 +2,7 @@
 % Please edit documentation in R/bypass_2fa.R
 \name{participant_bypass_2fa}
 \alias{participant_bypass_2fa}
-\title{Allow/disallow bypassing of two factor authentication for participant}
+\title{Allow/disallow bypassing of two-factor authentication for workspace participant}
 \usage{
 participant_bypass_2fa(
   participant_uuid,
@@ -15,12 +15,12 @@ participant_bypass_2fa(
 user UUID)}
 
 \item{allow_bypass}{Logical to indicate whether the participant should be
-able to bypass two step verification for workspace.}
+able to bypass two-factor authentication for workspace.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \description{
 Note that this setting can only be updated by a workspace owner.
-More information on two factor authentication can be found in
+More information on two-factor authentication can be found in
 \code{vignette("two-factor")}.
 }
