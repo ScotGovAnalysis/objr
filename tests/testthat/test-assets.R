@@ -28,35 +28,26 @@ without_internet({
 
 with_mock_api({
 
-  with_envvar(
+  test_that("Function returns dataframe", {
 
-    new = c("OBJR_USR" = "test_usr",
-            "OBJR_PWD" = "test_pwd"),
+    expect_s3_class(
+      workspace_assets(workspace_uuid = "test_workspace_uuid"),
+      "data.frame"
+    )
 
-    code = {
+  })
 
-      test_that("Function returns dataframe", {
+  test_that("Results filtered by type", {
 
-        expect_s3_class(
-          workspace_assets(workspace_uuid = "test_workspace_uuid"),
-          "data.frame"
-        )
+    expect_equal(
+      unique(
+        workspace_assets(workspace_uuid = "test_workspace_uuid",
+                         type = list("folder"))$asset_type
+      ),
+      "FOLDER"
+    )
 
-      })
-
-      test_that("Results filtered by type", {
-
-        expect_equal(
-          unique(
-            workspace_assets(workspace_uuid = "test_workspace_uuid",
-                             type = list("folder"))$asset_type
-          ),
-          "FOLDER"
-        )
-
-      })
-
-    })
+  })
 
 })
 
@@ -78,28 +69,17 @@ without_internet({
 
 with_mock_api({
 
-  with_envvar(
+  test_that("Function returns dataframe", {
 
-    new = c("OBJR_USR" = "test_usr",
-            "OBJR_PWD" = "test_pwd"),
+    expect_type(
+      asset_info(asset_uuid = "test_asset"),
+      "list"
+    )
 
-    code = {
+    expect_named(
+      asset_info(asset_uuid = "test_asset")
+    )
 
-      test_that("Function returns dataframe", {
-
-        expect_type(
-          asset_info(asset_uuid = "test_asset"),
-          "list"
-        )
-
-        expect_named(
-          asset_info(asset_uuid = "test_asset")
-        )
-
-      })
-
-    })
+  })
 
 })
-
-
