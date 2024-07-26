@@ -20,7 +20,9 @@ These steps only need to be carried out once before you can use objr (or the API
 
 ## Allowing the workspace owner to bypass 2FA
 
-To give yourself (the workspace owner) permission to bypass 2FA, you will need the help of your workgroup admin. If you work in the Scottish Government, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors) to arrange this.
+To give yourself (the workspace owner) permission to bypass 2FA, you will need the help of your workgroup admin. 
+
+> If you work in the Scottish Government, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors) to arrange this.
 
 1. Allow 2FA bypassing for the workgroup. This setting can only be controlled via the API, and not the Objective Connect browser interface. It can only be done by a workgroup admin. 
 

@@ -192,13 +192,26 @@ store_token <- function(response, store_env = globalenv()) {
 #' @noRd
 
 error <- function(response) {
+  status <- httr2::resp_status(response)
 
-  switch(
-    as.character(httr2::resp_status(response)),
-    "401" = "Authorisation failed. Check username / password / token.",
-    "403" = paste("Operation not permitted.")
-  )
-
+  if (status == 401) {
+    c(
+      "Authorisation failed. Check username / password / token.",
+      paste(
+        "You might have an expired token in your R environment.",
+        "Remove it with `rm(token)`."
+      )
+    )
+  } else {
+    if (status == 403) {
+      if (grepl("REQUIRES_2FA", httr2::resp_body_json(response)$description)) {
+        c(
+          "This action requires two-factor authentication (2FA).",
+          "See `help(participant_bypass_2fa)`."
+        )
+      }
+    }
+  }
 }
 
 
