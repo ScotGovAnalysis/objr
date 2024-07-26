@@ -81,16 +81,11 @@ objr <- function(endpoint,
   # Perform request
   response <- httr2::req_perform(request, path = path)
 
-  # Check status of response
-  httr2::resp_check_status(response)
-
-  # Store token for future requests
-  store_token(response)
-
-  check_pages(response)
-
   # Return response
-  response
+  response |>
+    httr2::resp_check_status() |>
+    store_token() |>
+    check_pages()
 
 }
 
@@ -178,7 +173,7 @@ store_token <- function(response, store_env = globalenv()) {
     rlang::env_poke(env = store_env, nm = "token", value = token)
   }
 
-  return(invisible(token))
+  invisible(response)
 
 }
 
@@ -192,30 +187,43 @@ store_token <- function(response, store_env = globalenv()) {
 #' @noRd
 
 error <- function(response) {
+
   status <- httr2::resp_status(response)
 
+  desc <- tryCatch(httr2::resp_body_json(response)$description,
+                   error = function(e) NULL)
+
+  extra <- NULL
+
   if (status == 401) {
-    c(
+    extra <- c(
       "Authorisation failed. Check username / password / token.",
       paste(
         "You might have an expired token in your R environment.",
         "Remove it with `rm(token)`."
       )
     )
-  } else {
-    if (status == 403) {
-      desc <- httr2::resp_body_json(response)$description
-
-      c(
-        desc,
-        if (grepl("REQUIRES_2FA", desc)) {
-          "See https://scotgovanalysis.github.io/objr/articles/two-factor.html"
-        }
-      )
-    }
   }
+
+  if (status == 403 && grepl("REQUIRES_2FA", desc)) {
+    extra <-
+      "See https://scotgovanalysis.github.io/objr/articles/two-factor.html"
+  }
+
+  c(desc, extra)
+
 }
 
+
+#' Check number of pages returned in response
+#'
+#' @param response An httr2 [httr2::response()][response]
+#' @param call Passed to `cli::cli_abort()`.
+#'
+#' @return Returns `response` invisibly. This function is primarily used for
+#' printing useful error/warning/message(s).
+#'
+#' @noRd
 
 check_pages <- function(response, call = rlang::caller_env()) {
 
@@ -267,5 +275,6 @@ check_pages <- function(response, call = rlang::caller_env()) {
 
   }
 
-}
+  invisible(response)
 
+}

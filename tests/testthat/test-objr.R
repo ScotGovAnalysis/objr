@@ -86,11 +86,15 @@ test_that("Error if Authorization header doesn't exist", {
   expect_error(store_token(httr2::response()))
 })
 
-test_that("Function returns invisible object", {
-  expect_invisible(
-    httr2::response(headers = list(Authorization = "test1")) |>
-      store_token(store_env = environment())
-  )
+test_that("Response returned invisibly", {
+
+  resp <- httr2::response(headers = list(Authorization = "test1"))
+
+  expect_invisible(store_token(resp, store_env = environment()))
+
+  returned <- store_token(resp, store_env = environment())
+  expect_equal(returned, resp)
+
 })
 
 test_that("Environment value created successfully", {
@@ -128,26 +132,15 @@ test_that("NULL returned for invalid status code", {
 
 # check_pages ----
 
-test_that("NULL returned", {
+test_that("Response returned invisibly", {
 
-  expect_null(
-    check_pages(httr2::response_json())
-  )
+  resp <- httr2::response_json()
 
-  expect_null(
-    check_pages(httr2::response_json(
-      body = list(content = "test_content")
-    ))
-  )
+  expect_invisible(check_pages(resp))
 
-  resp1 <- httr2::response_json(
-    body = list(metadata = list(
-      totalPages = 1,
-      page = 0
-    ))
-  )
+  returned <- check_pages(resp)
 
-  expect_null(check_pages(resp1))
+  expect_equal(returned, resp)
 
 })
 
@@ -172,7 +165,7 @@ test_that("Error returned", {
 
 })
 
-test_that("Warning and message returned", {
+test_that("Warning and messages returned", {
 
   resp <- httr2::response_json(
     body = list(metadata = list(
@@ -181,7 +174,9 @@ test_that("Warning and message returned", {
     ))
   )
 
-  expect_warning(suppressMessages(check_pages(resp)))
-  expect_message(suppressWarnings(check_pages(resp)))
+  check_pages(resp) |>
+    expect_warning() |>
+    expect_message() |>
+    expect_message()
 
 })
