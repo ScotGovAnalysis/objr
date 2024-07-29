@@ -1,6 +1,6 @@
 Package: objr
 Title: Wrapper for Objective APIs
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: c(
     person("Scottish Government", , , "statistics.enquiries@gov.scot", role = "cph"),
     person("Alice", "Hannah", , "alice.hannah@gov.scot", c("aut", "cre"))
