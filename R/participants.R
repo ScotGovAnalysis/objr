@@ -1,7 +1,7 @@
 #' Get data frame of workspace participants
 #'
 #' @param workspace_uuid UUID of workspace
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @return Data frame
 #'
@@ -9,7 +9,7 @@
 
 participants <- function(workspace_uuid, use_proxy = FALSE) {
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "participants",
     url_query = list(workspaceUuid = workspace_uuid)
   )

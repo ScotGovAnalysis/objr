@@ -1,4 +1,4 @@
-url: https://scotgovanalysis.github.io/objectiveR
+url: https://scotgovanalysis.github.io/objr
 
 development:
   mode: auto
@@ -45,7 +45,7 @@ reference:
 
 - title: API calls
   contents:
-  - objectiveR
+  - objr
   - my_user_id
 
 - subtitle: Workspaces
@@ -68,9 +68,17 @@ reference:
 
 - title: API authentication
   contents:
-  - objectiveR_auth
+  - objr_auth
 
-- title: Two factor authentication
+- title: Two-factor authentication
   contents:
   - allow_bypass_2fa
   - participant_bypass_2fa
+
+articles:
+- title: Articles
+  navbar: ~
+  contents:
+  - authentication
+  - two-factor
+  - faqs

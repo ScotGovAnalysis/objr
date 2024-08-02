@@ -3,7 +3,7 @@
 #' @param workgroup_uuid UUID of workgroup to filter by
 #' @param page Page number of responses to return (0..N).
 #' @param size Number of results to be returned per page.
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @return Data frame
 #'
@@ -14,7 +14,7 @@ my_workspaces <- function(workgroup_uuid = NULL,
                           size = NULL,
                           use_proxy = FALSE) {
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "myworkspaces",
     url_query = list(workgroupUuid = workgroup_uuid,
                      page = page,

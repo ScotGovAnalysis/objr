@@ -2,7 +2,7 @@
 % Please edit documentation in R/bypass_2fa.R
 \name{allow_bypass_2fa}
 \alias{allow_bypass_2fa}
-\title{Allow/disallow bypassing of two factor authentication for workgroup}
+\title{Allow/disallow bypassing of two-factor authentication for workgroup}
 \usage{
 allow_bypass_2fa(workgroup_uuid, allow_bypass = TRUE, use_proxy = FALSE)
 }
@@ -10,11 +10,11 @@ allow_bypass_2fa(workgroup_uuid, allow_bypass = TRUE, use_proxy = FALSE)
 \item{workgroup_uuid}{Workgroup UUID}
 
 \item{allow_bypass}{Logical to indicate whether the workgroup should allow
-selected participants to bypass two step workspace verification.}
+selected participants to bypass two-factor authentication verification.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \description{
-More information on two factor authentication can be found in
-\code{vignette("faqs")}.
+More information on two-factor authentication can be found in
+\code{vignette("two-factor")}.
 }

@@ -17,15 +17,15 @@
 #'
 #' @export
 
-objectiveR <- function(endpoint,
-                       url_path = NULL,
-                       url_query = NULL,
-                       method = "GET",
-                       body = NULL,
-                       path = NULL,
-                       accept = "application/json",
-                       content_type = "application/json",
-                       use_proxy = FALSE) {
+objr <- function(endpoint,
+                 url_path = NULL,
+                 url_query = NULL,
+                 method = "GET",
+                 body = NULL,
+                 path = NULL,
+                 accept = "application/json",
+                 content_type = "application/json",
+                 use_proxy = FALSE) {
 
   # Check lists supplied (better way to do this)
   stopifnot(
@@ -45,9 +45,9 @@ objectiveR <- function(endpoint,
     httr2::req_method(method) |>
     httr2::req_headers(accept = accept,
                        `content-type` = content_type) |>
-    objectiveR_auth() |>
+    objr_auth() |>
     httr2::req_user_agent(
-      "objectiveR (https://scotgovanalysis.github.io/objectiveR/)"
+      "objr (https://scotgovanalysis.github.io/objr/)"
     ) |>
     httr2::req_error(body = error)
 
@@ -81,16 +81,11 @@ objectiveR <- function(endpoint,
   # Perform request
   response <- httr2::req_perform(request, path = path)
 
-  # Check status of response
-  httr2::resp_check_status(response)
-
-  # Store token for future requests
-  store_token(response)
-
-  check_pages(response)
-
   # Return response
-  response
+  response |>
+    httr2::resp_check_status() |>
+    store_token() |>
+    check_pages()
 
 }
 
@@ -108,15 +103,15 @@ objectiveR <- function(endpoint,
 #' @examples
 #' \dontrun{
 #' httr2::request("http://example.com") |>
-#'   objectiveR_auth()
+#'   objr_auth()
 #' }
 #'
 #' token <- "test"
-#' httr2::request("http://example.com") |> objectiveR_auth()
+#' httr2::request("http://example.com") |> objr_auth()
 #'
 #' @export
 
-objectiveR_auth <- function(req) {
+objr_auth <- function(req) {
 
   # Check request is correct type
   if(!inherits(req, "httr2_request")) {
@@ -178,7 +173,7 @@ store_token <- function(response, store_env = globalenv()) {
     rlang::env_poke(env = store_env, nm = "token", value = token)
   }
 
-  return(invisible(token))
+  invisible(response)
 
 }
 
@@ -193,14 +188,42 @@ store_token <- function(response, store_env = globalenv()) {
 
 error <- function(response) {
 
-  switch(
-    as.character(httr2::resp_status(response)),
-    "401" = "Authorisation failed. Check username / password / token.",
-    "403" = paste("Operation not permitted.")
-  )
+  status <- httr2::resp_status(response)
+
+  desc <- tryCatch(httr2::resp_body_json(response)$description,
+                   error = function(e) NULL)
+
+  extra <- NULL
+
+  if (status == 401) {
+    extra <- c(
+      "Authorisation failed. Check username / password / token.",
+      paste(
+        "You might have an expired token in your R environment.",
+        "Remove it with `rm(token)`."
+      )
+    )
+  }
+
+  if (status == 403 && grepl("REQUIRES_2FA", desc)) {
+    extra <-
+      "See https://scotgovanalysis.github.io/objr/articles/two-factor.html"
+  }
+
+  c(desc, extra)
 
 }
 
+
+#' Check number of pages returned in response
+#'
+#' @param response An httr2 [httr2::response()][response]
+#' @param call Passed to `cli::cli_abort()`.
+#'
+#' @return Returns `response` invisibly. This function is primarily used for
+#' printing useful error/warning/message(s).
+#'
+#' @noRd
 
 check_pages <- function(response, call = rlang::caller_env()) {
 
@@ -252,5 +275,6 @@ check_pages <- function(response, call = rlang::caller_env()) {
 
   }
 
-}
+  invisible(response)
 
+}

@@ -20,29 +20,20 @@ without_internet({
 
 with_mock_api({
 
-  with_envvar(
+  test_that("Function returns dataframe", {
 
-    new = c("OBJECTIVER_USR" = "test_usr",
-            "OBJECTIVER_PWD" = "test_pwd"),
+    expect_s3_class(
+      my_workspaces(workgroup_uuid = "test_workgroup_uuid"),
+      "data.frame"
+    )
 
-    code = {
+    expect_equal(
+      unique(
+        my_workspaces(workgroup_uuid = "test_workgroup_uuid")$workgroup_uuid
+      ),
+      "test_workgroup_uuid"
+    )
 
-      test_that("Function returns dataframe", {
-
-        expect_s3_class(
-          my_workspaces(workgroup_uuid = "test_workgroup_uuid"),
-          "data.frame"
-        )
-
-      })
-
-      expect_equal(
-        unique(
-          my_workspaces(workgroup_uuid = "test_workgroup_uuid")$workgroup_uuid
-        ),
-        "test_workgroup_uuid"
-      )
-
-    })
+  })
 
 })

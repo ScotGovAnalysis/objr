@@ -43,35 +43,26 @@ with_file("test", {
 
   with_mock_api({
 
-    with_envvar(
+    test_that("Function returns invisible", {
 
-      new = c("OBJECTIVER_USR" = "test_usr",
-              "OBJECTIVER_PWD" = "test_pwd"),
+      expect_invisible(
+        suppressMessages(new_version(file = "test",
+                                     document_uuid = "test_asset"))
+      )
 
-      code = {
+      expect_invisible(
+        suppressMessages(upload_file(file = "test",
+                                     workspace_uuid = "test_workspace"))
+      )
 
-        test_that("Function returns invisible", {
+    })
 
-          expect_invisible(
-            suppressMessages(new_version(file = "test",
-                                                  document_uuid = "test_asset"))
-          )
+    test_that("Function returns success message", {
 
-          expect_invisible(
-            suppressMessages(upload_file(file = "test",
-                                          workspace_uuid = "test_workspace"))
-          )
+      expect_message(new_version(file = "test",
+                                 document_uuid = "test_asset"))
 
-        })
-
-        test_that("Function returns success message", {
-
-          expect_message(new_version(file = "test",
-                                              document_uuid = "test_asset"))
-
-        })
-
-      })
+    })
 
   })
 

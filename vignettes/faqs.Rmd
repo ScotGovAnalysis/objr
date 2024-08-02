@@ -12,18 +12,3 @@ vignette: >
 A user is an individual using Objective Connect. A participant is a user in a particular workspace. For example, a person using Objective Connect will have a User UUID associated with them, and also a Participant UUID for each individual workspace they are a member of. 
 
 A user can get their User UUID by running `my_user_id()`. A user can find their participant UUID for a particular workspace using `participants()`.
-
-
-## How does two factor authentication (2FA) work?
-
-(Note: this is sometimes also referred to as 'two step verification'.)
-
-Where workspaces have 2FA enabled, users cannot use the API unless they have been given permission to bypass this. Permission to bypass 2FA is given at a workspace level, and can only be granted by the workspace owner.
-
-Firstly, permission must be given at a workgroup level to allow bypassing permissions to be granted for workspaces within it. This can be done using `allow_bypass_2fa()`.
-
-Once this has been allowed, bypassing can be granted for individual participants in a workspace using `participant_bypass_2fa()`. 
-
-Both of these functions also allow for bypassing to be disallowed using `allow_bypass = FALSE`.
-
-To check the status of bypassing 2FA for participants in a workspace, use `participants()`.

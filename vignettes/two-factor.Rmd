@@ -1,0 +1,63 @@
+---
+title: "Two-Factor Authentication"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Two-Factor Authentication}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+(Note: this is sometimes also referred to as 'two-step verification'.)
+
+Where workspaces have two-factor authentication (2FA) enabled, participants cannot use the API unless they have been given permission to bypass 2FA. Permission to bypass 2FA is given at a workspace level, and can only be granted by the workspace owner.
+
+To check which participants are allowed to bypass 2FA, run `participants()` using your workspace UUID, and inspect the `bypass_2fa` column in the returned data frame. 
+
+The following guidance is for workspace owners. If you are not the workspace owner, you will need to ask them to provide you with bypass permissions.
+
+These steps only need to be carried out once before you can use objr (or the API in general) for the first time.
+
+
+## Allowing the workspace owner to bypass 2FA
+
+To give yourself (the workspace owner) permission to bypass 2FA, you will need the help of your workgroup admin. 
+
+> If you work in the Scottish Government, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors) to arrange this.
+
+1. Allow 2FA bypassing for the workgroup. This setting can only be controlled via the API, and not the Objective Connect browser interface. It can only be done by a workgroup admin. 
+
+   * Option 1: Use `allow_bypass_2fa()`, providing the relevant workgroup UUID.
+
+   * Option 2: If the workgroup admin isn't an R user, they can use the [API interactive documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html). Use the 'Authorise' button to setup authentication. Execute the [/workgroups/{uuid}/bypassTwoStepAllowed](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setWorkgroupMfaBypassAllowed) endpoint, providing the workgroup UUID.
+
+
+2. Temporarily disable 2FA in your workspace. 
+
+   * If 2FA is enforced at workgroup level, the workgroup admin will need to [disable this setting](https://help.objectiveconnect.com/onlinehelp/K_AdminFunctions/EnforcingMFA.htm) first.
+   
+   * In the Summary section of the workspace page, select the three dots icon (...) in the top right-hand corner, then Two-step verification. When prompted to confirm, select Disable.
+   
+
+3. Give yourself (the workspace owner) permission to bypass 2FA using `participant_bypass_2fa()`. You will need your participant UUID, which can be found using `participants()`.
+
+
+4. Check this has worked using `participants()`. The `bypass_2fa` column in the returned data frame should contain `TRUE` against your name.
+
+
+5. Reinstate 2FA for the workspace and workgroup in the same way that you disabled them in step 2.
+
+
+## Allowing other participants to bypass 2FA
+
+As you (the workspace owner) can now bypass 2FA, you can now provide the same bypassing permissions to other workspace members. This can be done in the same way as above; by using `participant_bypass_2fa()` and providing the relevant members' participant UUID. 
+
+For Scottish Government Objective Connect workspaces, these permissions should be limited to Scottish Government staff and not external participants.
+
+If you wish to revoke permissions to bypass 2FA, use `participant_bypass_2fa()` and set `allow_bypass = FALSE`.
+
+Remember, to check the status of 2FA bypassing for participants in a workspace, use `participants()`.
+
+
+## Getting more help
+
+This process can be quite fiddly. If you are unsure or have any issues with the above, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors).

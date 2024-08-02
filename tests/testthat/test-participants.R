@@ -14,24 +14,15 @@ without_internet({
 
 with_mock_api({
 
-  with_envvar(
+  test_that("Function returns dataframe", {
 
-    new = c("OBJECTIVER_USR" = "test_usr",
-            "OBJECTIVER_PWD" = "test_pwd"),
+    expect_s3_class(
+      participants(
+        workspace_uuid = "test_workspace_uuid"
+      ),
+      "data.frame"
+    )
 
-    code = {
-
-      test_that("Function returns dataframe", {
-
-        expect_s3_class(
-          participants(
-            workspace_uuid = "test_workspace_uuid"
-          ),
-          "data.frame"
-        )
-
-      })
-
-    })
+  })
 
 })

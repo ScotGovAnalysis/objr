@@ -1,8 +1,8 @@
 ---
-title: "Introduction to objectiveR"
+title: "Introduction to objr"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to objectiveR}
+  %\VignetteIndexEntry{Introduction to objr}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,14 +13,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-objectiveR aims to provide a convenient method of interacting with [Objective Connect](https://secure.objectiveconnect.co.uk) using R, making use of the [Objective Connect API](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html).
+objr aims to provide a convenient method of interacting with [Objective Connect](https://secure.objectiveconnect.co.uk) using R, making use of the [Objective Connect API](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html).
 
 This article demonstrates a simple workflow for using the package, with the ultimate aim of downloading or uploading a file to an Objective Connect workspace.
 
 Start by loading the package in your R session:
 
 ```{r setup}
-library(objectiveR)
+library(objr)
 ```
 
 
@@ -34,7 +34,7 @@ Objective Connect UUIDs take the form of a string of eight chunks of four lower 
 84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f
 ```
 
-Use of the API and the objectiveR package depends on these UUIDs. UUIDs are mostly findable using the functions in objectiveR (as demonstrated in this article), however you can often also find relevant UUIDs in the webpage URLs. For example, this is an example URL when viewing a workspace:
+Use of the API and the objr package depends on these UUIDs. UUIDs are mostly findable using the functions in objr (as demonstrated in this article), however you can often also find relevant UUIDs in the webpage URLs. For example, this is an example URL when viewing a workspace:
 
 ```
 https://secure.objectiveconnect.co.uk/share/2vo2-dd3s-1nn9-y20r-b906-u4s2-
@@ -68,7 +68,7 @@ This returns a data frame with a row for each workspace you are a member of. Amo
 ```{r workspaces-output, eval = TRUE, echo = FALSE}
 data.frame(
   workspace_name = c("Project 1", "Project 2"),
-  workspace_uuid = sapply(1:2, objectiveR:::random_uuid)
+  workspace_uuid = sapply(1:2, objr:::random_uuid)
 )
 ```
 
@@ -76,6 +76,8 @@ data.frame(
 ## Assets
 
 Maybe you would like to download a file from one of your workspaces. In Objective Connect, files are also known as 'assets'. To download an asset, you'll need its UUID.
+
+> Note: Where workspaces have two-factor authentication (2FA) enabled, participants cannot use the API for workspace level actions unless they have been given permission to bypass 2FA. See `vignette("two-factor")` for more information.
 
 Use the workspace UUID from `workspaces` to get a data frame of assets in the workspace:
 
@@ -88,7 +90,7 @@ This returns a data frame with a row for each asset in the workspace. Among othe
 ```{r assets-output, eval = TRUE, echo = FALSE}
 data.frame(
   asset_name = c("asset1", "asset2"),
-  asset_uuid = sapply(3:4, objectiveR:::random_uuid)
+  asset_uuid = sapply(3:4, objr:::random_uuid)
 )
 ```
 
@@ -137,7 +139,7 @@ assets <- workspace_assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 ```{r assets2-output, eval = TRUE, echo = FALSE}
 data.frame(
   asset_name = c("Asset 1", "Asset 2", "file2"),
-  asset_uuid = sapply(3:5, objectiveR:::random_uuid)
+  asset_uuid = sapply(3:5, objr:::random_uuid)
 )
 ```
 

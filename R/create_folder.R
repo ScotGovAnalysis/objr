@@ -6,7 +6,7 @@
 #' @param parent_uuid UUID of another folder in the workspace to create the new
 #' folder within. If not supplied, the folder will be created in the top-level
 #' of the workspace.
-#' @inheritParams objectiveR
+#' @inheritParams objr
 #'
 #' @export
 
@@ -16,7 +16,7 @@ create_folder <- function(folder_name,
                           parent_uuid = NULL,
                           use_proxy = FALSE) {
 
-  response <- objectiveR(
+  response <- objr(
     endpoint = "folders",
     method = "POST",
     body = list(
