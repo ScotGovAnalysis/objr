@@ -1,12 +1,12 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   authentication: authentication.html
   faqs: faqs.html
-  objectiveR: objectiveR.html
-last_built: 2024-06-14T15:45Z
+  objr: objr.html
+  two-factor: two-factor.html
+last_built: 2024-08-02T08:35Z
 urls:
-  reference: https://scotgovanalysis.github.io/objectiveR/reference
-  article: https://scotgovanalysis.github.io/objectiveR/articles
-
+  reference: https://scotgovanalysis.github.io/objr/reference
+  article: https://scotgovanalysis.github.io/objr/articles
