@@ -1,4 +1,4 @@
-structure(list(method = "GET", url = "https://api/myworkspaces?workgroupUuid=df05-8377-f703-4ce8-a163-9104-2bc6-64e5",
+structure(list(method = "GET", url = "https://api/myworkspaces?workgroupUuid=test_workgroup_uuid",
     status_code = 200L, headers = structure(list(Date = "Thu, 09 May 2024 15:49:51 GMT",
         `Content-Type` = "application/json", `Transfer-Encoding` = "chunked",
         Connection = "keep-alive", `X-CONNECT-MDC` = "apipGcxcEvR",
