@@ -10,6 +10,11 @@
 #'
 #' @return Data frame
 #'
+#' @examples
+#' \dontrun{
+#' comments()
+#' }
+#'
 #' @export
 
 comments <- function(created_after = NULL,

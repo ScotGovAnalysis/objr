@@ -37,3 +37,9 @@ Data frame
 \description{
 Get comments for workspaces of current user
 }
+\examples{
+\dontrun{
+comments()
+}
+
+}
