@@ -11,7 +11,8 @@ participants <- function(workspace_uuid, use_proxy = FALSE) {
 
   response <- objr(
     endpoint = "participants",
-    url_query = list(workspaceUuid = workspace_uuid)
+    url_query = list(workspaceUuid = workspace_uuid),
+    use_proxy = use_proxy
   )
 
   content <-

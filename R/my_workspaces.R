@@ -18,7 +18,8 @@ my_workspaces <- function(workgroup_uuid = NULL,
     endpoint = "myworkspaces",
     url_query = list(workgroupUuid = workgroup_uuid,
                      page = page,
-                     size = size)
+                     size = size),
+    use_proxy = use_proxy
   )
 
   content <-

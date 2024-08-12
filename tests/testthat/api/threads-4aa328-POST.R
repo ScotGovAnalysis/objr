@@ -1,7 +1,7 @@
-structure(list(method = "GET", url = "https://api/myworkspaces?workgroupUuid=test_workgroup_uuid",
-    status_code = 200L, headers = structure(list(Date = "Thu, 09 May 2024 15:49:51 GMT",
+structure(list(method = "POST", url = "https://api/threads",
+    status_code = 200L, headers = structure(list(Date = "Mon, 12 Aug 2024 13:11:58 GMT",
         `Content-Type` = "application/json", `Transfer-Encoding` = "chunked",
-        Connection = "keep-alive", `X-CONNECT-MDC` = "apipGcxcEvR",
+        Connection = "keep-alive", `X-CONNECT-MDC` = "apiPOKLkfNY",
         `X-Frame-Options` = "deny", `X-XSS-Protection` = "1; mode=block",
         `Cache-Control` = "no-cache, no-store", Expires = "0",
         Pragma = "no-cache", `Strict-Transport-Security` = "max-age=31536000 ; includeSubDomains",
@@ -9,5 +9,5 @@ structure(list(method = "GET", url = "https://api/myworkspaces?workgroupUuid=tes
         `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin",
         `Feature-Policy` = "vibrate 'none'; geolocation 'none'",
         Authorization = "REDACTED", `Set-Cookie` = "REDACTED"), class = "httr2_headers"),
-    body = charToRaw("{\"content\":[{\"uuid\":\"test_workspace_uuid\",\"name\":\"test_workspace_name\",\"participant\":{\"uuid\":\"test_participant_uuid\"},\"owner\":{\"uuid\":\"test_owner_uuid\",\"email\":\"test_owner_email\",\"givenName\":\"test_owner_name\",\"familyName\":\"test_owener_surname\"},\"workgroup\":{\"uuid\":\"test_workgroup_uuid\",\"name\":\"test_workgroup_name\"}}]}"),
+    body = charToRaw("{\"model\":\"Thread\",\"uuid\":\"test_uuid\"}"),
     cache = new.env(parent = emptyenv())), class = "httr2_response")
