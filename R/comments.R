@@ -105,14 +105,20 @@ new_thread <- function(workspace_uuid,
 #'
 #' @export
 
-new_reply <- function(thread_uuid, text, use_proxy = FALSE) {
+new_reply <- function(thread_uuid,
+                      text,
+                      mentioned_assets = NULL,
+                      mentioned_users = NULL,
+                      use_proxy = FALSE) {
 
   response <- objr(
     endpoint = "replies",
     method = "POST",
     body = list(
       threadUuid = thread_uuid,
-      text = text
+      text = text,
+      mentionedAssets = list(mentioned_assets),
+      mentionedUsers = list(mentioned_users)
     ),
     use_proxy = use_proxy
   )

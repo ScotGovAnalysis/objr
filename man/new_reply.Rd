@@ -4,12 +4,22 @@
 \alias{new_reply}
 \title{Create a new reply to a thread}
 \usage{
-new_reply(thread_uuid, text, use_proxy = FALSE)
+new_reply(
+  thread_uuid,
+  text,
+  mentioned_assets = NULL,
+  mentioned_users = NULL,
+  use_proxy = FALSE
+)
 }
 \arguments{
 \item{thread_uuid}{UUID of thread to reply to}
 
 \item{text}{Character string to include in body of thread}
+
+\item{mentioned_assets}{UUID(s) of asset(s) to mention}
+
+\item{mentioned_users}{UUID(s) of user(s) to mention}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
