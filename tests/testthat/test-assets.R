@@ -83,3 +83,39 @@ with_mock_api({
   })
 
 })
+
+
+# delete_asset ----
+
+without_internet({
+
+  test_that("Valid request", {
+
+    expect_DELETE(
+      delete_asset(asset_uuid = "test_asset_uuid"),
+      paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets/",
+             "test_asset_uuid")
+    )
+
+  })
+
+})
+
+with_mock_api({
+
+  test_that("Function returns invisible", {
+
+    expect_invisible(
+      suppressMessages(delete_asset(asset_uuid = "test_asset_uuid"))
+    )
+
+  })
+
+  test_that("Function returns success message", {
+
+    expect_message(delete_asset(asset_uuid = "test_asset_uuid"))
+
+  })
+
+})
+

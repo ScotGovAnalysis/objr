@@ -65,6 +65,7 @@ reference:
   - download_file
   - upload_file
   - new_version
+  - delete_asset
 
 - subtitle: Comments
   desc: View comments and create new threads and replies in workspaces
