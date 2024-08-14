@@ -9,7 +9,7 @@ Description: An R package wrapper for Objective APIs including Objective Connect
 License: MIT + file LICENCE
 URL:
   https://github.com/ScotGovAnalysis/objr, 
-  https://ScotGovAnalysis.github.io/objr
+  https://ScotGovAnalysis.github.io/objr/
 BugReports: https://github.com/ScotGovAnalysis/objr/issues
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -29,7 +29,8 @@ workspace_assets <- function(workspace_uuid,
     url_query = list(workspaceUuid = workspace_uuid,
                      type = type,
                      page = page,
-                     size = size)
+                     size = size),
+    use_proxy = use_proxy
   )
 
   content <-

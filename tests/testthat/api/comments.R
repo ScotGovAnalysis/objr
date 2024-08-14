@@ -1,0 +1,13 @@
+structure(list(method = "GET", url = "https://api/comments",
+    status_code = 200L, headers = structure(list(Date = "Mon, 12 Aug 2024 13:01:51 GMT",
+        `Content-Type` = "application/json", `Transfer-Encoding` = "chunked",
+        Connection = "keep-alive", `X-CONNECT-MDC` = "apimQTuvVAA",
+        `X-Frame-Options` = "deny", `X-XSS-Protection` = "1; mode=block",
+        `Cache-Control` = "no-cache, no-store", Expires = "0",
+        Pragma = "no-cache", `Strict-Transport-Security` = "max-age=31536000 ; includeSubDomains",
+        `Content-Security-Policy` = "script-src 'self' 'unsafe-inline'",
+        `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin",
+        `Feature-Policy` = "vibrate 'none'; geolocation 'none'",
+        Authorization = "REDACTED", `Set-Cookie` = "REDACTED"), class = "httr2_headers"),
+    body = charToRaw("{\"content\":[{\"model\":\"Comment\",\"uuid\":\"test_uuid\",\"threadUuid\":\"test_thread_uuid\",\"workspaceUuid\":\"test_workspace_uuid\",\"commentType\":\"REPLY\",\"commentText\":\"test_text\",\"createdTime\":1723457395000,\"thread\":{\"model\":\"Concise Thread\",\"uuid\":\"test_uuid\",\"replyCount\":1,\"workspaceUuid\":\"test_workspace_uuid\",\"createdTime\":1723457374000,\"updatedTime\":1723457395000},\"creator\":{\"model\":\"Concise User\",\"uuid\":\"test_creator_uuid\",\"givenName\":\"test_creator1\",\"familyName\":\"test_creator2\"},\"workspace\":{\"model\":\"Concise Workspace\",\"uuid\":\"test_workspace_uuid\",\"name\":\"test_workspace_name\",\"workgroupUuid\":\"test_workgroup_uuid\"},\"mentionedUsers\":[],\"mentionedAssets\":[]}],\"metadata\":{\"totalElements\":1,\"totalPages\":1,\"page\":0,\"offset\":0}}"),
+    cache = new.env(parent = emptyenv())), class = "httr2_response")

@@ -67,6 +67,13 @@ reference:
   - new_version
   - delete_asset
 
+- subtitle: Comments
+  desc: View comments and create new threads and replies in workspaces
+  contents:
+  - comments
+  - new_thread
+  - new_reply
+
 - title: API authentication
   contents:
   - objr_auth
