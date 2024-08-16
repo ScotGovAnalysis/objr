@@ -227,9 +227,8 @@ error <- function(response) {
 
 check_pages <- function(response, call = rlang::caller_env()) {
 
-  metadata <- if(httr2::resp_has_body(response)) {
-    try(httr2::resp_body_json(response)$metadata)
-  }
+  metadata <- tryCatch(httr2::resp_body_json(response)$metadata,
+                       error = function(e) NULL)
 
   if(!is.null(metadata)) {
 
