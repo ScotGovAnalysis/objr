@@ -83,7 +83,13 @@ asset_info <- function(asset_uuid,
     httr2::resp_body_json()
 
   # Return useful information as list
-  response[c("uuid", "name", "type", "extension", "description")]
+  list(
+    uuid = response$uuid,
+    name = response$name,
+    type = response$type,
+    extension = response$extension,
+    description = response$description
+  )
 
 }
 
