@@ -131,3 +131,29 @@ test_that("Setting seed returns consistent value", {
   )
 
 })
+
+
+# check_uuid ----
+
+test_that("Function returns UUID invisibly", {
+
+  expect_invisible(check_uuid(random_uuid()))
+
+  uuid <- random_uuid(1)
+  expect_equal(uuid, random_uuid(1))
+
+})
+
+test_that("Error returned if string not supplied", {
+
+  expect_error(check_uuid(1))
+  expect_error(check_uuid(c(random_uuid(1), random_uuid(2))))
+
+})
+
+test_that("Error returned if string not valid UUID", {
+
+  expect_error(check_uuid("invalid_uuid"))
+  expect_error(check_uuid(substr(random_uuid(1), 1, 9)))
+
+})
