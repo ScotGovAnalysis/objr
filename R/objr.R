@@ -109,7 +109,7 @@ objr <- function(endpoint,
 #' token <- "test"
 #' httr2::request("http://example.com") |> objr_auth()
 #'
-#' @export
+#' @noRd
 
 objr_auth <- function(req) {
 
