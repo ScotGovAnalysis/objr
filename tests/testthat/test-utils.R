@@ -157,3 +157,23 @@ test_that("Error returned if string not valid UUID", {
   expect_error(check_uuid(substr(random_uuid(1), 1, 9)))
 
 })
+
+
+# check_list ----
+
+test_that("Error returned", {
+
+  expect_error(check_list("x"))
+  expect_error(check_list(NULL, allow_null = FALSE))
+
+})
+
+test_that("`x` returned invisibly", {
+
+  expect_invisible(check_list(list("x")))
+  expect_invisible(check_list(NULL))
+
+  x <- check_list(list("x"))
+  expect_equal(x, list("x"))
+
+})

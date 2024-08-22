@@ -183,3 +183,29 @@ check_uuid <- function(uuid,
   invisible(uuid)
 
 }
+
+
+#' Check value is a list
+#'
+#' @param x List.
+#' @param allow_null Logical. If `allow_null = TRUE` (default), the function
+#'   will also accept NULL values.
+#'
+#' @return `x`, invisibly.
+#'
+#' @noRd
+
+check_list <- function(x,
+                       allow_null = TRUE,
+                       error_arg = rlang::caller_arg(x),
+                       error_call = rlang::caller_env()) {
+
+  if ((!allow_null & is.null(x)) |
+      (!is.null(x) & !rlang::is_list(x))) {
+    cli::cli_abort("{.arg {error_arg}} must be a list.",
+                   call = error_call)
+  }
+
+  invisible(x)
+
+}
