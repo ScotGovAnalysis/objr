@@ -90,9 +90,7 @@ new_thread <- function(workspace_uuid,
   )
 
   if(httr2::resp_status(response) == 200) {
-    cli::cli_alert_success(
-      "New thread created."
-    )
+    cli::cli_alert_success("New thread created.")
   }
 
   invisible(response)
@@ -129,9 +127,7 @@ new_reply <- function(thread_uuid,
   )
 
   if(httr2::resp_status(response) == 200) {
-    cli::cli_alert_success(
-      "New reply created."
-    )
+    cli::cli_alert_success("New reply created.")
   }
 
   invisible(response)
@@ -156,27 +152,26 @@ new_reply <- function(thread_uuid,
 #'
 #' @noRd
 
-convert_to_epoch <- function(date_time) {
+convert_to_epoch <- function(date_time,
+                             error_arg = rlang::caller_arg(date_time),
+                             error_call = rlang::caller_env()) {
+
+  if (is.null(date_time)) {
+    return(NULL)
+  }
 
   # Check correct class if supplied
-  stopifnot(
-    "`created_after` must be date or datetime class" =
-      is.null(date_time) |
-      any(class(date_time) %in% c("Date", "POSIXct", "POSIXt"))
-  )
-
-  if(!is.null(date_time)) {
-
-    # Add time if only date supplied
-    if(any(class(date_time) == "Date")) {
-      date_time <- as.POSIXct(paste(date_time, "00:00:01"))
-    }
-
-    # Convert to epoch
-    as.integer(date_time) * 1000
-
-  } else {
-    NULL
+  if (any(!class(date_time) %in% c("Date", "POSIXct", "POSIXt"))) {
+    cli::cli_abort("{.arg {error_arg}} must be of Date or POSIXct class.",
+      call = error_call
+    )
   }
+
+  # Add time if only date supplied
+  if (any(class(date_time) == "Date")) {
+    date_time <- as.POSIXct(paste(date_time, "00:00:01"))
+  }
+
+  as.integer(date_time) * 1000
 
 }

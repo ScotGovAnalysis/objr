@@ -17,10 +17,7 @@ workspace_assets <- function(workspace_uuid,
                              size = NULL,
                              use_proxy = FALSE) {
 
-  # Check list supplied (better way to do this)
-  stopifnot(
-    "`type` must be a list" = class(type) %in% c("NULL", "list")
-  )
+  check_list(type)
 
   type <- paste(toupper(type), collapse = "|")
 
@@ -40,18 +37,18 @@ workspace_assets <- function(workspace_uuid,
         data.frame(
           asset_name       = content$name,
           asset_ext        = ifelse(is.null(content$extension),
-                                  NA_character_,
-                                  content$extension),
+                                    NA_character_,
+                                    content$extension),
           asset_type       = content$type,
           asset_uuid       = content$uuid,
           last_modified_by = paste(content$modifiedBy$givenName,
-                                 content$modifiedBy$familyName),
+                                   content$modifiedBy$familyName),
           parent_name      = ifelse(is.null(content$parent),
-                                  NA_character_,
-                                  content$parent$name),
+                                    NA_character_,
+                                    content$parent$name),
           parent_uuid      = ifelse(is.null(content$parent),
-                                  NA_character_,
-                                  content$parent$uuid),
+                                    NA_character_,
+                                    content$parent$uuid),
           workspace_name   = content$workspace$name,
           workspace_uuid   = content$workspace$uuid
         )

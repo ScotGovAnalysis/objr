@@ -27,16 +27,9 @@ objr <- function(endpoint,
                  content_type = "application/json",
                  use_proxy = FALSE) {
 
-  # Check lists supplied (better way to do this)
-  stopifnot(
-    "`url_path` must be a list" = class(url_path) %in% c("NULL", "list")
-  )
-  stopifnot(
-    "`url_query` must be a list" = class(url_query) %in% c("NULL", "list")
-  )
-  stopifnot(
-    "`body` must be a list" = class(body) %in% c("NULL", "list")
-  )
+  check_list(url_path)
+  check_list(url_query)
+  check_list(body)
 
   # Build request
   request <-
