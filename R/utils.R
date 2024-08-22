@@ -205,8 +205,12 @@ check_list <- function(x,
                        error_arg = rlang::caller_arg(x),
                        error_call = rlang::caller_env()) {
 
-  if ((!allow_null & is.null(x)) |
-      (!is.null(x) & !rlang::is_list(x))) {
+  if (!allow_null & is.null(x)) {
+    cli::cli_abort("{.arg {error_arg}} must be supplied.",
+                   call = error_call)
+  }
+
+  if (!is.null(x) & !rlang::is_list(x)) {
     cli::cli_abort("{.arg {error_arg}} must be a list.",
                    call = error_call)
   }
