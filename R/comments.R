@@ -163,7 +163,7 @@ convert_to_epoch <- function(date_time,
   # Check correct class if supplied
   if (any(!class(date_time) %in% c("Date", "POSIXct", "POSIXt"))) {
     cli::cli_abort("{.arg {error_arg}} must be of Date or POSIXct class.",
-      call = error_call
+                   call = error_call
     )
   }
 

@@ -25,9 +25,7 @@ download_file <- function(document_uuid,
   )
 
   if(httr2::resp_status(response) == 200) {
-    cli::cli_alert_success(
-      "File downloaded: {path}."
-    )
+    cli::cli_alert_success("File downloaded: {path}.")
   }
 
   invisible(response)

@@ -174,9 +174,6 @@ test_that("Warning and messages returned", {
     ))
   )
 
-  check_pages(resp) |>
-    expect_warning() |>
-    expect_message() |>
-    expect_message()
+  expect_warning(check_pages(resp))
 
 })

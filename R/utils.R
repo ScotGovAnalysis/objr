@@ -7,13 +7,16 @@
 #'
 #' @noRd
 
-check_valid <- function(value, warn = FALSE) {
+check_valid <- function(value,
+                        warn = FALSE,
+                        error_arg = rlang::caller_arg(value),
+                        error_call = rlang::caller_env()) {
 
   # Works for single value only (not vectorised)
   if(length(value) > 1) {
-    cli::cli_abort(
-      c("x" = "Value must be length 1"),
-      class = "objr_value-invalid-length"
+    cli::cli_abort("{.arg {error_arg}} must be length 1.",
+                   call = error_call,
+                   class = "objr_value-invalid-length"
     )
   }
 
@@ -22,7 +25,8 @@ check_valid <- function(value, warn = FALSE) {
   # If invalid and warn = TRUE, return warning
   if(!valid & warn) {
     cli::cli_warn(
-      c("!" = "`value` must exist and be at least 1 character in length"),
+      c("!" = paste("{.arg {error_arg}} must exist and be at least",
+                    "1 character in length.")),
       class = "objr_value-invalid"
     )
   }
@@ -51,9 +55,10 @@ check_valid <- function(value, warn = FALSE) {
 #'
 #' @noRd
 
-input_value <- function(type = c("usr", "pwd", "proxy")) {
+input_value <- function(type = c("usr", "pwd", "proxy"),
+                        error_call = rlang::caller_env()) {
 
-  type <- match.arg(type)
+  type <- rlang::arg_match(type)
 
   envvar <- switch(
     type,
@@ -71,7 +76,8 @@ input_value <- function(type = c("usr", "pwd", "proxy")) {
     # Error if session not interactive
     if(!rlang::is_interactive()) {
       cli::cli_abort(
-        c("x" = "Environment variable (`{envvar}`) doesn't exist"),
+        "Environment variable ({.envvar envvar}) doesn't exist.",
+        call = error_call,
         class = "objr_invalid-envvar"
       )
     }
@@ -91,9 +97,8 @@ input_value <- function(type = c("usr", "pwd", "proxy")) {
     }
 
     if(!check_valid(value)) {
-      cli::cli_abort(
-        c("x" = "Failed to provide valid input")
-      )
+      cli::cli_abort("Failed to provide valid input.",
+                     call = error_call)
     }
 
   }
