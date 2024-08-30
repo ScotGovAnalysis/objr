@@ -144,3 +144,42 @@ random_uuid <- function(seed = NULL) {
     paste0(collapse = "-")
 
 }
+
+
+#' Check string is valid UUID format
+#'
+#' @param uuid Character string
+#'
+#' @return `uuid`, invisibly.
+#'
+#' @details See the [Getting Started vignette]
+#'   (https://scotgovanalysis.github.io/objr/
+#'   articles/objr.html#universally-unique-identifiers) for valid UUID format.
+#'
+#' @noRd
+
+check_uuid <- function(uuid,
+                       error_arg = rlang::caller_arg(uuid),
+                       error_call = rlang::caller_env()) {
+
+  if(!rlang::is_string(uuid)) {
+    cli::cli_abort("{.arg {error_arg}} must be a string.",
+                   call = error_call)
+  }
+
+  valid <- grepl(paste(rep("[A-Za-z0-9]{4}", 8), collapse = "-"),
+                 uuid)
+
+  if(!valid) {
+    cli::cli_abort(c(
+      "{.arg {error_arg}} must be valid UUID format.",
+      "i" = paste0("See the {.href [Getting Started vignette]",
+                   "(https://scotgovanalysis.github.io/objr/",
+                   "articles/objr.html#universally-unique-identifiers)} ",
+                   "for valid format.")
+      ), call = error_call)
+  }
+
+  invisible(uuid)
+
+}

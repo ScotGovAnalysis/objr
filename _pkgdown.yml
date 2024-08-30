@@ -43,12 +43,11 @@ figures:
 
 reference:
 
-- title: API calls
-  contents:
+- contents:
   - objr
   - my_user_id
 
-- subtitle: Workspaces
+- title: Workspaces
   desc: >
     Workspaces are the containers that connect a collection of documents and
     folders (Assets) with a collection of Users (Participants)
@@ -56,7 +55,7 @@ reference:
   - my_workspaces
   - participants
 
-- subtitle: Assets
+- title: Assets
   desc: Assets represent Documents and Folders that are added to Workspaces
   contents:
   - workspace_assets
@@ -67,16 +66,12 @@ reference:
   - new_version
   - delete_asset
 
-- subtitle: Comments
+- title: Comments
   desc: View comments and create new threads and replies in workspaces
   contents:
   - comments
   - new_thread
   - new_reply
-
-- title: API authentication
-  contents:
-  - objr_auth
 
 - title: Two-factor authentication
   contents:
