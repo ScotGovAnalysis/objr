@@ -26,6 +26,9 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    withr
+    withr,
+    readr,
+    readxl,
+    writexl
 Config/testthat/edition: 3
 VignetteBuilder: knitr

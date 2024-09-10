@@ -1,0 +1,72 @@
+#' Guess function for reading or writing temp file
+#'
+#' @param file_type Either "csv", "rds" or "xlsx".
+#' @param fn_type Either "read" or "write".
+#'
+#' @return Character string of function; e.g. "readr::write_csv". For "csv" and
+#' "rds" files, `readr` functions will be used, and for "xlsx" file types,
+#' `writexl` will be used.
+#'
+#' @example write_fn("rds", "read")
+#'
+#' @noRd
+
+guess_fn <- function(file_type = c("csv", "rds", "xlsx"),
+                     fn_type = c("read", "write")) {
+
+  file_type <- rlang::arg_match(file_type)
+  fn_type   <- rlang::arg_match(fn_type)
+
+  if(file_type == "xlsx") {
+    paste0(fn_type, "xl::", fn_type, "_", file_type)
+  } else {
+    paste0("readr::", fn_type, "_", file_type)
+  }
+
+}
+
+
+#' Write temporary data file
+#'
+#' @param x Data frame.
+#' @param name Name to give file.
+#' @param file_type File extension to give file.
+#' @param ... Additional arguments to pass to `write_fn`.
+#'
+#' @return Character string of path to temporary file.
+#'
+#' @noRd
+
+write_temp <- function(x,
+                       name,
+                       file_type,
+                       ...) {
+
+  path <- file.path(tempdir(check = TRUE),
+                    paste0(name, ".", file_type))
+
+  write_fn <- parse(text = guess_fn(file_type, "write"))
+
+  eval(write_fn)(x, path, ...)
+
+  path
+
+}
+
+
+#' Read temporary data file
+#'
+#' @param x Path to temporary file
+#' @param ... Additional arguments to pass to read function.
+#'
+#' @return Data frame or R object from file.
+#'
+#' @noRd
+
+read_temp <- function(x, ...) {
+
+  read_fn <- parse(text = guess_fn(tools::file_ext(x), "read"))
+
+  eval(read_fn)(x, ...)
+
+}
