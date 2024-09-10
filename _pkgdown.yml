@@ -62,6 +62,7 @@ reference:
   - asset_info
   - create_folder
   - download_file
+  - read_data
   - upload_file
   - new_version
   - delete_asset

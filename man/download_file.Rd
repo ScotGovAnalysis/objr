@@ -2,7 +2,7 @@
 % Please edit documentation in R/download.R
 \name{download_file}
 \alias{download_file}
-\title{Download a file}
+\title{Download a file and save to disk}
 \usage{
 download_file(document_uuid, folder, use_proxy = FALSE)
 }
@@ -13,6 +13,9 @@ download_file(document_uuid, folder, use_proxy = FALSE)
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
+\value{
+An httr2 \link[=response]{httr2::response()} (invisibly)
+}
 \description{
-Download a file
+Download a file and save to disk
 }

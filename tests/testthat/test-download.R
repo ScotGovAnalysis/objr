@@ -1,3 +1,5 @@
+# download_file ----
+
 without_internet({
 
   test_that("Valid request", {
@@ -37,5 +39,21 @@ with_mock_api({
   })
 
   file.remove(paste0(tempdir(), "/test_document_name.txt"))
+
+})
+
+
+# read_data ----
+
+without_internet({
+
+  test_that("Valid request", {
+
+    expect_GET(
+      read_data(document_uuid = "test_document"),
+      "https://secure.objectiveconnect.co.uk/publicapi/1/assets/test_document"
+    )
+
+  })
 
 })
