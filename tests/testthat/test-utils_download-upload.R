@@ -27,7 +27,7 @@ test_data <- data.frame(x = 1, y = NA)
 test_that("Correct value returned", {
 
   x1 <- suppressMessages(
-    write_temp(test_data, name = "test1", file_type = "csv")
+    write_temp(test_data, file_name = "test1", file_type = "csv")
   )
 
   expect_type(x1, "character")
@@ -35,13 +35,13 @@ test_that("Correct value returned", {
   expect_equal(basename(x1), "test1.csv")
 
   x2 <- suppressMessages(
-    write_temp(test_data, name = "test2", file_type = "rds")
+    write_temp(test_data, file_name = "test2", file_type = "rds")
   )
 
   expect_equal(basename(x2), "test2.rds")
 
   x3 <- suppressMessages(
-    write_temp(test_data, name = "test3", file_type = "xlsx")
+    write_temp(test_data, file_name = "test3", file_type = "xlsx")
   )
 
   expect_equal(basename(x3), "test3.xlsx")
@@ -54,7 +54,7 @@ test_that("Additional arguments passed to write_fn", {
 
   x4 <- suppressMessages(
     write_temp(test_data,
-               name = "test4",
+               file_name = "test4",
                file_type = "csv",
                na = "MISSING")
   )
@@ -68,7 +68,7 @@ test_that("Additional arguments passed to write_fn", {
 })
 
 test_that("Error if `file_type` not supplied", {
-  expect_error(write_temp(test_data, name = "test"))
+  expect_error(write_temp(test_data, file_name = "test"))
 })
 
 
@@ -92,7 +92,7 @@ test_that("Additional arguments passed to write_fn", {
 
   x4 <- suppressMessages(
     write_temp(test_data,
-               name = "test4",
+               file_name = "test4",
                file_type = "csv",
                na = "MISSING")
   )

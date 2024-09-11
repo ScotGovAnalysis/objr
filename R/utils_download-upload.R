@@ -38,12 +38,12 @@ guess_fn <- function(file_type = c("csv", "rds", "xlsx"),
 #' @noRd
 
 write_temp <- function(x,
-                       name,
+                       file_name,
                        file_type,
                        ...) {
 
   path <- file.path(tempdir(check = TRUE),
-                    paste0(name, ".", file_type))
+                    paste0(file_name, ".", file_type))
 
   write_fn <- parse(text = guess_fn(file_type, "write"))
 
