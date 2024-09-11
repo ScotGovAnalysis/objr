@@ -6,7 +6,7 @@
 #' @param thread_uuid UUID of thread to filter by
 #' @param mention_uuid UUID of user to filter comments where mentioned
 #' @inheritParams objr
-#' @inheritParams my_workspaces
+#' @inheritParams workspaces
 #'
 #' @return Data frame
 #'

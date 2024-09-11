@@ -1,25 +1,25 @@
-# workspace_assets ----
+# assets ----
 
 without_internet({
 
   test_that("Valid request created", {
 
     expect_GET(
-      workspace_assets(workspace_uuid = "test_workspace"),
+      assets(workspace_uuid = "test_workspace"),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets?",
              "workspaceUuid=test_workspace&type=DOCUMENT%7CFOLDER%7CLINK")
     )
 
     expect_GET(
-      workspace_assets(workspace_uuid = "test_workspace",
-                       type = list("folder")),
+      assets(workspace_uuid = "test_workspace",
+             type = list("folder")),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets?",
              "workspaceUuid=test_workspace&type=FOLDER")
     )
 
     expect_error(
-      workspace_assets(workspace_uuid = "test_workspace",
-                       type = "folder")
+      assets(workspace_uuid = "test_workspace",
+             type = "folder")
     )
 
   })
@@ -31,7 +31,7 @@ with_mock_api({
   test_that("Function returns dataframe", {
 
     expect_s3_class(
-      workspace_assets(workspace_uuid = "test_workspace_uuid"),
+      assets(workspace_uuid = "test_workspace_uuid"),
       "data.frame"
     )
 
@@ -41,8 +41,8 @@ with_mock_api({
 
     expect_equal(
       unique(
-        workspace_assets(workspace_uuid = "test_workspace_uuid",
-                         type = list("folder"))$asset_type
+        assets(workspace_uuid = "test_workspace_uuid",
+               type = list("folder"))$asset_type
       ),
       "FOLDER"
     )

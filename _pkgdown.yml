@@ -52,13 +52,13 @@ reference:
     Workspaces are the containers that connect a collection of documents and
     folders (Assets) with a collection of Users (Participants)
   contents:
-  - my_workspaces
+  - workspaces
   - participants
 
 - title: Assets
   desc: Assets represent Documents and Folders that are added to Workspaces
   contents:
-  - workspace_assets
+  - assets
   - asset_info
   - create_folder
   - delete_asset

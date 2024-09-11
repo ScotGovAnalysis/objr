@@ -60,7 +60,7 @@ me <- my_user_id()
 To see workspaces you are a member of:
 
 ```{r workspaces}
-workspaces <- my_workspaces()
+workspaces <- workspaces()
 ```
 
 This returns a data frame with a row for each workspace you are a member of. Among other things, there will be a column containing the workspace name and another containing the workspace UUID. For example:
@@ -82,7 +82,7 @@ Maybe you would like to download a file from one of your workspaces. In Objectiv
 Use the workspace UUID from `workspaces` to get a data frame of assets in the workspace:
 
 ```{r assets}
-assets <- workspace_assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+assets <- assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 ```
 
 This returns a data frame with a row for each asset in the workspace. Among other things, there will be a column containing the asset name and another containing the asset UUID.
@@ -133,7 +133,7 @@ cli::cli_alert_success(
 Now, if you rerun the previous step to get a data frame of workspace assets, you should see an additional row for the file you've just uploaded.
 
 ```{r assets2}
-assets <- workspace_assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+assets <- assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 ```
 
 ```{r assets2-output, eval = TRUE, echo = FALSE}

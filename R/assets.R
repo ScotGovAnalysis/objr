@@ -11,11 +11,11 @@
 #'
 #' @export
 
-workspace_assets <- function(workspace_uuid,
-                             type = list("document", "folder", "link"),
-                             page = NULL,
-                             size = NULL,
-                             use_proxy = FALSE) {
+assets <- function(workspace_uuid,
+                   type = list("document", "folder", "link"),
+                   page = NULL,
+                   size = NULL,
+                   use_proxy = FALSE) {
 
   check_list(type)
 
