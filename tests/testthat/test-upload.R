@@ -1,3 +1,5 @@
+# upload_file and upload_file_version ----
+
 with_file("test", {
 
   file.create("test")
@@ -28,7 +30,7 @@ with_file("test", {
       )
 
       expect_POST(
-        new_version(file = "test",
+        upload_file_version(file = "test",
                              document_uuid = "test_asset"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/",
                "documents/test_asset/upload ",
@@ -46,7 +48,7 @@ with_file("test", {
     test_that("Function returns invisible", {
 
       expect_invisible(
-        suppressMessages(new_version(file = "test",
+        suppressMessages(upload_file_version(file = "test",
                                      document_uuid = "test_asset"))
       )
 
@@ -59,11 +61,30 @@ with_file("test", {
 
     test_that("Function returns success message", {
 
-      expect_message(new_version(file = "test",
+      expect_message(upload_file_version(file = "test",
                                  document_uuid = "test_asset"))
 
     })
 
   })
+
+})
+
+
+# write_data and write_data_version ----
+
+without_internet({
+
+  expect_POST(
+    write_data(head(mtcars),
+               file_name = "test1",
+               file_type = "csv",
+               workspace_uuid = "test_workspace"),
+    paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
+           "Multipart form:\n  ",
+           "name = test1\n  ",
+           "workspaceUuid = test_workspace\n  ",
+           "file = File: 92b4327fdd7b86c862ec5f0d9e5e6bd8")
+  )
 
 })

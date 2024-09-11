@@ -21,13 +21,16 @@ upload_file(
 \item{name}{Name to give document. If this isn't provided, the name of the
 file will be used.}
 
-\item{description}{Optional description of document}
+\item{description}{Optional description of document.}
 
 \item{parent_uuid}{UUID of folder in the workspace to create the new
 document within. If not supplied, the document will be created in the
 top-level of the workspace.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
+}
+\value{
+An httr2 \link[=response]{httr2::response()} (invisibly)
 }
 \description{
 Upload a file to create a new document
