@@ -61,11 +61,19 @@ reference:
   - workspace_assets
   - asset_info
   - create_folder
+  - delete_asset
+
+- subtitle: Download
+  contents:
   - download_file
   - read_data
+
+- subtitle: Upload
+  contents:
   - upload_file
-  - new_version
-  - delete_asset
+  - upload_file_version
+  - write_data
+  - write_data_version
 
 - title: Comments
   desc: View comments and create new threads and replies in workspaces
