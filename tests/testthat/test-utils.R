@@ -177,3 +177,31 @@ test_that("`x` returned invisibly", {
   expect_equal(x, list("x"))
 
 })
+
+
+# convert_to_epoch ----
+
+test_that("Error produced if not NULL or datetime", {
+
+  expect_error(convert_to_epoch("invalid"))
+  expect_error(convert_to_epoch(NA))
+  expect_error(convert_to_epoch("2024-01-01"))
+  expect_error(convert_to_epoch(20240101))
+
+})
+
+test_that("Correct value returned", {
+
+  expect_equal(
+    convert_to_epoch(as.POSIXct("2024-01-01 09:00:00")),
+    1704099600000
+  )
+
+  expect_equal(
+    convert_to_epoch(as.POSIXct("2024-01-01")),
+    1704067200000
+  )
+
+  expect_equal(convert_to_epoch(NULL), NULL)
+
+})
