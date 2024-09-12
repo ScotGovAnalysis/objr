@@ -260,3 +260,36 @@ convert_to_epoch <- function(date_time,
   as.integer(date_time) * 1000
 
 }
+
+
+#' Convert number of milliseconds to epoch to date or datetime object
+#'
+#' @param x Numeric.
+#'
+#' @details If NULL is supplied, NULL is returned.
+#'
+#' @return Date (POSIXct class).
+#'
+#' @examples
+#' convert_from_epoch(1726095601000)
+#'
+#' @noRd
+
+convert_from_epoch <- function(x,
+                               error_arg = rlang::caller_arg(x),
+                               error_call = rlang::caller_env()) {
+
+  if (is.null(x)) {
+    return(NULL)
+  }
+
+  # Check correct class if supplied
+  if (class(x) != "numeric") {
+    cli::cli_abort("{.arg {error_arg}} must be of numeric class.",
+                   call = error_call
+    )
+  }
+
+  as.POSIXct(x / 1000, origin = "1970-01-01")
+
+}

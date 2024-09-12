@@ -205,3 +205,25 @@ test_that("Correct value returned", {
   expect_equal(convert_to_epoch(NULL), NULL)
 
 })
+
+
+# convert_from_epoch ----
+
+test_that("Error produced if not NULL or numeric", {
+
+  expect_error(convert_from_epoch("invalid"))
+  expect_error(convert_from_epoch(NA))
+  expect_error(convert_from_epoch(as.Date("2024-01-01")))
+
+})
+
+test_that("Correct value returned", {
+
+  expect_equal(
+    convert_from_epoch(1704099600000),
+    as.POSIXct("2024-01-01 09:00:00")
+  )
+
+  expect_equal(convert_from_epoch(NULL), NULL)
+
+})
