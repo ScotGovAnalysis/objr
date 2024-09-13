@@ -89,7 +89,8 @@ This returns a data frame with a row for each asset in the workspace. Among othe
 
 ```{r assets-output, eval = TRUE, echo = FALSE}
 data.frame(
-  asset_name = c("asset1", "asset2"),
+  asset_name = c("file1", "file2"),
+  asset_ext  = c("docx", "csv"),
   asset_uuid = sapply(3:4, objr:::random_uuid)
 )
 ```
@@ -108,9 +109,20 @@ This function doesn't return anything but will display a message in the R consol
 
 ```{r download-output, eval = TRUE, echo = FALSE, message = TRUE}
 cli::cli_alert_success(
-  "File downloaded: project-1/data/file1.csv."
+  "File downloaded: project-1/data/file1.docx."
 )
 ```
+
+
+## Read data
+
+Alternatively, you can read a data file directly into your R environment:
+
+```{r read_data}
+x <- read_data(document_uuid = "l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9")
+```
+
+Accepted data file formats are csv, rds and xlsx. 
 
 
 ## Upload file
@@ -118,7 +130,7 @@ cli::cli_alert_success(
 To upload a file to a workspace, use the UUID of the workspace and the file path of the file to upload:
 
 ```{r upload}
-upload_file(here::here("data", "file2.csv"),
+upload_file(here::here("data", "file3.csv"),
             workspace_uuid = "84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 ```
 
@@ -126,7 +138,7 @@ This function doesn't return anything but will display a message in the R consol
 
 ```{r upload-output, eval = TRUE, echo = FALSE, message = TRUE}
 cli::cli_alert_success(
-  "New document created: file2.csv."
+  "New document created: file3.csv."
 )
 ```
 
@@ -138,8 +150,32 @@ assets <- assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
 
 ```{r assets2-output, eval = TRUE, echo = FALSE}
 data.frame(
-  asset_name = c("Asset 1", "Asset 2", "file2"),
+  asset_name = c("file1", "file2", "file3"),
+  asset_ext  = c("docx", "csv", "csv"),
   asset_uuid = sapply(3:5, objr:::random_uuid)
 )
 ```
 
+
+## Write data
+
+Alternatively, you can write data directly from R:
+
+```{r write_data}
+write_data(mtcars,
+           file_name = "mtcars",
+           file_type = "rds",
+           workspace_uuid = "84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+```
+
+```{r assets3}
+assets <- assets("84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f")
+```
+
+```{r assets3-output, eval = TRUE, echo = FALSE}
+data.frame(
+  asset_name = c("file1", "file2", "file3", "mtcars"),
+  asset_ext  = c("docx", "csv", "csv", "rds"),
+  asset_uuid = sapply(3:6, objr:::random_uuid)
+)
+```
