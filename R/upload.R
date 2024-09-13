@@ -129,15 +129,17 @@ write_data <- function(x,
                        parent_uuid = NULL,
                        use_proxy = FALSE) {
 
+  # Write data to temporaty file
   path <- write_temp(x, file_name = file_name, file_type = file_type, ...)
+
+  # Delete temp file when exiting function
+  on.exit(unlink(path), add = TRUE)
 
   resp <- upload_file(path,
                       workspace_uuid = workspace_uuid,
                       description = description,
                       parent_uuid = parent_uuid,
                       use_proxy = FALSE)
-
-  unlink(path)
 
   invisible(resp)
 
@@ -185,11 +187,12 @@ write_data_version <- function(x,
                      file_type = info$extension,
                      ...)
 
+  # Delete temp file when exiting function
+  on.exit(unlink(path), add = TRUE)
+
   resp <- upload_file_version(path,
                               document_uuid,
                               use_proxy = use_proxy)
-
-  unlink(path)
 
   invisible(resp)
 
