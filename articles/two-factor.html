@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9004</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,75 +77,140 @@
     
 <p>(Note: this is sometimes also referred to as ‘two-step
 verification’.)</p>
+<div class="section level2">
+<h2 id="bypassing-2fa">Bypassing 2FA<a class="anchor" aria-label="anchor" href="#bypassing-2fa"></a>
+</h2>
 <p>Where workspaces have two-factor authentication (2FA) enabled,
-participants cannot use the API unless they have been given permission
-to bypass 2FA. Permission to bypass 2FA is given at a workspace level,
-and can only be granted by the workspace owner.</p>
-<p>To check which participants are allowed to bypass 2FA, run
+participants won’t be able to use the API unless they have been given
+permission to bypass 2FA.</p>
+<p>To check which participants have permission to bypass 2FA, run
 <code><a href="../reference/participants.html">participants()</a></code> using your workspace UUID, and inspect the
 <code>bypass_2fa</code> column in the returned data frame.</p>
-<p>The following guidance is for workspace owners. If you are not the
-workspace owner, you will need to ask them to provide you with bypass
-permissions.</p>
+<p>To set up 2FA bypassing in your workspace, you’ll need the help of
+both your workgroup administrator and your workspace owner. There are
+three main steps to complete this process:</p>
+<ul>
+<li><a href="#workgroup">Give permission to change 2FA bypass settings
+in the workgroup</a></li>
+<li><a href="#workspace-owner">Give permission to the workspace
+owner</a></li>
+<li><a href="#participants">Give permission to other workspace
+participants</a></li>
+</ul>
 <p>These steps only need to be carried out once before you can use objr
 (or the API in general) for the first time.</p>
+<p>Before you start, you’ll need the name and UUID for both your
+workgroup and workspace. More information on how to find these UUIDs can
+be found on the <a href="https://scotgovanalysis.github.io/objr/articles/objr.html#universally-unique-identifiers">Getting
+Started page</a>.</p>
+<div class="section level3">
+<h3 id="a-note-for-non-r-users">A note for non R users<a class="anchor" aria-label="anchor" href="#a-note-for-non-r-users"></a>
+</h3>
+<p>Some of the required changes can only be made via the API (and not in
+the <a href="https://secure.objectiveconnect.co.uk/login" class="external-link">Objective
+Connect browser interface</a>). If the user required to make these
+changes is not an R user, they can use the API via it’s <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html" class="external-link">interactive
+documentation</a> instead of using objr.</p>
+<p>Before using the interactivity, set up API authentication by clicking
+the the ‘Authorise’ button and entering your Objective Connect username
+and password.</p>
+<p>Links to relevant sections of the interactive documentation will be
+provided for each step below.</p>
+</div>
+</div>
 <div class="section level2">
-<h2 id="allowing-the-workspace-owner-to-bypass-2fa">Allowing the workspace owner to bypass 2FA<a class="anchor" aria-label="anchor" href="#allowing-the-workspace-owner-to-bypass-2fa"></a>
+<h2 id="workgroup">Permission to change 2FA settings in the workgroup<a class="anchor" aria-label="anchor" href="#workgroup"></a>
 </h2>
-<p>To give yourself (the workspace owner) permission to bypass 2FA, you
-will need the help of your workgroup admin.</p>
+<p>These steps must be completed by a <strong>workgroup
+admin</strong>.</p>
 <blockquote>
 <p>If you work in the Scottish Government, please <a href="https://scotgovanalysis.github.io/objr/authors.html#authors">contact
-the package maintainers</a> to arrange this.</p>
+the package maintainers</a> to arrange this step.</p>
 </blockquote>
-<ol style="list-style-type: decimal">
+<p><a name="workgroup-1"> 1. Navigate to the summary page for your
+workgroup in Objective Connect. Select ‘Workgroup Options’, un-check the
+option to ‘Enforce Two-step verification’, and click the blue ‘Update’
+button. (This setting will be reinstated later.) </a></p>
+<p><img src="workgroup-2fa.png" alt="A button for 'Workgroup options' is selected. A menu is visible containing an option to 'Enforce Two-step verification' with a checkbox." style="display: block; margin: auto;"></p>
+<ol start="2" style="list-style-type: decimal">
 <li>
-<p>Allow 2FA bypassing for the workgroup. This setting can only be
-controlled via the API, and not the Objective Connect browser interface.
-It can only be done by a workgroup admin.</p>
-<ul>
-<li><p>Option 1: Use <code><a href="../reference/allow_bypass_2fa.html">allow_bypass_2fa()</a></code>, providing the
-relevant workgroup UUID.</p></li>
-<li><p>Option 2: If the workgroup admin isn’t an R user, they can use
-the <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html" class="external-link">API
-interactive documentation</a>. Use the ‘Authorise’ button to setup
-authentication. Execute the <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setWorkgroupMfaBypassAllowed" class="external-link">/workgroups/{uuid}/bypassTwoStepAllowed</a>
-endpoint, providing the workgroup UUID.</p></li>
-</ul>
+<p>In R, allow 2FA bypassing for the workgroup using
+<code><a href="../reference/allow_bypass_2fa.html">allow_bypass_2fa()</a></code>, providing the relevant workgroup UUID.
+For example:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/allow_bypass_2fa.html">allow_bypass_2fa</a></span><span class="op">(</span><span class="st">"v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Bypass 2FA setting successfully updated for workgroup.</span></span></code></pre>
+<blockquote>
+<p>Non R users can use the interactive documentation to <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setWorkgroupMfaBypassAllowed" class="external-link">allow
+2FA bypassing in the workgroup</a>.</p>
+</blockquote>
 </li>
-<li>
-<p>Temporarily disable 2FA in your workspace.</p>
-<ul>
-<li><p>If 2FA is enforced at workgroup level, the workgroup admin will
-need to <a href="https://help.objectiveconnect.com/onlinehelp/K_AdminFunctions/EnforcingMFA.htm" class="external-link">disable
-this setting</a> first.</p></li>
-<li><p>In the Summary section of the workspace page, select the three
-dots icon (…) in the top right-hand corner, then Two-step verification.
-When prompted to confirm, select Disable.</p></li>
-</ul>
-</li>
-<li><p>Give yourself (the workspace owner) permission to bypass 2FA
-using <code><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa()</a></code>. You will need your
-participant UUID, which can be found using
-<code><a href="../reference/participants.html">participants()</a></code>.</p></li>
-<li><p>Check this has worked using <code><a href="../reference/participants.html">participants()</a></code>. The
-<code>bypass_2fa</code> column in the returned data frame should contain
-<code>TRUE</code> against your name.</p></li>
-<li><p>Reinstate 2FA for the workspace and workgroup in the same way
-that you disabled them in step 2.</p></li>
 </ol>
 </div>
 <div class="section level2">
-<h2 id="allowing-other-participants-to-bypass-2fa">Allowing other participants to bypass 2FA<a class="anchor" aria-label="anchor" href="#allowing-other-participants-to-bypass-2fa"></a>
+<h2 id="workspace-owner">Permission for the workspace owner<a class="anchor" aria-label="anchor" href="#workspace-owner"></a>
 </h2>
-<p>As you (the workspace owner) can now bypass 2FA, you can now provide
-the same bypassing permissions to other workspace members. This can be
-done in the same way as above; by using
-<code><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa()</a></code> and providing the relevant
-members’ participant UUID.</p>
-<p>For Scottish Government Objective Connect workspaces, these
-permissions should be limited to Scottish Government staff and not
-external participants.</p>
+<p>These steps must be completed by the <strong>workspace
+owner</strong>.</p>
+<p><a name="workspace-1"> 1. Navigate to the summary page for your
+workspace in Objective Connect. Select the three dots icon (…) in the
+top right-hand corner, then Two-step verification. When prompted to
+confirm, select Disable. </a></p>
+<p><img src="workspace-2fa.png" alt="A dropdown menu containing an option for 'Two-step verification' among other options." style="display: block; margin: auto;"></p>
+<ol start="2" style="list-style-type: decimal">
+<li>
+<p>In R, give yourself (the workspace owner) permission to bypass
+2FA using <code><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa()</a></code>. You will need your
+participant UUID, which can be found using <code><a href="../reference/participants.html">participants()</a></code>.
+For example,</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/allow_bypass_2fa.html">allow_bypass_2fa</a></span><span class="op">(</span><span class="st">"z98a-9sy0-b3gv-285m-39k6-20d5-dg6k-3gue"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Bypass 2FA setting successfully updated for participant.</span></span></code></pre>
+<blockquote>
+<p>Non R users can use the interactive documentation to find the
+relevant <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Participants/getParticipant" class="external-link">participant
+UUID</a> and to <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Participants/setParticipantBypassMfa" class="external-link">allow
+participant 2FA bypassing</a>.</p>
+</blockquote>
+</li>
+<li>
+<p>Check this has worked using <code><a href="../reference/participants.html">participants()</a></code>. The
+<code>bypass_2fa</code> column in the returned data frame should contain
+<code>TRUE</code> against your name.</p>
+<blockquote>
+<p>Non R users can use the interactive documentation to <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Participants/getParticipant" class="external-link">view
+participant settings</a>.</p>
+</blockquote>
+</li>
+<li><p>Reinstate 2FA for the workspace using the <a href="#workspace-1">same method as in step 1</a>.</p></li>
+<li><p>The workgroup admin can now <a href="#workgroup-1">reinstate 2FA
+enforcing for the workgroup</a>.</p></li>
+</ol>
+</div>
+<div class="section level2">
+<h2 id="participants">Permssion for other participants<a class="anchor" aria-label="anchor" href="#participants"></a>
+</h2>
+<p>These steps must be completed by the <strong>workspace
+owner</strong>.</p>
+<ol style="list-style-type: decimal">
+<li>
+<p>In R, give participants permission to bypass 2FA using
+<code><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa()</a></code>. You will need the relevant
+members’ participant UUID, which can be found using
+<code><a href="../reference/participants.html">participants()</a></code>.</p>
+<blockquote>
+<p>Non R users can use the interactive documentation to find the
+relevant <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Participants/getParticipant" class="external-link">participant
+UUID</a> and to <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Participants/setParticipantBypassMfa" class="external-link">allow
+participant 2FA bypassing</a>.</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>For Scottish Government Objective Connect workspaces, bypassing
+permissions should be limited to Scottish Government staff and not given
+to external workspace participants.</p>
+</blockquote>
 <p>If you wish to revoke permissions to bypass 2FA, use
 <code><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa()</a></code> and set
 <code>allow_bypass = FALSE</code>.</p>

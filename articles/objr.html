@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9004</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -125,7 +125,7 @@ successful response from the API.</p>
 </h2>
 <p>To see workspaces you are a member of:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">workspaces</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/my_workspaces.html">my_workspaces</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">workspaces</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/workspaces.html">workspaces</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>This returns a data frame with a row for each workspace you are a
 member of. Among other things, there will be a column containing the
 workspace name and another containing the workspace UUID. For
@@ -149,13 +149,13 @@ have been given permission to bypass 2FA. See
 <p>Use the workspace UUID from <code>workspaces</code> to get a data
 frame of assets in the workspace:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">assets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/workspace_assets.html">workspace_assets</a></span><span class="op">(</span><span class="st">"84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">assets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/assets.html">assets</a></span><span class="op">(</span><span class="st">"84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f"</span><span class="op">)</span></span></code></pre></div>
 <p>This returns a data frame with a row for each asset in the workspace.
 Among other things, there will be a column containing the asset name and
 another containing the asset UUID.</p>
-<pre><code><span><span class="co">##   asset_name                              asset_uuid</span></span>
-<span><span class="co">## 1     asset1 2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44</span></span>
-<span><span class="co">## 2     asset2 l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9</span></span></code></pre>
+<pre><code><span><span class="co">##   asset_name asset_ext                              asset_uuid</span></span>
+<span><span class="co">## 1      file1      docx 2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44</span></span>
+<span><span class="co">## 2      file2       csv l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="download-file">Download file<a class="anchor" aria-label="anchor" href="#download-file"></a>
@@ -168,29 +168,55 @@ you’d like the downloaded file to be saved to:</p>
 <p>This function doesn’t return anything but will display a message in
 the R console to indicate the download has been a success and to confirm
 the location of the file:</p>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> File downloaded: project-1/data/file1.csv.</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> File downloaded: project-1/data/file1.docx.</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="read-data">Read data<a class="anchor" aria-label="anchor" href="#read-data"></a>
+</h2>
+<p>Alternatively, you can read a data file directly into your R
+environment:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_data.html">read_data</a></span><span class="op">(</span>document_uuid <span class="op">=</span> <span class="st">"l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9"</span><span class="op">)</span></span></code></pre></div>
+<p>Accepted data file formats are csv, rds and xlsx.</p>
 </div>
 <div class="section level2">
 <h2 id="upload-file">Upload file<a class="anchor" aria-label="anchor" href="#upload-file"></a>
 </h2>
 <p>To upload a file to a workspace, use the UUID of the workspace and
 the file path of the file to upload:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/upload_file.html">upload_file</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"file2.csv"</span><span class="op">)</span>,</span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/upload_file.html">upload_file</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"file3.csv"</span><span class="op">)</span>,</span>
 <span>            workspace_uuid <span class="op">=</span> <span class="st">"84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f"</span><span class="op">)</span></span></code></pre></div>
 <p>This function doesn’t return anything but will display a message in
 the R console to indicate the upload has been a success and to confirm
 the name of the file.</p>
-<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> New document created: file2.csv.</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> New document created: file3.csv.</span></span></code></pre>
 <p>Now, if you rerun the previous step to get a data frame of workspace
 assets, you should see an additional row for the file you’ve just
 uploaded.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">assets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/workspace_assets.html">workspace_assets</a></span><span class="op">(</span><span class="st">"84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##   asset_name                              asset_uuid</span></span>
-<span><span class="co">## 1    Asset 1 2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44</span></span>
-<span><span class="co">## 2    Asset 2 l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9</span></span>
-<span><span class="co">## 3      file2 9tp8-3vme-d381-7o89-4qns-qw99-310b-3d06</span></span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">assets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/assets.html">assets</a></span><span class="op">(</span><span class="st">"84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   asset_name asset_ext                              asset_uuid</span></span>
+<span><span class="co">## 1      file1      docx 2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44</span></span>
+<span><span class="co">## 2      file2       csv l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9</span></span>
+<span><span class="co">## 3      file3       csv 9tp8-3vme-d381-7o89-4qns-qw99-310b-3d06</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="write-data">Write data<a class="anchor" aria-label="anchor" href="#write-data"></a>
+</h2>
+<p>Alternatively, you can write data directly from R:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/write_data.html">write_data</a></span><span class="op">(</span><span class="va">mtcars</span>,</span>
+<span>           file_name <span class="op">=</span> <span class="st">"mtcars"</span>,</span>
+<span>           file_type <span class="op">=</span> <span class="st">"rds"</span>,</span>
+<span>           workspace_uuid <span class="op">=</span> <span class="st">"84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">assets</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/assets.html">assets</a></span><span class="op">(</span><span class="st">"84op-9qdu-c692-t4z1-wa4z-h9k3-8454-i71f"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   asset_name asset_ext                              asset_uuid</span></span>
+<span><span class="co">## 1      file1      docx 2j47-ff38-lcgg-mnis-3vq8-9536-9jfp-oy44</span></span>
+<span><span class="co">## 2      file2       csv l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9</span></span>
+<span><span class="co">## 3      file3       csv 9tp8-3vme-d381-7o89-4qns-qw99-310b-3d06</span></span>
+<span><span class="co">## 4     mtcars       rds fh84-jbdy-g6kp-68z8-gt3v-ds39-x74p-80m3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
