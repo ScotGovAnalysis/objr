@@ -21,6 +21,8 @@ upload_file <- function(file,
                         parent_uuid = NULL,
                         use_proxy = FALSE) {
 
+  check_file_exists(file)
+
   # If name not provided, use file name
   name <- if(is.null(name)) {
     tools::file_path_sans_ext(basename(file))
@@ -62,6 +64,8 @@ upload_file <- function(file,
 upload_file_version <- function(file,
                                 document_uuid,
                                 use_proxy = FALSE) {
+
+  check_file_exists(file)
 
   response <- objr(
     endpoint = "documents",

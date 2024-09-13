@@ -70,3 +70,28 @@ read_temp <- function(x, ...) {
   eval(read_fn)(x, ...)
 
 }
+
+
+#' Check file exists
+#'
+#' @param path File path
+#'
+#' @return {.arg path} invisibly. Error if file doesn't exist at path.
+#'
+#' @noRd
+
+check_file_exists <- function(path,
+                              error_call = rlang::caller_env()) {
+
+  if (!file.exists(path)) {
+
+    cli::cli_abort(
+      "Can't find file at {.code {path}}.",
+      call = error_call
+    )
+
+  }
+
+  invisible(path)
+
+}

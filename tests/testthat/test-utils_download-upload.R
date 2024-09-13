@@ -112,3 +112,25 @@ test_that("Error if file not accepted type", {
 })
 
 unlink(path)
+
+
+# check_file_exists ----
+
+with_file("test", {
+
+  file.create("test")
+
+  test_that("Returns invisibly", {
+    expect_invisible(check_file_exists("test"))
+  })
+
+  test_that("Returns path", {
+    x <- check_file_exists("test")
+    expect_equal(x, "test")
+  })
+
+  test_that("Error if path doesn't exist", {
+    expect_error(check_file_exists("test1"))
+  })
+
+})
