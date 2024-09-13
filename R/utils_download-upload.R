@@ -12,10 +12,11 @@
 #' @noRd
 
 guess_fn <- function(file_type = c("csv", "rds", "xlsx"),
-                     fn_type = c("read", "write")) {
+                     fn_type = c("read", "write"),
+                     error_call = rlang::caller_env()) {
 
-  file_type <- rlang::arg_match(file_type)
-  fn_type   <- rlang::arg_match(fn_type)
+  file_type <- rlang::arg_match(file_type, error_call = error_call)
+  fn_type   <- rlang::arg_match(fn_type, error_call = error_call)
 
   if(file_type == "xlsx") {
     paste0(fn_type, "xl::", fn_type, "_", file_type)
@@ -40,12 +41,15 @@ guess_fn <- function(file_type = c("csv", "rds", "xlsx"),
 write_temp <- function(x,
                        file_name,
                        file_type,
-                       ...) {
+                       ...,
+                       error_call = rlang::caller_env()) {
 
   path <- file.path(tempdir(check = TRUE),
                     paste0(file_name, ".", file_type))
 
-  write_fn <- parse(text = guess_fn(file_type, "write"))
+  write_fn <- parse(text = guess_fn(file_type,
+                                    "write",
+                                    error_call = error_call))
 
   eval(write_fn)(x, path, ...)
 
@@ -63,9 +67,11 @@ write_temp <- function(x,
 #'
 #' @noRd
 
-read_temp <- function(x, ...) {
+read_temp <- function(x, ..., error_call = rlang::caller_env()) {
 
-  read_fn <- parse(text = guess_fn(tools::file_ext(x), "read"))
+  read_fn <- parse(text = guess_fn(tools::file_ext(x),
+                                   "read",
+                                   error_call = error_call))
 
   eval(read_fn)(x, ...)
 
