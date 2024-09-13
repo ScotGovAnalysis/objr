@@ -14,7 +14,8 @@ download_file <- function(document_uuid,
 
   doc_info <- asset_info(document_uuid)
 
-  path <- file.path(folder, paste0(doc_info$name, ".", doc_info$extension))
+  path <- file.path(folder, paste0(doc_info$asset_name, ".",
+                                   doc_info$asset_ext))
 
   file.create(path)
 

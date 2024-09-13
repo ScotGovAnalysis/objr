@@ -34,7 +34,7 @@ with_mock_api({
 
   test_that("Function creates new file", {
     suppressMessages(download_file(document_uuid = "test_document",
-                                   folder = tempdir()))
+                                   folder = tempdir(check = TRUE)))
     expect_true(file.exists(paste0(tempdir(), "/test_document_name.txt")))
   })
 

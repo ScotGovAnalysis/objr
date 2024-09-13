@@ -32,28 +32,7 @@ assets <- function(workspace_uuid,
 
   content <-
     httr2::resp_body_json(response)$content |>
-    lapply(
-      \(content) {
-        data.frame(
-          asset_name       = content$name,
-          asset_ext        = ifelse(is.null(content$extension),
-                                    NA_character_,
-                                    content$extension),
-          asset_type       = content$type,
-          asset_uuid       = content$uuid,
-          last_modified_by = paste(content$modifiedBy$givenName,
-                                   content$modifiedBy$familyName),
-          parent_name      = ifelse(is.null(content$parent),
-                                    NA_character_,
-                                    content$parent$name),
-          parent_uuid      = ifelse(is.null(content$parent),
-                                    NA_character_,
-                                    content$parent$uuid),
-          workspace_name   = content$workspace$name,
-          workspace_uuid   = content$workspace$uuid
-        )
-      }
-    )
+    lapply(\(x) data.frame(asset_info_list(x)))
 
   Reduce(dplyr::bind_rows, content)
 
@@ -79,14 +58,7 @@ asset_info <- function(asset_uuid,
   ) |>
     httr2::resp_body_json()
 
-  # Return useful information as list
-  list(
-    uuid = response$uuid,
-    name = response$name,
-    type = response$type,
-    extension = response$extension,
-    description = response$description
-  )
+  asset_info_list(response)
 
 }
 
@@ -114,5 +86,27 @@ delete_asset <- function(asset_uuid,
   }
 
   invisible(response)
+
+}
+
+
+na_if_null <- function(x) {if (is.null(x)) NA else x}
+
+asset_info_list <- function(x) {
+
+  list(
+    asset_name       = x$name,
+    asset_ext        = na_if_null(x$extension),
+    asset_type       = x$type,
+    asset_uuid       = x$uuid,
+    last_modified_by = paste(na_if_null(x[["modifiedBy"]]$givenName),
+                             na_if_null(x[["modifiedBy"]]$familyName)),
+    last_modified    = na_if_null(convert_from_epoch(x$modifiedTime)),
+    latest_version   = na_if_null(x$contentVersion),
+    parent_name      = na_if_null(x[["parent"]]$name),
+    parent_uuid      = na_if_null(x[["parent"]]$uuid),
+    workspace_name   = x[["workspace"]]$name,
+    workspace_uuid   = x[["workspace"]]$uuid
+  )
 
 }

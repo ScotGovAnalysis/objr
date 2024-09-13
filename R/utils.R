@@ -284,7 +284,7 @@ convert_from_epoch <- function(x,
   }
 
   # Check correct class if supplied
-  if (class(x) != "numeric") {
+  if (!inherits(x, "numeric")) {
     cli::cli_abort("{.arg {error_arg}} must be of numeric class.",
                    call = error_call
     )
