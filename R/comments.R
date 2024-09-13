@@ -6,7 +6,7 @@
 #' @param thread_uuid UUID of thread to filter by
 #' @param mention_uuid UUID of user to filter comments where mentioned
 #' @inheritParams objr
-#' @inheritParams my_workspaces
+#' @inheritParams workspaces
 #'
 #' @return Data frame
 #'
@@ -89,10 +89,8 @@ new_thread <- function(workspace_uuid,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 200) {
-    cli::cli_alert_success(
-      "New thread created."
-    )
+  if (httr2::resp_status(response) == 200) {
+    cli::cli_alert_success("New thread created.")
   }
 
   invisible(response)
@@ -128,55 +126,10 @@ new_reply <- function(thread_uuid,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 200) {
-    cli::cli_alert_success(
-      "New reply created."
-    )
+  if (httr2::resp_status(response) == 200) {
+    cli::cli_alert_success("New reply created.")
   }
 
   invisible(response)
-
-}
-
-
-#' Convert date or datetime object to number of milliseconds from epoch
-#'
-#' @param date_time Date or datetime.
-#'
-#' @details
-#' * If only a date is supplied, a time of 00:00:01 will be added.
-#' * If NULL is supplied, NULL is returned.
-#' * If an invalid value is supplied (not date, datetime or NULL), an error will
-#' be produced.
-#'
-#' @return Integer
-#'
-#' @examples
-#' convert_to_epoch(as.POSIXct("2024-01-01 09:00:00"))
-#'
-#' @noRd
-
-convert_to_epoch <- function(date_time) {
-
-  # Check correct class if supplied
-  stopifnot(
-    "`created_after` must be date or datetime class" =
-      is.null(date_time) |
-      any(class(date_time) %in% c("Date", "POSIXct", "POSIXt"))
-  )
-
-  if(!is.null(date_time)) {
-
-    # Add time if only date supplied
-    if(any(class(date_time) == "Date")) {
-      date_time <- as.POSIXct(paste(date_time, "00:00:01"))
-    }
-
-    # Convert to epoch
-    as.integer(date_time) * 1000
-
-  } else {
-    NULL
-  }
 
 }

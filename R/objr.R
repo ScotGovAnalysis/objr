@@ -27,16 +27,9 @@ objr <- function(endpoint,
                  content_type = "application/json",
                  use_proxy = FALSE) {
 
-  # Check lists supplied (better way to do this)
-  stopifnot(
-    "`url_path` must be a list" = class(url_path) %in% c("NULL", "list")
-  )
-  stopifnot(
-    "`url_query` must be a list" = class(url_query) %in% c("NULL", "list")
-  )
-  stopifnot(
-    "`body` must be a list" = class(body) %in% c("NULL", "list")
-  )
+  check_list(url_path)
+  check_list(url_query)
+  check_list(body)
 
   # Build request
   request <-
@@ -62,19 +55,19 @@ objr <- function(endpoint,
   )
 
   # Add request body
-  if(!is.null(content_type) && !is.null(body)) {
-    if(content_type == "multipart/form-data") {
+  if (!is.null(content_type) && !is.null(body)) {
+    if (content_type == "multipart/form-data") {
       request <- rlang::inject(
         httr2::req_body_multipart(request, !!!body)
       )
     }
-    if(content_type == "application/json") {
+    if (content_type == "application/json") {
       request <- httr2::req_body_json(request, body)
     }
   }
 
   # Add proxy details
-  if(use_proxy) {
+  if (use_proxy) {
     request <- httr2::req_proxy(request, input_value("proxy"))
   }
 
@@ -98,7 +91,8 @@ objr <- function(endpoint,
 #'
 #' @param req An [httr2 request](https://httr2.r-lib.org/reference/request.html)
 #'
-#' @return A modified [httr2 request](https://httr2.r-lib.org/reference/request.html)
+#' @return A modified
+#' [httr2 request](https://httr2.r-lib.org/reference/request.html)
 #'
 #' @examples
 #' \dontrun{
@@ -111,16 +105,17 @@ objr <- function(endpoint,
 #'
 #' @noRd
 
-objr_auth <- function(req) {
+objr_auth <- function(req,
+                      error_arg = rlang::caller_arg(req),
+                      error_call = rlang::caller_env()) {
 
   # Check request is correct type
-  if(!inherits(req, "httr2_request")) {
-    cli::cli_abort(c(
-      "x" = "{.var req} must be an HTTP2 request object"
-    ))
+  if (!inherits(req, "httr2_request")) {
+    cli::cli_abort("{.arg {error_arg}} must be an HTTP2 request object.",
+                   call = error_call)
   }
 
-  if(exists("token", where = parent.frame())) {
+  if (exists("token", where = parent.frame())) {
 
     httr2::req_headers(
       req,
@@ -151,25 +146,26 @@ objr_auth <- function(req) {
 #'
 #' @noRd
 
-store_token <- function(response, store_env = globalenv()) {
+store_token <- function(response,
+                        store_env = globalenv(),
+                        error_arg = rlang::caller_arg(response),
+                        error_call = rlang::caller_env()) {
 
   # Check response is in expected format
-  if(!inherits(response, "httr2_response")) {
-    cli::cli_abort(c(
-      "x" = "{.var response} must be an HTTP response object"
-    ))
+  if (!inherits(response, "httr2_response")) {
+    cli::cli_abort("{.arg {error_arg}} must be an HTTP response object.",
+                   call = error_call)
   }
 
   # Check Authorization header exists
-  if(!httr2::resp_header_exists(response, "Authorization")) {
-    cli::cli_abort(c(
-      "x" = "{.var response} must have Authorization header"
-    ))
+  if (!httr2::resp_header_exists(response, "Authorization")) {
+    cli::cli_abort("{.arg {error_arg}} must have Authorization header.",
+                   call = error_call)
   }
 
   token <- httr2::resp_header(response, "Authorization")
 
-  if(!exists("token", where = store_env)) {
+  if (!exists("token", where = store_env)) {
     rlang::env_poke(env = store_env, nm = "token", value = token)
   }
 
@@ -225,49 +221,53 @@ error <- function(response) {
 #'
 #' @noRd
 
-check_pages <- function(response, call = rlang::caller_env()) {
+check_pages <- function(response,
+                        error_arg = rlang::caller_arg(response),
+                        error_call = rlang::caller_env()) {
 
   metadata <- tryCatch(httr2::resp_body_json(response)$metadata,
                        error = function(e) NULL)
 
-  if(!is.null(metadata)) {
+  if (!is.null(metadata)) {
 
-    if(any(!c("totalPages", "page") %in%  names(metadata))) {
+    if (any(!c("totalPages", "page") %in%  names(metadata))) {
       cli::cli_abort(
-        "{.code totalPages} and {.code page} must exist in {.arg metadata}.",
+        paste("{.code totalPages} and {.code page} must exist",
+              "in {.arg metadata} element of response body."),
+        call = error_call,
         class = "metadata-values-dont-exist"
       )
     }
 
-    if(metadata$page > metadata$totalPages) {
-      cli::cli_abort(
-        paste(
-          "Page requested doesn't exist.",
-          "Pages available: {0:(metadata$totalPages-1)}."
-        ),
-        class = "page-doesnt-exist",
-        call = call
+    # metadata$page starts counting from 0
+    # metadata$totalPages starts counting from 1
+    pages_available <- 0:(metadata$totalPages - 1)
+
+    if (!metadata$page %in% pages_available) {
+      cli::cli_abort(c(
+        "Page {metadata$page} doesn't exist.",
+        "i" = "Pages available: {pages_available}.",
+        "i" = "Note that the first page available is page 0 (not page 1).",
+        "i" = "Use {.arg page} to control what page is returned.",
+        "i" =
+          "use {.arg size} to control the number of elements on each page."
+      ),
+      call = error_call,
+      class = "page-doesnt-exist"
       )
     }
 
     more_available <- metadata$totalPages > 1
 
-    if(more_available) {
+    if (more_available) {
 
-      cli::cli_warn(paste(
-        "More results are available.",
-        "Returning page {metadata$page + 1} of {metadata$totalPages}."
-      ))
-
-      cli::cli_li(c(
-        paste(
-          "Use the {.arg size} argument to control the number of results",
-          "returned per page."
-        ),
-        paste(
-          "Use the {.arg page} argument to determine which page of results",
-          "is returned."
-        )
+      cli::cli_warn(c(
+        "i" = "Returning page {metadata$page}. More pages are available.",
+        "i" = "Pages available: {pages_available}.",
+        "i" = "Note that the first page available is page 0 (not page 1).",
+        "i" = "Use {.arg page} to control what page is returned.",
+        "i" = paste("use {.arg size} to control the number of elements",
+                    "on each page.")
       ))
 
     }

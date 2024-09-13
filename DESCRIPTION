@@ -1,31 +1,35 @@
 Package: objr
 Title: Wrapper for Objective APIs
-Version: 0.0.0.9004
+Version: 0.0.0.9005
 Authors@R: c(
     person("Scottish Government", , , "statistics.enquiries@gov.scot", role = "cph"),
-    person("Alice", "Hannah", , "alice.hannah@gov.scot", c("aut", "cre"))
+    person("Alice", "Hannah", , "alice.hannah@gov.scot", role = c("aut", "cre"))
   )
-Description: An R package wrapper for Objective APIs including Objective Connect.
+Description: An R package wrapper for Objective APIs including Objective
+    Connect.
 License: MIT + file LICENCE
-URL:
-  https://github.com/ScotGovAnalysis/objr, 
-  https://ScotGovAnalysis.github.io/objr/
+URL:https://github.com/ScotGovAnalysis/objr,
+    https://ScotGovAnalysis.github.io/objr/
 BugReports: https://github.com/ScotGovAnalysis/objr/issues
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
 Imports: 
     cli,
-    httr2,
     curl,
-    rstudioapi,
+    dplyr,
+    httr2,
     rlang,
-    dplyr
+    rstudioapi
 Suggests: 
     httptest2,
     knitr,
+    readr,
+    readxl,
     rmarkdown,
     testthat (>= 3.0.0),
-    withr
+    withr,
+    writexl
+VignetteBuilder: 
+    knitr
 Config/testthat/edition: 3
-VignetteBuilder: knitr
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1

@@ -11,16 +11,13 @@
 #'
 #' @export
 
-workspace_assets <- function(workspace_uuid,
-                             type = list("document", "folder", "link"),
-                             page = NULL,
-                             size = NULL,
-                             use_proxy = FALSE) {
+assets <- function(workspace_uuid,
+                   type = list("document", "folder", "link"),
+                   page = NULL,
+                   size = NULL,
+                   use_proxy = FALSE) {
 
-  # Check list supplied (better way to do this)
-  stopifnot(
-    "`type` must be a list" = class(type) %in% c("NULL", "list")
-  )
+  check_list(type)
 
   type <- paste(toupper(type), collapse = "|")
 
@@ -35,28 +32,7 @@ workspace_assets <- function(workspace_uuid,
 
   content <-
     httr2::resp_body_json(response)$content |>
-    lapply(
-      \(content) {
-        data.frame(
-          asset_name       = content$name,
-          asset_ext        = ifelse(is.null(content$extension),
-                                  NA_character_,
-                                  content$extension),
-          asset_type       = content$type,
-          asset_uuid       = content$uuid,
-          last_modified_by = paste(content$modifiedBy$givenName,
-                                 content$modifiedBy$familyName),
-          parent_name      = ifelse(is.null(content$parent),
-                                  NA_character_,
-                                  content$parent$name),
-          parent_uuid      = ifelse(is.null(content$parent),
-                                  NA_character_,
-                                  content$parent$uuid),
-          workspace_name   = content$workspace$name,
-          workspace_uuid   = content$workspace$uuid
-        )
-      }
-    )
+    lapply(\(x) data.frame(asset_info_list(x)))
 
   Reduce(dplyr::bind_rows, content)
 
@@ -82,14 +58,7 @@ asset_info <- function(asset_uuid,
   ) |>
     httr2::resp_body_json()
 
-  # Return useful information as list
-  list(
-    uuid = response$uuid,
-    name = response$name,
-    type = response$type,
-    extension = response$extension,
-    description = response$description
-  )
+  asset_info_list(response)
 
 }
 
@@ -98,6 +67,9 @@ asset_info <- function(asset_uuid,
 #'
 #' @param asset_uuid UUID of asset
 #' @inheritParams objr
+#'
+#' @details Note: Note: This functionality is disabled in Scottish Government
+#' workspaces.
 #'
 #' @export
 
@@ -112,10 +84,34 @@ delete_asset <- function(asset_uuid,
   ) |>
     httr2::resp_body_json()
 
-  if(tolower(response$status) == "complete") {
+  if (tolower(response$status) == "complete") {
     cli::cli_alert_success("Asset deleted: {asset_uuid}.")
   }
 
   invisible(response)
+
+}
+
+
+na_if_null <- function(x) {
+  if (is.null(x)) NA else x
+}
+
+asset_info_list <- function(x) {
+
+  list(
+    asset_name       = x$name,
+    asset_ext        = na_if_null(x$extension),
+    asset_type       = x$type,
+    asset_uuid       = x$uuid,
+    last_modified_by = paste(na_if_null(x[["modifiedBy"]]$givenName),
+                             na_if_null(x[["modifiedBy"]]$familyName)),
+    last_modified    = na_if_null(convert_from_epoch(x$modifiedTime)),
+    latest_version   = na_if_null(x$contentVersion),
+    parent_name      = na_if_null(x[["parent"]]$name),
+    parent_uuid      = na_if_null(x[["parent"]]$uuid),
+    workspace_name   = x[["workspace"]]$name,
+    workspace_uuid   = x[["workspace"]]$uuid
+  )
 
 }

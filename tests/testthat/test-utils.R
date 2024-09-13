@@ -157,3 +157,73 @@ test_that("Error returned if string not valid UUID", {
   expect_error(check_uuid(substr(random_uuid(1), 1, 9)))
 
 })
+
+
+# check_list ----
+
+test_that("Error returned", {
+
+  expect_error(check_list("x"))
+  expect_error(check_list(NULL, allow_null = FALSE))
+
+})
+
+test_that("`x` returned invisibly", {
+
+  expect_invisible(check_list(list("x")))
+  expect_invisible(check_list(NULL))
+
+  x <- check_list(list("x"))
+  expect_equal(x, list("x"))
+
+})
+
+
+# convert_to_epoch ----
+
+test_that("Error produced if not NULL or datetime", {
+
+  expect_error(convert_to_epoch("invalid"))
+  expect_error(convert_to_epoch(NA))
+  expect_error(convert_to_epoch("2024-01-01"))
+  expect_error(convert_to_epoch(20240101))
+
+})
+
+test_that("Correct value returned", {
+
+  expect_equal(
+    convert_to_epoch(as.POSIXct("2024-01-01 09:00:00")),
+    1704099600000
+  )
+
+  expect_equal(
+    convert_to_epoch(as.POSIXct("2024-01-01")),
+    1704067200000
+  )
+
+  expect_equal(convert_to_epoch(NULL), NULL)
+
+})
+
+
+# convert_from_epoch ----
+
+test_that("Error produced if not NULL or numeric", {
+
+  expect_error(convert_from_epoch("invalid"))
+  expect_error(convert_from_epoch(NA))
+  expect_error(convert_from_epoch(as.Date("2024-01-01")))
+
+})
+
+test_that("Correct value returned", {
+
+  expect_equal(
+    convert_from_epoch(1704099600000),
+    as.POSIXct("2024-01-01 09:00:00")
+  )
+
+  expect_equal(convert_from_epoch(NULL), NULL)
+
+})

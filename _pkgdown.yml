@@ -52,19 +52,28 @@ reference:
     Workspaces are the containers that connect a collection of documents and
     folders (Assets) with a collection of Users (Participants)
   contents:
-  - my_workspaces
+  - workspaces
   - participants
 
 - title: Assets
   desc: Assets represent Documents and Folders that are added to Workspaces
   contents:
-  - workspace_assets
+  - assets
   - asset_info
   - create_folder
-  - download_file
-  - upload_file
-  - new_version
   - delete_asset
+
+- subtitle: Download
+  contents:
+  - download_file
+  - read_data
+
+- subtitle: Upload
+  contents:
+  - upload_file
+  - upload_file_version
+  - write_data
+  - write_data_version
 
 - title: Comments
   desc: View comments and create new threads and replies in workspaces

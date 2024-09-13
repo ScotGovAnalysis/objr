@@ -14,3 +14,7 @@ delete_asset(asset_uuid, use_proxy = FALSE)
 \description{
 Delete an asset
 }
+\details{
+Note: Note: This functionality is disabled in Scottish Government
+workspaces.
+}

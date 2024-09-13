@@ -9,10 +9,10 @@
 #'
 #' @export
 
-my_workspaces <- function(workgroup_uuid = NULL,
-                          page = NULL,
-                          size = NULL,
-                          use_proxy = FALSE) {
+workspaces <- function(workgroup_uuid = NULL,
+                       page = NULL,
+                       size = NULL,
+                       use_proxy = FALSE) {
 
   response <- objr(
     endpoint = "myworkspaces",

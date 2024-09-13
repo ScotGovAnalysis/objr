@@ -22,7 +22,7 @@ allow_bypass_2fa <- function(workgroup_uuid,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 204) {
+  if (httr2::resp_status(response) == 204) {
     cli::cli_alert_success(
       "Bypass 2FA setting successfully updated for workgroup."
     )
@@ -33,7 +33,8 @@ allow_bypass_2fa <- function(workgroup_uuid,
 }
 
 
-#' Allow/disallow bypassing of two-factor authentication for workspace participant
+#' Allow/disallow bypassing of two-factor authentication for workspace
+#' participant
 #'
 #' @description Note that this setting can only be updated by a workspace owner.
 #' More information on two-factor authentication can be found in
@@ -59,7 +60,7 @@ participant_bypass_2fa <- function(participant_uuid,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 204) {
+  if (httr2::resp_status(response) == 204) {
     cli::cli_alert_success(
       "Bypass 2FA setting successfully updated for participant."
     )
