@@ -68,6 +68,9 @@ asset_info <- function(asset_uuid,
 #' @param asset_uuid UUID of asset
 #' @inheritParams objr
 #'
+#' @details Note: Note: This functionality is disabled in Scottish Government
+#' workspaces.
+#'
 #' @export
 
 delete_asset <- function(asset_uuid,
