@@ -69,7 +69,7 @@ knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
 
    ```{r workgroup-output, eval = TRUE, echo = FALSE, message = TRUE}
    cli::cli_alert_success(
-      "Bypass 2FA setting successfully updated for workgroup."
+     "Bypass 2FA setting successfully updated for workgroup."
    )
    ```
 
@@ -89,7 +89,7 @@ These steps must be completed by the **workspace owner**.
 #| echo: false
 #| fig-align: "center"
 #| fig-alt: >
-#|    A dropdown menu containing an option for 'Two-step verification' among 
+#|    A dropdown menu containing an option for 'Two-step verification' among
 #|    other options.
 knitr::include_graphics("workspace-2fa.png", dpi = "retina")
 ```
@@ -102,7 +102,7 @@ knitr::include_graphics("workspace-2fa.png", dpi = "retina")
 
    ```{r workspace-output, eval = TRUE, echo = FALSE, message = TRUE}
    cli::cli_alert_success(
-      "Bypass 2FA setting successfully updated for participant."
+     "Bypass 2FA setting successfully updated for participant."
    )
    ```
 

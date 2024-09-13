@@ -44,7 +44,7 @@ req <- httr2::request("www.example.com")
 
 test_that("httr2 request returned", {
 
-  .GlobalEnv$token <- "test"
+  .GlobalEnv$token <- "test" # nolint: object_name_linter
 
   expect_s3_class(objr_auth(req), "httr2_request")
 
@@ -56,7 +56,7 @@ test_that("Correct authentication used", {
 
   expect_true(grepl("^Basic ", objr_auth(req)$headers$Authorization))
 
-  .GlobalEnv$token <- "test"
+  .GlobalEnv$token <- "test" # nolint: object_name_linter
 
   exp_token1 <- objr_auth(req)
   expect_equal(exp_token1$headers$Authorization, "test")

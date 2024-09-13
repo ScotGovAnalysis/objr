@@ -24,7 +24,10 @@ without_internet({
     )
 
     expect_PUT(
-      participant_bypass_2fa(participant_uuid = "test_user", allow_bypass = FALSE),
+      participant_bypass_2fa(
+        participant_uuid = "test_user",
+        allow_bypass = FALSE
+      ),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/participants/",
              "test_user/bypassTwoStep"),
       "{\"bypassTwoStep\":\"false\"}"

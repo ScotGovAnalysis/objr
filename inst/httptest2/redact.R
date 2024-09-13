@@ -1,4 +1,4 @@
-function (response) {
+function(response) {
 
   response["request"] <- NULL
 

@@ -84,7 +84,7 @@ delete_asset <- function(asset_uuid,
   ) |>
     httr2::resp_body_json()
 
-  if(tolower(response$status) == "complete") {
+  if (tolower(response$status) == "complete") {
     cli::cli_alert_success("Asset deleted: {asset_uuid}.")
   }
 
@@ -93,7 +93,9 @@ delete_asset <- function(asset_uuid,
 }
 
 
-na_if_null <- function(x) {if (is.null(x)) NA else x}
+na_if_null <- function(x) {
+  if (is.null(x)) NA else x
+}
 
 asset_info_list <- function(x) {
 

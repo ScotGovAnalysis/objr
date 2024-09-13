@@ -10,7 +10,7 @@ with_file("test", {
 
       expect_POST(
         upload_file(file = "test",
-                     workspace_uuid = "test_workspace"),
+                    workspace_uuid = "test_workspace"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
                "Multipart form:\n  ",
                "name = test\n  ",
@@ -20,8 +20,8 @@ with_file("test", {
 
       expect_POST(
         upload_file(file = "test",
-                     name = "test_file_name",
-                     workspace_uuid = "test_workspace"),
+                    name = "test_file_name",
+                    workspace_uuid = "test_workspace"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
                "Multipart form:\n  ",
                "name = test_file_name\n  ",
@@ -31,7 +31,7 @@ with_file("test", {
 
       expect_POST(
         upload_file_version(file = "test",
-                             document_uuid = "test_asset"),
+                            document_uuid = "test_asset"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/",
                "documents/test_asset/upload ",
                "Multipart form:", "\n  ",
@@ -49,7 +49,7 @@ with_file("test", {
 
       expect_invisible(
         suppressMessages(upload_file_version(file = "test",
-                                     document_uuid = "test_asset"))
+                                             document_uuid = "test_asset"))
       )
 
       expect_invisible(
@@ -62,7 +62,7 @@ with_file("test", {
     test_that("Function returns success message", {
 
       expect_message(upload_file_version(file = "test",
-                                 document_uuid = "test_asset"))
+                                         document_uuid = "test_asset"))
 
     })
 

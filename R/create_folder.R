@@ -29,7 +29,7 @@ create_folder <- function(folder_name,
   ) |>
     httr2::resp_body_json()
 
-  if(tolower(response$status) == "complete") {
+  if (tolower(response$status) == "complete") {
     cli::cli_alert_success("New folder created: {folder_name}.")
   }
 

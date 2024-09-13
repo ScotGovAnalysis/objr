@@ -18,7 +18,7 @@ guess_fn <- function(file_type = c("csv", "rds", "xlsx"),
   file_type <- rlang::arg_match(file_type, error_call = error_call)
   fn_type   <- rlang::arg_match(fn_type, error_call = error_call)
 
-  if(file_type == "xlsx") {
+  if (file_type == "xlsx") {
     paste0(fn_type, "xl::", fn_type, "_", file_type)
   } else {
     paste0("readr::", fn_type, "_", file_type)

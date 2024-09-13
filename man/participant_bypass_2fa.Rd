@@ -2,7 +2,8 @@
 % Please edit documentation in R/bypass_2fa.R
 \name{participant_bypass_2fa}
 \alias{participant_bypass_2fa}
-\title{Allow/disallow bypassing of two-factor authentication for workspace participant}
+\title{Allow/disallow bypassing of two-factor authentication for workspace
+participant}
 \usage{
 participant_bypass_2fa(
   participant_uuid,

@@ -24,9 +24,11 @@ upload_file <- function(file,
   check_file_exists(file)
 
   # If name not provided, use file name
-  name <- if(is.null(name)) {
+  name <- if (is.null(name)) {
     tools::file_path_sans_ext(basename(file))
-  } else {name}
+  } else {
+    name
+  }
 
   response <- objr(
     endpoint = "documents",
@@ -42,7 +44,7 @@ upload_file <- function(file,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 200) {
+  if (httr2::resp_status(response) == 200) {
     cli::cli_alert_success(
       "New document created: {paste(name, tools::file_ext(file), sep = \".\")}."
     )
@@ -77,9 +79,9 @@ upload_file_version <- function(file,
   )
 
   # Get asset info
-  info <- asset_info(document_uuid)
+  info <- asset_info(document_uuid) # nolint: object_usage_linter
 
-  if(httr2::resp_status(response) == 204) {
+  if (httr2::resp_status(response) == 204) {
     cli::cli_alert_success(
       "New version created: {paste(info$name, info$extension, sep = \".\")}."
     )
@@ -114,7 +116,7 @@ upload_file_version <- function(file,
 #' | xlsx | \code{writexl::write_xlsx()} |
 #'
 #' If there are other data file types you would like to upload using this
-#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}. # nolint: line_length_linter
 #'
 #' @return An httr2 [httr2::response()][response] (invisibly)
 #'
@@ -168,7 +170,7 @@ write_data <- function(x,
 #' | xlsx | \code{writexl::write_xlsx()} |
 #'
 #' If there are other data file types you would like to upload using this
-#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}. # nolint: line_length_linter
 #'
 #' @return An httr2 [httr2::response()][response] (invisibly)
 #'

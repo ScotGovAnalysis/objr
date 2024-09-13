@@ -27,7 +27,7 @@ download_file <- function(document_uuid,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 200) {
+  if (httr2::resp_status(response) == 200) {
     cli::cli_alert_success("File downloaded: {path}.")
   }
 
@@ -59,7 +59,7 @@ download_file <- function(document_uuid,
 #' arguments will be passed to), use \code{asset_info()}.
 #'
 #' If there are other data file types you would like to download using this
-#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}. # nolint: line_length_linter
 #'
 #' @return For csv and xlsx files, a data frame. For rds files, an R object.
 #'

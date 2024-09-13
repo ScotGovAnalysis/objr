@@ -89,7 +89,7 @@ new_thread <- function(workspace_uuid,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 200) {
+  if (httr2::resp_status(response) == 200) {
     cli::cli_alert_success("New thread created.")
   }
 
@@ -126,7 +126,7 @@ new_reply <- function(thread_uuid,
     use_proxy = use_proxy
   )
 
-  if(httr2::resp_status(response) == 200) {
+  if (httr2::resp_status(response) == 200) {
     cli::cli_alert_success("New reply created.")
   }
 

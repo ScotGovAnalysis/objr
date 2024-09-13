@@ -71,7 +71,7 @@ If you don't have these variables defined in your `.Renviron` file, `objr` will 
 #| fig-align: "center"
 #| fig-alt: >
 #|    A small pop-up window with prompt 'Enter email registered with Objective
-#|    Connect' followed by a text input box and buttons to select 'OK' or 
+#|    Connect' followed by a text input box and buttons to select 'OK' or
 #|    'Cancel'.
 knitr::include_graphics("auth_prompt.png", dpi = "retina")
 ```

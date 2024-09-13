@@ -13,17 +13,18 @@ check_valid <- function(value,
                         error_call = rlang::caller_env()) {
 
   # Works for single value only (not vectorised)
-  if(length(value) > 1) {
-    cli::cli_abort("{.arg {error_arg}} must be length 1.",
-                   call = error_call,
-                   class = "objr_value-invalid-length"
+  if (length(value) > 1) {
+    cli::cli_abort(
+      "{.arg {error_arg}} must be length 1.",
+      call = error_call,
+      class = "objr_value-invalid-length"
     )
   }
 
   valid <- !(is.null(value) || is.na(value) || !nchar(value) > 0)
 
   # If invalid and warn = TRUE, return warning
-  if(!valid & warn) {
+  if (!valid && warn) {
     cli::cli_warn(
       c("!" = paste("{.arg {error_arg}} must exist and be at least",
                     "1 character in length.")),
@@ -71,10 +72,10 @@ input_value <- function(type = c("usr", "pwd", "proxy"),
   value <- Sys.getenv(envvar)
 
   # If environment variable doesn't exist or not valid
-  if(!check_valid(value)) {
+  if (!check_valid(value)) {
 
     # Error if session not interactive
-    if(!rlang::is_interactive()) {
+    if (!rlang::is_interactive()) {
       cli::cli_abort(
         "Environment variable ({.envvar envvar}) doesn't exist.",
         call = error_call,
@@ -91,12 +92,12 @@ input_value <- function(type = c("usr", "pwd", "proxy"),
     )
 
     # Give user 2 attempts to enter valid input
-    for(i in 1:2) {
+    for (i in 1:2) {
       value <- rstudioapi::askForPassword(prompt)
-      if(check_valid(value)) break
+      if (check_valid(value)) break
     }
 
-    if(!check_valid(value)) {
+    if (!check_valid(value)) {
       cli::cli_abort("Failed to provide valid input.",
                      call = error_call)
     }
@@ -117,7 +118,7 @@ input_value <- function(type = c("usr", "pwd", "proxy"),
 
 form_data_null <- function(value) {
 
-  if(is.null(value)) {
+  if (is.null(value)) {
     NULL
   } else {
     curl::form_data(value)
@@ -140,7 +141,7 @@ random_uuid <- function(seed = NULL) {
   options <- c(letters, 0:9)
 
   # There should be equal probability of a letter or integer being sampled
-  prob_weights <- c(rep(1/26, 26), rep(1/10, 10))
+  prob_weights <- c(rep(1 / 26, 26), rep(1 / 10, 10))
 
   set.seed(seed)
 
@@ -167,7 +168,7 @@ check_uuid <- function(uuid,
                        error_arg = rlang::caller_arg(uuid),
                        error_call = rlang::caller_env()) {
 
-  if(!rlang::is_string(uuid)) {
+  if (!rlang::is_string(uuid)) {
     cli::cli_abort("{.arg {error_arg}} must be a string.",
                    call = error_call)
   }
@@ -175,14 +176,16 @@ check_uuid <- function(uuid,
   valid <- grepl(paste(rep("[A-Za-z0-9]{4}", 8), collapse = "-"),
                  uuid)
 
-  if(!valid) {
+  if (!valid) {
     cli::cli_abort(c(
       "{.arg {error_arg}} must be valid UUID format.",
-      "i" = paste0("See the {.href [Getting Started vignette]",
-                   "(https://scotgovanalysis.github.io/objr/",
-                   "articles/objr.html#universally-unique-identifiers)} ",
-                   "for valid format.")
-      ), call = error_call)
+      "i" = paste0(
+        "See the {.href [Getting Started vignette]",
+        "(https://scotgovanalysis.github.io/objr/",
+        "articles/objr.html#universally-unique-identifiers)} ",
+        "for valid format."
+      )
+    ), call = error_call)
   }
 
   invisible(uuid)
@@ -205,12 +208,12 @@ check_list <- function(x,
                        error_arg = rlang::caller_arg(x),
                        error_call = rlang::caller_env()) {
 
-  if (!allow_null & is.null(x)) {
+  if (!allow_null && is.null(x)) {
     cli::cli_abort("{.arg {error_arg}} must be supplied.",
                    call = error_call)
   }
 
-  if (!is.null(x) & !rlang::is_list(x)) {
+  if (!is.null(x) && !rlang::is_list(x)) {
     cli::cli_abort("{.arg {error_arg}} must be a list.",
                    call = error_call)
   }
@@ -247,8 +250,9 @@ convert_to_epoch <- function(date_time,
 
   # Check correct class if supplied
   if (any(!class(date_time) %in% c("Date", "POSIXct", "POSIXt"))) {
-    cli::cli_abort("{.arg {error_arg}} must be of Date or POSIXct class.",
-                   call = error_call
+    cli::cli_abort(
+      "{.arg {error_arg}} must be of Date or POSIXct class.",
+      call = error_call
     )
   }
 
@@ -285,8 +289,9 @@ convert_from_epoch <- function(x,
 
   # Check correct class if supplied
   if (!inherits(x, "numeric")) {
-    cli::cli_abort("{.arg {error_arg}} must be of numeric class.",
-                   call = error_call
+    cli::cli_abort(
+      "{.arg {error_arg}} must be of numeric class.",
+      call = error_call
     )
   }
 

@@ -55,19 +55,19 @@ objr <- function(endpoint,
   )
 
   # Add request body
-  if(!is.null(content_type) && !is.null(body)) {
-    if(content_type == "multipart/form-data") {
+  if (!is.null(content_type) && !is.null(body)) {
+    if (content_type == "multipart/form-data") {
       request <- rlang::inject(
         httr2::req_body_multipart(request, !!!body)
       )
     }
-    if(content_type == "application/json") {
+    if (content_type == "application/json") {
       request <- httr2::req_body_json(request, body)
     }
   }
 
   # Add proxy details
-  if(use_proxy) {
+  if (use_proxy) {
     request <- httr2::req_proxy(request, input_value("proxy"))
   }
 
@@ -91,7 +91,8 @@ objr <- function(endpoint,
 #'
 #' @param req An [httr2 request](https://httr2.r-lib.org/reference/request.html)
 #'
-#' @return A modified [httr2 request](https://httr2.r-lib.org/reference/request.html)
+#' @return A modified
+#' [httr2 request](https://httr2.r-lib.org/reference/request.html)
 #'
 #' @examples
 #' \dontrun{
@@ -109,12 +110,12 @@ objr_auth <- function(req,
                       error_call = rlang::caller_env()) {
 
   # Check request is correct type
-  if(!inherits(req, "httr2_request")) {
+  if (!inherits(req, "httr2_request")) {
     cli::cli_abort("{.arg {error_arg}} must be an HTTP2 request object.",
                    call = error_call)
   }
 
-  if(exists("token", where = parent.frame())) {
+  if (exists("token", where = parent.frame())) {
 
     httr2::req_headers(
       req,
@@ -151,20 +152,20 @@ store_token <- function(response,
                         error_call = rlang::caller_env()) {
 
   # Check response is in expected format
-  if(!inherits(response, "httr2_response")) {
+  if (!inherits(response, "httr2_response")) {
     cli::cli_abort("{.arg {error_arg}} must be an HTTP response object.",
                    call = error_call)
   }
 
   # Check Authorization header exists
-  if(!httr2::resp_header_exists(response, "Authorization")) {
+  if (!httr2::resp_header_exists(response, "Authorization")) {
     cli::cli_abort("{.arg {error_arg}} must have Authorization header.",
                    call = error_call)
   }
 
   token <- httr2::resp_header(response, "Authorization")
 
-  if(!exists("token", where = store_env)) {
+  if (!exists("token", where = store_env)) {
     rlang::env_poke(env = store_env, nm = "token", value = token)
   }
 
@@ -227,9 +228,9 @@ check_pages <- function(response,
   metadata <- tryCatch(httr2::resp_body_json(response)$metadata,
                        error = function(e) NULL)
 
-  if(!is.null(metadata)) {
+  if (!is.null(metadata)) {
 
-    if(any(!c("totalPages", "page") %in%  names(metadata))) {
+    if (any(!c("totalPages", "page") %in%  names(metadata))) {
       cli::cli_abort(
         paste("{.code totalPages} and {.code page} must exist",
               "in {.arg metadata} element of response body."),
@@ -248,16 +249,17 @@ check_pages <- function(response,
         "i" = "Pages available: {pages_available}.",
         "i" = "Note that the first page available is page 0 (not page 1).",
         "i" = "Use {.arg page} to control what page is returned.",
-        "i" = paste("use {.arg size} to control the number of elements",
-                    "on each page.")),
-        call = error_call,
-        class = "page-doesnt-exist"
+        "i" =
+          "use {.arg size} to control the number of elements on each page."
+      ),
+      call = error_call,
+      class = "page-doesnt-exist"
       )
     }
 
     more_available <- metadata$totalPages > 1
 
-    if(more_available) {
+    if (more_available) {
 
       cli::cli_warn(c(
         "i" = "Returning page {metadata$page}. More pages are available.",
