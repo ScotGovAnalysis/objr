@@ -54,6 +54,7 @@ These steps must be completed by a **workgroup admin**.
 ```{r}
 #| eval: true
 #| echo: false
+#| out.width: "50%"
 #| fig-align: "center"
 #| fig-alt: >
 #|    A button for 'Workgroup options' is selected. A menu is visible containing
@@ -87,6 +88,7 @@ These steps must be completed by the **workspace owner**.
 ```{r}
 #| eval: true
 #| echo: false
+#| out.width: "50%"
 #| fig-align: "center"
 #| fig-alt: >
 #|    A dropdown menu containing an option for 'Two-step verification' among
