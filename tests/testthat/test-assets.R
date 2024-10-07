@@ -118,3 +118,42 @@ with_mock_api({
   })
 
 })
+
+
+
+# rename_asset ----
+
+without_internet({
+
+  test_that("Valid request", {
+
+    expect_PUT(
+      rename_asset(asset_uuid = "test_asset_uuid",
+                   new_name = "test_new_name"),
+      paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets/",
+             "test_asset_uuid/name")
+    )
+
+  })
+
+})
+
+with_mock_api({
+
+  test_that("Function returns invisible", {
+
+    expect_invisible(
+      suppressMessages(rename_asset(asset_uuid = "test_asset_uuid",
+                                    new_name = "test_new_name"))
+    )
+
+  })
+
+  test_that("Function returns success message", {
+
+    expect_message(rename_asset(asset_uuid = "test_asset_uuid",
+                                new_name = "test_new_name"))
+
+  })
+
+})
