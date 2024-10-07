@@ -115,8 +115,10 @@ upload_file_version <- function(file,
 #' | rds | \code{readr::write_rds()} |
 #' | xlsx | \code{writexl::write_xlsx()} |
 #'
+# nolint start: line_length_linter
 #' If there are other data file types you would like to upload using this
-#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}. # nolint: line_length_linter
+#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+# nolint end
 #'
 #' @return An httr2 [httr2::response()][response] (invisibly)
 #'
@@ -169,8 +171,10 @@ write_data <- function(x,
 #' | rds | \code{readr::write_rds()} |
 #' | xlsx | \code{writexl::write_xlsx()} |
 #'
+# nolint start: line_length_linter
 #' If there are other data file types you would like to upload using this
-#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}. # nolint: line_length_linter
+#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+# nolint end
 #'
 #' @return An httr2 [httr2::response()][response] (invisibly)
 #'

@@ -58,8 +58,10 @@ download_file <- function(document_uuid,
 #' To check what file type your document is (and thus what function additional
 #' arguments will be passed to), use \code{asset_info()}.
 #'
+# nolint start: line_length_linter
 #' If there are other data file types you would like to download using this
-#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}. # nolint: line_length_linter
+#' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+# nolint end
 #'
 #' @return For csv and xlsx files, a data frame. For rds files, an R object.
 #'
