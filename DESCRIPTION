@@ -1,6 +1,6 @@
 Package: objr
 Title: Wrapper for Objective APIs
-Version: 0.0.0.9005
+Version: 0.0.0.9006
 Authors@R: c(
     person("Scottish Government", , , "statistics.enquiries@gov.scot", role = "cph"),
     person("Alice", "Hannah", , "alice.hannah@gov.scot", role = c("aut", "cre"))
@@ -8,7 +8,7 @@ Authors@R: c(
 Description: An R package wrapper for Objective APIs including Objective
     Connect.
 License: MIT + file LICENCE
-URL:https://github.com/ScotGovAnalysis/objr,
+URL: https://github.com/ScotGovAnalysis/objr,
     https://ScotGovAnalysis.github.io/objr/
 BugReports: https://github.com/ScotGovAnalysis/objr/issues
 Imports: 
