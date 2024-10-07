@@ -93,6 +93,36 @@ delete_asset <- function(asset_uuid,
 }
 
 
+#' Rename an asset
+#'
+#' @param asset_uuid UUID of asset
+#' @param new_name Character. New name to give asset.
+#' @inheritParams objr
+#'
+#' @export
+
+rename_asset <- function(asset_uuid,
+                         new_name,
+                         use_proxy = FALSE) {
+
+  response <- objr(
+    endpoint = "assets",
+    method = "PUT",
+    accept = "*/*",
+    url_path = list(asset_uuid, "name"),
+    body = list(name = new_name),
+    use_proxy = use_proxy
+  )
+
+  if (response$status_code == 204) {
+    cli::cli_alert_success("Asset renamed to {.val new_name}: {asset_uuid}.")
+  }
+
+  invisible(response)
+
+}
+
+
 na_if_null <- function(x) {
   if (is.null(x)) NA else x
 }
