@@ -61,6 +61,7 @@ reference:
   - assets
   - asset_info
   - create_folder
+  - rename_asset
   - delete_asset
 
 - subtitle: Download
