@@ -206,6 +206,13 @@ error <- function(response) {
       "See https://scotgovanalysis.github.io/objr/articles/two-factor.html"
   }
 
+  if (status == 404) {
+    extra <- c(
+      "Asset cannot be found.",
+      "Check asset UUID is correct."
+    )
+  }
+
   c(desc, extra)
 
 }
