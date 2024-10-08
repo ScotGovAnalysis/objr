@@ -82,9 +82,10 @@ upload_file_version <- function(file,
   info <- asset_info(document_uuid) # nolint: object_usage_linter
 
   if (httr2::resp_status(response) == 204) {
-    cli::cli_alert_success(
-      "New version created: {paste(info$name, info$extension, sep = \".\")}."
-    )
+    cli::cli_alert_success(paste(
+      "New version created:",
+      "{paste(info$asset_name, info$asset_ext, sep = \".\")}."
+    ))
   }
 
   invisible(response)
@@ -189,8 +190,8 @@ write_data_version <- function(x,
   info <- asset_info(document_uuid)
 
   path <- write_temp(x,
-                     file_name = info$name,
-                     file_type = info$extension,
+                     file_name = info$asset_name,
+                     file_type = info$asset_ext,
                      ...)
 
   # Delete temp file when exiting function
