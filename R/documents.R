@@ -31,6 +31,35 @@ versions <- function(document_uuid,
 }
 
 
+#' Rollback a document to a previous version
+#'
+#' @param document_uuid UUID of document (asset)
+#' @param version_uuid UUID of version to rollback to
+#' @inheritParams objr
+#'
+#' @export
+
+rollback_to_version <- function(document_uuid,
+                                version_uuid,
+                                use_proxy = FALSE) {
+
+  response <- objr(
+    endpoint = "documents",
+    method = "PUT",
+    url_path = list(document_uuid, "rollback"),
+    body = list(targetVersionUuid = version_uuid),
+    use_proxy = use_proxy
+  )
+
+  if (response$status_code == 204) {
+    cli::cli_alert_success("Document rollback successful.")
+  }
+
+  invisible(response)
+
+}
+
+
 versions_info_list <- function(x) {
 
   list(
