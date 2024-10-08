@@ -64,6 +64,11 @@ reference:
   - rename_asset
   - delete_asset
 
+- subtitle: Document versions
+  contents:
+  - versions
+  - rollback_to_version
+
 - subtitle: Download
   contents:
   - download_file
