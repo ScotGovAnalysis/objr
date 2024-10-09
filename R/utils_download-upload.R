@@ -140,7 +140,7 @@ create_file <- function(folder,
 #' @param response An httr2 [httr2::response()][response]. Must contain
 #' 'Content-Disposition' header.
 #' @param overwrite Logical to indicate whether to overwrite file if already
-#' exists.
+#' exists. Defaults to `FALSE`.
 #'
 #' @return File path of renamed file (invisibly).
 #'
@@ -148,7 +148,7 @@ create_file <- function(folder,
 
 rename_file <- function(temp_path,
                         response,
-                        overwrite,
+                        overwrite = FALSE,
                         error_call = rlang::caller_env(),
                         error_arg  = rlang::caller_arg(overwrite)) {
 
