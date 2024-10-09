@@ -16,7 +16,7 @@ participants <- function(workspace_uuid, use_proxy = FALSE) {
   )
 
   content <-
-    httr2::resp_body_json(response)$content |>
+    httr2::resp_body_json(response)$content %>%
     lapply(
       \(content) {
         data.frame(

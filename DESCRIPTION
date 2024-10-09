@@ -16,6 +16,7 @@ Imports:
     curl,
     dplyr,
     httr2,
+    magrittr,
     rlang,
     rstudioapi
 Suggests: 

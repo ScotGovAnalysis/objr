@@ -31,7 +31,7 @@ assets <- function(workspace_uuid,
   )
 
   content <-
-    httr2::resp_body_json(response)$content |>
+    httr2::resp_body_json(response)$content %>%
     lapply(\(x) data.frame(asset_info_list(x)))
 
   Reduce(dplyr::bind_rows, content)
@@ -55,7 +55,7 @@ asset_info <- function(asset_uuid,
     endpoint = "assets",
     url_path = list(asset_uuid),
     use_proxy = use_proxy
-  ) |>
+  ) %>%
     httr2::resp_body_json()
 
   asset_info_list(response)
@@ -81,7 +81,7 @@ delete_asset <- function(asset_uuid,
     method = "DELETE",
     url_path = list(asset_uuid),
     use_proxy = use_proxy
-  ) |>
+  ) %>%
     httr2::resp_body_json()
 
   if (tolower(response$status) == "complete") {

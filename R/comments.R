@@ -37,7 +37,7 @@ comments <- function(created_after = NULL,
   )
 
   content <-
-    httr2::resp_body_json(response)$content |>
+    httr2::resp_body_json(response)$content %>%
     lapply(
       \(content) {
         data.frame(

@@ -23,7 +23,7 @@ versions <- function(document_uuid,
   )
 
   content <-
-    httr2::resp_body_json(response)$content |>
+    httr2::resp_body_json(response)$content %>%
     lapply(\(x) data.frame(versions_info_list(x)))
 
   Reduce(dplyr::bind_rows, content)

@@ -33,15 +33,15 @@ objr <- function(endpoint,
 
   # Build request
   request <-
-    httr2::request("https://secure.objectiveconnect.co.uk/publicapi/1") |>
-    httr2::req_url_path_append(endpoint) |>
-    httr2::req_method(method) |>
+    httr2::request("https://secure.objectiveconnect.co.uk/publicapi/1") %>%
+    httr2::req_url_path_append(endpoint) %>%
+    httr2::req_method(method) %>%
     httr2::req_headers(accept = accept,
-                       `content-type` = content_type) |>
-    objr_auth() |>
+                       `content-type` = content_type) %>%
+    objr_auth() %>%
     httr2::req_user_agent(
       "objr (https://scotgovanalysis.github.io/objr/)"
-    ) |>
+    ) %>%
     httr2::req_error(body = error)
 
   # Modify the URL path
@@ -75,9 +75,9 @@ objr <- function(endpoint,
   response <- httr2::req_perform(request, path = path)
 
   # Return response
-  response |>
-    httr2::resp_check_status() |>
-    store_token() |>
+  response %>%
+    httr2::resp_check_status() %>%
+    store_token() %>%
     check_pages()
 
 }
@@ -96,12 +96,12 @@ objr <- function(endpoint,
 #'
 #' @examples
 #' \dontrun{
-#' httr2::request("http://example.com") |>
+#' httr2::request("http://example.com") %>%
 #'   objr_auth()
 #' }
 #'
 #' token <- "test"
-#' httr2::request("http://example.com") |> objr_auth()
+#' httr2::request("http://example.com") %>% objr_auth()
 #'
 #' @noRd
 
