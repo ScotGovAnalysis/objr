@@ -101,3 +101,85 @@ check_file_exists <- function(path,
   invisible(path)
 
 }
+
+
+#' Create file for download
+#'
+#' @param folder File path of folder to create file in
+#'
+#' @return File path of file created (invisibly).
+#'
+#' @noRd
+
+create_file <- function(folder,
+                        error_call = rlang::caller_env()) {
+
+  folder <- gsub("\\/*$", "", folder)
+
+  if (!dir.exists(folder)) {
+
+    cli::cli_abort(
+      "Can't find folder at {.code {folder}}.",
+      call = error_call
+    )
+
+  }
+
+  path <- tempfile(tmpdir = folder)
+
+  file.create(path)
+
+  invisible(path)
+
+}
+
+
+#' Rename downloaded file
+#'
+#' @param temp_path Temporary path of file downloaded.
+#' @param response An httr2 [httr2::response()][response]. Must contain
+#' 'Content-Disposition' header.
+#' @param overwrite Logical to indicate whether to overwrite file if already
+#' exists.
+#'
+#' @return File path of renamed file (invisibly).
+#'
+#' @noRd
+
+rename_file <- function(temp_path,
+                        response,
+                        overwrite,
+                        error_call = rlang::caller_env(),
+                        error_arg  = rlang::caller_arg(overwrite)) {
+
+  if (!httr2::resp_header_exists(response, "Content-Disposition")) {
+    cli::cli_abort(
+      "Response must contain `Content-Disposition` header.",
+      call = error_call
+    )
+  }
+
+  cont_disp <- httr2::resp_header(response, "Content-Disposition")
+
+  file_name <- regmatches(
+    cont_disp,
+    m = regexpr("(?<=filename=\\\").*(?=\\\")", cont_disp, perl = T)
+  )
+
+  new_path <- file.path(dirname(temp_path), file_name)
+
+  if (file.exists(new_path) && overwrite == FALSE) {
+    cli::cli_abort(
+      c(
+        "File already exists: {.path {new_path}}.",
+        "i" = "To overwrite, set {.code {error_arg} = TRUE}."
+      ),
+      call = error_call
+    )
+  }
+
+  file.rename(from = temp_path, to = new_path)
+
+  invisible(new_path)
+
+}

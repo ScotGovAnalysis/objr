@@ -36,6 +36,44 @@ download_file <- function(document_uuid,
 }
 
 
+#' Download a document version and save to disk
+#'
+#' @param document_uuid UUID of existing document version
+#' @param folder Folder to save downloaded file to
+#' @param overwrite Logical to indicate whether file should be overwritten if
+#' already exists.
+#' @inheritParams objr
+#'
+#' @return An httr2 [httr2::response()][response] (invisibly)
+#'
+#' @export
+
+download_file_version <- function(document_uuid,
+                                  folder,
+                                  overwrite = FALSE,
+                                  use_proxy = FALSE) {
+
+  path <- create_file(folder)
+
+  response <- objr(
+    endpoint = "documentversions",
+    url_path = list(document_uuid, "download"),
+    method = "GET",
+    path = path,
+    use_proxy = use_proxy
+  )
+
+  new_path <- rename_file(path, response, overwrite = overwrite)
+
+  if (httr2::resp_status(response) == 200) {
+    cli::cli_alert_success("File downloaded: {new_path}.")
+  }
+
+  invisible(response)
+
+}
+
+
 #' Read a data file into R
 #'
 #' @param document_uuid UUID of existing document
