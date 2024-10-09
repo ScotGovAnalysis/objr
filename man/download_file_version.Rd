@@ -17,7 +17,7 @@ download_file_version(
 \item{folder}{Folder to save downloaded file to}
 
 \item{overwrite}{Logical to indicate whether file should be overwritten if
-already exists.}
+already exists. Defaults to \code{FALSE}.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }

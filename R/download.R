@@ -2,6 +2,8 @@
 #'
 #' @param document_uuid UUID of existing document
 #' @param folder Folder to save downloaded file to
+#' @param overwrite Logical to indicate whether file should be overwritten if
+#' already exists. Defaults to `FALSE`.
 #' @inheritParams objr
 #'
 #' @return An httr2 [httr2::response()][response] (invisibly)
@@ -10,14 +12,10 @@
 
 download_file <- function(document_uuid,
                           folder,
+                          overwrite = FALSE,
                           use_proxy = FALSE) {
 
-  doc_info <- asset_info(document_uuid)
-
-  path <- file.path(folder, paste0(doc_info$asset_name, ".",
-                                   doc_info$asset_ext))
-
-  file.create(path)
+  path <- create_file(folder)
 
   response <- objr(
     endpoint = "documents",
@@ -27,8 +25,10 @@ download_file <- function(document_uuid,
     use_proxy = use_proxy
   )
 
+  new_path <- rename_file(path, response, overwrite = overwrite)
+
   if (httr2::resp_status(response) == 200) {
-    cli::cli_alert_success("File downloaded: {path}.")
+    cli::cli_alert_success("File downloaded: {.path {new_path}}.")
   }
 
   invisible(response)
@@ -41,7 +41,7 @@ download_file <- function(document_uuid,
 #' @param document_uuid UUID of existing document version
 #' @param folder Folder to save downloaded file to
 #' @param overwrite Logical to indicate whether file should be overwritten if
-#' already exists.
+#' already exists. Defaults to `FALSE`.
 #' @inheritParams objr
 #'
 #' @return An httr2 [httr2::response()][response] (invisibly)
@@ -66,7 +66,7 @@ download_file_version <- function(document_uuid,
   new_path <- rename_file(path, response, overwrite = overwrite)
 
   if (httr2::resp_status(response) == 200) {
-    cli::cli_alert_success("File downloaded: {new_path}.")
+    cli::cli_alert_success("File downloaded: {.path new_path}.")
   }
 
   invisible(response)

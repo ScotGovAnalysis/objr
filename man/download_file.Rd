@@ -4,12 +4,15 @@
 \alias{download_file}
 \title{Download a file and save to disk}
 \usage{
-download_file(document_uuid, folder, use_proxy = FALSE)
+download_file(document_uuid, folder, overwrite = FALSE, use_proxy = FALSE)
 }
 \arguments{
 \item{document_uuid}{UUID of existing document}
 
 \item{folder}{Folder to save downloaded file to}
+
+\item{overwrite}{Logical to indicate whether file should be overwritten if
+already exists. Defaults to \code{FALSE}.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
