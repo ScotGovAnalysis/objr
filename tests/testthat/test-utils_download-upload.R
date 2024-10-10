@@ -74,59 +74,55 @@ test_that("Error if `file_type` not supplied", {
 
 # read_temp ----
 
-path <- tempfile(fileext = c(".rds", ".rds", ".csv", ".txt"))
+with_tempfile("test_rds", fileext = ".rds", {
 
-readr::write_rds(test_data, path[1])
-readr::write_rds("x", path[2])
-readr::write_csv(test_data, path[3])
+  test_that("Correct value returned", {
 
-test_that("Correct value returned", {
+    readr::write_rds(test_data, test_rds)
+    expect_s3_class(read_temp(test_rds), "data.frame")
 
-  expect_s3_class(read_temp(path[1]), "data.frame")
-  expect_type(read_temp(path[2]), "character")
-  expect_s3_class(suppressMessages(read_temp(path[3])), "data.frame")
+    readr::write_rds("x", test_rds)
+    expect_type(read_temp(test_rds), "character")
 
-})
-
-test_that("Additional arguments passed to write_fn", {
-
-  x4 <- suppressMessages(
-    write_temp(test_data,
-               file_name = "test4",
-               file_type = "csv",
-               na = "MISSING")
-  )
-
-  file <- readr::read_csv(x4, show_col_types = FALSE)
-
-  expect_equal(unique(file$y), "MISSING")
-
-  unlink(x4)
+  })
 
 })
 
-writeLines("test", path[4])
+with_tempfile("temp_csv", fileext = ".csv", {
 
-test_that("Error if file not accepted type", {
-  expect_error(read_temp(test_data))
+  readr::write_csv(test_data, temp_csv)
+
+  test_that("Additional arguments passed to read_fn", {
+    x <- read_temp(temp_csv, id = "id", show_col_types = FALSE)
+    expect_true("id" %in% names(x))
+  })
+
 })
 
-unlink(path)
+with_tempfile("test_txt", fileext = ".txt", {
+
+  file.create(test_txt)
+
+  test_that("Error if file not accepted type", {
+    expect_error(read_temp(test_txt))
+  })
+
+})
 
 
 # check_file_exists ----
 
-with_file("test", {
+with_tempfile("test", {
 
-  file.create("test")
+  file.create(test)
 
   test_that("Returns invisibly", {
-    expect_invisible(check_file_exists("test"))
+    expect_invisible(check_file_exists(test))
   })
 
   test_that("Returns path", {
-    x <- check_file_exists("test")
-    expect_equal(x, "test")
+    x <- check_file_exists(test)
+    expect_equal(x, test)
   })
 
   test_that("Error if path doesn't exist", {
