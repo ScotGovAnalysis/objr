@@ -218,7 +218,7 @@ with_tempfile("test", {
   test_that("File is renamed", {
     rename_file(test, resp_expected)
     expect_false(file.exists(test))
-    expect_true(file.exists(file.path(dirname(test), "new_file.csv")))
+    expect_true(file.exists(file.path(dirname(test), "new_name.csv")))
   })
 
   unlink(file.path(dirname(test), "new_name.csv"))
