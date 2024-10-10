@@ -150,7 +150,18 @@ rename_file <- function(temp_path,
                         response,
                         overwrite = FALSE,
                         error_call = rlang::caller_env(),
-                        error_arg  = rlang::caller_arg(overwrite)) {
+                        error_arg_overwrite  = rlang::caller_arg(overwrite),
+                        error_arg_path = rlang::caller_arg(temp_path)) {
+
+  if (!file.exists(temp_path)) {
+    cli::cli_abort(
+      c(
+        "{.arg {error_arg_path}} must exist.",
+        "No file found: {.path {temp_path}}."
+      ),
+      call = error_call
+    )
+  }
 
   if (!httr2::resp_header_exists(response, "Content-Disposition")) {
     cli::cli_abort(
@@ -166,13 +177,23 @@ rename_file <- function(temp_path,
     m = regexpr("(?<=filename=\\\").*(?=\\\")", cont_disp, perl = T)
   )
 
+  if (length(file_name) == 0) {
+    cli::cli_abort(
+      c(
+        "`Content-Disposition` header must contain file name.",
+        "i" = "Expected format: filename=\\\"my_file.csv\\\""
+      ),
+      call = error_call
+    )
+  }
+
   new_path <- file.path(dirname(temp_path), file_name)
 
   if (file.exists(new_path) && overwrite == FALSE) {
     cli::cli_abort(
       c(
         "File already exists: {.path {new_path}}.",
-        "i" = "To overwrite, set {.code {error_arg} = TRUE}."
+        "i" = "To overwrite, set {.code {error_arg_overwrite} = TRUE}."
       ),
       call = error_call
     )
