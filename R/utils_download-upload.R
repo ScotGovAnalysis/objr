@@ -87,12 +87,16 @@ read_temp <- function(x, ..., error_call = rlang::caller_env()) {
 #' @noRd
 
 check_file_exists <- function(path,
-                              error_call = rlang::caller_env()) {
+                              error_call = rlang::caller_env(),
+                              error_arg = rlang::caller_arg(path)) {
 
   if (!file.exists(path)) {
 
     cli::cli_abort(
-      "Can't find file at {.code {path}}.",
+      c(
+        "{.arg {error_arg}} must exist.",
+        "Can't find file at {.path {path}}."
+      ),
       call = error_call
     )
 
