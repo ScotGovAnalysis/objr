@@ -1,6 +1,12 @@
 #' Download a file and save to disk
 #'
-#' @param document_uuid UUID of existing document
+#' @description
+#' * Use `download_file()` with an asset UUID for the latest version of a
+#'   document.
+#' * Use `download_file_version()` with a document version UUID for a specific
+#'   version of a document.
+#'
+#' @param document_uuid UUID of asset or document version
 #' @param folder Folder to save downloaded file to
 #' @param overwrite Logical to indicate whether file should be overwritten if
 #' already exists. Defaults to `FALSE`.
@@ -36,17 +42,8 @@ download_file <- function(document_uuid,
 }
 
 
-#' Download a document version and save to disk
-#'
-#' @param document_uuid UUID of existing document version
-#' @param folder Folder to save downloaded file to
-#' @param overwrite Logical to indicate whether file should be overwritten if
-#' already exists. Defaults to `FALSE`.
-#' @inheritParams objr
-#'
-#' @return An httr2 [httr2::response()][response] (invisibly)
-#'
 #' @export
+#' @rdname download_file
 
 download_file_version <- function(document_uuid,
                                   folder,
@@ -76,8 +73,13 @@ download_file_version <- function(document_uuid,
 
 #' Read a data file into R
 #'
-#' @param document_uuid UUID of existing document
-#' @param ... Additional arguments to pass to read function. See details.
+#' @description
+#' * Use `read_data()` with an asset UUID for the latest version of a document.
+#' * Use `read_data_version()` with a document version UUID for a specific
+#'   version of a document.
+#'
+#' @param document_uuid UUID of asset or document version
+#' @param ... Additional arguments passed to read function. See details.
 #' @inheritParams objr
 #'
 #' @details This function can be used to read the following data file types:
@@ -116,6 +118,31 @@ read_data <- function(document_uuid,
   )
 
   path <- resp$body[1]
+
+  x <- read_temp(path, ...)
+
+  unlink(path)
+
+  x
+
+}
+
+
+#' @export
+#' @rdname read_data
+
+read_data_version <- function(document_uuid,
+                              ...,
+                              use_proxy = FALSE) {
+
+  resp <- suppressMessages(
+    download_file_version(document_uuid,
+                          overwrite = TRUE,
+                          folder = tempdir(check = TRUE),
+                          use_proxy = use_proxy)
+  )
+
+  path <- file.path(tempdir(check = TRUE), file_name_from_header(resp))
 
   x <- read_temp(path, ...)
 

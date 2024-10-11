@@ -72,7 +72,6 @@ reference:
 - subtitle: Download
   contents:
   - download_file
-  - download_file_version
   - read_data
 
 - subtitle: Upload
