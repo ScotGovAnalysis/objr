@@ -167,9 +167,34 @@ rename_file <- function(temp_path,
     )
   }
 
+  file_name <- file_name_from_header(response)
+
+  new_path <- file.path(dirname(temp_path), file_name)
+
+  if (file.exists(new_path) && overwrite == FALSE) {
+    cli::cli_abort(
+      c(
+        "File already exists: {.path {new_path}}.",
+        "i" = "To overwrite, set {.code {error_arg_overwrite} = TRUE}."
+      ),
+      call = error_call
+    )
+  }
+
+  file.rename(from = temp_path, to = new_path)
+
+  invisible(new_path)
+
+}
+
+
+file_name_from_header <- function(response,
+                                  error_call = rlang::caller_env(),
+                                  error_arg  = rlang::caller_arg(response)) {
+
   if (!httr2::resp_header_exists(response, "Content-Disposition")) {
     cli::cli_abort(
-      "Response must contain `Content-Disposition` header.",
+      "{.arg {error_arg}} must contain `Content-Disposition` header.",
       call = error_call
     )
   }
@@ -191,20 +216,6 @@ rename_file <- function(temp_path,
     )
   }
 
-  new_path <- file.path(dirname(temp_path), file_name)
-
-  if (file.exists(new_path) && overwrite == FALSE) {
-    cli::cli_abort(
-      c(
-        "File already exists: {.path {new_path}}.",
-        "i" = "To overwrite, set {.code {error_arg_overwrite} = TRUE}."
-      ),
-      call = error_call
-    )
-  }
-
-  file.rename(from = temp_path, to = new_path)
-
-  invisible(new_path)
+  file_name
 
 }

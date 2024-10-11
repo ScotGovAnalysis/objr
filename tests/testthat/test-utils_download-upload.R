@@ -161,31 +161,12 @@ with_tempdir({
 
 # rename_file ----
 
-resp_expected <- httr2::response(
+resp <- httr2::response(
   headers = list(`Content-Disposition` = "filename=\"new_name.csv\"")
 )
 
-resp_bad_format <- httr2::response(
-  headers = list(`Content-Disposition` = "x")
-)
-
-resp_no_header <- httr2::response(
-  headers = list(x = 1)
-)
-
 test_that("Error if temp_file doesn't exist", {
-  expect_error(rename_file(temp_path = "test", resp_expected))
-})
-
-with_tempfile("test", {
-
-  file.create(test)
-
-  test_that("Error if httr2 resp doesn't have expected header", {
-    expect_error(rename_file(test, resp_no_header))
-    expect_error(rename_file(test, resp_bad_format))
-  })
-
+  expect_error(rename_file(temp_path = "test", resp))
 })
 
 with_tempfile(c("test", "new"), {
@@ -216,7 +197,7 @@ with_tempfile("test", {
   file.create(test)
 
   test_that("File is renamed", {
-    rename_file(test, resp_expected)
+    rename_file(test, resp)
     expect_false(file.exists(test))
     expect_true(file.exists(file.path(dirname(test), "new_name.csv")))
   })
@@ -230,7 +211,7 @@ with_tempfile("test", {
   file.create(test)
 
   test_that("Returns invisibly", {
-    expect_invisible(rename_file(test, resp_expected))
+    expect_invisible(rename_file(test, resp))
   })
 
   unlink(file.path(dirname(test), "new_name.csv"))
@@ -243,7 +224,7 @@ with_tempfile("test", {
 
   test_that("New file path returned", {
     expect_equal(
-      (rename_file(test, resp_expected)),
+      (rename_file(test, resp)),
       file.path(dirname(test), "new_name.csv")
     )
   })
@@ -251,3 +232,30 @@ with_tempfile("test", {
   unlink(file.path(dirname(test), "new_name.csv"))
 
 })
+
+
+# file_name_from_header ----
+
+test_that("Error if no `Content-Disposition` header", {
+  expect_error(file_name_from_header(
+    httr2::response(headers = list(x = 1))
+  ))
+})
+
+test_that("Error if header in unexpected format", {
+  expect_error(file_name_from_header(
+    httr2::response(headers = list(`Content-Disposition` = "x"))
+  ))
+})
+
+test_that("Correct value returned", {
+  expect_equal(
+    file_name_from_header(
+      httr2::response(
+        headers = list(`Content-Disposition` = "filename=\"new_name.csv\"")
+      )
+    ),
+    "new_name.csv"
+  )
+})
+
