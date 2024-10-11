@@ -1,3 +1,52 @@
+download_helper <- function(document_uuid,
+                            folder,
+                            asset_type = c("documents", "documentversions"),
+                            download_type = c("download", "read"),
+                            ...,
+                            overwrite = FALSE,
+                            use_proxy = FALSE) {
+
+  asset_type <- rlang::arg_match(asset_type)
+  download_type <- rlang::arg_match(download_type)
+
+  # Create temporary file in desired folder
+  path <- create_file(folder)
+
+  response <- objr(
+    endpoint = asset_type,
+    url_path = list(document_uuid, "download"),
+    method = "GET",
+    path = path,
+    use_proxy = use_proxy
+  )
+
+  if (download_type == "download") {
+
+    # Rename file to match asset name
+    new_path <- rename_file(path, response, overwrite = overwrite)
+
+    # Show success message and return response invisibly
+    if (httr2::resp_status(response) == 200) {
+      cli::cli_alert_success("File downloaded: {.path {new_path}}.")
+    }
+    invisible(response)
+
+  }
+
+  if (download_type == "read") {
+
+    # Read data from file path
+    x <- read_temp(response$body[1], ...)
+
+    # Delete file created by download and return data
+    unlink(path)
+    x
+
+  }
+
+}
+
+
 #' Download a file and save to disk
 #'
 #' @description
@@ -21,23 +70,12 @@ download_file <- function(document_uuid,
                           overwrite = FALSE,
                           use_proxy = FALSE) {
 
-  path <- create_file(folder)
-
-  response <- objr(
-    endpoint = "documents",
-    url_path = list(document_uuid, "download"),
-    method = "GET",
-    path = path,
-    use_proxy = use_proxy
-  )
-
-  new_path <- rename_file(path, response, overwrite = overwrite)
-
-  if (httr2::resp_status(response) == 200) {
-    cli::cli_alert_success("File downloaded: {.path {new_path}}.")
-  }
-
-  invisible(response)
+  download_helper(document_uuid,
+                  folder,
+                  asset_type = "documents",
+                  download_type = "download",
+                  overwrite = overwrite,
+                  use_proxy = use_proxy)
 
 }
 
@@ -50,23 +88,12 @@ download_file_version <- function(document_uuid,
                                   overwrite = FALSE,
                                   use_proxy = FALSE) {
 
-  path <- create_file(folder)
-
-  response <- objr(
-    endpoint = "documentversions",
-    url_path = list(document_uuid, "download"),
-    method = "GET",
-    path = path,
-    use_proxy = use_proxy
-  )
-
-  new_path <- rename_file(path, response, overwrite = overwrite)
-
-  if (httr2::resp_status(response) == 200) {
-    cli::cli_alert_success("File downloaded: {.path new_path}.")
-  }
-
-  invisible(response)
+  download_helper(document_uuid,
+                  folder,
+                  asset_type = "documentversions",
+                  download_type = "download",
+                  overwrite = overwrite,
+                  use_proxy = use_proxy)
 
 }
 
@@ -111,19 +138,13 @@ read_data <- function(document_uuid,
                       ...,
                       use_proxy = FALSE) {
 
-  resp <- suppressMessages(
-    download_file(document_uuid,
+  download_helper(document_uuid,
                   folder = tempdir(check = TRUE),
+                  asset_type = "documents",
+                  download_type = "read",
+                  ...,
+                  overwrite = FALSE,
                   use_proxy = use_proxy)
-  )
-
-  path <- resp$body[1]
-
-  x <- read_temp(path, ...)
-
-  unlink(path)
-
-  x
 
 }
 
@@ -135,19 +156,12 @@ read_data_version <- function(document_uuid,
                               ...,
                               use_proxy = FALSE) {
 
-  resp <- suppressMessages(
-    download_file_version(document_uuid,
-                          overwrite = TRUE,
-                          folder = tempdir(check = TRUE),
-                          use_proxy = use_proxy)
-  )
-
-  path <- file.path(tempdir(check = TRUE), file_name_from_header(resp))
-
-  x <- read_temp(path, ...)
-
-  unlink(path)
-
-  x
+  download_helper(document_uuid,
+                  folder = tempdir(check = TRUE),
+                  asset_type = "documentversions",
+                  download_type = "read",
+                  ...,
+                  overwrite = FALSE,
+                  use_proxy = use_proxy)
 
 }
