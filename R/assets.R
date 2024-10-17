@@ -7,7 +7,7 @@
 #' @param size Number of results to be returned per page.
 #' @inheritParams objr
 #'
-#' @return Data frame
+#' @return Tibble
 #'
 #' @export
 
@@ -30,11 +30,8 @@ assets <- function(workspace_uuid,
     use_proxy = use_proxy
   )
 
-  content <-
-    httr2::resp_body_json(response)$content %>%
-    lapply(\(x) data.frame(asset_info_list(x)))
-
-  Reduce(dplyr::bind_rows, content)
+  tidyr::tibble(content = httr2::resp_body_json(response)$content) %>%
+    asset_info_list()
 
 }
 
@@ -44,7 +41,7 @@ assets <- function(workspace_uuid,
 #' @param asset_uuid UUID of asset
 #' @inheritParams objr
 #'
-#' @return Named list containing: uuid, name, type, extension, description.
+#' @return Tibble
 #'
 #' @export
 
@@ -58,7 +55,8 @@ asset_info <- function(asset_uuid,
   ) %>%
     httr2::resp_body_json()
 
-  asset_info_list(response)
+  dplyr::tibble(content = list(response)) %>%
+    asset_info_list()
 
 }
 
@@ -122,26 +120,27 @@ rename_asset <- function(asset_uuid,
 
 }
 
-
-na_if_null <- function(x) {
-  if (is.null(x)) NA else x
-}
-
 asset_info_list <- function(x) {
 
-  list(
-    asset_name       = x$name,
-    asset_ext        = na_if_null(x$extension),
-    asset_type       = x$type,
-    asset_uuid       = x$uuid,
-    last_modified_by = paste(na_if_null(x[["modifiedBy"]]$givenName),
-                             na_if_null(x[["modifiedBy"]]$familyName)),
-    last_modified    = na_if_null(convert_from_epoch(x$modifiedTime)),
-    latest_version   = na_if_null(x$contentVersion),
-    parent_name      = na_if_null(x[["parent"]]$name),
-    parent_uuid      = na_if_null(x[["parent"]]$uuid),
-    workspace_name   = x[["workspace"]]$name,
-    workspace_uuid   = x[["workspace"]]$uuid
-  )
+  tidyr::hoist(
+    x,
+    .data$content,
+    asset_name       = "name",
+    asset_ext        = "extension",
+    asset_type       = "type",
+    asset_uuid       = "uuid",
+    name1            = c("modifiedBy", "givenName"),
+    name2            = c("modifiedBy", "familyName"),
+    last_modified    = "modifiedTime",
+    latest_version   = "contentVersion",
+    parent_name      = c("parent", "name"),
+    parent_uuid      = c("parent", "uuid"),
+    workspace_name   = c("workspace", "name"),
+    workspace_uuid   = c("workspace", "uuid"),
+    .transform = list(last_modified = convert_from_epoch)
+  ) %>%
+    dplyr::mutate(last_modified_by = paste(.data$name1, .data$name2),
+                  .after = "last_modified") %>%
+    dplyr::select(-c("name1", "name2", "content"))
 
 }

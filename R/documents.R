@@ -22,11 +22,24 @@ versions <- function(document_uuid,
     use_proxy = use_proxy
   )
 
-  content <-
-    httr2::resp_body_json(response)$content %>%
-    lapply(\(x) data.frame(versions_info_list(x)))
-
-  Reduce(dplyr::bind_rows, content)
+  dplyr::tibble(content = httr2::resp_body_json(response)$content) %>%
+    tidyr::hoist(
+      .data$content,
+      asset_name = c("asset", "name"),
+      asset_ext = "extension",
+      asset_uuid = c("asset", "uuid"),
+      version = "version",
+      version_uuid = "uuid",
+      created_date = "createdTime",
+      name1 = c("createdBy", "givenName"),
+      name2 = c("createdBy", "familyName"),
+      workspace_name = c("asset", "workspace", "name"),
+      workspace_uuid = c("asset", "workspace", "uuid"),
+      .transform = list(created_date = convert_from_epoch)
+    ) %>%
+    dplyr::mutate(created_by = paste(.data$name1, .data$name2),
+                  .after = "created_date") %>%
+    dplyr::select(-c("name1", "name2", "content"))
 
 }
 
@@ -56,23 +69,5 @@ rollback_to_version <- function(document_uuid,
   }
 
   invisible(response)
-
-}
-
-
-versions_info_list <- function(x) {
-
-  list(
-    asset_name       = x[["asset"]]$name,
-    asset_ext        = na_if_null(x$extension),
-    asset_uuid       = x[["asset"]]$uuid,
-    version          = x$version,
-    version_uuid     = x$uuid,
-    created_date     = na_if_null(convert_from_epoch(x$createdTime)),
-    created_by       = paste(na_if_null(x[["createdBy"]]$givenName),
-                             na_if_null(x[["createdBy"]]$familyName)),
-    workspace_name   = x[["asset"]][["workspace"]]$name,
-    workspace_uuid   = x[["asset"]][["workspace"]]$uuid
-  )
 
 }

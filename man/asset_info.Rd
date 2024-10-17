@@ -12,7 +12,7 @@ asset_info(asset_uuid, use_proxy = FALSE)
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Named list containing: uuid, name, type, extension, description.
+Tibble
 }
 \description{
 Get asset information

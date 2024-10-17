@@ -25,7 +25,7 @@ document, folder and link.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Data frame
+Tibble
 }
 \description{
 Get data frame of assets in workspace

@@ -18,7 +18,8 @@ Imports:
     httr2,
     magrittr,
     rlang,
-    rstudioapi
+    rstudioapi,
+    tidyr
 Suggests: 
     httptest2,
     knitr,

@@ -28,11 +28,11 @@ without_internet({
 
 with_mock_api({
 
-  test_that("Function returns dataframe", {
+  test_that("Function returns tibble", {
 
     expect_s3_class(
       assets(workspace_uuid = "test_workspace_uuid"),
-      "data.frame"
+      "tbl"
     )
 
   })
@@ -69,15 +69,11 @@ without_internet({
 
 with_mock_api({
 
-  test_that("Function returns dataframe", {
+  test_that("Function returns tibble", {
 
-    expect_type(
+    expect_s3_class(
       asset_info(asset_uuid = "test_asset"),
-      "list"
-    )
-
-    expect_named(
-      asset_info(asset_uuid = "test_asset")
+      "tbl"
     )
 
   })
