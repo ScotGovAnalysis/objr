@@ -181,12 +181,13 @@ test_that("`x` returned invisibly", {
 
 # convert_to_epoch ----
 
-test_that("Error produced if not NULL or datetime", {
+test_that("Error produced if not NULL or POSIXct", {
 
   expect_error(convert_to_epoch("invalid"))
   expect_error(convert_to_epoch(NA))
   expect_error(convert_to_epoch("2024-01-01"))
   expect_error(convert_to_epoch(20240101))
+  expect_error(convert_to_epoch(as.Date("2024-01-01")))
 
 })
 

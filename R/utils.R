@@ -225,10 +225,10 @@ check_list <- function(x,
 
 #' Convert date or datetime object to number of milliseconds from epoch
 #'
-#' @param date_time Date or datetime.
+#' @param date_time Date or datetime with "POSIXct" class.
 #'
 #' @details
-#' * If only a date is supplied, a time of 00:00:01 will be added.
+#' * If only a date is supplied, a time of 00:00:00 will be added.
 #' * If NULL is supplied, NULL is returned.
 #' * If an invalid value is supplied (not date, datetime or NULL), an error will
 #' be produced.
@@ -249,16 +249,11 @@ convert_to_epoch <- function(date_time,
   }
 
   # Check correct class if supplied
-  if (any(!class(date_time) %in% c("Date", "POSIXct", "POSIXt"))) {
+  if (!"POSIXct" %in% class(date_time)) {
     cli::cli_abort(
-      "{.arg {error_arg}} must be of Date or POSIXct class.",
+      "{.arg {error_arg}} must be of POSIXct class.",
       call = error_call
     )
-  }
-
-  # Add time if only date supplied
-  if (any(class(date_time) == "Date")) {
-    date_time <- as.POSIXct(paste(date_time, "00:00:01"))
   }
 
   as.integer(date_time) * 1000

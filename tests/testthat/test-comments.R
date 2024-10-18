@@ -10,7 +10,7 @@ without_internet({
     )
 
     expect_GET(
-      comments(created_after = as.Date("2024-01-01"),
+      comments(created_after = as.POSIXct("2024-01-01"),
                thread_uuid = "test_thread",
                mention_uuid = "test_mention",
                workgroup_uuid = "test_workgroup",
@@ -18,7 +18,7 @@ without_internet({
                size = "test_size"),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/comments?",
              "createdAfter=",
-             as.integer(as.POSIXct("2024-01-01 00:00:01")) * 1000, "&",
+             as.integer(as.POSIXct("2024-01-01 00:00:00")) * 1000, "&",
              "threadUuid=test_thread&",
              "mentionUuid=test_mention&",
              "workgroupUuid=test_workgroup&",
