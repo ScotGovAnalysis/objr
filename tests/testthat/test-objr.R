@@ -109,12 +109,18 @@ test_that("Environment value created successfully", {
 test_that("Expect character value returned", {
 
   expect_type(
+    error(httr2::response(status_code = 400)),
+    "character"
+  )
+
+  expect_type(
     error(httr2::response(status_code = 401)),
     "character"
   )
 
   expect_type(
-    error(httr2::response(status_code = 404)),
+    error(httr2::response(status_code = 403,
+                          body = list(description = "x"))),
     "character"
   )
 
@@ -123,6 +129,11 @@ test_that("Expect character value returned", {
       status_code = 403,
       body = list(description = "REQUIRES_2FA")
     )),
+    "character"
+  )
+
+  expect_type(
+    error(httr2::response(status_code = 404)),
     "character"
   )
 

@@ -189,31 +189,63 @@ error <- function(response) {
   desc <- tryCatch(httr2::resp_body_json(response)$description,
                    error = function(e) NULL)
 
-  extra <- NULL
+  message <- NULL
+
+  if (status == 400) {
+    message <- c(
+      "!" = desc,
+      "!" = "Invalid argument(s) provided."
+    )
+  }
 
   if (status == 401) {
-    extra <- c(
-      "Authorisation failed. Check username / password / token.",
-      paste(
-        "You might have an expired token in your R environment.",
+    message <- c(
+      "!" = "API authentication is invalid.",
+      "i" = "Is there an error in your username, password or token?",
+      "i" = paste(
+        "Do you have an expired token in your R environment?",
         "Remove it with `rm(token)`."
+      ),
+      "i" = paste(
+        "For more information, see",
+        "https://scotgovanalysis.github.io/objr/articles/authentication.html"
       )
     )
   }
 
-  if (status == 403 && grepl("REQUIRES_2FA", desc)) {
-    extra <-
-      "See https://scotgovanalysis.github.io/objr/articles/two-factor.html"
+  if (status == 403) {
+    message <- c(
+      "!" = "You are not permitted to perform this action."
+    )
+
+    if (!is.null(desc) && grepl("REQUIRES_2FA", desc)) {
+      message <- c(
+        message,
+        "i" = paste(
+          "You do not have permission to bypass two-factor authentication",
+          "in this workspace."
+        ),
+        "i" = paste(
+          "For more information, see",
+          "https://scotgovanalysis.github.io/objr/articles/two-factor.html"
+        )
+      )
+    } else {
+      message <- c(
+        message,
+        "i" = "This action may be disabled in your organisation."
+      )
+    }
   }
 
   if (status == 404) {
-    extra <- c(
-      "Asset cannot be found.",
-      "Check asset UUID is correct."
+    message <- c(
+      desc,
+      "i" = "Have you checked that the UUID supplied is valid?"
     )
   }
 
-  c(desc, extra)
+  if (is.null(message)) desc else message
 
 }
 
