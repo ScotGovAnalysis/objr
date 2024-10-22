@@ -94,8 +94,12 @@ add_participants <- function(workspace_uuid,
   }
 
   permission_values <-
-    rep("true", times = length(permissions)) %>%
-    magrittr::set_names(paste0("has", permissions))
+    if (!is.null(permissions)) {
+      rep("true", times = length(permissions)) %>%
+        magrittr::set_names(paste0("has", permissions))
+    } else {
+      NULL
+    }
 
   response <- objr(
     endpoint = "participants",
