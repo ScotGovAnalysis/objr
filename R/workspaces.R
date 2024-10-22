@@ -22,24 +22,21 @@ workspaces <- function(workgroup_uuid = NULL,
     use_proxy = use_proxy
   )
 
-  content <-
-    httr2::resp_body_json(response)$content |>
-    lapply(
-      \(content) {
-        data.frame(
-          workspace_name   = content$name,
-          workspace_uuid   = content$uuid,
-          participant_uuid = content$participant$uuid,
-          owner_name       = paste(content$owner$givenName,
-                                   content$owner$familyName),
-          owner_email      = content$owner$email,
-          owner_uuid       = content$owner$uuid,
-          workgroup_name   = content$workgroup$name,
-          workgroup_uuid   = content$workgroup$uuid
-        )
-      }
-    )
-
-  Reduce(dplyr::bind_rows, content)
+  dplyr::tibble(content = httr2::resp_body_json(response)$content) %>%
+    tidyr::hoist(
+      .data$content,
+      workspace_name   = "name",
+      workspace_uuid   = "uuid",
+      participant_uuid = c("participant", "uuid"),
+      name1            = c("owner", "givenName"),
+      name2            = c("owner", "familyName"),
+      owner_email      = c("owner", "email"),
+      owner_uuid       = c("owner", "uuid"),
+      workgroup_name   = c("workgroup", "name"),
+      workgroup_uuid   = c("workgroup", "uuid")
+    ) %>%
+    dplyr::mutate(owner_name = paste(.data$name1, .data$name2),
+                  .before = "owner_email") %>%
+    dplyr::select(-c("name1", "name2", "content"))
 
 }

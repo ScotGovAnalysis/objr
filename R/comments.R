@@ -36,25 +36,22 @@ comments <- function(created_after = NULL,
     use_proxy = use_proxy
   )
 
-  content <-
-    httr2::resp_body_json(response)$content %>%
-    lapply(
-      \(content) {
-        data.frame(
-          type = content$commentType,
-          text = content$commentText,
-          author = paste(content$creator$givenName,
-                         content$creator$familyName),
-          created_time = as.POSIXct(content$createdTime / 1000,
-                                    origin = "1970-01-01"),
-          thread_uuid = content$thread$uuid,
-          workspace_name = content$workspace$name,
-          workspace_uuid = content$workspace$uuid
-        )
-      }
-    )
-
-  Reduce(dplyr::bind_rows, content)
+  dplyr::tibble(content = httr2::resp_body_json(response)$content) %>%
+    tidyr::hoist(
+      .data$content,
+      type = "commentType",
+      text = "commentText",
+      name1 = c("creator", "givenName"),
+      name2 = c("creator", "familyName"),
+      created_time = "createdTime",
+      thread_uuid = c("thread", "uuid"),
+      workspace_name = c("workspace", "name"),
+      workspace_uuid = c("workspace", "uuid"),
+      .transform = list(created_time = convert_from_epoch)
+    ) %>%
+    dplyr::mutate(author = paste(.data$name1, .data$name2),
+                  .after = "text") %>%
+    dplyr::select(-c("name1", "name2", "content"))
 
 }
 
