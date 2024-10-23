@@ -203,7 +203,7 @@ file_name_from_header <- function(response,
 
   file_name <- regmatches(
     cont_disp,
-    m = regexpr("(?<=filename=\\\").*(?=\\\")", cont_disp, perl = T)
+    m = regexpr("(?<=filename=\\\").*(?=\\\")", cont_disp, perl = TRUE)
   )
 
   if (length(file_name) == 0) {

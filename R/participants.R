@@ -81,10 +81,12 @@ add_participants <- function(workspace_uuid,
 
   # Check requested permissions are valid
   if (any(!permissions %in% expected_permissions)) {
-    diff <- setdiff(permissions, expected_permissions)
     cli::cli_abort(c(
       "{.arg permissions} must only contain valid permission types.",
-      "i" = "{.str {diff}} {?is/are} not {?an/} accepted permission{?s}.",
+      "i" = paste(
+        "{.str {setdiff(permissions, expected_permissions)}}",
+        "{?is/are} not {?an/} accepted permission{?s}."
+      ),
       "i" = paste(
         "Accepted permissions:",
         "{.str {cli::cli_vec(expected_permissions,",
@@ -124,4 +126,3 @@ add_participants <- function(workspace_uuid,
   invisible(response)
 
 }
-

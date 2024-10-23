@@ -23,7 +23,7 @@ download_helper <- function(document_uuid,
   if (download_type == "download") {
 
     # Rename file to match asset name
-    new_path <- rename_file(path, response, overwrite = overwrite)
+    new_path <- rename_file(path, response, overwrite = overwrite) # nolint: object_usage_linter
 
     # Show success message and return response invisibly
     if (httr2::resp_status(response) == 200) {

@@ -258,4 +258,3 @@ test_that("Correct value returned", {
     "new_name.csv"
   )
 })
-
