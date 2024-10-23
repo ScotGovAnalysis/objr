@@ -54,6 +54,7 @@ reference:
   contents:
   - workspaces
   - participants
+  - add_participants
 
 - title: Assets
   desc: Assets represent Documents and Folders that are added to Workspaces
@@ -89,6 +90,7 @@ reference:
   - new_reply
 
 - title: Two-factor authentication
+  desc: See `vignette("two-factor")` for more information.
   contents:
   - allow_bypass_2fa
   - participant_bypass_2fa
