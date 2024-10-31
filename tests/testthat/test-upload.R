@@ -10,7 +10,7 @@ with_file("test", {
 
       expect_POST(
         upload_file(file = "test",
-                    workspace_uuid = "test_workspace"),
+                    uuid = "test_workspace"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
                "Multipart form:\n  ",
                "name = test\n  ",
@@ -21,7 +21,7 @@ with_file("test", {
       expect_POST(
         upload_file(file = "test",
                     name = "test_file_name",
-                    workspace_uuid = "test_workspace"),
+                    uuid = "test_workspace"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
                "Multipart form:\n  ",
                "name = test_file_name\n  ",
@@ -31,7 +31,7 @@ with_file("test", {
 
       expect_POST(
         upload_file_version(file = "test",
-                            document_uuid = "test_asset"),
+                            uuid = "test_asset"),
         paste0("https://secure.objectiveconnect.co.uk/publicapi/1/",
                "documents/test_asset/upload ",
                "Multipart form:", "\n  ",
@@ -49,12 +49,12 @@ with_file("test", {
 
       expect_invisible(
         suppressMessages(upload_file_version(file = "test",
-                                             document_uuid = "test_asset"))
+                                             uuid = "test_asset"))
       )
 
       expect_invisible(
         suppressMessages(upload_file(file = "test",
-                                     workspace_uuid = "test_workspace"))
+                                     uuid = "test_workspace"))
       )
 
     })
@@ -62,7 +62,7 @@ with_file("test", {
     test_that("Function returns success message", {
 
       expect_message(upload_file_version(file = "test",
-                                         document_uuid = "test_asset"))
+                                         uuid = "test_asset"))
 
     })
 
@@ -79,7 +79,7 @@ without_internet({
     write_data(head(mtcars),
                file_name = "test1",
                file_type = "csv",
-               workspace_uuid = "test_workspace"),
+               uuid = "test_workspace"),
     paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents ",
            "Multipart form:\n  ",
            "name = test1\n  ",

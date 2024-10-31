@@ -2,27 +2,31 @@
 % Please edit documentation in R/upload.R
 \name{write_data}
 \alias{write_data}
-\title{Write a data file from R to create a new document}
+\alias{write_data_version}
+\title{Write a data file from R}
 \usage{
 write_data(
   x,
+  uuid,
   file_name,
   file_type,
-  workspace_uuid,
   ...,
   description = NULL,
   parent_uuid = NULL,
   use_proxy = FALSE
 )
+
+write_data_version(x, uuid, ..., use_proxy = FALSE)
 }
 \arguments{
 \item{x}{R object to write to file.}
 
+\item{uuid}{Either a workspace UUID to create a new document or an asset UUID
+to create a new version of an existing document.}
+
 \item{file_name}{Name to give file.}
 
 \item{file_type}{Either "csv", "rds" or "xlsx".}
-
-\item{workspace_uuid}{UUID of the workspace to create the new document in}
 
 \item{...}{Additional arguments to pass to write function. See details.}
 
@@ -35,15 +39,20 @@ top-level of the workspace.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-An httr2 \link[=response]{httr2::response()} (invisibly)
+API response (invisibly)
 }
 \description{
-Write a data file from R to create a new document
+\itemize{
+\item Use \code{write_data()} to create a new file in a workspace.
+\item Use \code{write_data_version()} to write a data file as a new version of an
+existing document.
+}
 }
 \details{
 This function can be used to write the following data file types:
-csv, rds, xlsx. Use the \code{file_type} argument to control which file type
-to create.
+csv, rds, xlsx. If writing to a new document, use the \code{file_type}
+argument to control which file type to create. If writing a new version of an
+existing document, the existing file type will be used.
 
 The function works by writing the R object to a temporary file and uploading
 the file to Objective Connect. The following functions are used to

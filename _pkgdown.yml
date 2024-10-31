@@ -78,9 +78,7 @@ reference:
 - subtitle: Upload
   contents:
   - upload_file
-  - upload_file_version
   - write_data
-  - write_data_version
 
 - title: Comments
   desc: View comments and create new threads and replies in workspaces
