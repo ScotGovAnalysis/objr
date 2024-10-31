@@ -230,6 +230,12 @@ error <- function(response) {
           "https://scotgovanalysis.github.io/objr/articles/two-factor.html"
         )
       )
+    } else if (grepl("/tasks/.*/action$", response$url)) {
+      message <- c(
+        message,
+        "i" = "Has the task already been completed or cancelled?",
+        "i" = "Are you trying to action a task that you aren't assigned to?"
+      )
     } else {
       message <- c(
         message,

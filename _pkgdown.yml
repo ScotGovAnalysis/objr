@@ -89,6 +89,14 @@ reference:
   - new_thread
   - new_reply
 
+- title: Tasks
+  desc: View, create and action tasks assigned to participants in a workspace
+  contents:
+  - tasks
+  - new_task
+  - action_task
+  - cancel_task
+
 - title: Two-factor authentication
   desc: See `vignette("two-factor")` for more information.
   contents:
