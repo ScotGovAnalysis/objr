@@ -3,9 +3,8 @@
 #' @param workspace_uuid UUID of workspace
 #' @param type List of asset types to return. Defaults to all types;
 #' document, folder and link.
-#' @param page Page number of responses to return (0..N).
-#' @param size Number of results to be returned per page.
 #' @inheritParams objr
+#' @inheritParams workspaces
 #'
 #' @return Tibble
 #'

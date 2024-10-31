@@ -1,8 +1,8 @@
 #' Get workspaces the current user is a member of
 #'
 #' @param workgroup_uuid UUID of workgroup to filter by
-#' @param page Page number of responses to return (0..N).
-#' @param size Number of results to be returned per page.
+#' @param page Page number of responses to return (0..N). Default is 0.
+#' @param size Number of results to be returned per page. Default is 20.
 #' @inheritParams objr
 #'
 #' @return Data frame

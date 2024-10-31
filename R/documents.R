@@ -1,9 +1,8 @@
 #' Get data frame of document versions
 #'
 #' @param document_uuid UUID of document (asset)
-#' @param page Page number of responses to return (0..N).
-#' @param size Number of results to be returned per page.
 #' @inheritParams objr
+#' @inheritParams workspaces
 #'
 #' @return Data frame
 #'
