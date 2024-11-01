@@ -74,63 +74,187 @@ test_that("Error if `file_type` not supplied", {
 
 # read_temp ----
 
-path <- tempfile(fileext = c(".rds", ".rds", ".csv", ".txt"))
+with_tempfile("test_rds", fileext = ".rds", {
 
-readr::write_rds(test_data, path[1])
-readr::write_rds("x", path[2])
-readr::write_csv(test_data, path[3])
+  test_that("Correct value returned", {
 
-test_that("Correct value returned", {
+    readr::write_rds(test_data, test_rds)
+    expect_s3_class(read_temp(test_rds), "data.frame")
 
-  expect_s3_class(read_temp(path[1]), "data.frame")
-  expect_type(read_temp(path[2]), "character")
-  expect_s3_class(suppressMessages(read_temp(path[3])), "data.frame")
+    readr::write_rds("x", test_rds)
+    expect_type(read_temp(test_rds), "character")
 
-})
-
-test_that("Additional arguments passed to write_fn", {
-
-  x4 <- suppressMessages(
-    write_temp(test_data,
-               file_name = "test4",
-               file_type = "csv",
-               na = "MISSING")
-  )
-
-  file <- readr::read_csv(x4, show_col_types = FALSE)
-
-  expect_equal(unique(file$y), "MISSING")
-
-  unlink(x4)
+  })
 
 })
 
-writeLines("test", path[4])
+with_tempfile("temp_csv", fileext = ".csv", {
 
-test_that("Error if file not accepted type", {
-  expect_error(read_temp(test_data))
+  readr::write_csv(test_data, temp_csv)
+
+  test_that("Additional arguments passed to read_fn", {
+    x <- read_temp(temp_csv, id = "id", show_col_types = FALSE)
+    expect_true("id" %in% names(x))
+  })
+
 })
 
-unlink(path)
+with_tempfile("test_txt", fileext = ".txt", {
+
+  file.create(test_txt)
+
+  test_that("Error if file not accepted type", {
+    expect_error(read_temp(test_txt))
+  })
+
+})
 
 
 # check_file_exists ----
 
-with_file("test", {
+with_tempfile("test", {
 
-  file.create("test")
+  file.create(test)
 
   test_that("Returns invisibly", {
-    expect_invisible(check_file_exists("test"))
+    expect_invisible(check_file_exists(test))
   })
 
   test_that("Returns path", {
-    x <- check_file_exists("test")
-    expect_equal(x, "test")
+    x <- check_file_exists(test)
+    expect_equal(x, test)
   })
 
   test_that("Error if path doesn't exist", {
     expect_error(check_file_exists("test1"))
   })
 
+})
+
+
+# create_file ----
+
+test_that("Error if folder doesn't exist", {
+
+  expect_error(create_file("folder"))
+
+})
+
+with_tempdir({
+
+  test_that("Returns invisibly", {
+    expect_invisible(create_file(tempdir()))
+  })
+
+  test_that("Returns file path in folder", {
+
+    expect_type((create_file(tempdir())), "character")
+
+    # Use gsub as dirname returns a path using / (instead of \\ like tempdir())
+    expect_equal(dirname(create_file(tempdir())),
+                 gsub("\\\\", "/", tempdir()))
+
+  })
+
+})
+
+
+# rename_file ----
+
+resp <- httr2::response(
+  headers = list(`Content-Disposition` = "filename=\"new_name.csv\"")
+)
+
+test_that("Error if temp_file doesn't exist", {
+  expect_error(rename_file(temp_path = "test", resp))
+})
+
+with_tempfile(c("test", "new"), {
+
+  file.create(test)
+  file.create(new)
+
+  resp_new <- httr2::response(
+    headers = list(
+      `Content-Disposition` = paste0("filename=\"", basename(new), "\"")
+    )
+  )
+
+  test_that("Error if file already exists", {
+    expect_error(rename_file(test, resp_new))
+  })
+
+  test_that("No error if overwrite = TRUE", {
+    expect_no_error(rename_file(test, resp_new, overwrite = TRUE))
+  })
+
+  unlink(file.path(dirname(test), "new_name.csv"))
+
+})
+
+with_tempfile("test", {
+
+  file.create(test)
+
+  test_that("File is renamed", {
+    rename_file(test, resp)
+    expect_false(file.exists(test))
+    expect_true(file.exists(file.path(dirname(test), "new_name.csv")))
+  })
+
+  unlink(file.path(dirname(test), "new_name.csv"))
+
+})
+
+with_tempfile("test", {
+
+  file.create(test)
+
+  test_that("Returns invisibly", {
+    expect_invisible(rename_file(test, resp))
+  })
+
+  unlink(file.path(dirname(test), "new_name.csv"))
+
+})
+
+with_tempfile("test", {
+
+  file.create(test)
+
+  test_that("New file path returned", {
+    expect_equal(
+      (rename_file(test, resp)),
+      file.path(dirname(test), "new_name.csv")
+    )
+  })
+
+  unlink(file.path(dirname(test), "new_name.csv"))
+
+})
+
+
+# file_name_from_header ----
+
+test_that("Error if no `Content-Disposition` header", {
+  expect_error(file_name_from_header(
+    httr2::response(headers = list(x = 1))
+  ))
+})
+
+test_that("Error if header in unexpected format", {
+  expect_error(file_name_from_header(
+    httr2::response(headers = list(`Content-Disposition` = "x"))
+  ))
+})
+
+test_that("Correct value returned", {
+  expect_equal(
+    file_name_from_header(
+      httr2::response(
+        headers = list(`Content-Disposition` = "filename=\"new_name.csv\"")
+      )
+    ),
+    "new_name.csv"
+  )
 })

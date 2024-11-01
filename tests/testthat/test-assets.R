@@ -28,11 +28,11 @@ without_internet({
 
 with_mock_api({
 
-  test_that("Function returns dataframe", {
+  test_that("Function returns tibble", {
 
     expect_s3_class(
       assets(workspace_uuid = "test_workspace_uuid"),
-      "data.frame"
+      "tbl"
     )
 
   })
@@ -69,15 +69,11 @@ without_internet({
 
 with_mock_api({
 
-  test_that("Function returns dataframe", {
+  test_that("Function returns tibble", {
 
-    expect_type(
+    expect_s3_class(
       asset_info(asset_uuid = "test_asset"),
-      "list"
-    )
-
-    expect_named(
-      asset_info(asset_uuid = "test_asset")
+      "tbl"
     )
 
   })
@@ -114,6 +110,45 @@ with_mock_api({
   test_that("Function returns success message", {
 
     expect_message(delete_asset(asset_uuid = "test_asset_uuid"))
+
+  })
+
+})
+
+
+
+# rename_asset ----
+
+without_internet({
+
+  test_that("Valid request", {
+
+    expect_PUT(
+      rename_asset(asset_uuid = "test_asset_uuid",
+                   new_name = "test_new_name"),
+      paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets/",
+             "test_asset_uuid/name")
+    )
+
+  })
+
+})
+
+with_mock_api({
+
+  test_that("Function returns invisible", {
+
+    expect_invisible(
+      suppressMessages(rename_asset(asset_uuid = "test_asset_uuid",
+                                    new_name = "test_new_name"))
+    )
+
+  })
+
+  test_that("Function returns success message", {
+
+    expect_message(rename_asset(asset_uuid = "test_asset_uuid",
+                                new_name = "test_new_name"))
 
   })
 

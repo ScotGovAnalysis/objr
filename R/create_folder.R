@@ -26,7 +26,7 @@ create_folder <- function(folder_name,
       description = description
     ),
     use_proxy = use_proxy
-  ) |>
+  ) %>%
     httr2::resp_body_json()
 
   if (tolower(response$status) == "complete") {

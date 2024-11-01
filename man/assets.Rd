@@ -18,14 +18,14 @@ assets(
 \item{type}{List of asset types to return. Defaults to all types;
 document, folder and link.}
 
-\item{page}{Page number of responses to return (0..N).}
+\item{page}{Page number of responses to return (0..N). Default is 0.}
 
-\item{size}{Number of results to be returned per page.}
+\item{size}{Number of results to be returned per page. Default is 20.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Data frame
+Tibble
 }
 \description{
 Get data frame of assets in workspace

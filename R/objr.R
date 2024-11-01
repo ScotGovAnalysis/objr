@@ -33,15 +33,15 @@ objr <- function(endpoint,
 
   # Build request
   request <-
-    httr2::request("https://secure.objectiveconnect.co.uk/publicapi/1") |>
-    httr2::req_url_path_append(endpoint) |>
-    httr2::req_method(method) |>
+    httr2::request("https://secure.objectiveconnect.co.uk/publicapi/1") %>%
+    httr2::req_url_path_append(endpoint) %>%
+    httr2::req_method(method) %>%
     httr2::req_headers(accept = accept,
-                       `content-type` = content_type) |>
-    objr_auth() |>
+                       `content-type` = content_type) %>%
+    objr_auth() %>%
     httr2::req_user_agent(
       "objr (https://scotgovanalysis.github.io/objr/)"
-    ) |>
+    ) %>%
     httr2::req_error(body = error)
 
   # Modify the URL path
@@ -75,9 +75,9 @@ objr <- function(endpoint,
   response <- httr2::req_perform(request, path = path)
 
   # Return response
-  response |>
-    httr2::resp_check_status() |>
-    store_token() |>
+  response %>%
+    httr2::resp_check_status() %>%
+    store_token() %>%
     check_pages()
 
 }
@@ -96,12 +96,12 @@ objr <- function(endpoint,
 #'
 #' @examples
 #' \dontrun{
-#' httr2::request("http://example.com") |>
+#' httr2::request("http://example.com") %>%
 #'   objr_auth()
 #' }
 #'
 #' token <- "test"
-#' httr2::request("http://example.com") |> objr_auth()
+#' httr2::request("http://example.com") %>% objr_auth()
 #'
 #' @noRd
 
@@ -189,24 +189,63 @@ error <- function(response) {
   desc <- tryCatch(httr2::resp_body_json(response)$description,
                    error = function(e) NULL)
 
-  extra <- NULL
+  message <- NULL
+
+  if (status == 400) {
+    message <- c(
+      "!" = desc,
+      "!" = "Invalid argument(s) provided."
+    )
+  }
 
   if (status == 401) {
-    extra <- c(
-      "Authorisation failed. Check username / password / token.",
-      paste(
-        "You might have an expired token in your R environment.",
+    message <- c(
+      "!" = "API authentication is invalid.",
+      "i" = "Is there an error in your username, password or token?",
+      "i" = paste(
+        "Do you have an expired token in your R environment?",
         "Remove it with `rm(token)`."
+      ),
+      "i" = paste(
+        "For more information, see",
+        "https://scotgovanalysis.github.io/objr/articles/authentication.html"
       )
     )
   }
 
-  if (status == 403 && grepl("REQUIRES_2FA", desc)) {
-    extra <-
-      "See https://scotgovanalysis.github.io/objr/articles/two-factor.html"
+  if (status == 403) {
+    message <- c(
+      "!" = "You are not permitted to perform this action."
+    )
+
+    if (!is.null(desc) && grepl("REQUIRES_2FA", desc)) {
+      message <- c(
+        message,
+        "i" = paste(
+          "You do not have permission to bypass two-factor authentication",
+          "in this workspace."
+        ),
+        "i" = paste(
+          "For more information, see",
+          "https://scotgovanalysis.github.io/objr/articles/two-factor.html"
+        )
+      )
+    } else {
+      message <- c(
+        message,
+        "i" = "This action may be disabled in your organisation."
+      )
+    }
   }
 
-  c(desc, extra)
+  if (status == 404) {
+    message <- c(
+      desc,
+      "i" = "Have you checked that the UUID supplied is valid?"
+    )
+  }
+
+  if (is.null(message)) desc else message
 
 }
 

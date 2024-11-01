@@ -2,14 +2,25 @@
 % Please edit documentation in R/download.R
 \name{download_file}
 \alias{download_file}
+\alias{download_file_version}
 \title{Download a file and save to disk}
 \usage{
-download_file(document_uuid, folder, use_proxy = FALSE)
+download_file(document_uuid, folder, overwrite = FALSE, use_proxy = FALSE)
+
+download_file_version(
+  document_uuid,
+  folder,
+  overwrite = FALSE,
+  use_proxy = FALSE
+)
 }
 \arguments{
-\item{document_uuid}{UUID of existing document}
+\item{document_uuid}{UUID of asset or document version}
 
 \item{folder}{Folder to save downloaded file to}
+
+\item{overwrite}{Logical to indicate whether file should be overwritten if
+already exists. Defaults to \code{FALSE}.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
@@ -17,5 +28,10 @@ download_file(document_uuid, folder, use_proxy = FALSE)
 An httr2 \link[=response]{httr2::response()} (invisibly)
 }
 \description{
-Download a file and save to disk
+\itemize{
+\item Use \code{download_file()} with an asset UUID for the latest version of a
+document.
+\item Use \code{download_file_version()} with a document version UUID for a specific
+version of a document.
+}
 }

@@ -1,44 +1,54 @@
 # download_file ----
 
-without_internet({
+with_file("test", {
 
-  test_that("Valid request", {
+  dir.create("test")
 
-    expect_GET(
-      download_file(document_uuid = "test_document",
-                    folder = "test"),
-      "https://secure.objectiveconnect.co.uk/publicapi/1/assets/test_document"
-    )
+  without_internet({
+
+    test_that("Valid request", {
+
+      expect_GET(
+        download_file(document_uuid = "test_document",
+                      folder = "test"),
+        paste0("https://secure.objectiveconnect.co.uk/publicapi/1/",
+               "documents/test_document/download")
+      )
+
+    })
 
   })
 
-})
+  with_mock_api({
 
-with_mock_api({
+    test_that("Function returns invisible", {
+      expect_invisible(
+        suppressMessages(download_file(document_uuid = "test_document",
+                                       folder = "test"))
+      )
+    })
 
-  test_that("Function returns invisible", {
+    test_that("Success message returned", {
+      expect_message(download_file(document_uuid = "test_document",
+                                   folder = "test",
+                                   overwrite = TRUE))
+    })
 
-    expect_invisible(
+    test_that("New file created", {
       suppressMessages(download_file(document_uuid = "test_document",
-                                     folder = tempdir()))
-    )
+                                     folder = "test",
+                                     overwrite = TRUE))
+      expect_true(file.exists(paste0("test", "/test_document_name.txt")))
+    })
+
+    test_that("Error if file already exists and `overwrite = FALSE`", {
+      expect_error(
+        download_file(document_uuid = "test_document",
+                      folder = "test")
+      )
+    })
 
   })
-
-  test_that("Function returns success message", {
-
-    expect_message(download_file(document_uuid = "test_document",
-                                 folder = tempdir()))
-
-  })
-
-  test_that("Function creates new file", {
-    suppressMessages(download_file(document_uuid = "test_document",
-                                   folder = tempdir(check = TRUE)))
-    expect_true(file.exists(paste0(tempdir(), "/test_document_name.txt")))
-  })
-
-  file.remove(paste0(tempdir(), "/test_document_name.txt"))
 
 })
 
@@ -51,7 +61,8 @@ without_internet({
 
     expect_GET(
       read_data(document_uuid = "test_document"),
-      "https://secure.objectiveconnect.co.uk/publicapi/1/assets/test_document"
+      paste0("https://secure.objectiveconnect.co.uk/publicapi/1/documents/",
+             "test_document/download")
     )
 
   })

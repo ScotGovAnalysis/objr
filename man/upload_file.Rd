@@ -2,21 +2,25 @@
 % Please edit documentation in R/upload.R
 \name{upload_file}
 \alias{upload_file}
-\title{Upload a file to create a new document}
+\alias{upload_file_version}
+\title{Upload a file}
 \usage{
 upload_file(
   file,
-  workspace_uuid,
+  uuid,
   name = NULL,
   description = NULL,
   parent_uuid = NULL,
   use_proxy = FALSE
 )
+
+upload_file_version(file, uuid, use_proxy = FALSE)
 }
 \arguments{
 \item{file}{File path of document to upload}
 
-\item{workspace_uuid}{UUID of the workspace to create the new document in}
+\item{uuid}{For \code{upload_file()}, a workspace UUID to create the new document
+in. For \code{upload_file_version()}, an asset UUID to create a new version of.}
 
 \item{name}{Name to give document. If this isn't provided, the name of the
 file will be used.}
@@ -30,8 +34,12 @@ top-level of the workspace.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-An httr2 \link[=response]{httr2::response()} (invisibly)
+API response (invisibly)
 }
 \description{
-Upload a file to create a new document
+\itemize{
+\item Use \code{upload_file()} to create a new file in a workspace.
+\item Use \code{upload_file_version()} to create a new version of an existing
+document.
+}
 }

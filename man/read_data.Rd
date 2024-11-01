@@ -2,14 +2,17 @@
 % Please edit documentation in R/download.R
 \name{read_data}
 \alias{read_data}
+\alias{read_data_version}
 \title{Read a data file into R}
 \usage{
 read_data(document_uuid, ..., use_proxy = FALSE)
+
+read_data_version(document_uuid, ..., use_proxy = FALSE)
 }
 \arguments{
-\item{document_uuid}{UUID of existing document}
+\item{document_uuid}{UUID of asset or document version}
 
-\item{...}{Additional arguments to pass to read function. See details.}
+\item{...}{Additional arguments passed to read function. See details.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
@@ -17,7 +20,11 @@ read_data(document_uuid, ..., use_proxy = FALSE)
 For csv and xlsx files, a data frame. For rds files, an R object.
 }
 \description{
-Read a data file into R
+\itemize{
+\item Use \code{read_data()} with an asset UUID for the latest version of a document.
+\item Use \code{read_data_version()} with a document version UUID for a specific
+version of a document.
+}
 }
 \details{
 This function can be used to read the following data file types:
