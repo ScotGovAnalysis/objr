@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9005</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,6 +77,12 @@
 
         </dt>
         <dd>Get data frame of workspace participants</dd>
+      </dl><dl><dt>
+
+          <code><a href="add_participants.html">add_participants()</a></code>
+
+        </dt>
+        <dd>Add participant(s) to a workspace</dd>
       </dl></div><div class="section level2">
       <h2 id="assets">Assets<a class="anchor" aria-label="anchor" href="#assets"></a></h2>
 
@@ -108,10 +114,39 @@
         <dd>Create a new folder</dd>
       </dl><dl><dt>
 
+          <code><a href="rename_asset.html">rename_asset()</a></code>
+
+        </dt>
+        <dd>Rename an asset</dd>
+      </dl><dl><dt>
+
           <code><a href="delete_asset.html">delete_asset()</a></code>
 
         </dt>
         <dd>Delete an asset</dd>
+      </dl></div><div class="section level2">
+
+      <h3 id="document-versions">Document versions<a class="anchor" aria-label="anchor" href="#document-versions"></a></h3>
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="versions.html">versions()</a></code>
+
+        </dt>
+        <dd>Get data frame of document versions</dd>
+      </dl><dl><dt>
+
+          <code><a href="rollback_to_version.html">rollback_to_version()</a></code>
+
+        </dt>
+        <dd>Rollback a document to a previous version</dd>
       </dl></div><div class="section level2">
 
       <h3 id="download">Download<a class="anchor" aria-label="anchor" href="#download"></a></h3>
@@ -125,13 +160,13 @@
 
       <dl><dt>
 
-          <code><a href="download_file.html">download_file()</a></code>
+          <code><a href="download_file.html">download_file()</a></code> <code><a href="download_file.html">download_file_version()</a></code>
 
         </dt>
         <dd>Download a file and save to disk</dd>
       </dl><dl><dt>
 
-          <code><a href="read_data.html">read_data()</a></code>
+          <code><a href="read_data.html">read_data()</a></code> <code><a href="read_data.html">read_data_version()</a></code>
 
         </dt>
         <dd>Read a data file into R</dd>
@@ -148,28 +183,16 @@
 
       <dl><dt>
 
-          <code><a href="upload_file.html">upload_file()</a></code>
+          <code><a href="upload_file.html">upload_file()</a></code> <code><a href="upload_file.html">upload_file_version()</a></code>
 
         </dt>
-        <dd>Upload a file to create a new document</dd>
+        <dd>Upload a file</dd>
       </dl><dl><dt>
 
-          <code><a href="upload_file_version.html">upload_file_version()</a></code>
+          <code><a href="write_data.html">write_data()</a></code> <code><a href="write_data.html">write_data_version()</a></code>
 
         </dt>
-        <dd>Upload a file to create a new document version</dd>
-      </dl><dl><dt>
-
-          <code><a href="write_data.html">write_data()</a></code>
-
-        </dt>
-        <dd>Write a data file from R to create a new document</dd>
-      </dl><dl><dt>
-
-          <code><a href="write_data_version.html">write_data_version()</a></code>
-
-        </dt>
-        <dd>Write a data file from R to create a new document version</dd>
+        <dd>Write a data file from R</dd>
       </dl></div><div class="section level2">
       <h2 id="comments">Comments<a class="anchor" aria-label="anchor" href="#comments"></a></h2>
 
@@ -202,7 +225,7 @@
       </dl></div><div class="section level2">
       <h2 id="two-factor-authentication">Two-factor authentication<a class="anchor" aria-label="anchor" href="#two-factor-authentication"></a></h2>
 
-
+      <div class="section-desc"><p>See <code><a href="../articles/two-factor.html">vignette("two-factor")</a></code> for more information.</p></div>
 
 
     </div><div class="section level2">
@@ -232,7 +255,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer></div>
