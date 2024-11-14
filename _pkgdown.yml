@@ -90,7 +90,7 @@ reference:
 - title: Two-factor authentication
   desc: See `vignette("two-factor")` for more information.
   contents:
-  - allow_bypass_2fa
+  - workgroup_bypass_2fa
   - participant_bypass_2fa
 
 articles:

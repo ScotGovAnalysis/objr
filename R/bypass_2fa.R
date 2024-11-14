@@ -16,9 +16,9 @@
 #'
 #' @export
 
-allow_bypass_2fa <- function(workgroup_uuid,
-                             allow_bypass = TRUE,
-                             use_proxy = FALSE) {
+workgroup_bypass_2fa <- function(workgroup_uuid,
+                                 allow_bypass = TRUE,
+                                 use_proxy = FALSE) {
 
   response <- objr(
     endpoint = "workgroups",

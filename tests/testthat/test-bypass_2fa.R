@@ -3,14 +3,15 @@ without_internet({
   test_that("Valid request", {
 
     expect_PUT(
-      allow_bypass_2fa(workgroup_uuid = "test_workgroup"),
+      workgroup_bypass_2fa(workgroup_uuid = "test_workgroup"),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/workgroups/",
              "test_workgroup/bypassTwoStepAllowed"),
       "{\"bypassTwoStepAllowed\":\"true\"}"
     )
 
     expect_PUT(
-      allow_bypass_2fa(workgroup_uuid = "test_workgroup", allow_bypass = FALSE),
+      workgroup_bypass_2fa(workgroup_uuid = "test_workgroup",
+                           allow_bypass = FALSE),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/workgroups/",
              "test_workgroup/bypassTwoStepAllowed"),
       "{\"bypassTwoStepAllowed\":\"false\"}"
@@ -43,7 +44,7 @@ with_mock_api({
 
     expect_invisible(
       suppressMessages(
-        allow_bypass_2fa("test_workgroup")
+        workgroup_bypass_2fa("test_workgroup")
       )
     )
 
@@ -57,7 +58,7 @@ with_mock_api({
 
   test_that("Functions return success message", {
 
-    expect_message(allow_bypass_2fa("test_workgroup"))
+    expect_message(workgroup_bypass_2fa("test_workgroup"))
     expect_message(participant_bypass_2fa("test_participant"))
 
   })
