@@ -43,3 +43,11 @@ API response (invisibly)
 document.
 }
 }
+\details{
+More details on the endpoints used by these functions are available in the
+API documentation:
+\itemize{
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocument}{\code{upload_file}}
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocumentVersion_1}{\code{upload_file_version}}
+}
+}

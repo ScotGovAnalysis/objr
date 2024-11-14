@@ -12,8 +12,12 @@ asset_info(asset_uuid, use_proxy = FALSE)
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Tibble
+A tibble
 }
 \description{
 Get asset information
+}
+\details{
+More details on this endpoint are available in the
+\href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/getAssetByUuid}{API documentation}.
 }

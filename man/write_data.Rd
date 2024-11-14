@@ -66,4 +66,11 @@ write the data and any additional arguments (\code{...}) will be passed to these
 
 If there are other data file types you would like to upload using this
 function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+
+More details on the endpoints used by these functions are available in the
+API documentation:
+\itemize{
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocument}{\code{write_data}}
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocumentVersion_1}{\code{write_data_version}}
+}
 }

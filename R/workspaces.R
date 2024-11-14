@@ -1,5 +1,11 @@
 #' Get workspaces the current user is a member of
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Workspaces/getMyWorkspaces}{API documentation}.
+# nolint end
+#'
 #' @param workgroup_uuid UUID of workgroup to filter by
 #' @param page Page number of responses to return (0..N). Default is 0.
 #' @param size Number of results to be returned per page. Default is 20.

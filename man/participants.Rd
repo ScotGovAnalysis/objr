@@ -17,3 +17,7 @@ Data frame
 \description{
 Get data frame of workspace participants
 }
+\details{
+More details on this endpoint are available in the
+\href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Participants/getParticipant}{API documentation}.
+}

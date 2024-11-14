@@ -15,6 +15,10 @@ A character value of the authenticated user's ID
 \description{
 Get user ID for current authenticated user
 }
+\details{
+More details on this endpoint are available in the
+\href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Users/getCurrentUser}{API documentation}.
+}
 \examples{
 \dontrun{
 my_user_id()

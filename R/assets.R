@@ -1,12 +1,18 @@
 #' Get data frame of assets in workspace
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/getAssets}{API documentation}.
+# nolint end
+#'
 #' @param workspace_uuid UUID of workspace
 #' @param type List of asset types to return. Defaults to all types;
 #' document, folder and link.
 #' @inheritParams objr
 #' @inheritParams workspaces
 #'
-#' @return Tibble
+#' @return A tibble
 #'
 #' @export
 
@@ -37,10 +43,16 @@ assets <- function(workspace_uuid,
 
 #' Get asset information
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/getAssetByUuid}{API documentation}.
+# nolint end
+#'
 #' @param asset_uuid UUID of asset
 #' @inheritParams objr
 #'
-#' @return Tibble
+#' @return A tibble
 #'
 #' @export
 
@@ -62,11 +74,16 @@ asset_info <- function(asset_uuid,
 
 #' Delete an asset
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/deleteAsset}{API documentation}.
+# nolint end
+#'
+#' Note: This functionality is disabled in Scottish Government workspaces.
+#'
 #' @param asset_uuid UUID of asset
 #' @inheritParams objr
-#'
-#' @details Note: Note: This functionality is disabled in Scottish Government
-#' workspaces.
 #'
 #' @export
 
@@ -91,6 +108,12 @@ delete_asset <- function(asset_uuid,
 
 
 #' Rename an asset
+#'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/updateAssetName}{API documentation}.
+# nolint end
 #'
 #' @param asset_uuid UUID of asset
 #' @param new_name Character. New name to give asset.

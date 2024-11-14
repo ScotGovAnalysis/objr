@@ -45,4 +45,11 @@ arguments will be passed to), use \code{asset_info()}.
 
 If there are other data file types you would like to download using this
 function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+
+More details on the endpoints used by these functions are available in the
+API documentation:
+\itemize{
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download}{\code{read_data}}
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion}{\code{read_data_version}}
+}
 }

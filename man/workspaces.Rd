@@ -21,3 +21,7 @@ Data frame
 \description{
 Get workspaces the current user is a member of
 }
+\details{
+More details on this endpoint are available in the
+\href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Workspaces/getMyWorkspaces}{API documentation}.
+}

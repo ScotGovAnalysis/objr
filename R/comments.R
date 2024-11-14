@@ -1,5 +1,11 @@
 #' Get comments for workspaces of current user
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Comments/getComments}{API documentation}.
+# nolint end
+#'
 #' @param created_after Date (and optionally time) to filter comments created
 #' since this date/time. If a time is not supplied, all comments made on this
 #' day will be included.
@@ -58,6 +64,12 @@ comments <- function(created_after = NULL,
 
 #' Create a new thread
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Comments/createThread}{API documentation}.
+# nolint end
+#'
 #' @param workspace_uuid UUID of workspace
 #' @param text Character string to include in body of thread
 #' @param mentioned_assets UUID(s) of asset(s) to mention
@@ -96,6 +108,12 @@ new_thread <- function(workspace_uuid,
 
 
 #' Create a new reply to a thread
+#'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Comments/createReply}{API documentation}.
+# nolint end
 #'
 #' @param thread_uuid UUID of thread to reply to
 #' @inheritParams new_thread
