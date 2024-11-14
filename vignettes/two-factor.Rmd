@@ -47,9 +47,7 @@ These steps must be completed by a **workgroup admin**.
 
 > If you work in the Scottish Government, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors) to arrange this step.
 
-<a name = "workgroup-1">
-1. Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button. (This setting will be reinstated later.)
-</a>
+1. <a name = "workgroup-1">Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button. (This setting will be reinstated later.)</a>
 
 ```{r}
 #| eval: true
@@ -81,9 +79,7 @@ knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
 
 These steps must be completed by the **workspace owner**.
 
-<a name = "workspace-1">
-1. Navigate to the summary page for your workspace in Objective Connect. Select the three dots icon (...) in the top right-hand corner, then Two-step verification. When prompted to confirm, select Disable.
-</a>
+1. <a name = "workspace-1">Navigate to the summary page for your workspace in Objective Connect. Select the three dots icon (...) in the top right-hand corner, then Two-step verification. When prompted to confirm, select Disable.</a>
 
 ```{r}
 #| eval: true
