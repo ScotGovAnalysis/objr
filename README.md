@@ -39,6 +39,23 @@ remotes::install_local(
 )
 ```
 
+## Getting Started
+
+Once installed, objr can be loaded using the `library()` function:
+
+``` r
+library(objr)
+```
+
+Help files for each function in the package can be found on the
+[References](https://ScotGovAnalysis.github.io/objr/reference) page of the package website. Alternatively, type `?function_name` into the
+RStudio console. For example:
+
+``` r
+?workspaces()
+```
+
+There is also a demonstration of a simple workflow using the package in `vignette("objr")`.
 
 ## Licence
 
