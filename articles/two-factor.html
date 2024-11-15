@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9006</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,18 +127,20 @@ admin</strong>.</p>
 <p>If you work in the Scottish Government, please <a href="https://scotgovanalysis.github.io/objr/authors.html#authors">contact
 the package maintainers</a> to arrange this step.</p>
 </blockquote>
-<p><a name="workgroup-1"> 1. Navigate to the summary page for your
+<ol style="list-style-type: decimal">
+<li><a name="workgroup-1">Navigate to the summary page for your
 workgroup in Objective Connect. Select ‘Workgroup Options’, un-check the
 option to ‘Enforce Two-step verification’, and click the blue ‘Update’
-button. (This setting will be reinstated later.) </a></p>
+button. (This setting will be reinstated later.)</a></li>
+</ol>
 <p><img src="workgroup-2fa.png" alt="A button for 'Workgroup options' is selected. A menu is visible containing an option to 'Enforce Two-step verification' with a checkbox." width="50%" style="display: block; margin: auto;"></p>
 <ol start="2" style="list-style-type: decimal">
 <li>
 <p>In R, allow 2FA bypassing for the workgroup using
-<code><a href="../reference/allow_bypass_2fa.html">allow_bypass_2fa()</a></code>, providing the relevant workgroup UUID.
-For example:</p>
+<code><a href="../reference/workgroup_bypass_2fa.html">workgroup_bypass_2fa()</a></code>, providing the relevant workgroup
+UUID. For example:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/allow_bypass_2fa.html">allow_bypass_2fa</a></span><span class="op">(</span><span class="st">"v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/workgroup_bypass_2fa.html">workgroup_bypass_2fa</a></span><span class="op">(</span><span class="st">"v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Bypass 2FA setting successfully updated for workgroup.</span></span></code></pre>
 <blockquote>
 <p>Non R users can use the interactive documentation to <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setWorkgroupMfaBypassAllowed" class="external-link">allow
@@ -152,10 +154,12 @@ For example:</p>
 </h2>
 <p>These steps must be completed by the <strong>workspace
 owner</strong>.</p>
-<p><a name="workspace-1"> 1. Navigate to the summary page for your
+<ol style="list-style-type: decimal">
+<li><a name="workspace-1">Navigate to the summary page for your
 workspace in Objective Connect. Select the three dots icon (…) in the
 top right-hand corner, then Two-step verification. When prompted to
-confirm, select Disable. </a></p>
+confirm, select Disable.</a></li>
+</ol>
 <p><img src="workspace-2fa.png" alt="A dropdown menu containing an option for 'Two-step verification' among other options." width="50%" style="display: block; margin: auto;"></p>
 <ol start="2" style="list-style-type: decimal">
 <li>
@@ -164,7 +168,7 @@ confirm, select Disable. </a></p>
 participant UUID, which can be found using <code><a href="../reference/participants.html">participants()</a></code>.
 For example,</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/allow_bypass_2fa.html">allow_bypass_2fa</a></span><span class="op">(</span><span class="st">"z98a-9sy0-b3gv-285m-39k6-20d5-dg6k-3gue"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa</a></span><span class="op">(</span><span class="st">"z98a-9sy0-b3gv-285m-39k6-20d5-dg6k-3gue"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Bypass 2FA setting successfully updated for participant.</span></span></code></pre>
 <blockquote>
 <p>Non R users can use the interactive documentation to find the

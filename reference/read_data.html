@@ -19,7 +19,7 @@ version of a document.
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9006</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9007</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -83,7 +83,7 @@ version of a document.</p></li>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>For csv and xlsx files, a data frame. For rds files, an R object.</p>
+    <p>Format depends on file type. See details.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -95,7 +95,10 @@ read the data and any additional arguments (<code>...</code>) will be passed to 
 arguments will be passed to), use <code><a href="asset_info.html">asset_info()</a></code>.</p>
 <p>If there are other data file types you would like to download using this
 function, please <a href="https://github.com/ScotGovAnalysis/objr/issues/new" class="external-link">open an issue on the GitHub repository</a>.</p>
-    </div>
+<p>More details on the endpoints used by these functions are available in the
+API documentation:</p><ul><li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download" class="external-link"><code>read_data</code></a></p></li>
+<li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion" class="external-link"><code>read_data_version</code></a></p></li>
+</ul></div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
