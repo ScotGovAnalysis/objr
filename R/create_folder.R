@@ -14,6 +14,8 @@
 #' of the workspace.
 #' @inheritParams objr
 #'
+#' @return API response (invisibly)
+#'
 #' @export
 
 create_folder <- function(folder_name,

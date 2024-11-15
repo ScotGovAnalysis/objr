@@ -19,7 +19,7 @@
 #' @param content_type Content-Type header. Defaults to 'application/json'.
 #' @param use_proxy Logical to indicate whether to use proxy
 #'
-#' @return An httr2 [httr2::response()][response]
+#' @return API response
 #'
 #' @export
 

@@ -25,7 +25,7 @@ already exists. Defaults to \code{FALSE}.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-An httr2 \link[=response]{httr2::response()} (invisibly)
+API response (invisibly)
 }
 \description{
 \itemize{

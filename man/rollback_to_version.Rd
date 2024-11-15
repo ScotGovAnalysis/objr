@@ -13,6 +13,9 @@ rollback_to_version(document_uuid, version_uuid, use_proxy = FALSE)
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
+\value{
+API response (invisibly)
+}
 \description{
 Rollback a document to a previous version
 }

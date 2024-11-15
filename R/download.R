@@ -71,7 +71,7 @@ download_helper <- function(document_uuid,
 #' already exists. Defaults to `FALSE`.
 #' @inheritParams objr
 #'
-#' @return An httr2 [httr2::response()][response] (invisibly)
+#' @return API response (invisibly)
 #'
 #' @export
 
@@ -148,7 +148,7 @@ download_file_version <- function(document_uuid,
 #' @param ... Additional arguments passed to read function. See details.
 #' @inheritParams objr
 #'
-#' @return For csv and xlsx files, a data frame. For rds files, an R object.
+#' @return Format depends on file type. See details.
 #'
 #' @export
 

@@ -14,7 +14,7 @@
 #' @inheritParams objr
 #' @inheritParams workspaces
 #'
-#' @return Data frame
+#' @return A tibble
 #'
 #' @examples
 #' \dontrun{

@@ -16,7 +16,7 @@ workspaces(workgroup_uuid = NULL, page = NULL, size = NULL, use_proxy = FALSE)
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Data frame
+A tibble
 }
 \description{
 Get workspaces the current user is a member of

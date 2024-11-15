@@ -25,6 +25,9 @@ of the workspace.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
+\value{
+API response (invisibly)
+}
 \description{
 Create a new folder
 }

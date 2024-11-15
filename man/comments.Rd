@@ -32,7 +32,7 @@ day will be included.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Data frame
+A tibble
 }
 \description{
 Get comments for workspaces of current user

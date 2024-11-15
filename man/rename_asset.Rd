@@ -13,6 +13,9 @@ rename_asset(asset_uuid, new_name, use_proxy = FALSE)
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
+\value{
+API response (invisibly)
+}
 \description{
 Rename an asset
 }

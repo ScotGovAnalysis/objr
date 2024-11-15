@@ -14,6 +14,9 @@ selected participants to bypass two-factor authentication verification.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
+\value{
+API response (invisibly)
+}
 \description{
 Allow/disallow bypassing of two-factor authentication for workgroup
 }

@@ -14,6 +14,8 @@
 #' selected participants to bypass two-factor authentication verification.
 #' @inheritParams objr
 #'
+#' @return API response (invisibly)
+#'
 #' @export
 
 workgroup_bypass_2fa <- function(workgroup_uuid,
@@ -58,6 +60,8 @@ workgroup_bypass_2fa <- function(workgroup_uuid,
 #' @param allow_bypass Logical to indicate whether the participant should be
 #' able to bypass two-factor authentication for workspace.
 #' @inheritParams objr
+#'
+#' @return API response (invisibly)
 #'
 #' @export
 

@@ -39,7 +39,7 @@ downloading files)}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-An httr2 \link[=response]{httr2::response()}
+API response
 }
 \description{
 Core request function

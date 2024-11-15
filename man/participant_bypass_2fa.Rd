@@ -20,6 +20,9 @@ able to bypass two-factor authentication for workspace.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
+\value{
+API response (invisibly)
+}
 \description{
 Allow/disallow bypassing of two-factor authentication for workspace
 participant

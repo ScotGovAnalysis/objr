@@ -199,7 +199,7 @@ check_uuid <- function(uuid,
 #' @param allow_null Logical. If `allow_null = TRUE` (default), the function
 #'   will also accept NULL values.
 #'
-#' @return `x`, invisibly.
+#' @return {.arg x} (invisibly).
 #'
 #' @noRd
 

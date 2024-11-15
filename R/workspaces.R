@@ -11,7 +11,7 @@
 #' @param size Number of results to be returned per page. Default is 20.
 #' @inheritParams objr
 #'
-#' @return Data frame
+#' @return A tibble
 #'
 #' @export
 

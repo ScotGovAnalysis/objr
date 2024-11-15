@@ -85,6 +85,8 @@ asset_info <- function(asset_uuid,
 #' @param asset_uuid UUID of asset
 #' @inheritParams objr
 #'
+#' @return API response (invisibly)
+#'
 #' @export
 
 delete_asset <- function(asset_uuid,
@@ -118,6 +120,8 @@ delete_asset <- function(asset_uuid,
 #' @param asset_uuid UUID of asset
 #' @param new_name Character. New name to give asset.
 #' @inheritParams objr
+#'
+#' @return API response (invisibly)
 #'
 #' @export
 

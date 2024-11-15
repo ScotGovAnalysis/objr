@@ -10,7 +10,7 @@
 #' @inheritParams objr
 #' @inheritParams workspaces
 #'
-#' @return Data frame
+#' @return A tibble
 #'
 #' @export
 
@@ -60,6 +60,8 @@ versions <- function(document_uuid,
 #' @param document_uuid UUID of document (asset)
 #' @param version_uuid UUID of version to rollback to
 #' @inheritParams objr
+#'
+#' @return API response (invisibly)
 #'
 #' @export
 

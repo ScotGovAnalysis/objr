@@ -16,7 +16,7 @@ versions(document_uuid, page = NULL, size = NULL, use_proxy = FALSE)
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Data frame
+A tibble
 }
 \description{
 Get data frame of document versions

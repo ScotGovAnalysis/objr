@@ -9,7 +9,7 @@
 #' @param workspace_uuid UUID of workspace
 #' @inheritParams objr
 #'
-#' @return Data frame
+#' @return A tibble
 #'
 #' @export
 

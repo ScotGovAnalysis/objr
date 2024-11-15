@@ -17,7 +17,7 @@ read_data_version(document_uuid, ..., use_proxy = FALSE)
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-For csv and xlsx files, a data frame. For rds files, an R object.
+Format depends on file type. See details.
 }
 \description{
 \itemize{

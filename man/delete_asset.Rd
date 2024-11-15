@@ -11,6 +11,9 @@ delete_asset(asset_uuid, use_proxy = FALSE)
 
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
+\value{
+API response (invisibly)
+}
 \description{
 Delete an asset
 }
