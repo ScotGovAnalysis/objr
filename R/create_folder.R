@@ -1,5 +1,11 @@
 #' Create a new folder
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createFolder}{API documentation}.
+# nolint end
+#'
 #' @param folder_name Name to give new folder
 #' @param workspace_uuid UUID of the workspace to create the new folder in
 #' @param description Optional description of folder
@@ -7,6 +13,8 @@
 #' folder within. If not supplied, the folder will be created in the top-level
 #' of the workspace.
 #' @inheritParams objr
+#'
+#' @return API response (invisibly)
 #'
 #' @export
 

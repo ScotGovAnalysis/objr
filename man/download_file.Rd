@@ -25,7 +25,7 @@ already exists. Defaults to \code{FALSE}.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-An httr2 \link[=response]{httr2::response()} (invisibly)
+API response (invisibly)
 }
 \description{
 \itemize{
@@ -33,5 +33,13 @@ An httr2 \link[=response]{httr2::response()} (invisibly)
 document.
 \item Use \code{download_file_version()} with a document version UUID for a specific
 version of a document.
+}
+}
+\details{
+More details on the endpoints used by these functions are available in the
+API documentation:
+\itemize{
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download}{\code{download_file}}
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion}{\code{download_file_version}}
 }
 }

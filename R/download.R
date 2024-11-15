@@ -57,13 +57,21 @@ download_helper <- function(document_uuid,
 #' * Use `download_file_version()` with a document version UUID for a specific
 #'   version of a document.
 #'
+#' @details
+#' More details on the endpoints used by these functions are available in the
+#' API documentation:
+# nolint start: line_length_linter
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download}{`download_file`}
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion}{`download_file_version`}
+# nolint end
+#'
 #' @param document_uuid UUID of asset or document version
 #' @param folder Folder to save downloaded file to
 #' @param overwrite Logical to indicate whether file should be overwritten if
 #' already exists. Defaults to `FALSE`.
 #' @inheritParams objr
 #'
-#' @return An httr2 [httr2::response()][response] (invisibly)
+#' @return API response (invisibly)
 #'
 #' @export
 
@@ -107,11 +115,8 @@ download_file_version <- function(document_uuid,
 #' * Use `read_data_version()` with a document version UUID for a specific
 #'   version of a document.
 #'
-#' @param document_uuid UUID of asset or document version
-#' @param ... Additional arguments passed to read function. See details.
-#' @inheritParams objr
-#'
-#' @details This function can be used to read the following data file types:
+#' @details
+#' This function can be used to read the following data file types:
 #' csv, rds, xlsx.
 #'
 #' The function works by downloading the file from Objective Connect to a
@@ -132,7 +137,18 @@ download_file_version <- function(document_uuid,
 #' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
 # nolint end
 #'
-#' @return For csv and xlsx files, a data frame. For rds files, an R object.
+#' More details on the endpoints used by these functions are available in the
+#' API documentation:
+# nolint start: line_length_linter
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download}{`read_data`}
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion}{`read_data_version`}
+# nolint end
+#'
+#' @param document_uuid UUID of asset or document version
+#' @param ... Additional arguments passed to read function. See details.
+#' @inheritParams objr
+#'
+#' @return Format depends on file type. See details.
 #'
 #' @export
 

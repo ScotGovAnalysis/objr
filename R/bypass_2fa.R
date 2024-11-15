@@ -1,18 +1,26 @@
 #' Allow/disallow bypassing of two-factor authentication for workgroup
 #'
-#' @description More information on two-factor authentication can be found in
+#' @details
+#' More information on two-factor authentication can be found in
 #' `vignette("two-factor")`.
+#'
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Workgroups/setWorkgroupMfaBypassAllowed}{API documentation}.
+# nolint end
 #'
 #' @param workgroup_uuid Workgroup UUID
 #' @param allow_bypass Logical to indicate whether the workgroup should allow
 #' selected participants to bypass two-factor authentication verification.
 #' @inheritParams objr
 #'
+#' @return API response (invisibly)
+#'
 #' @export
 
-allow_bypass_2fa <- function(workgroup_uuid,
-                             allow_bypass = TRUE,
-                             use_proxy = FALSE) {
+workgroup_bypass_2fa <- function(workgroup_uuid,
+                                 allow_bypass = TRUE,
+                                 use_proxy = FALSE) {
 
   response <- objr(
     endpoint = "workgroups",
@@ -36,15 +44,24 @@ allow_bypass_2fa <- function(workgroup_uuid,
 #' Allow/disallow bypassing of two-factor authentication for workspace
 #' participant
 #'
-#' @description Note that this setting can only be updated by a workspace owner.
+#' @details
+#' This setting can only be updated by a workspace owner.
+#'
 #' More information on two-factor authentication can be found in
 #' `vignette("two-factor")`.
+#'
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Participants/setParticipantBypassMfa}{API documentation}.
+# nolint end
 #'
 #' @param participant_uuid Participant UUID (note that this is different to the
 #' user UUID)
 #' @param allow_bypass Logical to indicate whether the participant should be
 #' able to bypass two-factor authentication for workspace.
 #' @inheritParams objr
+#'
+#' @return API response (invisibly)
 #'
 #' @export
 

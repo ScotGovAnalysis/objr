@@ -1,10 +1,16 @@
 #' Get data frame of document versions
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/getVersionsByDocumentUuid}{API documentation}.
+# nolint end
+#'
 #' @param document_uuid UUID of document (asset)
 #' @inheritParams objr
 #' @inheritParams workspaces
 #'
-#' @return Data frame
+#' @return A tibble
 #'
 #' @export
 
@@ -45,9 +51,17 @@ versions <- function(document_uuid,
 
 #' Rollback a document to a previous version
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/rollbackDocument}{API documentation}.
+# nolint end
+#'
 #' @param document_uuid UUID of document (asset)
 #' @param version_uuid UUID of version to rollback to
 #' @inheritParams objr
+#'
+#' @return API response (invisibly)
 #'
 #' @export
 

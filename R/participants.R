@@ -1,9 +1,15 @@
 #' Get data frame of workspace participants
 #'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Participants/getParticipant}{API documentation}.
+# nolint end
+#'
 #' @param workspace_uuid UUID of workspace
 #' @inheritParams objr
 #'
-#' @return Data frame
+#' @return A tibble
 #'
 #' @export
 
@@ -35,6 +41,12 @@ participants <- function(workspace_uuid, use_proxy = FALSE) {
 
 
 #' Add participant(s) to a workspace
+#'
+#' @details
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Participants/addParticipants}{API documentation}.
+# nolint end
 #'
 #' @param workspace_uuid UUID of workspace.
 #' @param emails Character vector of email addresses to send invites to.

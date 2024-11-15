@@ -39,8 +39,12 @@ downloading files)}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-An httr2 \link[=response]{httr2::response()}
+API response
 }
 \description{
 Core request function
+}
+\details{
+More details on endpoints are available in the
+\href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/}{API documentation}.
 }

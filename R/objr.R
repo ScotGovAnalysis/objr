@@ -1,5 +1,11 @@
 #' Core request function
 #'
+#' @details
+#' More details on endpoints are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/}{API documentation}.
+# nolint end
+#'
 #' @param endpoint The endpoint to append to the API server address
 #' @param url_path A list of values to be added to the request URL path.
 #' Values will be separated with `/`.
@@ -13,7 +19,7 @@
 #' @param content_type Content-Type header. Defaults to 'application/json'.
 #' @param use_proxy Logical to indicate whether to use proxy
 #'
-#' @return An httr2 [httr2::response()][response]
+#' @return API response
 #'
 #' @export
 

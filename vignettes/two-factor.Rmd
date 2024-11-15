@@ -47,9 +47,7 @@ These steps must be completed by a **workgroup admin**.
 
 > If you work in the Scottish Government, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors) to arrange this step.
 
-<a name = "workgroup-1">
-1. Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button. (This setting will be reinstated later.)
-</a>
+1. <a name = "workgroup-1">Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button. (This setting will be reinstated later.)</a>
 
 ```{r}
 #| eval: true
@@ -62,10 +60,10 @@ These steps must be completed by a **workgroup admin**.
 knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
 ```
 
-2. In R, allow 2FA bypassing for the workgroup using `allow_bypass_2fa()`, providing the relevant workgroup UUID. For example:
+2. In R, allow 2FA bypassing for the workgroup using `workgroup_bypass_2fa()`, providing the relevant workgroup UUID. For example:
 
    ```{r workgroup}
-   allow_bypass_2fa("v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440")
+   workgroup_bypass_2fa("v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440")
    ```
 
    ```{r workgroup-output, eval = TRUE, echo = FALSE, message = TRUE}
@@ -81,9 +79,7 @@ knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
 
 These steps must be completed by the **workspace owner**.
 
-<a name = "workspace-1">
-1. Navigate to the summary page for your workspace in Objective Connect. Select the three dots icon (...) in the top right-hand corner, then Two-step verification. When prompted to confirm, select Disable.
-</a>
+1. <a name = "workspace-1">Navigate to the summary page for your workspace in Objective Connect. Select the three dots icon (...) in the top right-hand corner, then Two-step verification. When prompted to confirm, select Disable.</a>
 
 ```{r}
 #| eval: true
@@ -99,7 +95,7 @@ knitr::include_graphics("workspace-2fa.png", dpi = "retina")
 2. In R, give yourself (the workspace owner) permission to bypass 2FA using `participant_bypass_2fa()`. You will need your participant UUID, which can be found using `participants()`. For example,
 
    ```{r workspace}
-   allow_bypass_2fa("z98a-9sy0-b3gv-285m-39k6-20d5-dg6k-3gue")
+   participant_bypass_2fa("z98a-9sy0-b3gv-285m-39k6-20d5-dg6k-3gue")
    ```
 
    ```{r workspace-output, eval = TRUE, echo = FALSE, message = TRUE}

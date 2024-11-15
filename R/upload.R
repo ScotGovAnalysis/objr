@@ -5,6 +5,14 @@
 #' * Use `upload_file_version()` to create a new version of an existing
 #'   document.
 #'
+#' @details
+#' More details on the endpoints used by these functions are available in the
+#' API documentation:
+# nolint start: line_length_linter
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocument}{`upload_file`}
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocumentVersion_1}{`upload_file_version`}
+# nolint end
+#'
 #' @param file File path of document to upload
 #' @param uuid For `upload_file()`, a workspace UUID to create the new document
 #' in. For `upload_file_version()`, an asset UUID to create a new version of.
@@ -101,16 +109,8 @@ upload_file_version <- function(file,
 #' * Use `write_data_version()` to write a data file as a new version of an
 #'   existing document.
 #'
-#' @param x R object to write to file.
-#' @param uuid Either a workspace UUID to create a new document or an asset UUID
-#' to create a new version of an existing document.
-#' @param file_name Name to give file.
-#' @param file_type Either "csv", "rds" or "xlsx".
-#' @param ... Additional arguments to pass to write function. See details.
-#' @inheritParams objr
-#' @inheritParams upload_file
-#'
-#' @details This function can be used to write the following data file types:
+#' @details
+#' This function can be used to write the following data file types:
 #' csv, rds, xlsx. If writing to a new document, use the \code{file_type}
 #' argument to control which file type to create. If writing a new version of an
 #' existing document, the existing file type will be used.
@@ -129,6 +129,22 @@ upload_file_version <- function(file,
 #' If there are other data file types you would like to upload using this
 #' function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
 # nolint end
+#'
+#' More details on the endpoints used by these functions are available in the
+#' API documentation:
+# nolint start: line_length_linter
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocument}{`write_data`}
+#' * \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocumentVersion_1}{`write_data_version`}
+# nolint end
+#'
+#' @param x R object to write to file.
+#' @param uuid Either a workspace UUID to create a new document or an asset UUID
+#' to create a new version of an existing document.
+#' @param file_name Name to give file.
+#' @param file_type Either "csv", "rds" or "xlsx".
+#' @param ... Additional arguments to pass to write function. See details.
+#' @inheritParams objr
+#' @inheritParams upload_file
 #'
 #' @return API response (invisibly)
 #'

@@ -17,7 +17,7 @@ read_data_version(document_uuid, ..., use_proxy = FALSE)
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-For csv and xlsx files, a data frame. For rds files, an R object.
+Format depends on file type. See details.
 }
 \description{
 \itemize{
@@ -45,4 +45,11 @@ arguments will be passed to), use \code{asset_info()}.
 
 If there are other data file types you would like to download using this
 function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+
+More details on the endpoints used by these functions are available in the
+API documentation:
+\itemize{
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download}{\code{read_data}}
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion}{\code{read_data_version}}
+}
 }
