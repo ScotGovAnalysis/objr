@@ -3,7 +3,6 @@
 
 <!-- badges: start -->
 
-[![Project Status: WIP – Initial development is in progress, but there has not yet been a stable, usable release suitable for the public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/scotgovanalysis/objr)](https://github.com/scotgovanalysis/objr/releases/latest)
 [![R build status](https://github.com/scotgovanalysis/objr/workflows/R-CMD-check/badge.svg)](https://github.com/scotgovanalysis/objr/actions)
 
@@ -13,8 +12,10 @@ objr aims to provide a convenient method of interacting with [Objective Connect]
 
 ## Installation
 
-The package can be installed directly from GitHub. 
-Note that this method requires the `remotes` package and may not work from within the Scottish Government network.
+If you are working within the Scottish Government network, you can
+install objr in the same way as with other R packages. The easiest way to do this is by using the [pkginstaller](https://github.com/ScotGovAnalysis/pkginstaller/tree/main) add-in. Further guidance is available on [eRDM](https://erdm.scotland.gov.uk:8443/documents/A42404229/details).
+
+Alternatively, objr can be installed directly from GitHub. Note that this method requires the remotes package and may not work from within the Scottish Government network.
 
 ``` r
 remotes::install_github(
@@ -24,7 +25,7 @@ remotes::install_github(
 )
 ```
 
-Finally, the package can also be installed by downloading the [zip of the
+Finally, objr can also be installed by downloading the [zip of the
 repository](https://github.com/ScotGovAnalysis/objr/archive/main.zip)
 and running the following code, replacing the section marked `<>`
 (including the arrows themselves) with the location of the downloaded
@@ -38,6 +39,23 @@ remotes::install_local(
 )
 ```
 
+## Getting Started
+
+Once installed, objr can be loaded using the `library()` function:
+
+``` r
+library(objr)
+```
+
+Help files for each function in the package can be found on the
+[References](https://ScotGovAnalysis.github.io/objr/reference) page of the package website. Alternatively, type `?function_name` into the
+RStudio console. For example:
+
+``` r
+?workspaces()
+```
+
+There is also a demonstration of a simple workflow using the package in `vignette("objr")`.
 
 ## Licence
 
