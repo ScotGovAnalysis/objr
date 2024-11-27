@@ -15,8 +15,8 @@
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Roboto-0.4.9/font.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><link href="extra.css" rel="stylesheet">
 <meta property="og:title" content="Wrapper for Objective APIs">
 <meta name="description" content="An R package wrapper for Objective APIs including Objective Connect.">
@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="index.html">objr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Unreleased version">0.0.0.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,20 +76,32 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The package can be installed directly from GitHub. Note that this method requires the <code>remotes</code> package and may not work from within the Scottish Government network.</p>
+<p>If you are working within the Scottish Government network, you can install objr in the same way as with other R packages. The easiest way to do this is by using the <a href="https://github.com/ScotGovAnalysis/pkginstaller/tree/main" class="external-link">pkginstaller</a> add-in. Further guidance is available on <a href="https://erdm.scotland.gov.uk:8443/documents/A42404229/details" class="external-link">eRDM</a>.</p>
+<p>Alternatively, objr can be installed directly from GitHub. Note that this method requires the remotes package and may not work from within the Scottish Government network.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
 <span>  <span class="st">"ScotGovAnalysis/objr"</span>,</span>
 <span>  upgrade <span class="op">=</span> <span class="st">"never"</span>,</span>
 <span>  build_vignettes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>Finally, the package can also be installed by downloading the <a href="https://github.com/ScotGovAnalysis/objr/archive/main.zip" class="external-link">zip of the repository</a> and running the following code, replacing the section marked <code>&lt;&gt;</code> (including the arrows themselves) with the location of the downloaded zip:</p>
+<p>Finally, objr can also be installed by downloading the <a href="https://github.com/ScotGovAnalysis/objr/archive/main.zip" class="external-link">zip of the repository</a> and running the following code, replacing the section marked <code>&lt;&gt;</code> (including the arrows themselves) with the location of the downloaded zip:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_local</span><span class="op">(</span></span>
 <span>  <span class="st">"&lt;FILEPATH OF ZIPPED FILE&gt;/objr-main.zip"</span>,</span>
 <span>  upgrade <span class="op">=</span> <span class="st">"never"</span>,</span>
 <span>  build_vignettes <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="getting-started">Getting Started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h2>
+<p>Once installed, objr can be loaded using the <code><a href="https://rdrr.io/r/base/library.html" class="external-link">library()</a></code> function:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ScotGovAnalysis/objr" class="external-link">objr</a></span><span class="op">)</span></span></code></pre></div>
+<p>Help files for each function in the package can be found on the <a href="https://ScotGovAnalysis.github.io/objr/reference" class="external-link">References</a> page of the package website. Alternatively, type <code>?function_name</code> into the RStudio console. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="op">?</span><span class="fu"><a href="reference/workspaces.html">workspaces</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>There is also a demonstration of a simple workflow using the package in <code><a href="articles/objr.html">vignette("objr")</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="licence">Licence<a class="anchor" aria-label="anchor" href="#licence"></a>
