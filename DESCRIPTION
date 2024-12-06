@@ -1,6 +1,6 @@
 Package: objr
 Title: Wrapper for Objective APIs
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Scottish Government", , , "statistics.enquiries@gov.scot", role = "cph"),
     person("Alice", "Hannah", , "alice.hannah@gov.scot", role = c("aut", "cre"))
@@ -14,12 +14,12 @@ BugReports: https://github.com/ScotGovAnalysis/objr/issues
 Imports: 
     cli,
     curl,
-    dplyr,
+    dplyr (>= 1.1.4),
     httr2,
     magrittr,
     rlang,
     rstudioapi,
-    tidyr
+    tidyr (>= 1.3.1)
 Suggests: 
     httptest2,
     knitr,
