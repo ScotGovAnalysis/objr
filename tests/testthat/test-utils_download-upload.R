@@ -252,9 +252,11 @@ test_that("Correct value returned", {
   expect_equal(
     file_name_from_header(
       httr2::response(
-        headers = list(`Content-Disposition` = "filename=\"new_name.csv\"")
+        headers = list(
+          `Content-Disposition` = "filename=\"ayrshire%20%26%20arran.csv\""
+        )
       )
     ),
-    "new_name.csv"
+    "ayrshire & arran.csv"
   )
 })

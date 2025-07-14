@@ -201,10 +201,12 @@ file_name_from_header <- function(response,
 
   cont_disp <- httr2::resp_header(response, "Content-Disposition")
 
-  file_name <- regmatches(
-    cont_disp,
-    m = regexpr("(?<=filename=\\\").*(?=\\\")", cont_disp, perl = TRUE)
-  )
+  file_name <-
+    regmatches(
+      cont_disp,
+      m = regexpr("(?<=filename=\\\").*(?=\\\")", cont_disp, perl = TRUE)
+    ) %>%
+    utils::URLdecode()
 
   if (length(file_name) == 0) {
     cli::cli_abort(
