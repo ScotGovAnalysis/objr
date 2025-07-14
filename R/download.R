@@ -11,6 +11,7 @@ download_helper <- function(document_uuid,
 
   # Create temporary file in desired folder
   path <- create_file(folder)
+  on.exit(unlink(path), add = TRUE)
 
   response <- objr(
     endpoint = asset_type,
@@ -20,10 +21,10 @@ download_helper <- function(document_uuid,
     use_proxy = use_proxy
   )
 
-  # Rename file to match asset name
-  new_path <- rename_file(path, response, overwrite = overwrite) # nolint: object_usage_linter
-
   if (download_type == "download") {
+
+    # Rename file to match asset name
+    new_path <- rename_file(path, response, overwrite = overwrite) # nolint: object_usage_linter
 
     # Show success message and return response invisibly
     if (httr2::resp_status(response) == 200) {
@@ -37,10 +38,7 @@ download_helper <- function(document_uuid,
   if (download_type == "read") {
 
     # Read data from file path
-    x <- read_temp(new_path, ...)
-
-    # Delete temp file when exiting function
-    on.exit(unlink(c(path, new_path)), add = TRUE)
+    x <- read_temp(path, ...)
 
     x
 
