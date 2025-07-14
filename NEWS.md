@@ -1,5 +1,8 @@
 # objr (development version)
 
+* `download_file()` now writes files with percent-decoded names 
+(e.g. `file%20name.csv` is now `file name.csv`) (#34).
+
 * Fixed an issue where temporary files sometimes persisted after running 
 `download_file()` or `read_file()` (#39).
 
