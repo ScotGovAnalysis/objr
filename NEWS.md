@@ -1,5 +1,8 @@
 # objr (development version)
 
+* Fixed an issue where temporary files sometimes persisted after running 
+`download_file()` or `read_file()` (#39).
+
 # objr 0.1.1
 
 * Set minimum versions for `dplyr` and `tidyr` dependencies (#32).
