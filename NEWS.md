@@ -1,5 +1,7 @@
 # objr (development version)
 
+* `download_file()` now returns file path (invisibly) (#38).
+
 * `download_file()` now accepts custom file name in `file_name` argument (#37).
 
 * `download_file()` now writes files with percent-decoded names 

@@ -35,7 +35,7 @@ already exists. Defaults to \code{FALSE}.}
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-API response (invisibly)
+Path to downloaded file (invisibly).
 }
 \description{
 \itemize{

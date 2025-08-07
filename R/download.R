@@ -35,7 +35,7 @@ download_helper <- function(document_uuid,
       cli::cli_alert_success("File downloaded: {.path {new_path}}.")
     }
 
-    invisible(response)
+    return(invisible(new_path))
 
   }
 
@@ -44,7 +44,7 @@ download_helper <- function(document_uuid,
     # Read data from file path
     x <- read_temp(path, ...)
 
-    x
+    return(x)
 
   }
 
@@ -75,7 +75,7 @@ download_helper <- function(document_uuid,
 #' already exists. Defaults to `FALSE`.
 #' @inheritParams objr
 #'
-#' @return API response (invisibly)
+#' @return Path to downloaded file (invisibly).
 #'
 #' @export
 

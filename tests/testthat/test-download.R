@@ -21,10 +21,16 @@ with_file("test", {
 
   with_mock_api({
 
-    test_that("Function returns invisible", {
+    test_that("Function returns file path invisibly", {
       expect_invisible(
         suppressMessages(download_file(document_uuid = "test_document",
                                        folder = "test"))
+      )
+      expect_equal(
+        suppressMessages(download_file(document_uuid = "test_document",
+                                       folder = "test",
+                                       overwrite = TRUE)),
+        paste0("test", "/test_document_name.txt")
       )
     })
 
