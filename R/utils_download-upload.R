@@ -143,6 +143,8 @@ create_file <- function(folder,
 #' @param temp_path Temporary path of file downloaded.
 #' @param response An httr2 [httr2::response()][response]. Must contain
 #' 'Content-Disposition' header.
+#' @param new_file_name Optional name to give downloaded file. If not provided,
+#' file will have same name as Objective Connect asset.
 #' @param overwrite Logical to indicate whether to overwrite file if already
 #' exists. Defaults to `FALSE`.
 #'
@@ -152,8 +154,10 @@ create_file <- function(folder,
 
 rename_file <- function(temp_path,
                         response,
+                        new_file_name = NULL,
                         overwrite = FALSE,
                         error_call = rlang::caller_env(),
+                        error_arg_file_name = rlang::caller_arg(new_file_name),
                         error_arg_overwrite  = rlang::caller_arg(overwrite),
                         error_arg_path = rlang::caller_arg(temp_path)) {
 
@@ -168,6 +172,24 @@ rename_file <- function(temp_path,
   }
 
   file_name <- file_name_from_header(response)
+
+  if (!is.null(new_file_name) && tools::file_ext(new_file_name) != "") {
+    cli::cli_abort(
+      c(
+        "x" = "{.arg {error_arg_file_name}} must not include a file extension.",
+        "i" = paste("{.arg {error_arg_file_name}} ends with",
+                    "{.str .{tools::file_ext(new_file_name)}}.")
+      ),
+      call = error_call
+    )
+  }
+
+  # If `new_file_name` supplied, use it
+  if (!is.null(new_file_name)) {
+    file_name <- paste0(
+      new_file_name, ".", tools::file_ext(file_name)
+    )
+  }
 
   new_path <- file.path(dirname(temp_path), file_name)
 
