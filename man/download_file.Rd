@@ -5,11 +5,18 @@
 \alias{download_file_version}
 \title{Download a file and save to disk}
 \usage{
-download_file(document_uuid, folder, overwrite = FALSE, use_proxy = FALSE)
+download_file(
+  document_uuid,
+  folder,
+  file_name = NULL,
+  overwrite = FALSE,
+  use_proxy = FALSE
+)
 
 download_file_version(
   document_uuid,
   folder,
+  file_name = NULL,
   overwrite = FALSE,
   use_proxy = FALSE
 )
@@ -18,6 +25,9 @@ download_file_version(
 \item{document_uuid}{UUID of asset or document version}
 
 \item{folder}{Folder to save downloaded file to}
+
+\item{file_name}{Optional name to give downloaded file. If not provided,
+file will have same name as Objective Connect asset.}
 
 \item{overwrite}{Logical to indicate whether file should be overwritten if
 already exists. Defaults to \code{FALSE}.}
