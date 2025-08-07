@@ -17,7 +17,7 @@ read_data_version(document_uuid, ..., use_proxy = FALSE)
 \item{use_proxy}{Logical to indicate whether to use proxy}
 }
 \value{
-Format depends on file type. See details.
+A \link[tibble:tibble-package]{tibble}.
 }
 \description{
 \itemize{

@@ -156,7 +156,7 @@ download_file_version <- function(document_uuid,
 #' @param ... Additional arguments passed to read function. See details.
 #' @inheritParams objr
 #'
-#' @return Format depends on file type. See details.
+#' @return A [tibble][tibble::tibble-package].
 #'
 #' @export
 
