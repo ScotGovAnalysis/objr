@@ -47,7 +47,7 @@ These steps must be completed by a **workgroup admin**.
 
 > If you work in the Scottish Government, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors) to arrange this step.
 
-1. <a name = "workgroup-1">Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button. (This setting will be reinstated later.)</a>
+1. <a name = "workgroup-1">Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button.</a>
 
 ```{r}
 #| eval: true
@@ -59,6 +59,7 @@ These steps must be completed by a **workgroup admin**.
 #|    an option to 'Enforce Two-step verification' with a checkbox.
 knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
 ```
+
 
 2. In R, allow 2FA bypassing for the workgroup using `workgroup_bypass_2fa()`, providing the relevant workgroup UUID. For example:
 
@@ -73,6 +74,8 @@ knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
    ```
 
    > Non R users can use the interactive documentation to [allow 2FA bypassing in the workgroup](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setWorkgroupMfaBypassAllowed).
+
+3. Continue to the next section to [give the workspace owner permission to bypass 2FA](#workspace-owner). Once this is complete, [reinstate 2FA enforcing for the workgroup](#workgroup-1).
 
 
 ## Permission for the workspace owner {#workspace-owner}

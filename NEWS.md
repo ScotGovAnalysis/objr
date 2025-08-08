@@ -1,5 +1,7 @@
 # objr (development version)
 
+* Added `CONTRIBUTING.md` and `SUPPORT.md` (#36).
+
 * `download_file()` now returns file path (invisibly) (#38).
 
 * `download_file()` now accepts custom file name in `file_name` argument (#37).

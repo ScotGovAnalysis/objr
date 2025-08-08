@@ -13,7 +13,7 @@ versions(document_uuid, page = NULL, size = NULL, use_proxy = FALSE)
 
 \item{size}{Number of results to be returned per page. Default is 20.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 A tibble

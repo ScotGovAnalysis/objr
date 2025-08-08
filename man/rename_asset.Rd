@@ -11,7 +11,7 @@ rename_asset(asset_uuid, new_name, use_proxy = FALSE)
 
 \item{new_name}{Character. New name to give asset.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 API response (invisibly)

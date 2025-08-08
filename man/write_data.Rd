@@ -36,7 +36,7 @@ to create a new version of an existing document.}
 document within. If not supplied, the document will be created in the
 top-level of the workspace.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 API response (invisibly)

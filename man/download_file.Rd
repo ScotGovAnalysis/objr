@@ -32,7 +32,7 @@ file will have same name as Objective Connect asset.}
 \item{overwrite}{Logical to indicate whether file should be overwritten if
 already exists. Defaults to \code{FALSE}.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 Path to downloaded file (invisibly).

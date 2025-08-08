@@ -36,7 +36,7 @@ visible to all other workspace members, or "bcc" to hide participants.}
 \item{send_email_invite}{Default \code{TRUE} to send an email invite for
 participants to join the workspace. If \code{FALSE}, no email will be sent.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 API response (invisibly)

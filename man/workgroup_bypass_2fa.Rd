@@ -12,7 +12,7 @@ workgroup_bypass_2fa(workgroup_uuid, allow_bypass = TRUE, use_proxy = FALSE)
 \item{allow_bypass}{Logical to indicate whether the workgroup should allow
 selected participants to bypass two-factor authentication verification.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 API response (invisibly)

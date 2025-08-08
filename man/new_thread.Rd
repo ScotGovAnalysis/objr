@@ -21,7 +21,7 @@ new_thread(
 
 \item{mentioned_users}{UUID(s) of user(s) to mention}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 API response (invisibly)
