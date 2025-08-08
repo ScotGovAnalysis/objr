@@ -21,7 +21,17 @@ participants <- function(workspace_uuid, use_proxy = FALSE) {
     use_proxy = use_proxy
   )
 
-  dplyr::tibble(content = httr2::resp_body_json(response)$content) %>%
+  content <- httr2::resp_body_json(response)$content
+
+  if (length(content) == 0) {
+    cli::cli_abort(c(
+      "x" = "Workspace must exist.",
+      "i" = "Did you accidentally provide an incorrect UUID?",
+      "i" = "Do you definitely have access to the workspace?"
+    ))
+  }
+
+  dplyr::tibble(content = content) %>%
     tidyr::hoist(
       .data$content,
       name1 = c("user", "givenName"),
