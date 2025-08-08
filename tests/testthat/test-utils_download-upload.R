@@ -192,17 +192,29 @@ with_tempfile(c("test", "new"), {
 
 })
 
-with_tempfile("test", {
+with_tempfile(c("test1", "test2"), {
 
-  file.create(test)
+  file.create(test1)
+  file.create(test2)
 
-  test_that("File is renamed", {
-    rename_file(test, resp)
-    expect_false(file.exists(test))
-    expect_true(file.exists(file.path(dirname(test), "new_name.csv")))
+  test_that("Error if new_file_name include file ext", {
+    expect_error(rename_file(test1, resp, new_file_name = "x.csv"))
   })
 
-  unlink(file.path(dirname(test), "new_name.csv"))
+  test_that("File is renamed from response header", {
+    rename_file(test1, resp)
+    expect_false(file.exists(test1))
+    expect_true(file.exists(file.path(dirname(test1), "new_name.csv")))
+  })
+
+  test_that("File is renamed from supplied new file name", {
+    rename_file(test2, resp, new_file_name = "new_name2")
+    expect_false(file.exists(test2))
+    expect_true(file.exists(file.path(dirname(test2), "new_name2.csv")))
+  })
+
+  unlink(file.path(dirname(test1), "new_name.csv"))
+  unlink(file.path(dirname(test2), "new_name2.csv"))
 
 })
 

@@ -3,6 +3,7 @@ download_helper <- function(document_uuid,
                             asset_type = c("documents", "documentversions"),
                             download_type = c("download", "read"),
                             ...,
+                            file_name = NULL,
                             overwrite = FALSE,
                             use_proxy = FALSE) {
 
@@ -24,14 +25,17 @@ download_helper <- function(document_uuid,
   if (download_type == "download") {
 
     # Rename file to match asset name
-    new_path <- rename_file(path, response, overwrite = overwrite) # nolint: object_usage_linter
+    new_path <- rename_file(path, # nolint: object_usage_linter
+                            response,
+                            new_file_name = file_name,
+                            overwrite = overwrite)
 
     # Show success message and return response invisibly
     if (httr2::resp_status(response) == 200) {
       cli::cli_alert_success("File downloaded: {.path {new_path}}.")
     }
 
-    invisible(response)
+    return(invisible(new_path))
 
   }
 
@@ -40,7 +44,7 @@ download_helper <- function(document_uuid,
     # Read data from file path
     x <- read_temp(path, ...)
 
-    x
+    return(x)
 
   }
 
@@ -65,16 +69,19 @@ download_helper <- function(document_uuid,
 #'
 #' @param document_uuid UUID of asset or document version
 #' @param folder Folder to save downloaded file to
+#' @param file_name Optional name to give downloaded file. If not provided,
+#' file will have same name as Objective Connect asset.
 #' @param overwrite Logical to indicate whether file should be overwritten if
 #' already exists. Defaults to `FALSE`.
 #' @inheritParams objr
 #'
-#' @return API response (invisibly)
+#' @return Path to downloaded file (invisibly).
 #'
 #' @export
 
 download_file <- function(document_uuid,
                           folder,
+                          file_name = NULL,
                           overwrite = FALSE,
                           use_proxy = FALSE) {
 
@@ -82,6 +89,7 @@ download_file <- function(document_uuid,
                   folder,
                   asset_type = "documents",
                   download_type = "download",
+                  file_name = file_name,
                   overwrite = overwrite,
                   use_proxy = use_proxy)
 
@@ -93,6 +101,7 @@ download_file <- function(document_uuid,
 
 download_file_version <- function(document_uuid,
                                   folder,
+                                  file_name = NULL,
                                   overwrite = FALSE,
                                   use_proxy = FALSE) {
 
@@ -100,6 +109,7 @@ download_file_version <- function(document_uuid,
                   folder,
                   asset_type = "documentversions",
                   download_type = "download",
+                  file_name = file_name,
                   overwrite = overwrite,
                   use_proxy = use_proxy)
 
@@ -146,7 +156,7 @@ download_file_version <- function(document_uuid,
 #' @param ... Additional arguments passed to read function. See details.
 #' @inheritParams objr
 #'
-#' @return Format depends on file type. See details.
+#' @return A [tibble][tibble::tibble-package].
 #'
 #' @export
 
