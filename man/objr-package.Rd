@@ -7,6 +7,14 @@
 \description{
 An R package wrapper for Objective APIs including Objective Connect.
 }
+\references{
+\itemize{
+\item \href{https://ScotGovAnalysis.github.io/objr/}{\{objr\} package website}
+\item \href{https://scotgovanalysis.github.io/objr/articles/authentication.html}{API authentication}
+\item \href{https://scotgovanalysis.github.io/objr/articles/two-factor.html}{Two-factor authentication}
+\item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/}{Objective Connect API documentation}
+}
+}
 \seealso{
 Useful links:
 \itemize{
