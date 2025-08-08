@@ -7,7 +7,7 @@
 my_user_id(use_proxy = FALSE)
 }
 \arguments{
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 A character value of the authenticated user's ID

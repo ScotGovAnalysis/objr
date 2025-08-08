@@ -9,7 +9,7 @@ participants(workspace_uuid, use_proxy = FALSE)
 \arguments{
 \item{workspace_uuid}{UUID of workspace}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 A tibble

@@ -14,7 +14,7 @@ read_data_version(document_uuid, ..., use_proxy = FALSE)
 
 \item{...}{Additional arguments passed to read function. See details.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble}.

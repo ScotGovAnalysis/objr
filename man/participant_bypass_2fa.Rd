@@ -18,7 +18,7 @@ user UUID)}
 \item{allow_bypass}{Logical to indicate whether the participant should be
 able to bypass two-factor authentication for workspace.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 API response (invisibly)

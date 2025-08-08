@@ -23,7 +23,7 @@ create_folder(
 folder within. If not supplied, the folder will be created in the top-level
 of the workspace.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 API response (invisibly)

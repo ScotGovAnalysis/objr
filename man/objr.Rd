@@ -17,29 +17,29 @@ objr(
 )
 }
 \arguments{
-\item{endpoint}{The endpoint to append to the API server address}
+\item{endpoint}{The endpoint to append to the API server address.}
 
 \item{url_path}{A list of values to be added to the request URL path.
 Values will be separated with \code{/}.}
 
-\item{url_query}{A list of named values to define query parameters}
+\item{url_query}{A list of named values to define query parameters.}
 
-\item{method}{HTTP method to use; e.g. \code{GET}, \code{POST}, \code{PUT}.
-Defaults to \code{GET}.}
+\item{method}{HTTP method to use; e.g. \code{"GET"}, \code{"POST"}, \code{"PUT"}.
+Defaults to \code{"GET"}.}
 
-\item{body}{A list of named values to be passed to the request body}
+\item{body}{A list of named values to be passed to the request body.}
 
 \item{path}{Optional file path to save body of request (mainly used when
-downloading files)}
+downloading files).}
 
-\item{accept}{Accept header. Defaults to 'application/json'.}
+\item{accept}{Accept header. Defaults to \code{"application/json"}.}
 
-\item{content_type}{Content-Type header. Defaults to 'application/json'.}
+\item{content_type}{Content-Type header. Defaults to \code{"application/json"}.}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
-API response
+API response.
 }
 \description{
 Core request function

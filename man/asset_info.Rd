@@ -9,7 +9,7 @@ asset_info(asset_uuid, use_proxy = FALSE)
 \arguments{
 \item{asset_uuid}{UUID of asset}
 
-\item{use_proxy}{Logical to indicate whether to use proxy}
+\item{use_proxy}{Logical to indicate whether to use proxy.}
 }
 \value{
 A tibble
