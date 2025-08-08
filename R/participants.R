@@ -28,13 +28,22 @@ participants <- function(workspace_uuid, use_proxy = FALSE) {
       name2 = c("user", "familyName"),
       user_email = c("user", "email"),
       user_uuid = "userUuid",
-      bypass_2fa = "bypassTwoStep",
       participant_uuid = "uuid",
+      has_accepted = "hasAccepted",
+      is_owner = "isOwner",
+      bypass_2fa = "bypassTwoStep",
       workspace_name = c("workspace", "name"),
       workspace_uuid = c("workspace", "uuid")
     ) %>%
-    dplyr::mutate(user_name = paste(.data$name1, .data$name2),
-                  .before = 0) %>%
+    dplyr::mutate(
+      user_name = dplyr::case_when(
+        is.na(.data$name1) & is.na(.data$name2) ~ NA_character_,
+        is.na(.data$name1) ~ .data$name2,
+        is.na(.data$name2) ~ .data$name1,
+        TRUE ~ paste(.data$name1, .data$name2)
+      ),
+      .before = 0
+    ) %>%
     dplyr::select(-c("name1", "name2", "content"))
 
 }
