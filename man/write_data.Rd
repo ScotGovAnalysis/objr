@@ -26,7 +26,7 @@ to create a new version of an existing document.}
 
 \item{file_name}{Name to give file.}
 
-\item{file_type}{Either "csv", "rds" or "xlsx".}
+\item{file_type}{Either "csv", "rds", "xlsx", or "parquet".}
 
 \item{...}{Additional arguments to pass to write function. See details.}
 
@@ -50,9 +50,9 @@ existing document.
 }
 \details{
 This function can be used to write the following data file types:
-csv, rds, xlsx. If writing to a new document, use the \code{file_type}
-argument to control which file type to create. If writing a new version of an
-existing document, the existing file type will be used.
+csv, rds, xlsx, parquet. If writing to a new document, use the
+\code{file_type} argument to control which file type to create. If writing a
+new version of an existing document, the existing file type will be used.
 
 The function works by writing the R object to a temporary file and uploading
 the file to Objective Connect. The following functions are used to
@@ -61,11 +61,14 @@ write the data and any additional arguments (\code{...}) will be passed to these
    csv \tab \code{readr::write_csv()} \cr
    rds \tab \code{readr::write_rds()} \cr
    xlsx \tab \code{writexl::write_xlsx()} \cr
+   parquet \tab \code{nanoparquet::write_parquet()} \cr
 }
 
 
 If there are other data file types you would like to upload using this
-function, please \href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on the GitHub repository}.
+function, please
+\href{https://github.com/ScotGovAnalysis/objr/issues/new}{open an issue on
+the GitHub repository}.
 
 More details on the endpoints used by these functions are available in the
 API documentation:
