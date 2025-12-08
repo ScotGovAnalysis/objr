@@ -1,0 +1,35 @@
+# Changelog
+
+## objr (development version)
+
+- Added `CONTRIBUTING.md` and `SUPPORT.md`
+  ([\#36](https://github.com/ScotGovAnalysis/objr/issues/36)).
+
+- [`download_file()`](https://scotgovanalysis.github.io/objr/dev/reference/download_file.md)
+  now returns file path (invisibly)
+  ([\#38](https://github.com/ScotGovAnalysis/objr/issues/38)).
+
+- [`download_file()`](https://scotgovanalysis.github.io/objr/dev/reference/download_file.md)
+  now accepts custom file name in `file_name` argument
+  ([\#37](https://github.com/ScotGovAnalysis/objr/issues/37)).
+
+- [`download_file()`](https://scotgovanalysis.github.io/objr/dev/reference/download_file.md)
+  now writes files with percent-decoded names (e.g. `file%20name.csv` is
+  now `file name.csv`)
+  ([\#34](https://github.com/ScotGovAnalysis/objr/issues/34)).
+
+- Fixed an issue where temporary files sometimes persisted after running
+  [`download_file()`](https://scotgovanalysis.github.io/objr/dev/reference/download_file.md)
+  or `read_file()`
+  ([\#39](https://github.com/ScotGovAnalysis/objr/issues/39)).
+
+## objr 0.1.1
+
+- Set minimum versions for `dplyr` and `tidyr` dependencies
+  ([\#32](https://github.com/ScotGovAnalysis/objr/issues/32)).
+
+## objr 0.1.0
+
+- First package release.
+
+- Add pkgdown site (<https://ScotGovAnalysis.github.io/objr>).
