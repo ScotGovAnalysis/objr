@@ -147,6 +147,8 @@ create_file <- function(folder,
 #' file will have same name as Objective Connect asset.
 #' @param overwrite Logical to indicate whether to overwrite file if already
 #' exists. Defaults to `FALSE`.
+#' @param ext_only Logical to indicate whether to assign a file extension only,
+#' and not replace the full file name. Defaults to `FALSE`.
 #'
 #' @return File path of renamed file (invisibly).
 #'
@@ -156,6 +158,7 @@ rename_file <- function(temp_path,
                         response,
                         new_file_name = NULL,
                         overwrite = FALSE,
+                        ext_only = FALSE,
                         error_call = rlang::caller_env(),
                         error_arg_file_name = rlang::caller_arg(new_file_name),
                         error_arg_overwrite  = rlang::caller_arg(overwrite),
@@ -173,7 +176,9 @@ rename_file <- function(temp_path,
 
   file_name <- file_name_from_header(response)
 
-  if (!is.null(new_file_name) && tools::file_ext(new_file_name) != "") {
+  if (!ext_only &&
+      !is.null(new_file_name) &&
+      tools::file_ext(new_file_name) != "") {
     cli::cli_abort(
       c(
         "x" = "{.arg {error_arg_file_name}} must not include a file extension.",
@@ -184,8 +189,10 @@ rename_file <- function(temp_path,
     )
   }
 
-  # If `new_file_name` supplied, use it
-  if (!is.null(new_file_name)) {
+  # Derive new file name
+  if (ext_only) {
+    file_name <- paste0(basename(temp_path), ".", tools::file_ext(file_name))
+  } else if (!is.null(new_file_name)) {
     file_name <- paste0(
       new_file_name, ".", tools::file_ext(file_name)
     )

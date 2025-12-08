@@ -192,10 +192,11 @@ with_tempfile(c("test", "new"), {
 
 })
 
-with_tempfile(c("test1", "test2"), {
+with_tempfile(c("test1", "test2", "test3"), {
 
   file.create(test1)
   file.create(test2)
+  file.create(test3)
 
   test_that("Error if new_file_name include file ext", {
     expect_error(rename_file(test1, resp, new_file_name = "x.csv"))
@@ -213,8 +214,15 @@ with_tempfile(c("test1", "test2"), {
     expect_true(file.exists(file.path(dirname(test2), "new_name2.csv")))
   })
 
+  test_that("File is renamed with file ext only", {
+    rename_file(test3, resp, ext_only = TRUE)
+    expect_false(file.exists(test3))
+    expect_true(file.exists(paste0(test3, ".csv")))
+  })
+
   unlink(file.path(dirname(test1), "new_name.csv"))
   unlink(file.path(dirname(test2), "new_name2.csv"))
+  unlink(paste0(test3, ".csv"))
 
 })
 
