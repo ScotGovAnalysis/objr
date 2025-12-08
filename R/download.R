@@ -41,8 +41,15 @@ download_helper <- function(document_uuid,
 
   if (download_type == "read") {
 
+    # Rename file to match asset name
+    new_path <- rename_file(path, # nolint: object_usage_linter
+                            response,
+                            ext_only = TRUE)
+
+    on.exit(unlink(new_path), add = TRUE)
+
     # Read data from file path
-    x <- read_temp(path, ...)
+    x <- read_temp(new_path, ...)
 
     return(x)
 
