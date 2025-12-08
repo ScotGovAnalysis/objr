@@ -52,28 +52,28 @@ test_that("httr2 request returned", {
 
 })
 
-# test_that("Correct authentication used", {
-#
-#   expect_true(grepl("^Basic ", objr_auth(req)$headers$Authorization))
-#
-#   .GlobalEnv$token <- "test" # nolint: object_name_linter
-#
-#   exp_token1 <- objr_auth(req)
-#   expect_equal(exp_token1$headers$Authorization, "test")
-#
-#   # Token used even when no username and password supplied
-#   with_envvar(
-#     new = c("OBJR_USR" = "",
-#             "OBJR_PWD" = ""),
-#     code = {
-#       exp_token2 <- objr_auth(req)
-#       expect_equal(exp_token2$headers$Authorization, "test")
-#     }
-#   )
-#
-#   rm(token, pos = .GlobalEnv)
-#
-# })
+test_that("Correct authentication used", {
+
+  expect_true(grepl("^Basic ", objr_auth(req)$headers$Authorization))
+
+  .GlobalEnv$token <- "test" # nolint: object_name_linter
+
+  exp_token1 <- objr_auth(req)
+  expect_equal(exp_token1$headers$Authorization, "test")
+
+  # Token used even when no username and password supplied
+  with_envvar(
+    new = c("OBJR_USR" = "",
+            "OBJR_PWD" = ""),
+    code = {
+      exp_token2 <- objr_auth(req)
+      expect_equal(exp_token2$headers$Authorization, "test")
+    }
+  )
+
+  rm(token, pos = .GlobalEnv)
+
+})
 
 
 # store_token ----
@@ -118,11 +118,11 @@ test_that("Expect character value returned", {
     "character"
   )
 
-  # expect_type(
-  #   error(httr2::response(status_code = 403,
-  #                         body = list(description = "x"))),
-  #   "character"
-  # )
+  expect_type(
+    error(httr2::response(status_code = 403,
+                          body = list(description = "x"))),
+    "character"
+  )
 
   expect_type(
     error(httr2::response_json(
