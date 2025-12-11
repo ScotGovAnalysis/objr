@@ -92,7 +92,7 @@ to create a new version of an existing document.</p></dd>
 
 
 <dt id="arg-file-type">file_type<a class="anchor" aria-label="anchor" href="#arg-file-type"></a></dt>
-<dd><p>Either "csv", "rds" or "xlsx".</p></dd>
+<dd><p>Either "csv", "rds", "xlsx", or "parquet".</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -120,13 +120,15 @@ top-level of the workspace.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function can be used to write the following data file types:
-csv, rds, xlsx. If writing to a new document, use the <code>file_type</code>
-argument to control which file type to create. If writing a new version of an
-existing document, the existing file type will be used.</p>
+csv, rds, xlsx, parquet. If writing to a new document, use the
+<code>file_type</code> argument to control which file type to create. If writing a
+new version of an existing document, the existing file type will be used.</p>
 <p>The function works by writing the R object to a temporary file and uploading
 the file to Objective Connect. The following functions are used to
-write the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">readr::write_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::write_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://docs.ropensci.org/writexl//reference/write_xlsx.html" class="external-link">writexl::write_xlsx()</a></code></td></tr></table><p>If there are other data file types you would like to upload using this
-function, please <a href="https://github.com/ScotGovAnalysis/objr/issues/new" class="external-link">open an issue on the GitHub repository</a>.</p>
+write the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">readr::write_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::write_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://docs.ropensci.org/writexl//reference/write_xlsx.html" class="external-link">writexl::write_xlsx()</a></code></td></tr><tr><td>parquet</td><td><code>nanoparquet::write_parquet()</code></td></tr></table><p>If there are other data file types you would like to upload using this
+function, please
+<a href="https://github.com/ScotGovAnalysis/objr/issues/new" class="external-link">open an issue on
+the GitHub repository</a>.</p>
 <p>More details on the endpoints used by these functions are available in the
 API documentation:</p><ul><li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocument" class="external-link"><code>write_data</code></a></p></li>
 <li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocumentVersion_1" class="external-link"><code>write_data_version</code></a></p></li>

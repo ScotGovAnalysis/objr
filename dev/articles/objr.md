@@ -123,7 +123,7 @@ environment:
 x <- read_data(document_uuid = "l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9")
 ```
 
-Accepted data file formats are csv, rds and xlsx.
+Accepted data file formats are csv, rds, xlsx and parquet.
 
 ## Upload file
 

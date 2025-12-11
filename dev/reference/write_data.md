@@ -39,7 +39,7 @@ write_data_version(x, uuid, ..., use_proxy = FALSE)
 
 - file_type:
 
-  Either "csv", "rds" or "xlsx".
+  Either "csv", "rds", "xlsx", or "parquet".
 
 - ...:
 
@@ -66,9 +66,9 @@ API response (invisibly)
 ## Details
 
 This function can be used to write the following data file types: csv,
-rds, xlsx. If writing to a new document, use the `file_type` argument to
-control which file type to create. If writing a new version of an
-existing document, the existing file type will be used.
+rds, xlsx, parquet. If writing to a new document, use the `file_type`
+argument to control which file type to create. If writing a new version
+of an existing document, the existing file type will be used.
 
 The function works by writing the R object to a temporary file and
 uploading the file to Objective Connect. The following functions are
@@ -81,6 +81,7 @@ passed to these.
 | csv       | [`readr::write_csv()`](https://readr.tidyverse.org/reference/write_delim.html)          |
 | rds       | [`readr::write_rds()`](https://readr.tidyverse.org/reference/read_rds.html)             |
 | xlsx      | [`writexl::write_xlsx()`](https://docs.ropensci.org/writexl//reference/write_xlsx.html) |
+| parquet   | `nanoparquet::write_parquet()`                                                          |
 
 If there are other data file types you would like to upload using this
 function, please [open an issue on the GitHub

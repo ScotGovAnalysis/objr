@@ -35,7 +35,7 @@ A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html).
 ## Details
 
 This function can be used to read the following data file types: csv,
-rds, xlsx.
+rds, xlsx, parquet.
 
 The function works by downloading the file from Objective Connect to a
 temporary file and reading it into R. The following functions are used
@@ -48,6 +48,7 @@ these.
 | csv       | [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)    |
 | rds       | [`readr::read_rds()`](https://readr.tidyverse.org/reference/read_rds.html)      |
 | xlsx      | [`readxl::read_xlsx()`](https://readxl.tidyverse.org/reference/read_excel.html) |
+| parquet   | `nanoparquet::read_parquet()`                                                   |
 
 To check what file type your document is (and thus what function
 additional arguments will be passed to), use

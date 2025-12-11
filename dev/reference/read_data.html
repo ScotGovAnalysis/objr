@@ -88,10 +88,10 @@ version of a document.</p></li>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function can be used to read the following data file types:
-csv, rds, xlsx.</p>
+csv, rds, xlsx, parquet.</p>
 <p>The function works by downloading the file from Objective Connect to a
 temporary file and reading it into R. The following functions are used to
-read the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_xlsx()</a></code></td></tr></table><p>To check what file type your document is (and thus what function additional
+read the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_xlsx()</a></code></td></tr><tr><td>parquet</td><td><code>nanoparquet::read_parquet()</code></td></tr></table><p>To check what file type your document is (and thus what function additional
 arguments will be passed to), use <code><a href="asset_info.html">asset_info()</a></code>.</p>
 <p>If there are other data file types you would like to download using this
 function, please <a href="https://github.com/ScotGovAnalysis/objr/issues/new" class="external-link">open an issue on the GitHub repository</a>.</p>

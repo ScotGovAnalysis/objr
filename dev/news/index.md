@@ -20,8 +20,12 @@
 
 - Fixed an issue where temporary files sometimes persisted after running
   [`download_file()`](https://scotgovanalysis.github.io/objr/dev/reference/download_file.md)
-  or `read_file()`
+  or
+  [`read_data()`](https://scotgovanalysis.github.io/objr/dev/reference/read_data.md)
   ([\#39](https://github.com/ScotGovAnalysis/objr/issues/39)).
+
+- Added support for parquet files in `read/write_data` and
+  `read/write_data_version()`([\#54](https://github.com/ScotGovAnalysis/objr/issues/54)).
 
 ## objr 0.1.1
 
