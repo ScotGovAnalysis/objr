@@ -6,6 +6,7 @@ test_that("Correct value returned", {
     expect_equal(guess_fn("csv", "read"), "readr::read_csv")
     expect_equal(guess_fn("rds", "write"), "readr::write_rds")
     expect_equal(guess_fn("xlsx", "write"), "writexl::write_xlsx")
+    expect_equal(guess_fn("parquet", "read"), "nanoparquet::read_parquet")
   })
 
 })

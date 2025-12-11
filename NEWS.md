@@ -10,7 +10,10 @@
 (e.g. `file%20name.csv` is now `file name.csv`) (#34).
 
 * Fixed an issue where temporary files sometimes persisted after running 
-`download_file()` or `read_file()` (#39).
+`download_file()` or `read_data()` (#39).
+
+* Added support for parquet files in `read/write_data` and 
+`read/write_data_version()`(#54).
 
 # objr 0.1.1
 

@@ -1,28 +1,29 @@
 #' Guess function for reading or writing temp file
 #'
-#' @param file_type Either "csv", "rds" or "xlsx".
+#' @param file_type One of "csv", "rds", "xlsx" or "parquet".
 #' @param fn_type Either "read" or "write".
 #'
 #' @return Character string of function; e.g. "readr::write_csv". For "csv" and
-#' "rds" files, `readr` functions will be used, and for "xlsx" file types,
-#' `writexl` will be used.
+#' "rds" files, `readr` functions will be used; for "xlsx" file types,
+#' `writexl` will be used; for "parquet" files, `nanoparquet` will be used.
 #'
 #' @example write_fn("rds", "read")
 #'
 #' @noRd
 
-guess_fn <- function(file_type = c("csv", "rds", "xlsx"),
+guess_fn <- function(file_type = c("csv", "rds", "xlsx", "parquet"),
                      fn_type = c("read", "write"),
                      error_call = rlang::caller_env()) {
 
   file_type <- rlang::arg_match(file_type, error_call = error_call)
   fn_type   <- rlang::arg_match(fn_type, error_call = error_call)
 
-  if (file_type == "xlsx") {
-    paste0(fn_type, "xl::", fn_type, "_", file_type)
-  } else {
-    paste0("readr::", fn_type, "_", file_type)
-  }
+  dplyr::case_match(
+    file_type,
+    c("csv", "rds") ~ paste0("readr::", fn_type, "_", file_type),
+    "xlsx" ~ paste0(fn_type, "xl::", fn_type, "_", file_type),
+    "parquet" ~ paste0("nanoparquet::", fn_type, "_", file_type)
+  )
 
 }
 
