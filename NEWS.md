@@ -15,6 +15,10 @@
 * Added support for parquet files in `read/write_data` and 
 `read/write_data_version()`(#54).
 
+* Added support for [mobile authentication](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth)
+to view status (`mobile_auth_staus()`) and to login (`mobile_auth_login()`) 
+(#52).
+
 # objr 0.1.1
 
 * Set minimum versions for `dplyr` and `tidyr` dependencies (#32).
