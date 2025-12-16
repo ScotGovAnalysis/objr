@@ -50,6 +50,20 @@ test_that("Correct value returned when environment variable exists", {
     code = expect_equal(input_value("proxy"), "test_proxy")
   )
 
+  with_envvar(
+    new = c("OBJR_PROXY" = "test_proxy "),
+    code = expect_equal(input_value("proxy"), "test_proxy")
+  )
+
+})
+
+test_that("Error if envvar white space only", {
+
+  with_envvar(
+    new = c("OBJR_PROXY" = " "),
+    code = expect_error(input_value("proxy"), class = "objr_invalid-envvar")
+  )
+
 })
 
 test_that("Error if envvar doesn't exist and not interactive", {

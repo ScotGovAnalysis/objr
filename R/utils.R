@@ -55,59 +55,67 @@ check_valid <- function(value,
 #' Look for or ask for input value
 #'
 #' @description The function looks for the relevant value from environment
-#' variables. If this doesn't exist and the session is interactive, the user
-#' will be prompted to input a value. The value is then validated using
-#' \code{check_valid()}.
+#'   variables. If this doesn't exist and the session is interactive, the user
+#'   will be prompted to input a value. The value is then validated using
+#'   \code{check_valid()}.
 #'
-#' Expected environment variables for each \code{type} are as follows:
-#' * usr: `OBJR_USR`
-#' * pwd: `OBJR_PWD`
-#' * proxy: `OBJR_PROXY`
+#'   Expected environment variables for each \code{type} are as follows:
+#'   * usr: `OBJR_USR`
+#'   * pwd: `OBJR_PWD`
+#'   * proxy: `OBJR_PROXY`
 #'
-#' @param type One of 'usr' (username), 'pwd' (password), or 'proxy'.
+#'   'mobileauth' is not an expected environment variable, and can only be
+#'   provided interactively.
+#'
+#' @param type One of 'usr' (username), 'pwd' (password), 'proxy', or
+#'   'mobileauth'.
 #'
 #' @return Validated value
 #'
 #' @noRd
 
-input_value <- function(type = c("usr", "pwd", "proxy"),
+input_value <- function(type = c("usr", "pwd", "proxy", "mobileauth"),
                         error_call = rlang::caller_env()) {
 
   type <- rlang::arg_match(type)
 
-  envvar <- switch(
-    type,
-    "usr" = "OBJR_USR",
-    "pwd" = "OBJR_PWD",
-    "proxy" = "OBJR_PROXY"
-  )
+  if (type != "mobileauth") {
 
-  # Get environment variable
-  value <- Sys.getenv(envvar)
+    envvar <- switch(
+      type,
+      "usr" = "OBJR_USR",
+      "pwd" = "OBJR_PWD",
+      "proxy" = "OBJR_PROXY"
+    )
 
-  # If environment variable doesn't exist or not valid
-  if (!check_valid(value)) {
+    # Get environment variable
+    value <- Sys.getenv(envvar) %>% trimws()
 
-    # Error if session not interactive
-    if (!rlang::is_interactive()) {
-      cli::cli_abort(
-        "Environment variable ({.envvar envvar}) doesn't exist.",
-        call = error_call,
-        class = "objr_invalid-envvar"
-      )
-    }
+    if (!check_valid(value) && !rlang::is_interactive()) {
+        cli::cli_abort(
+          paste("Environment variable ({.envvar envvar}) doesn't exist or is",
+                "invalid."),
+          call = error_call,
+          class = "objr_invalid-envvar"
+        )
+      }
+
+  }
+
+  if (!check_valid(value) && rlang::is_interactive()) {
 
     # Set text for pop up prompt
     prompt <- switch(
       type,
       "usr" = "Enter email registered with Objective Connect:",
       "pwd" = "Enter Objective Connect password:",
-      "proxy" = "Please enter proxy URL:"
+      "proxy" = "Please enter proxy URL:",
+      "mobileauth" = "Enter mobile authentication code:"
     )
 
     # Give user 2 attempts to enter valid input
     for (i in 1:2) {
-      value <- rstudioapi::askForPassword(prompt)
+      value <- rstudioapi::askForPassword(prompt) %>% trimws()
       if (check_valid(value)) break
     }
 
