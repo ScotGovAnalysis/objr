@@ -3,7 +3,7 @@
 #' @param value Value to verify
 #' @param warn Logical. Indicates whether to produce warning if value is invalid
 #'
-#' @return Validated value
+#' @return Logical; is the value valid?
 #'
 #' @noRd
 
