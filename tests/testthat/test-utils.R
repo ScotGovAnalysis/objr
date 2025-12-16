@@ -12,14 +12,17 @@ test_that("Correct value returned", {
 
   expect_true(check_valid("test1"))
   expect_false(check_valid(""))
+  expect_false(check_valid("  "))
   expect_false(check_valid(NA))
   expect_false(check_valid(NULL))
 
 })
 
-test_that("Warning returned if invalid value and warn = FALSE", {
+test_that("Warning only returned if warn = TRUE", {
 
-  expect_warning(check_valid("", warn = TRUE))
+  expect_warning(check_valid("", warn = TRUE),
+                 class = "objr_value-invalid")
+  expect_no_warning(check_valid("", warn = FALSE))
 
 })
 

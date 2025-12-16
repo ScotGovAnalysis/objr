@@ -21,13 +21,27 @@ check_valid <- function(value,
     )
   }
 
-  valid <- !(is.null(value) || is.na(value) || !nchar(value) > 0)
+  issue <- if (is.null(value)) {
+    "{.arg {error_arg}} is NULL."
+  } else {
+    dplyr::case_when(
+      is.na(value) ~
+        "{.arg {error_arg}} is missing ({value}).",
+      nchar(value) == 0 ~
+        "{.arg {error_arg}} is an empty string.",
+      nchar(trimws(value)) == 0 ~
+        "{.arg {error_arg}} contains only white space."
+    )
+  }
+
+  valid <- is.na(issue)
 
   # If invalid and warn = TRUE, return warning
   if (!valid && warn) {
     cli::cli_warn(
-      c("!" = paste("{.arg {error_arg}} must exist and be at least",
-                    "1 character in length.")),
+      c("!" = paste("{.arg {error_arg}} must be a string containing at least",
+                    "1 non-empty character."),
+        "i" = issue),
       class = "objr_value-invalid"
     )
   }
