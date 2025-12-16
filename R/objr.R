@@ -236,6 +236,19 @@ error <- function(response) {
           "https://scotgovanalysis.github.io/objr/articles/two-factor.html"
         )
       )
+    } else if (!is.null(desc) && grepl("MFA is required", desc)) {
+      message <- c(
+        "!" = "Mobile authentication is required.",
+        "i" = "Use `objr::mobile_auth_login()` to authenticate.",
+        "i" = paste(
+          "For more information, see",
+          "https://scotgovanalysis.github.io/objr/articles/authentication.html"
+        )
+      )
+    } else if (!is.null(desc) && grepl("Time-Based One Time-Password", desc)) {
+      message <- c(
+        "!" = "The mobile authentication code is invalid."
+      )
     } else {
       message <- c(
         message,
