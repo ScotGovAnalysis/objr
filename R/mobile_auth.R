@@ -38,17 +38,32 @@ mobile_auth_status <- function(use_proxy = FALSE) {
 # nolint end
 #'
 #' @param code Character string. Time-based one time-password from mobile
-#' authenticator.
+#' authenticator. If not supplied, a pop-up window will prompt the user to
+#' enter.
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
 #'
 #' @export
 
-mobile_auth_login <- function(code, use_proxy = FALSE) {
+mobile_auth_login <- function(code = NULL, use_proxy = FALSE) {
 
-  if (!rlang::is_character(code)) {
-    cli::cli_abort("{.arg code} must be a character type, not {typeof(code)}.")
+  if (!is.null(code)) {
+
+    if (!rlang::is_character(code)) {
+      cli::cli_abort(
+        "{.arg code} must be a character type, not {typeof(code)}."
+      )
+    }
+    if (!check_valid(code)) {
+      cli::cli_abort("Failed to provide valid input.")
+    }
+
+    # If code isn't provided and session is interactive, prompt user to enter
+  } else if (rlang::is_interactive()) {
+    code <- input_value("mobileauth")
+  } else {
+    cli::cli_abort("{.arg code} must be provided.")
   }
 
   response <- objr::objr(

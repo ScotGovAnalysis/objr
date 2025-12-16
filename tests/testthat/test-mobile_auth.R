@@ -1,7 +1,13 @@
 
-test_that("Error if character not supplied", {
+test_that("Error if invalid code supplied", {
   expect_error(mobile_auth_login(000000))
   expect_error(mobile_auth_login(TRUE))
+  expect_error(mobile_auth_login(" "))
+})
+
+test_that("Error if no code supplied and not interactive", {
+  local_options(list(rlang_interactive = FALSE))
+  expect_error(mobile_auth_login())
 })
 
 without_internet({

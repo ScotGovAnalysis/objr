@@ -4,11 +4,12 @@
 \alias{mobile_auth_login}
 \title{Login using mobile authenticator}
 \usage{
-mobile_auth_login(code, use_proxy = FALSE)
+mobile_auth_login(code = NULL, use_proxy = FALSE)
 }
 \arguments{
 \item{code}{Character string. Time-based one time-password from mobile
-authenticator.}
+authenticator. If not supplied, a pop-up window will prompt the user to
+enter.}
 
 \item{use_proxy}{Logical to indicate whether to use proxy.}
 }
