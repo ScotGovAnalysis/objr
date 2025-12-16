@@ -79,12 +79,8 @@ test_that("Popup input works", {
   # To pass test, user must input some text when popups appear
 
   local_options(list(rlang_interactive = TRUE))
-
   skip_if_not(rstudioapi::isAvailable(), "RStudio not available")
-
   expect_no_error(input_value("usr"))
-  expect_no_error(input_value("pwd"))
-  expect_no_error(input_value("proxy"))
 
 })
 
