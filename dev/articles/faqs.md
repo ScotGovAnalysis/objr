@@ -19,3 +19,14 @@ Unfortunately, no. Although both eRDM and Connect are
 considerably different. The objr package currently works for Objective
 Connect only, although it may be developed in the future to work with
 eRDM.
+
+## Can I use objr with two-factor or mobile authentication?
+
+Yes. The following articles provide more information on how to use
+these:
+
+- [Two-factor
+  authentication](https://scotgovanalysis.github.io/objr/dev/articles/two-factor.md)
+
+- [Mobile
+  authentication](https://scotgovanalysis.github.io/objr/dev/articles/authentication.html#mobileauth)

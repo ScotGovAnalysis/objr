@@ -68,7 +68,9 @@ View comments and create new threads and replies in workspaces
 - [`new_reply()`](https://scotgovanalysis.github.io/objr/dev/reference/new_reply.md)
   : Create a new reply to a thread
 
-## Two-factor authentication
+## Authentication
+
+### Two-factor authentication
 
 See
 [`vignette("two-factor")`](https://scotgovanalysis.github.io/objr/dev/articles/two-factor.md)
@@ -79,3 +81,12 @@ for more information.
 - [`participant_bypass_2fa()`](https://scotgovanalysis.github.io/objr/dev/reference/participant_bypass_2fa.md)
   : Allow/disallow bypassing of two-factor authentication for workspace
   participant
+
+### Mobile authentication
+
+See vignette for more information.
+
+- [`mobile_auth_status()`](https://scotgovanalysis.github.io/objr/dev/reference/mobile_auth_status.md)
+  : Get mobile authenticator details of the current authenticated user
+- [`mobile_auth_login()`](https://scotgovanalysis.github.io/objr/dev/reference/mobile_auth_login.md)
+  : Login using mobile authenticator

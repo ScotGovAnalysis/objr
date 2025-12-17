@@ -1,16 +1,19 @@
-# API Authentication
+# Authentication
 
 ## How authentication works
 
 The first time you send a request, the API requires your Objective
-Connect user email address and password to authenticate.
+Connect user email address and password to authenticate. This is called
+“Basic” authentication.
 
 Each successful response from the API includes a token. This token can
 then be used to authenticate subsequent requests in your session,
 negating the need to repeatedly supply your email address and password.
+This is called “Session” authentication.
 
 The rest of this article details how to manage authentication when using
-the `objr` package.
+the `objr` package, including handling [multi-factor
+authentication](#mfa) (including two-factor and mobile authentication).
 
 ## First request
 
@@ -60,8 +63,6 @@ If you don’t have these variables defined in your `.Renviron` file,
 `objr` will prompt you to supply them if you’re working in an
 interactive session.
 
-  
-
 ![A small pop-up window with prompt 'Enter email registered with
 Objective Connect' followed by a text input box and buttons to select
 'OK' or 'Cancel'.](auth_prompt.png)
@@ -71,10 +72,89 @@ Objective Connect' followed by a text input box and buttons to select
 Each successful API response includes a token that can be used for
 subsequent requests. `objr` functions automatically parse this token
 from the API response and store it in your R session’s global
-environment.
+environment (as `token`).
 
 Where this object exists, `objr` will automatically use it to
 authenticate subsequent requests.
 
 If this object doesn’t exist, `objr` will resort to using your username
 and password, as it did for your [first request](#first-request).
+
+Tokens become invalid when your session expires. If you have an invalid
+token in your environment, your API request will fail and you will be
+prompted to remove the token and try again using your username and
+password.
+
+## Multi-factor authentication
+
+### Two-factor authentication
+
+Two-factor authentication (2FA) may be enforced in some workspaces. When
+using Objective Connect in your browser, this means you will need to
+enter a code that has been emailed to you before completing certain
+tasks.
+
+To use `objr` in these workspaces, users must be given permission to
+bypass 2FA. More information and guidance to set this up is available in
+the [Two-factor authentication
+article](https://scotgovanalysis.github.io/objr/dev/articles/two-factor.md).
+
+### Mobile authentication
+
+Mobile authentication may be enforced in some workspaces, or you may
+have enabled this yourself. [Guidance to enable, register or disable
+mobile
+authentication](https://helpdocs.objective.com/objectiveconnect/K_AdminFunctions/ManagingMobileAuth.htm)
+is available in the Objective Connect Help documentation.
+
+You can view the status of mobile authentication on your account using
+[`mobile_auth_status()`](https://scotgovanalysis.github.io/objr/dev/reference/mobile_auth_status.md).
+For example:
+
+``` r
+mobile_auth_status()
+```
+
+    ## $mobileAuthLogin
+    ## [1] TRUE
+    ## 
+    ## $mobileAuthRegistered
+    ## [1] TRUE
+
+If you have both enabled mobile authentication and registered a mobile
+device, you will need to login using mobile authentication before using
+any other `objr` functionality. This can be done using
+[`mobile_auth_login()`](https://scotgovanalysis.github.io/objr/dev/reference/mobile_auth_login.md).
+This function requires [username and password
+authentication](#first-request) as with any other first request.
+
+You can either provide the authentication code from your mobile device
+directly to the function:
+
+``` r
+mobile_auth_status("123456")
+```
+
+Or, if left empty, you will be prompted to enter your code in a pop-up
+window:
+
+``` r
+mobile_auth_status()
+```
+
+![A small pop-up window with prompt 'Enter mobile authentication code'
+followed by a text input box and buttons to select 'OK' or
+'Cancel'.](mobileauth_prompt.png)
+
+    ## ✔ Successfully logged in via Mobile Authenticator.
+
+If login is successful, the token from the API response is stored
+automatically and used for [subsequent requests](#subsequent-requests).
+Tokens become invalid when your session expires. If you have an invalid
+token in your environment, your API request will fail and you will need
+to login using your mobile authenticator again.
+
+Mobile authentication login attempts are limited to a maximum of 5
+failures within a 5-minute interval. After 5 failed attempts, your
+Objective Connect account will be locked. To regain access, wait for 5
+mins and then try logging in again.

@@ -19,7 +19,7 @@
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">API Authentication</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/two-factor.html">Two-Factor Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a></li>
   </ul></li>
@@ -46,6 +46,7 @@
 <li><p><code><a href="../reference/download_file.html">download_file()</a></code> now writes files with percent-decoded names (e.g. <code>file%20name.csv</code> is now <code>file name.csv</code>) (<a href="https://github.com/ScotGovAnalysis/objr/issues/34" class="external-link">#34</a>).</p></li>
 <li><p>Fixed an issue where temporary files sometimes persisted after running <code><a href="../reference/download_file.html">download_file()</a></code> or <code><a href="../reference/read_data.html">read_data()</a></code> (<a href="https://github.com/ScotGovAnalysis/objr/issues/39" class="external-link">#39</a>).</p></li>
 <li><p>Added support for parquet files in <code>read/write_data</code> and <code>read/write_data_version()</code>(<a href="https://github.com/ScotGovAnalysis/objr/issues/54" class="external-link">#54</a>).</p></li>
+<li><p>Added support for <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth" class="external-link">mobile authentication</a> to view status (<code>mobile_auth_staus()</code>) and to login (<code><a href="../reference/mobile_auth_login.html">mobile_auth_login()</a></code>) (<a href="https://github.com/ScotGovAnalysis/objr/issues/52" class="external-link">#52</a>).</p></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="objr-011">objr 0.1.1<a class="anchor" aria-label="anchor" href="#objr-011"></a></h2>
