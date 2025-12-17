@@ -94,13 +94,13 @@ input_value <- function(type = c("usr", "pwd", "proxy", "mobileauth"),
     value <- Sys.getenv(envvar) %>% trimws()
 
     if (!check_valid(value) && !rlang::is_interactive()) {
-        cli::cli_abort(
-          paste("Environment variable ({.envvar envvar}) doesn't exist or is",
-                "invalid."),
-          call = error_call,
-          class = "objr_invalid-envvar"
-        )
-      }
+      cli::cli_abort(
+        paste("Environment variable ({.envvar envvar}) doesn't exist or is",
+              "invalid."),
+        call = error_call,
+        class = "objr_invalid-envvar"
+      )
+    }
 
   }
 

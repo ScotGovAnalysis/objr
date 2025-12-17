@@ -178,8 +178,8 @@ rename_file <- function(temp_path,
   file_name <- file_name_from_header(response)
 
   if (!ext_only &&
-      !is.null(new_file_name) &&
-      tools::file_ext(new_file_name) != "") {
+        !is.null(new_file_name) &&
+        tools::file_ext(new_file_name) != "") {
     cli::cli_abort(
       c(
         "x" = "{.arg {error_arg_file_name}} must not include a file extension.",
