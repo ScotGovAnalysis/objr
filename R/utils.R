@@ -79,6 +79,8 @@ input_value <- function(type = c("usr", "pwd", "proxy", "mobileauth"),
 
   type <- rlang::arg_match(type)
 
+  value <- NULL
+
   if (type != "mobileauth") {
 
     envvar <- switch(
