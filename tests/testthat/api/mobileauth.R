@@ -1,0 +1,13 @@
+structure(list(method = "GET", url = "https://api/mobileauth", 
+    status_code = 200L, headers = structure(list(Date = "Fri, 12 Dec 2025 13:19:32 GMT", 
+        `Content-Type` = "application/json", `Transfer-Encoding` = "chunked", 
+        Connection = "keep-alive", `X-CONNECT-MDC` = "apib1e8c537a235d3d3e3d071c998504c42", 
+        `X-Frame-Options` = "deny", `X-XSS-Protection` = "1; mode=block", 
+        `Cache-Control` = "no-cache, no-store", Expires = "0", 
+        Pragma = "no-cache", `Strict-Transport-Security` = "max-age=31536000 ; includeSubDomains", 
+        `Content-Security-Policy` = "script-src 'self' 'unsafe-inline'", 
+        `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin", 
+        `Feature-Policy` = "vibrate 'none'; geolocation 'none'", 
+        Authorization = "REDACTED", `Set-Cookie` = "REDACTED"), class = "httr2_headers"), 
+    body = charToRaw("{\"mobileAuthLogin\":true,\"mobileAuthRegistered\":true}"), 
+    cache = new.env(parent = emptyenv())), class = "httr2_response")

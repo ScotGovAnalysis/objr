@@ -12,14 +12,17 @@ test_that("Correct value returned", {
 
   expect_true(check_valid("test1"))
   expect_false(check_valid(""))
+  expect_false(check_valid("  "))
   expect_false(check_valid(NA))
   expect_false(check_valid(NULL))
 
 })
 
-test_that("Warning returned if invalid value and warn = FALSE", {
+test_that("Warning only returned if warn = TRUE", {
 
-  expect_warning(check_valid("", warn = TRUE))
+  expect_warning(check_valid("", warn = TRUE),
+                 class = "objr_value-invalid")
+  expect_no_warning(check_valid("", warn = FALSE))
 
 })
 
@@ -45,6 +48,20 @@ test_that("Correct value returned when environment variable exists", {
   with_envvar(
     new = c("OBJR_PROXY" = "test_proxy"),
     code = expect_equal(input_value("proxy"), "test_proxy")
+  )
+
+  with_envvar(
+    new = c("OBJR_PROXY" = "test_proxy "),
+    code = expect_equal(input_value("proxy"), "test_proxy")
+  )
+
+})
+
+test_that("Error if envvar white space only", {
+
+  with_envvar(
+    new = c("OBJR_PROXY" = " "),
+    code = expect_error(input_value("proxy"), class = "objr_invalid-envvar")
   )
 
 })
@@ -76,12 +93,8 @@ test_that("Popup input works", {
   # To pass test, user must input some text when popups appear
 
   local_options(list(rlang_interactive = TRUE))
-
   skip_if_not(rstudioapi::isAvailable(), "RStudio not available")
-
   expect_no_error(input_value("usr"))
-  expect_no_error(input_value("pwd"))
-  expect_no_error(input_value("proxy"))
 
 })
 

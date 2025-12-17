@@ -1,4 +1,6 @@
-linters: linters_with_defaults()
+linters: linters_with_defaults(
+    pipe_consistency_linter(pipe = "auto")
+  )
 exclusions: list(
     "tests/testthat/api/",
     "vignettes/"
