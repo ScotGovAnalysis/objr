@@ -171,7 +171,7 @@ random_uuid <- function(seed = NULL) {
   set.seed(seed)
 
   replicate(8, paste0(sample(options, 4, replace = TRUE, prob = prob_weights),
-                      collapse = "")) |>
+                      collapse = "")) %>%
     paste0(collapse = "-")
 
 }
