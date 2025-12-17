@@ -33,6 +33,13 @@
   ([`mobile_auth_login()`](https://scotgovanalysis.github.io/objr/dev/reference/mobile_auth_login.md))
   ([\#52](https://github.com/ScotGovAnalysis/objr/issues/52)).
 
+- Temporary fix to
+  [`assets()`](https://scotgovanalysis.github.io/objr/dev/reference/assets.md)
+  to account for bug in underlying API
+  ([\#53](https://github.com/ScotGovAnalysis/objr/issues/53)). The
+  `type` argument now only accepts an empty list (default to return all
+  asset types) or a list of length 1.
+
 ## objr 0.1.1
 
 - Set minimum versions for `dplyr` and `tidyr` dependencies
