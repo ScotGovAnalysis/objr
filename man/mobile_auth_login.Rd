@@ -20,8 +20,13 @@ API response (invisibly)
 Login using mobile authenticator
 }
 \details{
+Mobile authenticator login attempts are limited to a maximum of 5 failures
+within a 5-minute interval. After 5 failed attempts, your Objective Connect
+account will be locked. To regain access, wait for 5 mins and then try
+logging in again.
+
 More information on mobile authentication can be found in
-\code{vignette}.
+\code{vignette("authentication")}.
 
 More details on this endpoint are available in the
 \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth/login}{API documentation}.
