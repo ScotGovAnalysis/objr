@@ -1,6 +1,6 @@
 # All types
 
-structure(list(method = "GET", url = "https://api/assets?workspaceUuid=test_workspace&type=DOCUMENT%7CFOLDER%7CLINK",
+structure(list(method = "GET", url = "https://api/assets?workspaceUuid=test_workspace&type=",
     status_code = 200L, headers = structure(list(Date = "Mon, 08 Apr 2024 16:12:59 GMT",
         `Content-Type` = "application/json", `Transfer-Encoding` = "chunked",
         Connection = "keep-alive", `X-CONNECT-MDC` = "apiGMsONBfA",

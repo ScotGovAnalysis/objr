@@ -16,8 +16,12 @@
 `read/write_data_version()`(#54).
 
 * Added support for [mobile authentication](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth)
-to view status (`mobile_auth_staus()`) and to login (`mobile_auth_login()`) 
+to view status (`mobile_auth_staus()`) and to login (`mobile_auth_login()`)
 (#52).
+
+* Temporary fix to `assets()` to account for bug in underlying API (#53).
+The `type` argument now only accepts an empty list (default to return all asset 
+types) or a list of length 1.
 
 # objr 0.1.1
 
