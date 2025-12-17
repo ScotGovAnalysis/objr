@@ -117,7 +117,8 @@ input_value <- function(type = c("usr", "pwd", "proxy", "mobileauth"),
 
     # Give user 2 attempts to enter valid input
     for (i in 1:2) {
-      value <- rstudioapi::askForPassword(prompt) %>% trimws()
+      value <- rstudioapi::askForPassword(prompt)
+      if (!is.null(value)) value <- trimws(value)
       if (check_valid(value)) break
     }
 
