@@ -1,13 +1,18 @@
 # assets ----
 
+test_that("Error if `type` length > 1", {
+  expect_error(assets(workspace_uuid = "test_workspace",
+                      type = list("document", "link")))
+})
+
 without_internet({
 
   test_that("Valid request created", {
 
     expect_GET(
-      assets(workspace_uuid = "test_workspace"),
+      assets(workspace_uuid = "test_workspace", type = list()),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets?",
-             "workspaceUuid=test_workspace&type=DOCUMENT%7CFOLDER%7CLINK")
+             "workspaceUuid=test_workspace&type=")
     )
 
     expect_GET(
