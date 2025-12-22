@@ -125,7 +125,7 @@ objr_auth <- function(req,
 
     httr2::req_headers(
       req,
-      Authorization = get("token", pos = parent.frame())
+      Authorization = get("token", pos = parent.frame())$value
     )
 
   } else {
@@ -147,7 +147,7 @@ objr_auth <- function(req,
 #' header.
 #' @param store_env The environment to bind the token to.
 #'
-#' @return Returns the token invisibly. This function is primarily used
+#' @return API response (invisibly). This function is primarily used
 #' for its side effect - an environment variable is created called "token".
 #'
 #' @noRd
@@ -169,11 +169,12 @@ store_token <- function(response,
                    call = error_call)
   }
 
-  token <- httr2::resp_header(response, "Authorization")
+  token <- list(
+    value = httr2::resp_header(response, "Authorization"),
+    last_used = Sys.time()
+  )
 
-  if (!exists("token", where = store_env)) {
-    rlang::env_poke(env = store_env, nm = "token", value = token)
-  }
+  rlang::env_poke(env = store_env, nm = "token", value = token)
 
   invisible(response)
 

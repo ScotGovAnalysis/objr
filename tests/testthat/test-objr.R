@@ -44,7 +44,11 @@ req <- httr2::request("www.example.com")
 
 test_that("httr2 request returned", {
 
-  .GlobalEnv$token <- "test" # nolint: object_name_linter
+  .GlobalEnv$token <- list( # nolint: object_name_linter
+    value = "test",
+    last_used = structure(1766424072.19122,
+                          class = c("POSIXct", "POSIXt"))
+  )
 
   expect_s3_class(objr_auth(req), "httr2_request")
 
