@@ -1,0 +1,11 @@
+structure(list(method = "PUT", url = "https://api/workgroups/test_workgroup/twostepmandatory",
+    status_code = 204L, headers = structure(list(Date = "Mon, 22 Dec 2025 15:43:40 GMT",
+        `Content-Length` = "0", Connection = "keep-alive", `X-CONNECT-MDC` = "api8ac74669e4e222120b3a73403ee82c2c",
+        `X-Frame-Options` = "deny", `X-XSS-Protection` = "1; mode=block",
+        `Cache-Control` = "no-cache, no-store", Expires = "0",
+        Pragma = "no-cache", `Strict-Transport-Security` = "max-age=31536000 ; includeSubDomains",
+        `Content-Security-Policy` = "script-src 'self' 'unsafe-inline'",
+        `X-Content-Type-Options` = "nosniff", `Referrer-Policy` = "strict-origin-when-cross-origin",
+        `Feature-Policy` = "vibrate 'none'; geolocation 'none'",
+        Authorization = "REDACTED", `Set-Cookie` = "REDACTED"), class = "httr2_headers"),
+    body = raw(0), cache = new.env(parent = emptyenv())), class = "httr2_response")
