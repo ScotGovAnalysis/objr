@@ -52,7 +52,7 @@ these.
 
 To check what file type your document is (and thus what function
 additional arguments will be passed to), use
-[`asset_info()`](https://scotgovanalysis.github.io/objr/dev/reference/asset_info.md).
+[`asset_info()`](https://ScotGovAnalysis.github.io/objr/dev/reference/asset_info.md).
 
 If there are other data file types you would like to download using this
 function, please [open an issue on the GitHub

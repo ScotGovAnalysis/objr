@@ -37,7 +37,7 @@ API response (invisibly)
 This setting can only be updated by a workspace owner.
 
 More information on two-factor authentication can be found in
-[`vignette("two-factor")`](https://scotgovanalysis.github.io/objr/dev/articles/two-factor.md).
+[`vignette("two-factor")`](https://ScotGovAnalysis.github.io/objr/dev/articles/two-factor.md).
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Participants/setParticipantBypassMfa).

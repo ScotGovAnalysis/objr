@@ -9,7 +9,7 @@ participants won’t be able to use the API unless they have been given
 permission to bypass 2FA.
 
 To check which participants have permission to bypass 2FA, run
-[`participants()`](https://scotgovanalysis.github.io/objr/dev/reference/participants.md)
+[`participants()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participants.md)
 using your workspace UUID, and inspect the `bypass_2fa` column in the
 returned data frame.
 
@@ -55,16 +55,37 @@ These steps must be completed by a **workgroup admin**.
 > maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors)
 > to arrange this step.
 
-1.  Navigate to the summary page for your workgroup in Objective
-    Connect. Select ‘Workgroup Options’, un-check the option to ‘Enforce
-    Two-step verification’, and click the blue ‘Update’ button.
+1.  Temporarily disable mandatory 2FA in your workgroup. This can be
+    done in one of the following ways:
 
-![A button for 'Workgroup options' is selected. A menu is visible
-containing an option to 'Enforce Two-step verification' with a
-checkbox.](workgroup-2fa.png)
+    - Navigate to the summary page for your workgroup in Objective
+      Connect. Select ‘Workgroup Options’, un-check the option to
+      ‘Enforce Two-step verification’, and click the blue ‘Update’
+      button.
+
+    ![A button for 'Workgroup options' is selected. A menu is visible
+    containing an option to 'Enforce Two-step verification' with a
+    checkbox.](workgroup-2fa.png)
+
+    - In R, use
+      [`workgroup_mandate_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/workgroup_mandate_2fa.md),
+      providing the relevant workgroup UUID and setting
+      `mandate = FALSE` to disable. For example:
+
+      ``` r
+      workgroup_mandate_2fa("v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440", mandate = FALSE)
+      ```
+
+          ## ✔ Mandatory 2FA setting successfully updated for workgroup.
+
+      To reinstate mandatory 2FA later, set `mandate = TRUE`.
+
+      > Non R users can also use the interactive documentation to
+      > [disable mandatory 2FA in the
+      > workgroup](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setTwoStepMandatory).
 
 2.  In R, allow 2FA bypassing for the workgroup using
-    [`workgroup_bypass_2fa()`](https://scotgovanalysis.github.io/objr/dev/reference/workgroup_bypass_2fa.md),
+    [`workgroup_bypass_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/workgroup_bypass_2fa.md),
     providing the relevant workgroup UUID. For example:
 
     ``` r
@@ -79,7 +100,7 @@ checkbox.](workgroup-2fa.png)
 
 3.  Continue to the next section to [give the workspace owner permission
     to bypass 2FA](#workspace-owner). Once this is complete, [reinstate
-    2FA enforcing for the workgroup](#workgroup-1).
+    mandatory 2FA for the workgroup](#workgroup-1).
 
 ## Permission for the workspace owner
 
@@ -95,9 +116,9 @@ other options.](workspace-2fa.png)
 
 2.  In R, give yourself (the workspace owner) permission to bypass 2FA
     using
-    [`participant_bypass_2fa()`](https://scotgovanalysis.github.io/objr/dev/reference/participant_bypass_2fa.md).
+    [`participant_bypass_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participant_bypass_2fa.md).
     You will need your participant UUID, which can be found using
-    [`participants()`](https://scotgovanalysis.github.io/objr/dev/reference/participants.md).
+    [`participants()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participants.md).
     For example,
 
     ``` r
@@ -113,7 +134,7 @@ other options.](workspace-2fa.png)
     > bypassing](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Participants/setParticipantBypassMfa).
 
 3.  Check this has worked using
-    [`participants()`](https://scotgovanalysis.github.io/objr/dev/reference/participants.md).
+    [`participants()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participants.md).
     The `bypass_2fa` column in the returned data frame should contain
     `TRUE` against your name.
 
@@ -124,7 +145,7 @@ other options.](workspace-2fa.png)
 4.  Reinstate 2FA for the workspace using the [same method as in step
     1](#workspace-1).
 
-5.  The workgroup admin can now [reinstate 2FA enforcing for the
+5.  The workgroup admin can now [reinstate mandatory 2FA for the
     workgroup](#workgroup-1).
 
 ## Permssion for other participants
@@ -132,10 +153,10 @@ other options.](workspace-2fa.png)
 These steps must be completed by the **workspace owner**.
 
 1.  In R, give participants permission to bypass 2FA using
-    [`participant_bypass_2fa()`](https://scotgovanalysis.github.io/objr/dev/reference/participant_bypass_2fa.md).
+    [`participant_bypass_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participant_bypass_2fa.md).
     You will need the relevant members’ participant UUID, which can be
     found using
-    [`participants()`](https://scotgovanalysis.github.io/objr/dev/reference/participants.md).
+    [`participants()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participants.md).
 
     > Non R users can use the interactive documentation to find the
     > relevant [participant
@@ -148,12 +169,12 @@ These steps must be completed by the **workspace owner**.
 > given to external workspace participants.
 
 If you wish to revoke permissions to bypass 2FA, use
-[`participant_bypass_2fa()`](https://scotgovanalysis.github.io/objr/dev/reference/participant_bypass_2fa.md)
+[`participant_bypass_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participant_bypass_2fa.md)
 and set `allow_bypass = FALSE`.
 
 Remember, to check the status of 2FA bypassing for participants in a
 workspace, use
-[`participants()`](https://scotgovanalysis.github.io/objr/dev/reference/participants.md).
+[`participants()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participants.md).
 
 ## Getting more help
 

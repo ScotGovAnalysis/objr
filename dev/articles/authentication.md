@@ -97,7 +97,7 @@ tasks.
 To use `objr` in these workspaces, users must be given permission to
 bypass 2FA. More information and guidance to set this up is available in
 the [Two-factor authentication
-article](https://scotgovanalysis.github.io/objr/dev/articles/two-factor.md).
+article](https://ScotGovAnalysis.github.io/objr/dev/articles/two-factor.md).
 
 ### Mobile authentication
 
@@ -108,7 +108,7 @@ authentication](https://helpdocs.objective.com/objectiveconnect/K_AdminFunctions
 is available in the Objective Connect Help documentation.
 
 You can view the status of mobile authentication on your account using
-[`mobile_auth_status()`](https://scotgovanalysis.github.io/objr/dev/reference/mobile_auth_status.md).
+[`mobile_auth_status()`](https://ScotGovAnalysis.github.io/objr/dev/reference/mobile_auth_status.md).
 For example:
 
 ``` r
@@ -124,7 +124,7 @@ mobile_auth_status()
 If you have both enabled mobile authentication and registered a mobile
 device, you will need to login using mobile authentication before using
 any other `objr` functionality. This can be done using
-[`mobile_auth_login()`](https://scotgovanalysis.github.io/objr/dev/reference/mobile_auth_login.md).
+[`mobile_auth_login()`](https://ScotGovAnalysis.github.io/objr/dev/reference/mobile_auth_login.md).
 This function requires [username and password
 authentication](#first-request) as with any other first request.
 

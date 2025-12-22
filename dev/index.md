@@ -60,12 +60,12 @@ RStudio console. For example:
 ```
 
 There is also a demonstration of a simple workflow using the package in
-[`vignette("objr")`](https://scotgovanalysis.github.io/objr/dev/articles/objr.md).
+[`vignette("objr")`](https://ScotGovAnalysis.github.io/objr/dev/articles/objr.md).
 
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT
-Licence](https://scotgovanalysis.github.io/objr/dev/LICENCE). This
+Licence](https://ScotGovAnalysis.github.io/objr/dev/LICENCE). This
 covers both the codebase and any sample code in the documentation.
 
 The documentation is [© Crown

@@ -8,9 +8,9 @@ will have a User UUID associated with them, and also a Participant UUID
 for each individual workspace they are a member of.
 
 A user can get their User UUID by running
-[`my_user_id()`](https://scotgovanalysis.github.io/objr/dev/reference/my_user_id.md).
+[`my_user_id()`](https://ScotGovAnalysis.github.io/objr/dev/reference/my_user_id.md).
 A user can find their participant UUID for a particular workspace using
-[`participants()`](https://scotgovanalysis.github.io/objr/dev/reference/participants.md).
+[`participants()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participants.md).
 
 ## Can I use the objr package to interact with eRDM?
 
@@ -26,7 +26,7 @@ Yes. The following articles provide more information on how to use
 these:
 
 - [Two-factor
-  authentication](https://scotgovanalysis.github.io/objr/dev/articles/two-factor.md)
+  authentication](https://ScotGovAnalysis.github.io/objr/dev/articles/two-factor.md)
 
 - [Mobile
-  authentication](https://scotgovanalysis.github.io/objr/dev/articles/authentication.html#mobileauth)
+  authentication](https://ScotGovAnalysis.github.io/objr/dev/articles/authentication.html#mobileauth)
