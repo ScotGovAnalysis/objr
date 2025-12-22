@@ -1,4 +1,4 @@
-url: https://scotgovanalysis.github.io/objr
+url: https://ScotGovAnalysis.github.io/objr
 
 development:
   mode: auto
@@ -96,6 +96,7 @@ reference:
 - subtitle: Two-factor authentication
   desc: See `vignette("two-factor")` for more information.
   contents:
+  - workgroup_mandate_2fa
   - workgroup_bypass_2fa
   - participant_bypass_2fa
 

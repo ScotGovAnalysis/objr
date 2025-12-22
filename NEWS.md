@@ -23,6 +23,9 @@ to view status (`mobile_auth_staus()`) and to login (`mobile_auth_login()`)
 The `type` argument now only accepts an empty list (default to return all asset 
 types) or a list of length 1.
 
+* New `workgroup_mandate_2fa()` provides ability to enable or disable mandatory 
+two-factor authentication (2FA) in workgroups (#65).
+
 # objr 0.1.1
 
 * Set minimum versions for `dplyr` and `tidyr` dependencies (#32).

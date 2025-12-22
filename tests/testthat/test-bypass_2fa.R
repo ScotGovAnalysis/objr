@@ -34,6 +34,21 @@ without_internet({
       "{\"bypassTwoStep\":\"false\"}"
     )
 
+    expect_PUT(
+      workgroup_mandate_2fa(workgroup_uuid = "test_workgroup"),
+      paste0("https://secure.objectiveconnect.co.uk/publicapi/1/workgroups/",
+             "test_workgroup/twostepmandatory"),
+      "{\"twoStepMandatory\":\"true\"}"
+    )
+
+    expect_PUT(
+      workgroup_mandate_2fa(workgroup_uuid = "test_workgroup",
+                            mandate = FALSE),
+      paste0("https://secure.objectiveconnect.co.uk/publicapi/1/workgroups/",
+             "test_workgroup/twostepmandatory"),
+      "{\"twoStepMandatory\":\"false\"}"
+    )
+
   })
 
 })
@@ -54,12 +69,19 @@ with_mock_api({
       )
     )
 
+    expect_invisible(
+      suppressMessages(
+        workgroup_mandate_2fa("test_workgroup")
+      )
+    )
+
   })
 
   test_that("Functions return success message", {
 
     expect_message(workgroup_bypass_2fa("test_workgroup"))
     expect_message(participant_bypass_2fa("test_participant"))
+    expect_message(workgroup_mandate_2fa("test_workgroup"))
 
   })
 
