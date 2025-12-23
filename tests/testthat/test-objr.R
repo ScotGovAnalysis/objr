@@ -104,7 +104,13 @@ test_that("Response returned invisibly", {
 test_that("Environment value created successfully", {
   httr2::response(headers = list(Authorization = "test2")) |>
     store_token(store_env = environment())
+
   expect_true(exists("token"))
+  expect_type(get("token"), "list")
+  expect_equal(names(get("token")), c("value", "expiry"))
+  expect_equal(get("token")$value, "test2")
+  expect_type(get("token")$value, "character")
+  expect_s3_class(get("token")$expiry, "POSIXct")
 })
 
 
