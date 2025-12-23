@@ -3,17 +3,17 @@
 ## How authentication works
 
 The first time you send a request, the API requires your Objective
-Connect user email address and password to authenticate. This is called
-“Basic” authentication.
+Connect user email address and password to authenticate.
 
 Each successful response from the API includes a token. This token can
 then be used to authenticate subsequent requests in your session,
 negating the need to repeatedly supply your email address and password.
-This is called “Session” authentication.
+
+Depending on your account and/or workspace settings, you may also be
+required to use two-factor or mobile authentication.
 
 The rest of this article details how to manage authentication when using
-the `objr` package, including handling [multi-factor
-authentication](#mfa) (including two-factor and mobile authentication).
+the `objr` package.
 
 ## First request
 
@@ -80,10 +80,19 @@ authenticate subsequent requests.
 If this object doesn’t exist, `objr` will resort to using your username
 and password, as it did for your [first request](#first-request).
 
-Tokens become invalid when your session expires. If you have an invalid
-token in your environment, your API request will fail and you will be
-prompted to remove the token and try again using your username and
-password.
+### Token expiry
+
+Tokens expire when they have been unused for 20 minutes or more. You can
+see the expiry time of your current token by viewing `token$expiry`.
+
+If you try to make a request with an expired token in your environment,
+it will be removed, and `objr` will try to use your username and
+password instead.
+
+Note that if you are using [mobile authentication](#mobileauth), this
+will still fail, and you should login again using
+[`mobile_auth_login()`](https://ScotGovAnalysis.github.io/objr/dev/reference/mobile_auth_login.md)
+to generate a new token.
 
 ## Multi-factor authentication
 
@@ -132,14 +141,14 @@ You can either provide the authentication code from your mobile device
 directly to the function:
 
 ``` r
-mobile_auth_status("123456")
+mobile_auth_login("123456")
 ```
 
 Or, if left empty, you will be prompted to enter your code in a pop-up
 window:
 
 ``` r
-mobile_auth_status()
+mobile_auth_login()
 ```
 
 ![A small pop-up window with prompt 'Enter mobile authentication code'
@@ -150,9 +159,9 @@ followed by a text input box and buttons to select 'OK' or
 
 If login is successful, the token from the API response is stored
 automatically and used for [subsequent requests](#subsequent-requests).
-Tokens become invalid when your session expires. If you have an invalid
-token in your environment, your API request will fail and you will need
-to login using your mobile authenticator again.
+[Tokens expire](#token-expiry) when they have been unused for 20 minutes
+or more - if this happens, you will need to login using your mobile
+authenticator again.
 
 Mobile authentication login attempts are limited to a maximum of 5
 failures within a 5-minute interval. After 5 failed attempts, your

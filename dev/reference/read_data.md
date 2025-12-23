@@ -64,3 +64,10 @@ the API documentation:
 - [`read_data`](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download)
 
 - [`read_data_version`](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion)
+
+## See also
+
+Other Read/write functions:
+[`download_file()`](https://ScotGovAnalysis.github.io/objr/dev/reference/download_file.md),
+[`upload_file()`](https://ScotGovAnalysis.github.io/objr/dev/reference/upload_file.md),
+[`write_data()`](https://ScotGovAnalysis.github.io/objr/dev/reference/write_data.md)

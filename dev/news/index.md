@@ -46,6 +46,12 @@
   authentication (2FA) in workgroups
   ([\#65](https://github.com/ScotGovAnalysis/objr/issues/65)).
 
+- Expiry time is now stored alongside the authentication token
+  (`token`). If a token is expired, it will be removed from the Global
+  Environment and authentication will be attempted with username and
+  password instead
+  ([\#35](https://github.com/ScotGovAnalysis/objr/issues/35)).
+
 ## objr 0.1.1
 
 - Set minimum versions for `dplyr` and `tidyr` dependencies

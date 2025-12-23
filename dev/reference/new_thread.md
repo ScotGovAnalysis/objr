@@ -44,3 +44,9 @@ API response (invisibly)
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Comments/createThread).
+
+## See also
+
+Other Comment functions:
+[`comments()`](https://ScotGovAnalysis.github.io/objr/dev/reference/comments.md),
+[`new_reply()`](https://ScotGovAnalysis.github.io/objr/dev/reference/new_reply.md)

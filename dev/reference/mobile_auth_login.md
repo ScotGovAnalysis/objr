@@ -36,3 +36,8 @@ More information on mobile authentication can be found in
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth/login).
+
+## See also
+
+Other Mobile authentication functions:
+[`mobile_auth_status()`](https://ScotGovAnalysis.github.io/objr/dev/reference/mobile_auth_status.md)

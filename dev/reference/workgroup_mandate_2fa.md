@@ -34,3 +34,9 @@ More information on two-factor authentication can be found in
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setTwoStepMandatory).
+
+## See also
+
+Other Two-factor authentication functions:
+[`participant_bypass_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/participant_bypass_2fa.md),
+[`workgroup_bypass_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/workgroup_bypass_2fa.md)

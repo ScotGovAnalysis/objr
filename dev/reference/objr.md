@@ -65,5 +65,9 @@ API response.
 
 ## Details
 
+API authentication is handled automatically. See the [Authentication
+article](https://scotgovanalysis.github.io/objr/articles/authentication.html)
+for more information.
+
 More details on endpoints are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/).
