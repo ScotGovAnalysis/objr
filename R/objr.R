@@ -121,11 +121,24 @@ objr_auth <- function(req,
                    call = error_call)
   }
 
-  if (exists("token", where = parent.frame())) {
+  token_exists <- exists("token", where = globalenv())
+
+  if (token_exists) {
+    if (get("token", pos = globalenv())$expiry < Sys.time()) {
+      remove("token", pos = globalenv())
+      token_exists <- FALSE
+      cli::cli_inform(c(
+        "i" = "Existing authentication `token` has expired.",
+        "i" = "Re-trying authentication using username/password..."
+      ))
+    }
+  }
+
+  if (token_exists) {
 
     httr2::req_headers(
       req,
-      Authorization = get("token", pos = parent.frame())$value
+      Authorization = get("token", pos = globalenv())$value
     )
 
   } else {
