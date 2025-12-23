@@ -115,13 +115,13 @@ If you have both enabled mobile authentication and registered a mobile device, y
 You can either provide the authentication code from your mobile device directly to the function:
 
 ```{r login-1}
-mobile_auth_status("123456")
+mobile_auth_login("123456")
 ```
 
 Or, if left empty, you will be prompted to enter your code in a pop-up window:
 
 ```{r login-2}
-mobile_auth_status()
+mobile_auth_login()
 ```
 
 ```{r}
