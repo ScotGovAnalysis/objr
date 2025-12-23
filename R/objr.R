@@ -171,7 +171,7 @@ store_token <- function(response,
 
   token <- list(
     value = httr2::resp_header(response, "Authorization"),
-    last_used = Sys.time()
+    expiry = Sys.time() + (20 * 60)
   )
 
   rlang::env_poke(env = store_env, nm = "token", value = token)
