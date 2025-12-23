@@ -26,6 +26,8 @@
 #'
 #' @return API response (invisibly)
 #'
+#' @family Read/write functions
+#'
 #' @export
 
 upload_file <- function(file,
@@ -149,6 +151,8 @@ upload_file_version <- function(file,
 #' @inheritParams upload_file
 #'
 #' @return API response (invisibly)
+#'
+#' @family Read/write functions
 #'
 #' @export
 

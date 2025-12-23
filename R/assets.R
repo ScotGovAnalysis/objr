@@ -20,6 +20,8 @@
 #'
 #' @return A tibble
 #'
+#' @family Asset functions
+#'
 #' @export
 
 assets <- function(workspace_uuid,
@@ -75,6 +77,8 @@ assets <- function(workspace_uuid,
 #'
 #' @return A tibble
 #'
+#' @family Asset functions
+#'
 #' @export
 
 asset_info <- function(asset_uuid,
@@ -107,6 +111,8 @@ asset_info <- function(asset_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Asset functions
 #'
 #' @export
 
@@ -143,6 +149,8 @@ delete_asset <- function(asset_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Asset functions
 #'
 #' @export
 

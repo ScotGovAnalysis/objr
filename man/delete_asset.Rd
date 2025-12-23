@@ -23,3 +23,11 @@ More details on this endpoint are available in the
 
 Note: This functionality is disabled in Scottish Government workspaces.
 }
+\seealso{
+Other Asset functions: 
+\code{\link{asset_info}()},
+\code{\link{assets}()},
+\code{\link{create_folder}()},
+\code{\link{rename_asset}()}
+}
+\concept{Asset functions}

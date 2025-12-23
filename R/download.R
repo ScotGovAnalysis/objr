@@ -84,6 +84,8 @@ download_helper <- function(document_uuid,
 #'
 #' @return Path to downloaded file (invisibly).
 #'
+#' @family Read/write functions
+#'
 #' @export
 
 download_file <- function(document_uuid,
@@ -165,6 +167,8 @@ download_file_version <- function(document_uuid,
 #' @inheritParams objr
 #'
 #' @return A [tibble][tibble::tibble-package].
+#'
+#' @family Read/write functions
 #'
 #' @export
 

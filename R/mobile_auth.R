@@ -15,6 +15,8 @@
 #' * `mobileAuthLogin`: Has the user enabled login via Mobile Authenticator?
 #' * `mobileAuthRegistered`: Has the user registered a Mobile Authenticator?
 #'
+#' @family Mobile authentication functions
+#'
 #' @export
 
 mobile_auth_status <- function(use_proxy = FALSE) {
@@ -48,6 +50,8 @@ mobile_auth_status <- function(use_proxy = FALSE) {
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Mobile authentication functions
 #'
 #' @export
 
