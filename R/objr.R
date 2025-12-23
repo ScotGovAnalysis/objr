@@ -2,7 +2,9 @@
 #'
 #' @details
 #' API authentication is handled automatically. See the
+# nolint start: line_length_linter
 #' [Authentication article](https://scotgovanalysis.github.io/objr/articles/authentication.html)
+# nolint end
 #' for more information.
 #'
 #' More details on endpoints are available in the
