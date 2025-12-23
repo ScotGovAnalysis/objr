@@ -107,9 +107,16 @@ reference:
   - mobile_auth_login
 
 articles:
-- title: Articles
-  navbar: ~
+- title: Getting started
+  navbar:
+  contents:
+  - objr
+  - faqs
+- title: Authentication
+  navbar: Authentication
   contents:
   - authentication
   - two-factor
-  - faqs
+- title: Other
+  contents:
+  - developers

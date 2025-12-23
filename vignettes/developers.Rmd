@@ -1,0 +1,96 @@
+---
+title: "Guidance for developers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Guidance for developers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(objr)
+library(testthat)
+library(httptest2)
+```
+
+The `objr` package is built using the `{httr2}` package, and the `{httptest2}` and `{withr}` packages for testing.
+
+## New functions
+
+All API request functions must use the `objr()` core request function. `objr()` handles common operations such as authentication, error handing and using a proxy. Thus additional functions need only provide input parameters to build the request and a way of parsing the response into something useful.
+
+## Unit testing
+
+In addition to `{testthat}`, unit testing is handled using the `{httptest2}` and `{withr}` packages. These allow tests to be run without the need to access the remote Objective Connect API.
+
+Tests broadly fall into one of the following categories:
+
+1. Does the function build the correct API request using the input values provided?
+
+2. Does the function handle the API response correctly?
+
+The testing environment is set up in `tests/testthat/setup.R`. This script is automatically run before any tests. Required packages are loaded, and system environment variables for API authentication are temporarily set with dummy values.
+
+To demonstrate how this works, we will write some tests for the  `create_folder()` function.
+
+### Does the function build the correct API request?
+
+The idea is to test that the arguments passed to `create_folder()` are correctly handled and passed to the API request. 
+
+By wrapping the function call in `httptest2::without_internet()`, the request will always fail, and the request is returned in an error message. Functions such as `httptest2::expect_GET()` then look for this information and test that it matches our expectation.
+
+1. View the expected request structure in the [API documentation for the `folders` endpoint](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createFolder).
+
+2. Run `create_folder()` within `httptest2::without_internet()` to view the request structure.
+
+   ```{r without-internet-1, eval = TRUE, error = TRUE}
+   without_internet(
+     create_folder(folder_name = "test_folder",
+                   workspace_uuid = "test_workspace")
+   )
+   ```
+   
+3. Choose the appropriate expectation test based on the request method. For `create_folder()`, this is `expect_POST()`. 
+
+   The first argument is the call to `create_folder()`, the second argument is the URL of the API request, then subsequent arguments are character segments of the request body. 
+   
+   This is then wrapped in a `test_that()` call, and finally wrapped in `httptest2::without_internet()`. 
+
+   ```{r without-internet-2}
+   without_internet({
+  
+     test_that("Valid request created", {
+    
+       expect_POST(
+         create_folder(
+           folder_name = "test_folder",
+           workspace_uuid = "test_workspace"
+         ),
+         "https://secure.objectiveconnect.co.uk/publicapi/1/folders",
+         "{\"name\":\"test_folder\",",
+         "\"workspaceUuid\":\"test_workspace\",",
+         "\"parentUuid\":null,",
+         "\"description\":null}"
+       )
+    
+     })
+  
+   })
+   ```
+
+These tests can take some trial and error to write for the first time, however, error messages from test failures are fairly useful to see where there is a mismatch.
+
+
+### Does the function handle the API response correctly?
+
+Now we know that the correct request is being sent to the API, we can now shift our attention to testing how the function handles the API response.
+
+
+
+
+
