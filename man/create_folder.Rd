@@ -35,3 +35,11 @@ Create a new folder
 More details on this endpoint are available in the
 \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createFolder}{API documentation}.
 }
+\seealso{
+Other Asset functions: 
+\code{\link{asset_info}()},
+\code{\link{assets}()},
+\code{\link{delete_asset}()},
+\code{\link{rename_asset}()}
+}
+\concept{Asset functions}

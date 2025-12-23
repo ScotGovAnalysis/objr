@@ -51,7 +51,7 @@ download_helper <- function(document_uuid,
     # Read data from file path
     x <- read_temp(new_path, ...)
 
-    return(x)
+    x
 
   }
 
@@ -83,6 +83,8 @@ download_helper <- function(document_uuid,
 #' @inheritParams objr
 #'
 #' @return Path to downloaded file (invisibly).
+#'
+#' @family Read/write functions
 #'
 #' @export
 
@@ -165,6 +167,8 @@ download_file_version <- function(document_uuid,
 #' @inheritParams objr
 #'
 #' @return A [tibble][tibble::tibble-package].
+#'
+#' @family Read/write functions
 #'
 #' @export
 

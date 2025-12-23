@@ -16,6 +16,8 @@
 #'
 #' @return API response (invisibly)
 #'
+#' @family Asset functions
+#'
 #' @export
 
 create_folder <- function(folder_name,

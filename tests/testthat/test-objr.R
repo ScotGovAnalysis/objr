@@ -28,6 +28,7 @@ with_mock_api({
 
   test_that("Valid response", {
     user <- objr("me", use_proxy = TRUE)
+    expect_s3_class(user, "httr2_response")
     expect_equal(httr2::resp_body_json(user)$uuid, "1234")
   })
 
@@ -42,13 +43,38 @@ test_that("Error if invalid request supplied", {
 
 req <- httr2::request("www.example.com")
 
-test_that("httr2 request returned", {
+test_that("Success if valid token exists", {
 
-  .GlobalEnv$token <- "test" # nolint: object_name_linter
+  .GlobalEnv$token <- list( # nolint: object_name_linter
+    value = "test",
+    expiry = structure(Sys.time() + 60,
+                       class = c("POSIXct", "POSIXt"))
+  )
 
   expect_s3_class(objr_auth(req), "httr2_request")
+  # expect_equal(objr_auth(req)$headers$Authorization, "test")
 
   rm(token, pos = .GlobalEnv)
+
+})
+
+test_that("Uses usr/pwd if token exists but is expired", {
+
+  .GlobalEnv$token <- list( # nolint: object_name_linter
+    value = "test",
+    expiry = structure(Sys.time() - 60,
+                       class = c("POSIXct", "POSIXt"))
+  )
+
+  req_auth <- suppressMessages(objr_auth(req))
+
+  # expect_true(
+  #   grepl("^Basic", req_auth$headers$Authorization)
+  # )
+
+  expect_false(
+    exists("token", where = .GlobalEnv)
+  )
 
 })
 
@@ -100,7 +126,13 @@ test_that("Response returned invisibly", {
 test_that("Environment value created successfully", {
   httr2::response(headers = list(Authorization = "test2")) |>
     store_token(store_env = environment())
+
   expect_true(exists("token"))
+  expect_type(get("token"), "list")
+  expect_equal(names(get("token")), c("value", "expiry"))
+  expect_equal(get("token")$value, "test2")
+  expect_type(get("token")$value, "character")
+  expect_s3_class(get("token")$expiry, "POSIXct")
 })
 
 

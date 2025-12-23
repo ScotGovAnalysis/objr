@@ -77,3 +77,10 @@ API documentation:
 \item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocumentVersion_1}{\code{write_data_version}}
 }
 }
+\seealso{
+Other Read/write functions: 
+\code{\link{download_file}()},
+\code{\link{read_data}()},
+\code{\link{upload_file}()}
+}
+\concept{Read/write functions}

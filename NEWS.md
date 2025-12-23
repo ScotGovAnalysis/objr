@@ -26,6 +26,10 @@ types) or a list of length 1.
 * New `workgroup_mandate_2fa()` provides ability to enable or disable mandatory 
 two-factor authentication (2FA) in workgroups (#65).
 
+* Expiry time is now stored alongside the authentication token (`token`). If a 
+token is expired, it will be removed from the Global Environment and 
+authentication will be attempted with username and password instead (#35).
+
 # objr 0.1.1
 
 * Set minimum versions for `dplyr` and `tidyr` dependencies (#32).

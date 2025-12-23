@@ -20,6 +20,8 @@
 #'
 #' @return A tibble
 #'
+#' @family Asset functions
+#'
 #' @export
 
 assets <- function(workspace_uuid,
@@ -37,7 +39,8 @@ assets <- function(workspace_uuid,
         "There is currently a bug in the underlying API preventing",
         "users from selecting more than one asset type. See",
         "{.href [objr#53](https://github.com/ScotGovAnalysis/objr/issues/53)}",
-        "for more information."),
+        "for more information."
+      ),
       "i" = paste("To return all assets, use `type = list()` (default)."),
       "i" = paste("To return one asset type only, e.g. documents, use",
                   "`type = list(\"document\")`. See `?assets` for all",
@@ -75,6 +78,8 @@ assets <- function(workspace_uuid,
 #'
 #' @return A tibble
 #'
+#' @family Asset functions
+#'
 #' @export
 
 asset_info <- function(asset_uuid,
@@ -107,6 +112,8 @@ asset_info <- function(asset_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Asset functions
 #'
 #' @export
 
@@ -143,6 +150,8 @@ delete_asset <- function(asset_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Asset functions
 #'
 #' @export
 

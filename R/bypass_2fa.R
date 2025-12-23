@@ -16,6 +16,8 @@
 #'
 #' @return API response (invisibly)
 #'
+#' @family Two-factor authentication functions
+#'
 #' @export
 
 workgroup_bypass_2fa <- function(workgroup_uuid,
@@ -63,6 +65,8 @@ workgroup_bypass_2fa <- function(workgroup_uuid,
 #'
 #' @return API response (invisibly)
 #'
+#' @family Two-factor authentication functions
+#'
 #' @export
 
 participant_bypass_2fa <- function(participant_uuid,
@@ -105,6 +109,8 @@ participant_bypass_2fa <- function(participant_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Two-factor authentication functions
 #'
 #' @export
 
