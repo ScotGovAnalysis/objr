@@ -85,7 +85,13 @@ Where this object exists, `objr` will automatically use it to authenticate subse
 
 If this object doesn't exist, `objr` will resort to using your username and password, as it did for your [first request](#first-request).
 
-Tokens become invalid when your session expires. If you have an invalid token in your environment, your API request will fail and you will be prompted to remove the token and try again using your username and password.
+### Token expiry 
+
+Tokens expire when they have been unused for 20 minutes or more. You can see the expiry time of your current token by viewing `token$expiry`. 
+
+If you try to make a request with an expired token in your environment, it will be removed, and `objr` will try to use your username and password instead. 
+
+Note that if you are using [mobile authentication](#mobileauth), this will still fail, and you should login again using `mobile_auth_login()` to generate a new token.
 
 
 ## Multi-factor authentication {#mfa}
@@ -140,6 +146,6 @@ cli::cli_alert_success(
 )
 ```
 
-If login is successful, the token from the API response is stored automatically and used for [subsequent requests](#subsequent-requests). Tokens become invalid when your session expires. If you have an invalid token in your environment, your API request will fail and you will need to login using your mobile authenticator again.
+If login is successful, the token from the API response is stored automatically and used for [subsequent requests](#subsequent-requests). [Tokens expire](#token-expiry) when they have been unused for 20 minutes or more - if this happens, you will need to login using your mobile authenticator again.
 
 Mobile authentication login attempts are limited to a maximum of 5 failures within a 5-minute interval. After 5 failed attempts, your Objective Connect account will be locked. To regain access, wait for 5 mins and then try logging in again.
