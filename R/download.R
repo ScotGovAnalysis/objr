@@ -51,7 +51,7 @@ download_helper <- function(document_uuid,
     # Read data from file path
     x <- read_temp(new_path, ...)
 
-    return(x)
+    x
 
   }
 
