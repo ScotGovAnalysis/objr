@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.1.1.9000</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.2.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,17 +40,28 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="objr-development-version">objr (development version)<a class="anchor" aria-label="anchor" href="#objr-development-version"></a></h2>
-<ul><li><p>Added <code>CONTRIBUTING.md</code> and <code>SUPPORT.md</code> (<a href="https://github.com/ScotGovAnalysis/objr/issues/36" class="external-link">#36</a>).</p></li>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.2.0" id="objr-020">objr 0.2.0<a class="anchor" aria-label="anchor" href="#objr-020"></a></h2>
+<div class="section level3">
+<h3 id="new-features-0-2-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-2-0"></a></h3>
+<ul><li><p>New <code><a href="../reference/mobile_auth_status.html">mobile_auth_status()</a></code> and <code><a href="../reference/mobile_auth_login.html">mobile_auth_login()</a></code> support use of <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth" class="external-link">mobile authentication</a> (<a href="https://github.com/ScotGovAnalysis/objr/issues/52" class="external-link">#52</a>).</p></li>
+<li><p>New <code><a href="../reference/workgroup_mandate_2fa.html">workgroup_mandate_2fa()</a></code> provides ability to enable or disable mandatory two-factor authentication (2FA) in workgroups (<a href="https://github.com/ScotGovAnalysis/objr/issues/65" class="external-link">#65</a>).</p></li>
+<li><p><code><a href="../reference/read_data.html">read_data()</a></code> and <code><a href="../reference/write_data.html">write_data()</a></code> now support reading and writing of parquet files (<a href="https://github.com/ScotGovAnalysis/objr/issues/54" class="external-link">#54</a>).</p></li>
+<li><p><code><a href="../reference/download_file.html">download_file()</a></code> gains a <code>file_name</code> argument to supply a custom name (<a href="https://github.com/ScotGovAnalysis/objr/issues/37" class="external-link">#37</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="lifecycle-changes-0-2-0">Lifecycle changes<a class="anchor" aria-label="anchor" href="#lifecycle-changes-0-2-0"></a></h3>
+<ul><li>In <code><a href="../reference/assets.html">assets()</a></code>, <code>type</code> now expects a string instead of a list. This was prompted by a change to the underlying API, where results can now only be filtered by one asset type at a time (<a href="https://github.com/ScotGovAnalysis/objr/issues/53" class="external-link">#53</a>).</li>
+</ul></div>
+<div class="section level3">
+<h3 id="minor-improvements-and-bug-fixes-0-2-0">Minor improvements and bug fixes<a class="anchor" aria-label="anchor" href="#minor-improvements-and-bug-fixes-0-2-0"></a></h3>
+<ul><li><p>Expiry time is now stored alongside the authentication token (<code>token</code>). If a token is expired, it will be removed from the Global Environment and authentication will be attempted with username and password instead (<a href="https://github.com/ScotGovAnalysis/objr/issues/35" class="external-link">#35</a>).</p></li>
 <li><p><code><a href="../reference/download_file.html">download_file()</a></code> now returns file path (invisibly) (<a href="https://github.com/ScotGovAnalysis/objr/issues/38" class="external-link">#38</a>).</p></li>
-<li><p><code><a href="../reference/download_file.html">download_file()</a></code> now accepts custom file name in <code>file_name</code> argument (<a href="https://github.com/ScotGovAnalysis/objr/issues/37" class="external-link">#37</a>).</p></li>
 <li><p><code><a href="../reference/download_file.html">download_file()</a></code> now writes files with percent-decoded names (e.g. <code>file%20name.csv</code> is now <code>file name.csv</code>) (<a href="https://github.com/ScotGovAnalysis/objr/issues/34" class="external-link">#34</a>).</p></li>
 <li><p>Fixed an issue where temporary files sometimes persisted after running <code><a href="../reference/download_file.html">download_file()</a></code> or <code><a href="../reference/read_data.html">read_data()</a></code> (<a href="https://github.com/ScotGovAnalysis/objr/issues/39" class="external-link">#39</a>).</p></li>
-<li><p>Added support for parquet files in <code>read/write_data</code> and <code>read/write_data_version()</code>(<a href="https://github.com/ScotGovAnalysis/objr/issues/54" class="external-link">#54</a>).</p></li>
-<li><p>Added support for <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth" class="external-link">mobile authentication</a> to view status (<code>mobile_auth_staus()</code>) and to login (<code><a href="../reference/mobile_auth_login.html">mobile_auth_login()</a></code>) (<a href="https://github.com/ScotGovAnalysis/objr/issues/52" class="external-link">#52</a>).</p></li>
-<li><p>In <code><a href="../reference/assets.html">assets()</a></code>, <code>type</code> now expects a string instead of a list. This was prompted by a change to the underlying API, where results can now only be filtered by one asset type at a time (<a href="https://github.com/ScotGovAnalysis/objr/issues/53" class="external-link">#53</a>).</p></li>
-<li><p>New <code><a href="../reference/workgroup_mandate_2fa.html">workgroup_mandate_2fa()</a></code> provides ability to enable or disable mandatory two-factor authentication (2FA) in workgroups (<a href="https://github.com/ScotGovAnalysis/objr/issues/65" class="external-link">#65</a>).</p></li>
-<li><p>Expiry time is now stored alongside the authentication token (<code>token</code>). If a token is expired, it will be removed from the Global Environment and authentication will be attempted with username and password instead (<a href="https://github.com/ScotGovAnalysis/objr/issues/35" class="external-link">#35</a>).</p></li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="objr-011">objr 0.1.1<a class="anchor" aria-label="anchor" href="#objr-011"></a></h2>
 <ul><li>Set minimum versions for <code>dplyr</code> and <code>tidyr</code> dependencies (<a href="https://github.com/ScotGovAnalysis/objr/issues/32" class="external-link">#32</a>).</li>
