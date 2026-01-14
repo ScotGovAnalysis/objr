@@ -287,6 +287,8 @@ convert_to_epoch <- function(date_time,
 #' Convert number of milliseconds to epoch to date or datetime object
 #'
 #' @param x Numeric.
+#' @param tz Character string, passed to `as.POSIXct`. Default value of "" uses
+#' current time zone.
 #'
 #' @details If NULL is supplied, NULL is returned.
 #'
@@ -298,6 +300,7 @@ convert_to_epoch <- function(date_time,
 #' @noRd
 
 convert_from_epoch <- function(x,
+                               tz = "",
                                error_arg = rlang::caller_arg(x),
                                error_call = rlang::caller_env()) {
 
@@ -313,6 +316,6 @@ convert_from_epoch <- function(x,
     )
   }
 
-  as.POSIXct(x / 1000, origin = "1970-01-01")
+  as.POSIXct(x / 1000, origin = "1970-01-01", tz = tz)
 
 }
