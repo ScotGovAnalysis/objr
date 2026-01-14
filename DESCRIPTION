@@ -16,6 +16,7 @@ Imports:
     curl,
     dplyr (>= 1.1.4),
     httr2,
+    lifecycle,
     magrittr,
     rlang,
     rstudioapi,

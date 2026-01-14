@@ -7,14 +7,8 @@
 # nolint end
 #'
 #' @param workspace_uuid UUID of workspace
-#' @param type List of asset types to return. Default returns all types;
-#' "document", "folder" and "link".
-#'
-#' List must be empty (default, returns all asset types), or length 1 (e.g.
-#' `list("document")`). This is a temporary measure while a bug in the
-#' underlying API is outstanding (see
-#' [objr#53](https://github.com/ScotGovAnalysis/objr/issues/53)).
-#'
+#' @param type Asset type to filter results by. Either "document", "folder" or
+#'  "link". Default returns all asset types.
 #' @inheritParams objr
 #' @inheritParams workspaces
 #'
@@ -25,35 +19,38 @@
 #' @export
 
 assets <- function(workspace_uuid,
-                   type = list(),
+                   type = NULL,
                    page = NULL,
                    size = NULL,
                    use_proxy = FALSE) {
 
-  check_list(type)
-
-  if (length(type) > 1) {
-    cli::cli_abort(c(
-      "x" = "{.arg type} must be a list of length 0 or 1, not {length(type)}.",
-      "i" = paste(
-        "There is currently a bug in the underlying API preventing",
-        "users from selecting more than one asset type. See",
-        "{.href [objr#53](https://github.com/ScotGovAnalysis/objr/issues/53)}",
-        "for more information."
-      ),
-      "i" = paste("To return all assets, use `type = list()` (default)."),
-      "i" = paste("To return one asset type only, e.g. documents, use",
-                  "`type = list(\"document\")`. See `?assets` for all",
-                  "options.")
-    ))
+  if (rlang::is_list(type)) {
+    lifecycle::deprecate_warn(
+      when = "0.2.0",
+      what = "assets(type = 'must be a character string')",
+      details = "All asset types are returned.",
+      always = TRUE
+    )
+    type <- NULL
   }
 
-  type <- paste(toupper(type), collapse = "|")
+  if (!is.null(type)) {
+    if (!rlang::is_string(type)) {
+      cli::cli_abort(
+        "`type` must be a string, length 1."
+      )
+    }
+    if (!type %in% c("document", "folder", "link")) {
+      cli::cli_abort(
+        "`type` must be one of {.str document}, {.str folder} or {.str link}."
+      )
+    }
+  }
 
   response <- objr(
     endpoint = "assets",
     url_query = list(workspaceUuid = workspace_uuid,
-                     type = type,
+                     type = toupper(type),
                      page = page,
                      size = size),
     use_proxy = use_proxy
