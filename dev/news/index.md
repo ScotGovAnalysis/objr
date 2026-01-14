@@ -33,12 +33,12 @@
   ([`mobile_auth_login()`](https://ScotGovAnalysis.github.io/objr/dev/reference/mobile_auth_login.md))
   ([\#52](https://github.com/ScotGovAnalysis/objr/issues/52)).
 
-- Temporary fix to
-  [`assets()`](https://ScotGovAnalysis.github.io/objr/dev/reference/assets.md)
-  to account for bug in underlying API
-  ([\#53](https://github.com/ScotGovAnalysis/objr/issues/53)). The
-  `type` argument now only accepts an empty list (default to return all
-  asset types) or a list of length 1.
+- In
+  [`assets()`](https://ScotGovAnalysis.github.io/objr/dev/reference/assets.md),
+  `type` now expects a string instead of a list. This was prompted by a
+  change to the underlying API, where results can now only be filtered
+  by one asset type at a time
+  ([\#53](https://github.com/ScotGovAnalysis/objr/issues/53)).
 
 - New
   [`workgroup_mandate_2fa()`](https://ScotGovAnalysis.github.io/objr/dev/reference/workgroup_mandate_2fa.md)
