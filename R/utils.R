@@ -183,9 +183,7 @@ random_uuid <- function(seed = NULL) {
 #'
 #' @return `uuid`, invisibly.
 #'
-#' @details See the [Getting Started vignette]
-#'   (https://scotgovanalysis.github.io/objr/
-#'   articles/objr.html#universally-unique-identifiers) for valid UUID format.
+#' @details See the [Getting Started vignette](https://scotgovanalysis.github.io/objr/articles/objr.html#universally-unique-identifiers) for valid UUID format. # nolint: line_length_linter.
 #'
 #' @noRd
 
