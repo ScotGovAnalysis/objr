@@ -7,7 +7,7 @@ Get data frame of assets in workspace
 ``` r
 assets(
   workspace_uuid,
-  type = list(),
+  type = NULL,
   page = NULL,
   size = NULL,
   use_proxy = FALSE
@@ -22,13 +22,8 @@ assets(
 
 - type:
 
-  List of asset types to return. Default returns all types; "document",
-  "folder" and "link".
-
-  List must be empty (default, returns all asset types), or length 1
-  (e.g. `list("document")`). This is a temporary measure while a bug in
-  the underlying API is outstanding (see
-  [objr#53](https://github.com/ScotGovAnalysis/objr/issues/53)).
+  Asset type to filter results by. Either "document", "folder" or
+  "link". Default returns all asset types.
 
 - page:
 
