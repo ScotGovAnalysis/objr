@@ -1,4 +1,5 @@
 library(httptest2)
+library(httr2)
 library(withr)
 
 withr::local_envvar(
