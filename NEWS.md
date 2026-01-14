@@ -19,9 +19,9 @@
 to view status (`mobile_auth_staus()`) and to login (`mobile_auth_login()`)
 (#52).
 
-* Temporary fix to `assets()` to account for bug in underlying API (#53).
-The `type` argument now only accepts an empty list (default to return all asset 
-types) or a list of length 1.
+* In `assets()`, `type` now expects a string instead of a list. This was 
+prompted by a change to the underlying API, where results can now only be 
+filtered by one asset type at a time (#53).
 
 * New `workgroup_mandate_2fa()` provides ability to enable or disable mandatory 
 two-factor authentication (2FA) in workgroups (#65).
