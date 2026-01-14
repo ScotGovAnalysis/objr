@@ -51,8 +51,9 @@ test_that("Success if valid token exists", {
                        class = c("POSIXct", "POSIXt"))
   )
 
-  expect_s3_class(objr_auth(req), "httr2_request")
-  # expect_equal(objr_auth(req)$headers$Authorization, "test")
+  x <- objr_auth(req)
+  expect_s3_class(x, "httr2_request")
+  expect_equal(req_get_headers(x, redacted = "reveal")$Authorization, "test")
 
   rm(token, pos = .GlobalEnv)
 
@@ -68,9 +69,10 @@ test_that("Uses usr/pwd if token exists but is expired", {
 
   req_auth <- suppressMessages(objr_auth(req))
 
-  # expect_true(
-  #   grepl("^Basic", req_auth$headers$Authorization)
-  # )
+  expect_true(
+    grepl("^Basic",
+          req_get_headers(req_auth, redacted = "reveal")$Authorization)
+  )
 
   expect_false(
     exists("token", where = .GlobalEnv)
@@ -78,28 +80,38 @@ test_that("Uses usr/pwd if token exists but is expired", {
 
 })
 
-# test_that("Correct authentication used", {
-#
-#   expect_true(grepl("^Basic ", objr_auth(req)$headers$Authorization))
-#
-#   .GlobalEnv$token <- "test" # nolint: object_name_linter
-#
-#   exp_token1 <- objr_auth(req)
-#   expect_equal(exp_token1$headers$Authorization, "test")
-#
-#   # Token used even when no username and password supplied
-#   with_envvar(
-#     new = c("OBJR_USR" = "",
-#             "OBJR_PWD" = ""),
-#     code = {
-#       exp_token2 <- objr_auth(req)
-#       expect_equal(exp_token2$headers$Authorization, "test")
-#     }
-#   )
-#
-#   rm(token, pos = .GlobalEnv)
-#
-# })
+test_that("Correct authentication used", {
+
+  req1 <- objr_auth(req)
+  expect_true(grepl("^Basic ",
+                    req_get_headers(req1, redacted = "reveal")$Authorization))
+
+  .GlobalEnv$token <- list( # nolint: object_name_linter
+    value = "test",
+    expiry = structure(Sys.time() + 60,
+                       class = c("POSIXct", "POSIXt"))
+  )
+
+  exp_token1 <- objr_auth(req)
+  expect_equal(req_get_headers(exp_token1, redacted = "reveal")$Authorization,
+               "test")
+
+  # Token used even when no username and password supplied
+  with_envvar(
+    new = c("OBJR_USR" = "",
+            "OBJR_PWD" = ""),
+    code = {
+      exp_token2 <- objr_auth(req)
+      expect_equal(
+        req_get_headers(exp_token2, redacted = "reveal")$Authorization,
+        "test"
+      )
+    }
+  )
+
+  rm(token, pos = .GlobalEnv)
+
+})
 
 
 # store_token ----
@@ -150,11 +162,11 @@ test_that("Expect character value returned", {
     "character"
   )
 
-  # expect_type(
-  #   error(httr2::response(status_code = 403,
-  #                         body = list(description = "x"))),
-  #   "character"
-  # )
+  expect_type(
+    error(httr2::response_json(status_code = 403,
+                               body = list(description = "x"))),
+    "character"
+  )
 
   expect_type(
     error(httr2::response_json(
