@@ -1,4 +1,4 @@
-# objr (development version)
+# objr 0.2.0
 
 ## New features
 
