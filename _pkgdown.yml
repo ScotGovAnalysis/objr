@@ -113,7 +113,7 @@ articles:
   - objr
   - faqs
 - title: Authentication
-  navbar: Authentication
+  navbar:
   contents:
   - authentication
   - two-factor
