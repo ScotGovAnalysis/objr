@@ -18,9 +18,9 @@ library(testthat)
 library(httptest2)
 ```
 
-The `objr` package is built using the `{httr2}` package, and the `{httptest2}` and `{withr}` packages for testing.
-
 ## New functions
+
+The `objr` package is built using the `{httr2}` package, and all new functionality should use this by default.
 
 All API request functions must use the `objr()` core request function. `objr()` handles common operations such as authentication, error handing and using a proxy. Thus additional functions need only provide input parameters to build the request and a way of parsing the response into something useful.
 
@@ -36,7 +36,11 @@ Tests broadly fall into one of the following categories:
 
 The testing environment is set up in `tests/testthat/setup.R`. This script is automatically run before any tests. Required packages are loaded, and system environment variables for API authentication are temporarily set with dummy values.
 
-To demonstrate how this works, we will write some tests for the  `create_folder()` function.
+To demonstrate how this works, we will write some tests for the  `create_folder()` function. First, create a test file:
+
+```{r use_test, eval = FALSE}
+usethis::use_test("create_folder")
+```
 
 ### Does the function build the correct API request?
 
@@ -89,8 +93,3 @@ These tests can take some trial and error to write for the first time, however, 
 ### Does the function handle the API response correctly?
 
 Now we know that the correct request is being sent to the API, we can now shift our attention to testing how the function handles the API response.
-
-
-
-
-
