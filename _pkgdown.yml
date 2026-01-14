@@ -1,4 +1,4 @@
-url: https://scotgovanalysis.github.io/objr
+url: https://ScotGovAnalysis.github.io/objr
 
 development:
   mode: auto
@@ -91,11 +91,20 @@ reference:
   - new_thread
   - new_reply
 
-- title: Two-factor authentication
+- title: Authentication
+
+- subtitle: Two-factor authentication
   desc: See `vignette("two-factor")` for more information.
   contents:
+  - workgroup_mandate_2fa
   - workgroup_bypass_2fa
   - participant_bypass_2fa
+
+- subtitle: Mobile authentication
+  desc: See vignette for more information.
+  contents:
+  - mobile_auth_status
+  - mobile_auth_login
 
 articles:
 - title: Articles

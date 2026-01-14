@@ -51,7 +51,7 @@ download_helper <- function(document_uuid,
     # Read data from file path
     x <- read_temp(new_path, ...)
 
-    return(x)
+    x
 
   }
 
@@ -83,6 +83,8 @@ download_helper <- function(document_uuid,
 #' @inheritParams objr
 #'
 #' @return Path to downloaded file (invisibly).
+#'
+#' @family Read/write functions
 #'
 #' @export
 
@@ -132,7 +134,7 @@ download_file_version <- function(document_uuid,
 #'
 #' @details
 #' This function can be used to read the following data file types:
-#' csv, rds, xlsx.
+#' csv, rds, xlsx, parquet.
 #'
 #' The function works by downloading the file from Objective Connect to a
 #' temporary file and reading it into R. The following functions are used to
@@ -143,6 +145,7 @@ download_file_version <- function(document_uuid,
 #' | csv | \code{readr::read_csv()} |
 #' | rds | \code{readr::read_rds()} |
 #' | xlsx | \code{readxl::read_xlsx()} |
+#' | parquet | \code{nanoparquet::read_parquet()} |
 #'
 #' To check what file type your document is (and thus what function additional
 #' arguments will be passed to), use \code{asset_info()}.
@@ -164,6 +167,8 @@ download_file_version <- function(document_uuid,
 #' @inheritParams objr
 #'
 #' @return A [tibble][tibble::tibble-package].
+#'
+#' @family Read/write functions
 #'
 #' @export
 

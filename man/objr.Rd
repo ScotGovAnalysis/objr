@@ -45,6 +45,10 @@ API response.
 Core request function
 }
 \details{
+API authentication is handled automatically. See the
+\href{https://scotgovanalysis.github.io/objr/articles/authentication.html}{Authentication article}
+for more information.
+
 More details on endpoints are available in the
 \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/}{API documentation}.
 }

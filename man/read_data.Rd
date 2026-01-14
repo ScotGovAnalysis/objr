@@ -28,7 +28,7 @@ version of a document.
 }
 \details{
 This function can be used to read the following data file types:
-csv, rds, xlsx.
+csv, rds, xlsx, parquet.
 
 The function works by downloading the file from Objective Connect to a
 temporary file and reading it into R. The following functions are used to
@@ -37,6 +37,7 @@ read the data and any additional arguments (\code{...}) will be passed to these.
    csv \tab \code{readr::read_csv()} \cr
    rds \tab \code{readr::read_rds()} \cr
    xlsx \tab \code{readxl::read_xlsx()} \cr
+   parquet \tab \code{nanoparquet::read_parquet()} \cr
 }
 
 
@@ -53,3 +54,10 @@ API documentation:
 \item \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion}{\code{read_data_version}}
 }
 }
+\seealso{
+Other Read/write functions: 
+\code{\link{download_file}()},
+\code{\link{upload_file}()},
+\code{\link{write_data}()}
+}
+\concept{Read/write functions}

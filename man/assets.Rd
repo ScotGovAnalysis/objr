@@ -6,7 +6,7 @@
 \usage{
 assets(
   workspace_uuid,
-  type = list("document", "folder", "link"),
+  type = NULL,
   page = NULL,
   size = NULL,
   use_proxy = FALSE
@@ -15,8 +15,8 @@ assets(
 \arguments{
 \item{workspace_uuid}{UUID of workspace}
 
-\item{type}{List of asset types to return. Defaults to all types;
-document, folder and link.}
+\item{type}{Asset type to filter results by. Either "document", "folder" or
+"link". Default returns all asset types.}
 
 \item{page}{Page number of responses to return (0..N). Default is 0.}
 
@@ -34,3 +34,11 @@ Get data frame of assets in workspace
 More details on this endpoint are available in the
 \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/getAssets}{API documentation}.
 }
+\seealso{
+Other Asset functions: 
+\code{\link{asset_info}()},
+\code{\link{create_folder}()},
+\code{\link{delete_asset}()},
+\code{\link{rename_asset}()}
+}
+\concept{Asset functions}

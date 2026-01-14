@@ -17,3 +17,12 @@ A user can get their User UUID by running `my_user_id()`. A user can find their 
 ## Can I use the objr package to interact with eRDM?
 
 Unfortunately, no. Although both eRDM and Connect are [Objective](https://www.objective.co.uk/) products, their API's are considerably different. The objr package currently works for Objective Connect only, although it may be developed in the future to work with eRDM.
+
+
+## Can I use objr with two-factor or mobile authentication?
+
+Yes. The following articles provide more information on how to use these:
+
+* [Two-factor authentication](./two-factor.html)
+
+* [Mobile authentication](./authentication.html#mobileauth)

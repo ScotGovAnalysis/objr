@@ -16,6 +16,8 @@
 #'
 #' @return API response (invisibly)
 #'
+#' @family Two-factor authentication functions
+#'
 #' @export
 
 workgroup_bypass_2fa <- function(workgroup_uuid,
@@ -63,6 +65,8 @@ workgroup_bypass_2fa <- function(workgroup_uuid,
 #'
 #' @return API response (invisibly)
 #'
+#' @family Two-factor authentication functions
+#'
 #' @export
 
 participant_bypass_2fa <- function(participant_uuid,
@@ -80,6 +84,51 @@ participant_bypass_2fa <- function(participant_uuid,
   if (httr2::resp_status(response) == 204) {
     cli::cli_alert_success(
       "Bypass 2FA setting successfully updated for participant."
+    )
+  }
+
+  invisible(response)
+
+}
+
+
+#' Enable/disable mandatory two-factor authentication for workgroup
+#'
+#' @details
+#' More information on two-factor authentication can be found in
+#' `vignette("two-factor")`.
+#'
+#' More details on this endpoint are available in the
+# nolint start: line_length_linter
+#' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setTwoStepMandatory}{API documentation}.
+# nolint end
+#'
+#' @param workgroup_uuid Workgroup UUID
+#' @param mandate Logical to indicate whether two-factor authentication should
+#' be mandatory in the workgroup
+#' @inheritParams objr
+#'
+#' @return API response (invisibly)
+#'
+#' @family Two-factor authentication functions
+#'
+#' @export
+
+workgroup_mandate_2fa <- function(workgroup_uuid,
+                                  mandate = TRUE,
+                                  use_proxy = FALSE) {
+
+  response <- objr(
+    endpoint = "workgroups",
+    url_path = list(workgroup_uuid, "twostepmandatory"),
+    method = "PUT",
+    body = list(twoStepMandatory = tolower(mandate)),
+    use_proxy = use_proxy
+  )
+
+  if (httr2::resp_status(response) == 204) {
+    cli::cli_alert_success(
+      "Mandatory 2FA setting successfully updated for workgroup."
     )
   }
 

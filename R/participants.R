@@ -11,6 +11,8 @@
 #'
 #' @return A tibble
 #'
+#' @seealso [add_participants()]
+#'
 #' @export
 
 participants <- function(workspace_uuid, use_proxy = FALSE) {
@@ -85,6 +87,8 @@ participants <- function(workspace_uuid, use_proxy = FALSE) {
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @seealso [participants()]
 #'
 #' @export
 

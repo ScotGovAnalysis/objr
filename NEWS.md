@@ -10,7 +10,25 @@
 (e.g. `file%20name.csv` is now `file name.csv`) (#34).
 
 * Fixed an issue where temporary files sometimes persisted after running 
-`download_file()` or `read_file()` (#39).
+`download_file()` or `read_data()` (#39).
+
+* Added support for parquet files in `read/write_data` and 
+`read/write_data_version()`(#54).
+
+* Added support for [mobile authentication](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/MobileAuth)
+to view status (`mobile_auth_staus()`) and to login (`mobile_auth_login()`)
+(#52).
+
+* Temporary fix to `assets()` to account for bug in underlying API (#53).
+The `type` argument now only accepts an empty list (default to return all asset 
+types) or a list of length 1.
+
+* New `workgroup_mandate_2fa()` provides ability to enable or disable mandatory 
+two-factor authentication (2FA) in workgroups (#65).
+
+* Expiry time is now stored alongside the authentication token (`token`). If a 
+token is expired, it will be removed from the Global Environment and 
+authentication will be attempted with username and password instead (#35).
 
 # objr 0.1.1
 

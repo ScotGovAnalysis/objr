@@ -1,6 +1,12 @@
 #' Core request function
 #'
 #' @details
+#' API authentication is handled automatically. See the
+# nolint start: line_length_linter
+#' [Authentication article](https://scotgovanalysis.github.io/objr/articles/authentication.html)
+# nolint end
+#' for more information.
+#'
 #' More details on endpoints are available in the
 # nolint start: line_length_linter
 #' \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/}{API documentation}.
@@ -8,13 +14,13 @@
 #'
 #' @param endpoint The endpoint to append to the API server address.
 #' @param url_path A list of values to be added to the request URL path.
-#' Values will be separated with `/`.
+#'   Values will be separated with `/`.
 #' @param url_query A list of named values to define query parameters.
 #' @param method HTTP method to use; e.g. `"GET"`, `"POST"`, `"PUT"`.
-#' Defaults to `"GET"`.
+#'   Defaults to `"GET"`.
 #' @param body A list of named values to be passed to the request body.
 #' @param path Optional file path to save body of request (mainly used when
-#' downloading files).
+#'   downloading files).
 #' @param accept Accept header. Defaults to `"application/json"`.
 #' @param content_type Content-Type header. Defaults to `"application/json"`.
 #' @param use_proxy Logical to indicate whether to use proxy.
@@ -121,11 +127,24 @@ objr_auth <- function(req,
                    call = error_call)
   }
 
-  if (exists("token", where = parent.frame())) {
+  token_exists <- exists("token", where = globalenv())
+
+  if (token_exists) {
+    if (get("token", pos = globalenv())$expiry < Sys.time()) {
+      remove("token", pos = globalenv())
+      token_exists <- FALSE
+      cli::cli_inform(c(
+        "i" = "Existing authentication `token` has expired.",
+        "i" = "Re-trying authentication using username/password..."
+      ))
+    }
+  }
+
+  if (token_exists) {
 
     httr2::req_headers(
       req,
-      Authorization = get("token", pos = parent.frame())
+      Authorization = get("token", pos = globalenv())$value
     )
 
   } else {
@@ -147,7 +166,7 @@ objr_auth <- function(req,
 #' header.
 #' @param store_env The environment to bind the token to.
 #'
-#' @return Returns the token invisibly. This function is primarily used
+#' @return API response (invisibly). This function is primarily used
 #' for its side effect - an environment variable is created called "token".
 #'
 #' @noRd
@@ -169,11 +188,12 @@ store_token <- function(response,
                    call = error_call)
   }
 
-  token <- httr2::resp_header(response, "Authorization")
+  token <- list(
+    value = httr2::resp_header(response, "Authorization"),
+    expiry = Sys.time() + (20 * 60)
+  )
 
-  if (!exists("token", where = store_env)) {
-    rlang::env_poke(env = store_env, nm = "token", value = token)
-  }
+  rlang::env_poke(env = store_env, nm = "token", value = token)
 
   invisible(response)
 
@@ -235,6 +255,19 @@ error <- function(response) {
           "For more information, see",
           "https://scotgovanalysis.github.io/objr/articles/two-factor.html"
         )
+      )
+    } else if (!is.null(desc) && grepl("MFA is required", desc)) {
+      message <- c(
+        "!" = "Mobile authentication is required.",
+        "i" = "Use `objr::mobile_auth_login()` to authenticate.",
+        "i" = paste(
+          "For more information, see",
+          "https://scotgovanalysis.github.io/objr/articles/authentication.html"
+        )
+      )
+    } else if (!is.null(desc) && grepl("Time-Based One Time-Password", desc)) {
+      message <- c(
+        "!" = "The mobile authentication code is invalid."
       )
     } else {
       message <- c(

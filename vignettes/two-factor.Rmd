@@ -34,12 +34,11 @@ Before you start, you'll need the name and UUID for both your workgroup and work
 
 ### A note for non R users
 
-Some of the required changes can only be made via the API (and not in the [Objective Connect browser interface](https://secure.objectiveconnect.co.uk/login)). If the user required to make these changes is not an R user, they can use the API via it's [interactive documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html) instead of using objr.
-
-Before using the interactivity, set up API authentication by clicking the the 'Authorise' button and entering your Objective Connect username and password.
+Some of the required changes can only be made using the API (and not in the [Objective Connect browser interface](https://secure.objectiveconnect.co.uk/login)). If either your Workgroup Admin or Workspace Owner is not an R user, they can use the API via it's [interactive documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html) instead of using objr.
 
 Links to relevant sections of the interactive documentation will be provided for each step below.
 
+[More detailed guidance to use the interactive documentation](#interactive) is available in the Getting more help section.
 
 ## Permission to change 2FA settings in the workgroup {#workgroup}
 
@@ -47,18 +46,36 @@ These steps must be completed by a **workgroup admin**.
 
 > If you work in the Scottish Government, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors) to arrange this step.
 
-1. <a name = "workgroup-1">Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button.</a>
+1. <a name = "workgroup-1">Temporarily disable mandatory 2FA in your workgroup.</a> This can be done in one of the following ways:
 
-```{r}
-#| eval: true
-#| echo: false
-#| out.width: "50%"
-#| fig-align: "center"
-#| fig-alt: >
-#|    A button for 'Workgroup options' is selected. A menu is visible containing
-#|    an option to 'Enforce Two-step verification' with a checkbox.
-knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
-```
+   * Navigate to the summary page for your workgroup in Objective Connect. Select 'Workgroup Options', un-check the option to 'Enforce Two-step verification', and click the blue 'Update' button.
+
+   ```{r}
+   #| eval: true
+   #| echo: false
+   #| out.width: "50%"
+   #| fig-align: "center"
+   #| fig-alt: >
+   #|    A button for 'Workgroup options' is selected. A menu is visible    containing
+   #|    an option to 'Enforce Two-step verification' with a checkbox.
+   knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
+   ```
+
+   * In R, use `workgroup_mandate_2fa()`, providing the relevant workgroup UUID and setting `mandate = FALSE` to disable. For example:
+
+      ```{r workgroup_mandate}
+      workgroup_mandate_2fa("v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440", mandate = FALSE)
+      ```
+
+      ```{r workgroup_mandate-output, eval = TRUE, echo = FALSE, message = TRUE}
+      cli::cli_alert_success(
+        "Mandatory 2FA setting successfully updated for workgroup."
+      )
+      ```
+      
+      To reinstate mandatory 2FA later, set `mandate = TRUE`.
+
+      > Non R users can also use the interactive documentation to [disable mandatory 2FA in the workgroup](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setTwoStepMandatory).
 
 
 2. In R, allow 2FA bypassing for the workgroup using `workgroup_bypass_2fa()`, providing the relevant workgroup UUID. For example:
@@ -75,7 +92,7 @@ knitr::include_graphics("workgroup-2fa.png", dpi = "retina")
 
    > Non R users can use the interactive documentation to [allow 2FA bypassing in the workgroup](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setWorkgroupMfaBypassAllowed).
 
-3. Continue to the next section to [give the workspace owner permission to bypass 2FA](#workspace-owner). Once this is complete, [reinstate 2FA enforcing for the workgroup](#workgroup-1).
+3. Continue to the next section to [give the workspace owner permission to bypass 2FA](#workspace-owner). Once this is complete, [reinstate mandatory 2FA for the workgroup](#workgroup-1).
 
 
 ## Permission for the workspace owner {#workspace-owner}
@@ -115,7 +132,7 @@ knitr::include_graphics("workspace-2fa.png", dpi = "retina")
 
 4. Reinstate 2FA for the workspace using the [same method as in step 1](#workspace-1).
 
-5. The workgroup admin can now [reinstate 2FA enforcing for the workgroup](#workgroup-1).
+5. The workgroup admin can now [reinstate mandatory 2FA for the workgroup](#workgroup-1).
 
 
 ## Permssion for other participants {#participants}
@@ -136,3 +153,51 @@ Remember, to check the status of 2FA bypassing for participants in a workspace, 
 ## Getting more help
 
 This process can be quite fiddly. If you are unsure or have any issues with the above, please [contact the package maintainers](https://scotgovanalysis.github.io/objr/authors.html#authors).
+
+### Using the Interactive Documentation {#interactive}
+
+Some of the required changes can only be made using the API. If either your Workgroup Admin or Workspace Owner is not an R user, they can use the API via it’s [interactive documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html) instead of using objr.
+
+Links to relevant sections of the interactive documentation are provided for each step above.
+
+Before using the interactivity, set up API authentication by clicking the green 'Authorise' button (near the top of the page on the right hand side).
+
+```{r}
+#| eval: true
+#| echo: false
+#| out.width: "80%"
+#| fig-align: "center"
+#| fig-alt: >
+#|    A screenshot of the interactive API documentation, showing the green
+#|    'Authorize' button on the right hand side of the view.
+knitr::include_graphics("authorize.png", dpi = "retina")
+```
+
+In the pop-up window, enter your username (usually your email address) and password for Objective Connect, and click the 'Authorize' button.
+
+```{r}
+#| eval: true
+#| echo: false
+#| out.width: "60%"
+#| fig-align: "center"
+#| fig-alt: >
+#|    A screenshot of the authorisation pop-up window with input boxes to enter
+#|    your username and password. An 'Authorize' button is underneath.
+knitr::include_graphics("auth-pop-up.png", dpi = "retina")
+```
+
+To use the API within each section, click the 'Try it out' button. You will then be able to enter values for required parameters. 
+
+```{r}
+#| eval: true
+#| echo: false
+#| out.width: "80%"
+#| fig-align: "center"
+#| fig-alt: >
+#|    A screenshot of the interactive API documentation, showing the 'Try it
+#|    out' button on the right hand side of the section for the bypass two step
+#|    endpoint. 
+knitr::include_graphics("try-it-out.png", dpi = "retina")
+```
+
+Once you have supplied the required information, click the blue 'Execute' button to send the API request. Below this you will be able to see the API response, and whether it has been successful.

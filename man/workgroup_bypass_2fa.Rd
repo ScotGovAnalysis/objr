@@ -27,3 +27,9 @@ More information on two-factor authentication can be found in
 More details on this endpoint are available in the
 \href{https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Workgroups/setWorkgroupMfaBypassAllowed}{API documentation}.
 }
+\seealso{
+Other Two-factor authentication functions: 
+\code{\link{participant_bypass_2fa}()},
+\code{\link{workgroup_mandate_2fa}()}
+}
+\concept{Two-factor authentication functions}

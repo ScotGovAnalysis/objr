@@ -12,6 +12,8 @@
 #'
 #' @return A tibble
 #'
+#' @seealso [rollback_to_version()]
+#'
 #' @export
 
 versions <- function(document_uuid,
@@ -62,6 +64,8 @@ versions <- function(document_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @seealso [versions()]
 #'
 #' @export
 

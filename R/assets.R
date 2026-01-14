@@ -7,29 +7,50 @@
 # nolint end
 #'
 #' @param workspace_uuid UUID of workspace
-#' @param type List of asset types to return. Defaults to all types;
-#' document, folder and link.
+#' @param type Asset type to filter results by. Either "document", "folder" or
+#'  "link". Default returns all asset types.
 #' @inheritParams objr
 #' @inheritParams workspaces
 #'
 #' @return A tibble
 #'
+#' @family Asset functions
+#'
 #' @export
 
 assets <- function(workspace_uuid,
-                   type = list("document", "folder", "link"),
+                   type = NULL,
                    page = NULL,
                    size = NULL,
                    use_proxy = FALSE) {
 
-  check_list(type)
+  if (rlang::is_list(type)) {
+    lifecycle::deprecate_warn(
+      when = "0.2.0",
+      what = "assets(type = 'must be a character string')",
+      details = "All asset types are returned.",
+      always = TRUE
+    )
+    type <- NULL
+  }
 
-  type <- paste(toupper(type), collapse = "|")
+  if (!is.null(type)) {
+    if (!rlang::is_string(type)) {
+      cli::cli_abort(
+        "`type` must be a string, length 1."
+      )
+    }
+    if (!type %in% c("document", "folder", "link")) {
+      cli::cli_abort(
+        "`type` must be one of {.str document}, {.str folder} or {.str link}."
+      )
+    }
+  }
 
   response <- objr(
     endpoint = "assets",
     url_query = list(workspaceUuid = workspace_uuid,
-                     type = type,
+                     type = toupper(type),
                      page = page,
                      size = size),
     use_proxy = use_proxy
@@ -53,6 +74,8 @@ assets <- function(workspace_uuid,
 #' @inheritParams objr
 #'
 #' @return A tibble
+#'
+#' @family Asset functions
 #'
 #' @export
 
@@ -86,6 +109,8 @@ asset_info <- function(asset_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Asset functions
 #'
 #' @export
 
@@ -122,6 +147,8 @@ delete_asset <- function(asset_uuid,
 #' @inheritParams objr
 #'
 #' @return API response (invisibly)
+#'
+#' @family Asset functions
 #'
 #' @export
 

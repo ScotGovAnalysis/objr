@@ -1,5 +1,12 @@
 # assets ----
 
+test_that("Error if `type` invalid", {
+  expect_error(assets(workspace_uuid = "test_workspace",
+                      type = c("document", "link")))
+  expect_error(assets(workspace_uuid = "test_workspace",
+                      type = "x"))
+})
+
 without_internet({
 
   test_that("Valid request created", {
@@ -7,19 +14,27 @@ without_internet({
     expect_GET(
       assets(workspace_uuid = "test_workspace"),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets?",
-             "workspaceUuid=test_workspace&type=DOCUMENT%7CFOLDER%7CLINK")
+             "workspaceUuid=test_workspace")
     )
 
     expect_GET(
       assets(workspace_uuid = "test_workspace",
-             type = list("folder")),
+             type = "folder"),
       paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets?",
              "workspaceUuid=test_workspace&type=FOLDER")
     )
 
-    expect_error(
-      assets(workspace_uuid = "test_workspace",
-             type = "folder")
+  })
+
+  test_that("Deprecated `type` list format handled correctly", {
+
+    expect_GET(
+      suppressWarnings(
+        assets(workspace_uuid = "test_workspace",
+               type = list("folder"))
+      ),
+      paste0("https://secure.objectiveconnect.co.uk/publicapi/1/assets?",
+             "workspaceUuid=test_workspace")
     )
 
   })
@@ -38,15 +53,13 @@ with_mock_api({
   })
 
   test_that("Results filtered by type", {
-
     expect_equal(
       unique(
         assets(workspace_uuid = "test_workspace_uuid",
-               type = list("folder"))$asset_type
+               type = "folder")$asset_type
       ),
       "FOLDER"
     )
-
   })
 
 })

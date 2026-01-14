@@ -21,6 +21,8 @@
 #' comments()
 #' }
 #'
+#' @family Comment functions
+#'
 #' @export
 
 comments <- function(created_after = NULL,
@@ -78,6 +80,8 @@ comments <- function(created_after = NULL,
 #'
 #' @return API response (invisibly)
 #'
+#' @family Comment functions
+#'
 #' @export
 
 new_thread <- function(workspace_uuid,
@@ -121,6 +125,7 @@ new_thread <- function(workspace_uuid,
 #'
 #' @return API response (invisibly)
 #'
+#' @family Comment functions
 #' @export
 
 new_reply <- function(thread_uuid,

@@ -47,3 +47,9 @@ comments()
 }
 
 }
+\seealso{
+Other Comment functions: 
+\code{\link{new_reply}()},
+\code{\link{new_thread}()}
+}
+\concept{Comment functions}
