@@ -207,12 +207,12 @@ test_that("Error produced if not NULL or POSIXct", {
 test_that("Correct value returned", {
 
   expect_equal(
-    convert_to_epoch(as.POSIXct("2024-01-01 09:00:00")),
+    convert_to_epoch(as.POSIXct("2024-01-01 09:00:00", tz = "GMT")),
     1704099600000
   )
 
   expect_equal(
-    convert_to_epoch(as.POSIXct("2024-01-01")),
+    convert_to_epoch(as.POSIXct("2024-01-01", tz = "GMT")),
     1704067200000
   )
 
@@ -234,8 +234,8 @@ test_that("Error produced if not NULL or numeric", {
 test_that("Correct value returned", {
 
   expect_equal(
-    convert_from_epoch(1704099600000),
-    as.POSIXct("2024-01-01 09:00:00")
+    convert_from_epoch(1704099600000, tz = "GMT"),
+    as.POSIXct("2024-01-01 09:00:00", tz = "GMT")
   )
 
   expect_equal(convert_from_epoch(NULL), NULL)
