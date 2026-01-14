@@ -12,7 +12,7 @@ my_user_id(use_proxy = FALSE)
 
 - use_proxy:
 
-  Logical to indicate whether to use proxy
+  Logical to indicate whether to use proxy.
 
 ## Value
 

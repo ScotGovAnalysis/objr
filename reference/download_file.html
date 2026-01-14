@@ -13,7 +13,7 @@ document.
 Use download_file_version() with a document version UUID for a specific
 version of a document.
 
-"><meta property="og:image" content="https://scotgovanalysis.github.io/objr/logo.svg"></head><body>
+"><meta property="og:image" content="https://ScotGovAnalysis.github.io/objr/logo.svg"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -21,7 +21,7 @@ version of a document.
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@ version of a document.
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">API Authentication</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/two-factor.html">Two-Factor Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a></li>
   </ul></li>
@@ -49,7 +49,7 @@ version of a document.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Download a file and save to disk</h1>
-      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/pkgdown-v0.1.1/R/download.R" class="external-link"><code>R/download.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/main/R/download.R" class="external-link"><code>R/download.R</code></a></small>
       <div class="d-none name"><code>download_file.Rd</code></div>
     </div>
 
@@ -63,11 +63,18 @@ version of a document.</p></li>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_file</span><span class="op">(</span><span class="va">document_uuid</span>, <span class="va">folder</span>, overwrite <span class="op">=</span> <span class="cn">FALSE</span>, use_proxy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">download_file</span><span class="op">(</span></span>
+<span>  <span class="va">document_uuid</span>,</span>
+<span>  <span class="va">folder</span>,</span>
+<span>  file_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  use_proxy <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">download_file_version</span><span class="op">(</span></span>
 <span>  <span class="va">document_uuid</span>,</span>
 <span>  <span class="va">folder</span>,</span>
+<span>  file_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  overwrite <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  use_proxy <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -85,18 +92,23 @@ version of a document.</p></li>
 <dd><p>Folder to save downloaded file to</p></dd>
 
 
+<dt id="arg-file-name">file_name<a class="anchor" aria-label="anchor" href="#arg-file-name"></a></dt>
+<dd><p>Optional name to give downloaded file. If not provided,
+file will have same name as Objective Connect asset.</p></dd>
+
+
 <dt id="arg-overwrite">overwrite<a class="anchor" aria-label="anchor" href="#arg-overwrite"></a></dt>
 <dd><p>Logical to indicate whether file should be overwritten if
 already exists. Defaults to <code>FALSE</code>.</p></dd>
 
 
 <dt id="arg-use-proxy">use_proxy<a class="anchor" aria-label="anchor" href="#arg-use-proxy"></a></dt>
-<dd><p>Logical to indicate whether to use proxy</p></dd>
+<dd><p>Logical to indicate whether to use proxy.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>API response (invisibly)</p>
+    <p>Path to downloaded file (invisibly).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -104,13 +116,20 @@ already exists. Defaults to <code>FALSE</code>.</p></dd>
 API documentation:</p><ul><li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download" class="external-link"><code>download_file</code></a></p></li>
 <li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion" class="external-link"><code>download_file_version</code></a></p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other Read/write functions:
+<code><a href="read_data.html">read_data()</a></code>,
+<code><a href="upload_file.html">upload_file()</a></code>,
+<code><a href="write_data.html">write_data()</a></code></p></div>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by the Scottish Government  <a href="mailto:statistics.enquiries@gov.scot"><i class="fas fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
+  <p>Developed by the Scottish Government  <a href="https://www.gov.scot" class="external-link"><i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i><span class="visually-hidden">Scottish Government Website&gt;</span></a>  <a href="mailto:statistics.enquiries@gov.scot"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

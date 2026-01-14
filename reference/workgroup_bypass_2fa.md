@@ -21,7 +21,7 @@ workgroup_bypass_2fa(workgroup_uuid, allow_bypass = TRUE, use_proxy = FALSE)
 
 - use_proxy:
 
-  Logical to indicate whether to use proxy
+  Logical to indicate whether to use proxy.
 
 ## Value
 
@@ -30,7 +30,13 @@ API response (invisibly)
 ## Details
 
 More information on two-factor authentication can be found in
-[`vignette("two-factor")`](https://scotgovanalysis.github.io/objr/articles/two-factor.md).
+[`vignette("two-factor")`](https://ScotGovAnalysis.github.io/objr/articles/two-factor.md).
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Workgroups/setWorkgroupMfaBypassAllowed).
+
+## See also
+
+Other Two-factor authentication functions:
+[`participant_bypass_2fa()`](https://ScotGovAnalysis.github.io/objr/reference/participant_bypass_2fa.md),
+[`workgroup_mandate_2fa()`](https://ScotGovAnalysis.github.io/objr/reference/workgroup_mandate_2fa.md)

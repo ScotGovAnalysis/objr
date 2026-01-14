@@ -9,11 +9,18 @@
 ## Usage
 
 ``` r
-download_file(document_uuid, folder, overwrite = FALSE, use_proxy = FALSE)
+download_file(
+  document_uuid,
+  folder,
+  file_name = NULL,
+  overwrite = FALSE,
+  use_proxy = FALSE
+)
 
 download_file_version(
   document_uuid,
   folder,
+  file_name = NULL,
   overwrite = FALSE,
   use_proxy = FALSE
 )
@@ -29,6 +36,11 @@ download_file_version(
 
   Folder to save downloaded file to
 
+- file_name:
+
+  Optional name to give downloaded file. If not provided, file will have
+  same name as Objective Connect asset.
+
 - overwrite:
 
   Logical to indicate whether file should be overwritten if already
@@ -36,11 +48,11 @@ download_file_version(
 
 - use_proxy:
 
-  Logical to indicate whether to use proxy
+  Logical to indicate whether to use proxy.
 
 ## Value
 
-API response (invisibly)
+Path to downloaded file (invisibly).
 
 ## Details
 
@@ -50,3 +62,10 @@ the API documentation:
 - [`download_file`](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download)
 
 - [`download_file_version`](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion)
+
+## See also
+
+Other Read/write functions:
+[`read_data()`](https://ScotGovAnalysis.github.io/objr/reference/read_data.md),
+[`upload_file()`](https://ScotGovAnalysis.github.io/objr/reference/upload_file.md),
+[`write_data()`](https://ScotGovAnalysis.github.io/objr/reference/write_data.md)

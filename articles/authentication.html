@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>API Authentication • objr</title>
+<title>Authentication • objr</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
@@ -17,7 +17,7 @@
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><link href="../extra.css" rel="stylesheet">
-<meta property="og:title" content="API Authentication">
+<meta property="og:title" content="Authentication">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/authentication.html">API Authentication</a></li>
+<li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/two-factor.html">Two-Factor Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a></li>
   </ul>
@@ -65,10 +65,10 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.svg" class="logo" alt=""><h1>API Authentication</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>Authentication</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/pkgdown-v0.1.1/vignettes/authentication.Rmd" class="external-link"><code>vignettes/authentication.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/main/vignettes/authentication.Rmd" class="external-link"><code>vignettes/authentication.Rmd</code></a></small>
       <div class="d-none name"><code>authentication.Rmd</code></div>
     </div>
 
@@ -83,6 +83,8 @@ Connect user email address and password to authenticate.</p>
 can then be used to authenticate subsequent requests in your session,
 negating the need to repeatedly supply your email address and
 password.</p>
+<p>Depending on your account and/or workspace settings, you may also be
+required to use two-factor or mobile authentication.</p>
 <p>The rest of this article details how to manage authentication when
 using the <code>objr</code> package.</p>
 </div>
@@ -132,7 +134,6 @@ automatically find them here each time you use the package.</p>
 <p>If you don’t have these variables defined in your
 <code>.Renviron</code> file, <code>objr</code> will prompt you to supply
 them if you’re working in an interactive session.</p>
-<p><br></p>
 <p><img src="auth_prompt.png" class="r-plt" alt="A small pop-up window with prompt 'Enter email registered with Objective Connect' followed by a text input box and buttons to select 'OK' or 'Cancel'." style="display: block; margin: auto;"></p>
 </div>
 </div>
@@ -142,11 +143,81 @@ them if you’re working in an interactive session.</p>
 <p>Each successful API response includes a token that can be used for
 subsequent requests. <code>objr</code> functions automatically parse
 this token from the API response and store it in your R session’s global
-environment.</p>
+environment (as <code>token</code>).</p>
 <p>Where this object exists, <code>objr</code> will automatically use it
 to authenticate subsequent requests.</p>
 <p>If this object doesn’t exist, <code>objr</code> will resort to using
 your username and password, as it did for your <a href="#first-request">first request</a>.</p>
+<div class="section level3">
+<h3 id="token-expiry">Token expiry<a class="anchor" aria-label="anchor" href="#token-expiry"></a>
+</h3>
+<p>Tokens expire when they have been unused for 20 minutes or more. You
+can see the expiry time of your current token by viewing
+<code>token$expiry</code>.</p>
+<p>If you try to make a request with an expired token in your
+environment, it will be removed, and <code>objr</code> will try to use
+your username and password instead.</p>
+<p>Note that if you are using <a href="#mobileauth">mobile
+authentication</a>, this will still fail, and you should login again
+using <code><a href="../reference/mobile_auth_login.html">mobile_auth_login()</a></code> to generate a new token.</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="mfa">Multi-factor authentication<a class="anchor" aria-label="anchor" href="#mfa"></a>
+</h2>
+<div class="section level3">
+<h3 id="two-factor-authentication">Two-factor authentication<a class="anchor" aria-label="anchor" href="#two-factor-authentication"></a>
+</h3>
+<p>Two-factor authentication (2FA) may be enforced in some workspaces.
+When using Objective Connect in your browser, this means you will need
+to enter a code that has been emailed to you before completing certain
+tasks.</p>
+<p>To use <code>objr</code> in these workspaces, users must be given
+permission to bypass 2FA. More information and guidance to set this up
+is available in the <a href="./two-factor.html">Two-factor
+authentication article</a>.</p>
+</div>
+<div class="section level3">
+<h3 id="mobileauth">Mobile authentication<a class="anchor" aria-label="anchor" href="#mobileauth"></a>
+</h3>
+<p>Mobile authentication may be enforced in some workspaces, or you may
+have enabled this yourself. <a href="https://helpdocs.objective.com/objectiveconnect/K_AdminFunctions/ManagingMobileAuth.htm" class="external-link">Guidance
+to enable, register or disable mobile authentication</a> is available in
+the Objective Connect Help documentation.</p>
+<p>You can view the status of mobile authentication on your account
+using <code><a href="../reference/mobile_auth_status.html">mobile_auth_status()</a></code>. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/mobile_auth_status.html">mobile_auth_status</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## $mobileAuthLogin</span></span>
+<span><span class="co">## [1] TRUE</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## $mobileAuthRegistered</span></span>
+<span><span class="co">## [1] TRUE</span></span></code></pre>
+<p>If you have both enabled mobile authentication and registered a
+mobile device, you will need to login using mobile authentication before
+using any other <code>objr</code> functionality. This can be done using
+<code><a href="../reference/mobile_auth_login.html">mobile_auth_login()</a></code>. This function requires <a href="#first-request">username and password authentication</a> as with
+any other first request.</p>
+<p>You can either provide the authentication code from your mobile
+device directly to the function:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/mobile_auth_login.html">mobile_auth_login</a></span><span class="op">(</span><span class="st">"123456"</span><span class="op">)</span></span></code></pre></div>
+<p>Or, if left empty, you will be prompted to enter your code in a
+pop-up window:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/mobile_auth_login.html">mobile_auth_login</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="mobileauth_prompt.png" class="r-plt" alt="A small pop-up window with prompt 'Enter mobile authentication code'  followed by a text input box and buttons to select 'OK' or 'Cancel'." style="display: block; margin: auto;"></p>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Successfully logged in via Mobile Authenticator.</span></span></code></pre>
+<p>If login is successful, the token from the API response is stored
+automatically and used for <a href="#subsequent-requests">subsequent
+requests</a>. <a href="#token-expiry">Tokens expire</a> when they have
+been unused for 20 minutes or more - if this happens, you will need to
+login using your mobile authenticator again.</p>
+<p>Mobile authentication login attempts are limited to a maximum of 5
+failures within a 5-minute interval. After 5 failed attempts, your
+Objective Connect account will be locked. To regain access, wait for 5
+mins and then try logging in again.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -155,7 +226,7 @@ your username and password, as it did for your <a href="#first-request">first re
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by the Scottish Government  <a href="mailto:statistics.enquiries@gov.scot"><i class="fas fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
+  <p>Developed by the Scottish Government  <a href="https://www.gov.scot" class="external-link"><i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i><span class="visually-hidden">Scottish Government Website&gt;</span></a>  <a href="mailto:statistics.enquiries@gov.scot"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

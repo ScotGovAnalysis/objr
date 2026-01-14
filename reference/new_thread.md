@@ -34,7 +34,7 @@ new_thread(
 
 - use_proxy:
 
-  Logical to indicate whether to use proxy
+  Logical to indicate whether to use proxy.
 
 ## Value
 
@@ -44,3 +44,9 @@ API response (invisibly)
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Comments/createThread).
+
+## See also
+
+Other Comment functions:
+[`comments()`](https://ScotGovAnalysis.github.io/objr/reference/comments.md),
+[`new_reply()`](https://ScotGovAnalysis.github.io/objr/reference/new_reply.md)

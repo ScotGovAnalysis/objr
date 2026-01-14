@@ -26,16 +26,16 @@ read_data_version(document_uuid, ..., use_proxy = FALSE)
 
 - use_proxy:
 
-  Logical to indicate whether to use proxy
+  Logical to indicate whether to use proxy.
 
 ## Value
 
-Format depends on file type. See details.
+A [tibble](https://tibble.tidyverse.org/reference/tibble-package.html).
 
 ## Details
 
 This function can be used to read the following data file types: csv,
-rds, xlsx.
+rds, xlsx, parquet.
 
 The function works by downloading the file from Objective Connect to a
 temporary file and reading it into R. The following functions are used
@@ -48,10 +48,11 @@ these.
 | csv       | [`readr::read_csv()`](https://readr.tidyverse.org/reference/read_delim.html)    |
 | rds       | [`readr::read_rds()`](https://readr.tidyverse.org/reference/read_rds.html)      |
 | xlsx      | [`readxl::read_xlsx()`](https://readxl.tidyverse.org/reference/read_excel.html) |
+| parquet   | `nanoparquet::read_parquet()`                                                   |
 
 To check what file type your document is (and thus what function
 additional arguments will be passed to), use
-[`asset_info()`](https://scotgovanalysis.github.io/objr/reference/asset_info.md).
+[`asset_info()`](https://ScotGovAnalysis.github.io/objr/reference/asset_info.md).
 
 If there are other data file types you would like to download using this
 function, please [open an issue on the GitHub
@@ -63,3 +64,10 @@ the API documentation:
 - [`read_data`](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download)
 
 - [`read_data_version`](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion)
+
+## See also
+
+Other Read/write functions:
+[`download_file()`](https://ScotGovAnalysis.github.io/objr/reference/download_file.md),
+[`upload_file()`](https://ScotGovAnalysis.github.io/objr/reference/upload_file.md),
+[`write_data()`](https://ScotGovAnalysis.github.io/objr/reference/write_data.md)

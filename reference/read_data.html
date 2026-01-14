@@ -11,7 +11,7 @@ Use read_data() with an asset UUID for the latest version of a document.
 Use read_data_version() with a document version UUID for a specific
 version of a document.
 
-"><meta property="og:image" content="https://scotgovanalysis.github.io/objr/logo.svg"></head><body>
+"><meta property="og:image" content="https://ScotGovAnalysis.github.io/objr/logo.svg"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +19,7 @@ version of a document.
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@ version of a document.
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">API Authentication</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/two-factor.html">Two-Factor Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a></li>
   </ul></li>
@@ -47,7 +47,7 @@ version of a document.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Read a data file into R</h1>
-      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/pkgdown-v0.1.1/R/download.R" class="external-link"><code>R/download.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/main/R/download.R" class="external-link"><code>R/download.R</code></a></small>
       <div class="d-none name"><code>read_data.Rd</code></div>
     </div>
 
@@ -78,20 +78,20 @@ version of a document.</p></li>
 
 
 <dt id="arg-use-proxy">use_proxy<a class="anchor" aria-label="anchor" href="#arg-use-proxy"></a></dt>
-<dd><p>Logical to indicate whether to use proxy</p></dd>
+<dd><p>Logical to indicate whether to use proxy.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>Format depends on file type. See details.</p>
+    <p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a>.</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function can be used to read the following data file types:
-csv, rds, xlsx.</p>
+csv, rds, xlsx, parquet.</p>
 <p>The function works by downloading the file from Objective Connect to a
 temporary file and reading it into R. The following functions are used to
-read the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_xlsx()</a></code></td></tr></table><p>To check what file type your document is (and thus what function additional
+read the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::read_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://readxl.tidyverse.org/reference/read_excel.html" class="external-link">readxl::read_xlsx()</a></code></td></tr><tr><td>parquet</td><td><code>nanoparquet::read_parquet()</code></td></tr></table><p>To check what file type your document is (and thus what function additional
 arguments will be passed to), use <code><a href="asset_info.html">asset_info()</a></code>.</p>
 <p>If there are other data file types you would like to download using this
 function, please <a href="https://github.com/ScotGovAnalysis/objr/issues/new" class="external-link">open an issue on the GitHub repository</a>.</p>
@@ -99,13 +99,20 @@ function, please <a href="https://github.com/ScotGovAnalysis/objr/issues/new" cl
 API documentation:</p><ul><li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/download" class="external-link"><code>read_data</code></a></p></li>
 <li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/downloadVersion" class="external-link"><code>read_data_version</code></a></p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other Read/write functions:
+<code><a href="download_file.html">download_file()</a></code>,
+<code><a href="upload_file.html">upload_file()</a></code>,
+<code><a href="write_data.html">write_data()</a></code></p></div>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by the Scottish Government  <a href="mailto:statistics.enquiries@gov.scot"><i class="fas fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
+  <p>Developed by the Scottish Government  <a href="https://www.gov.scot" class="external-link"><i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i><span class="visually-hidden">Scottish Government Website&gt;</span></a>  <a href="mailto:statistics.enquiries@gov.scot"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -27,7 +27,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,7 +41,7 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/authentication.html">API Authentication</a></li>
+<li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/two-factor.html">Two-Factor Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a></li>
   </ul>
@@ -68,7 +68,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Two-Factor Authentication</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/pkgdown-v0.1.1/vignettes/two-factor.Rmd" class="external-link"><code>vignettes/two-factor.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/main/vignettes/two-factor.Rmd" class="external-link"><code>vignettes/two-factor.Rmd</code></a></small>
       <div class="d-none name"><code>two-factor.Rmd</code></div>
     </div>
 
@@ -100,21 +100,20 @@ participants</a></li>
 (or the API in general) for the first time.</p>
 <p>Before you start, you’ll need the name and UUID for both your
 workgroup and workspace. More information on how to find these UUIDs can
-be found on the <a href="https://scotgovanalysis.github.io/objr/articles/objr.html#universally-unique-identifiers">Getting
+be found on the <a href="https://scotgovanalysis.github.io/objr/articles/objr.html#universally-unique-identifiers" class="external-link">Getting
 Started page</a>.</p>
 <div class="section level3">
 <h3 id="a-note-for-non-r-users">A note for non R users<a class="anchor" aria-label="anchor" href="#a-note-for-non-r-users"></a>
 </h3>
-<p>Some of the required changes can only be made via the API (and not in
-the <a href="https://secure.objectiveconnect.co.uk/login" class="external-link">Objective
-Connect browser interface</a>). If the user required to make these
-changes is not an R user, they can use the API via it’s <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html" class="external-link">interactive
+<p>Some of the required changes can only be made using the API (and not
+in the <a href="https://secure.objectiveconnect.co.uk/login" class="external-link">Objective
+Connect browser interface</a>). If either your Workgroup Admin or
+Workspace Owner is not an R user, they can use the API via it’s <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html" class="external-link">interactive
 documentation</a> instead of using objr.</p>
-<p>Before using the interactivity, set up API authentication by clicking
-the the ‘Authorise’ button and entering your Objective Connect username
-and password.</p>
 <p>Links to relevant sections of the interactive documentation will be
 provided for each step below.</p>
+<p><a href="#interactive">More detailed guidance to use the interactive
+documentation</a> is available in the Getting more help section.</p>
 </div>
 </div>
 <div class="section level2">
@@ -123,22 +122,41 @@ provided for each step below.</p>
 <p>These steps must be completed by a <strong>workgroup
 admin</strong>.</p>
 <blockquote>
-<p>If you work in the Scottish Government, please <a href="https://scotgovanalysis.github.io/objr/authors.html#authors">contact
+<p>If you work in the Scottish Government, please <a href="https://scotgovanalysis.github.io/objr/authors.html#authors" class="external-link">contact
 the package maintainers</a> to arrange this step.</p>
 </blockquote>
 <ol style="list-style-type: decimal">
-<li><a name="workgroup-1">Navigate to the summary page for your
-workgroup in Objective Connect. Select ‘Workgroup Options’, un-check the
-option to ‘Enforce Two-step verification’, and click the blue ‘Update’
-button. (This setting will be reinstated later.)</a></li>
-</ol>
-<p><img src="workgroup-2fa.png" class="r-plt" alt="A button for 'Workgroup options' is selected. A menu is visible containing an option to 'Enforce Two-step verification' with a checkbox." width="50%" style="display: block; margin: auto;"></p>
-<ol start="2" style="list-style-type: decimal">
+<li>
+<p><a name="workgroup-1">Temporarily disable mandatory 2FA in your
+workgroup.</a> This can be done in one of the following ways:</p>
+<ul>
+<li>Navigate to the summary page for your workgroup in Objective
+Connect. Select ‘Workgroup Options’, un-check the option to ‘Enforce
+Two-step verification’, and click the blue ‘Update’ button.</li>
+</ul>
+<p><img src="workgroup-2fa.png" class="r-plt" alt="A button for 'Workgroup options' is selected. A menu is visible    containing an option to 'Enforce Two-step verification' with a checkbox." width="50%" style="display: block; margin: auto;"></p>
+<ul>
+<li>
+<p>In R, use <code><a href="../reference/workgroup_mandate_2fa.html">workgroup_mandate_2fa()</a></code>, providing the
+relevant workgroup UUID and setting <code>mandate = FALSE</code> to
+disable. For example:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/workgroup_mandate_2fa.html">workgroup_mandate_2fa</a></span><span class="op">(</span><span class="st">"v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440"</span>, mandate <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Mandatory 2FA setting successfully updated for workgroup.</span></span></code></pre>
+<p>To reinstate mandatory 2FA later, set
+<code>mandate = TRUE</code>.</p>
+<blockquote>
+<p>Non R users can also use the interactive documentation to <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html#/Workgroups/setTwoStepMandatory" class="external-link">disable
+mandatory 2FA in the workgroup</a>.</p>
+</blockquote>
+</li>
+</ul>
+</li>
 <li>
 <p>In R, allow 2FA bypassing for the workgroup using
 <code><a href="../reference/workgroup_bypass_2fa.html">workgroup_bypass_2fa()</a></code>, providing the relevant workgroup
 UUID. For example:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/workgroup_bypass_2fa.html">workgroup_bypass_2fa</a></span><span class="op">(</span><span class="st">"v09y-g5vk-5348-k68t-s462-c2vs-7kl8-7440"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Bypass 2FA setting successfully updated for workgroup.</span></span></code></pre>
 <blockquote>
@@ -146,6 +164,10 @@ UUID. For example:</p>
 2FA bypassing in the workgroup</a>.</p>
 </blockquote>
 </li>
+<li><p>Continue to the next section to <a href="#workspace-owner">give
+the workspace owner permission to bypass 2FA</a>. Once this is complete,
+<a href="#workgroup-1">reinstate mandatory 2FA for the
+workgroup</a>.</p></li>
 </ol>
 </div>
 <div class="section level2">
@@ -166,7 +188,7 @@ confirm, select Disable.</a></li>
 2FA using <code><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa()</a></code>. You will need your
 participant UUID, which can be found using <code><a href="../reference/participants.html">participants()</a></code>.
 For example,</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/participant_bypass_2fa.html">participant_bypass_2fa</a></span><span class="op">(</span><span class="st">"z98a-9sy0-b3gv-285m-39k6-20d5-dg6k-3gue"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #00BB00;">✔</span> Bypass 2FA setting successfully updated for participant.</span></span></code></pre>
 <blockquote>
@@ -186,8 +208,8 @@ participant settings</a>.</p>
 </blockquote>
 </li>
 <li><p>Reinstate 2FA for the workspace using the <a href="#workspace-1">same method as in step 1</a>.</p></li>
-<li><p>The workgroup admin can now <a href="#workgroup-1">reinstate 2FA
-enforcing for the workgroup</a>.</p></li>
+<li><p>The workgroup admin can now <a href="#workgroup-1">reinstate
+mandatory 2FA for the workgroup</a>.</p></li>
 </ol>
 </div>
 <div class="section level2">
@@ -224,8 +246,32 @@ workspace, use <code><a href="../reference/participants.html">participants()</a>
 <h2 id="getting-more-help">Getting more help<a class="anchor" aria-label="anchor" href="#getting-more-help"></a>
 </h2>
 <p>This process can be quite fiddly. If you are unsure or have any
-issues with the above, please <a href="https://scotgovanalysis.github.io/objr/authors.html#authors">contact
+issues with the above, please <a href="https://scotgovanalysis.github.io/objr/authors.html#authors" class="external-link">contact
 the package maintainers</a>.</p>
+<div class="section level3">
+<h3 id="interactive">Using the Interactive Documentation<a class="anchor" aria-label="anchor" href="#interactive"></a>
+</h3>
+<p>Some of the required changes can only be made using the API. If
+either your Workgroup Admin or Workspace Owner is not an R user, they
+can use the API via it’s <a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html" class="external-link">interactive
+documentation</a> instead of using objr.</p>
+<p>Links to relevant sections of the interactive documentation are
+provided for each step above.</p>
+<p>Before using the interactivity, set up API authentication by clicking
+the green ‘Authorise’ button (near the top of the page on the right hand
+side).</p>
+<p><img src="authorize.png" class="r-plt" alt="A screenshot of the interactive API documentation, showing the green 'Authorize' button on the right hand side of the view." width="80%" style="display: block; margin: auto;"></p>
+<p>In the pop-up window, enter your username (usually your email
+address) and password for Objective Connect, and click the ‘Authorize’
+button.</p>
+<p><img src="auth-pop-up.png" class="r-plt" alt="A screenshot of the authorisation pop-up window with input boxes to enter your username and password. An 'Authorize' button is underneath." width="60%" style="display: block; margin: auto;"></p>
+<p>To use the API within each section, click the ‘Try it out’ button.
+You will then be able to enter values for required parameters.</p>
+<p><img src="try-it-out.png" class="r-plt" alt="A screenshot of the interactive API documentation, showing the 'Try it out' button on the right hand side of the section for the bypass two step endpoint. " width="80%" style="display: block; margin: auto;"></p>
+<p>Once you have supplied the required information, click the blue
+‘Execute’ button to send the API request. Below this you will be able to
+see the API response, and whether it has been successful.</p>
+</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -234,7 +280,7 @@ the package maintainers</a>.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by the Scottish Government  <a href="mailto:statistics.enquiries@gov.scot"><i class="fas fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
+  <p>Developed by the Scottish Government  <a href="https://www.gov.scot" class="external-link"><i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i><span class="visually-hidden">Scottish Government Website&gt;</span></a>  <a href="mailto:statistics.enquiries@gov.scot"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

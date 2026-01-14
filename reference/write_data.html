@@ -11,7 +11,7 @@ Use write_data() to create a new file in a workspace.
 Use write_data_version() to write a data file as a new version of an
 existing document.
 
-"><meta property="og:image" content="https://scotgovanalysis.github.io/objr/logo.svg"></head><body>
+"><meta property="og:image" content="https://ScotGovAnalysis.github.io/objr/logo.svg"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -19,7 +19,7 @@ existing document.
 
     <a class="navbar-brand me-2" href="../index.html">objr</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@ existing document.
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">API Authentication</a></li>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/authentication.html">Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/two-factor.html">Two-Factor Authentication</a></li>
     <li><a class="dropdown-item" href="../articles/faqs.html">Frequently Asked Questions</a></li>
   </ul></li>
@@ -47,7 +47,7 @@ existing document.
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Write a data file from R</h1>
-      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/pkgdown-v0.1.1/R/upload.R" class="external-link"><code>R/upload.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/ScotGovAnalysis/objr/blob/main/R/upload.R" class="external-link"><code>R/upload.R</code></a></small>
       <div class="d-none name"><code>write_data.Rd</code></div>
     </div>
 
@@ -92,7 +92,7 @@ to create a new version of an existing document.</p></dd>
 
 
 <dt id="arg-file-type">file_type<a class="anchor" aria-label="anchor" href="#arg-file-type"></a></dt>
-<dd><p>Either "csv", "rds" or "xlsx".</p></dd>
+<dd><p>Either "csv", "rds", "xlsx", or "parquet".</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -110,7 +110,7 @@ top-level of the workspace.</p></dd>
 
 
 <dt id="arg-use-proxy">use_proxy<a class="anchor" aria-label="anchor" href="#arg-use-proxy"></a></dt>
-<dd><p>Logical to indicate whether to use proxy</p></dd>
+<dd><p>Logical to indicate whether to use proxy.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -120,24 +120,33 @@ top-level of the workspace.</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function can be used to write the following data file types:
-csv, rds, xlsx. If writing to a new document, use the <code>file_type</code>
-argument to control which file type to create. If writing a new version of an
-existing document, the existing file type will be used.</p>
+csv, rds, xlsx, parquet. If writing to a new document, use the
+<code>file_type</code> argument to control which file type to create. If writing a
+new version of an existing document, the existing file type will be used.</p>
 <p>The function works by writing the R object to a temporary file and uploading
 the file to Objective Connect. The following functions are used to
-write the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">readr::write_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::write_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://docs.ropensci.org/writexl//reference/write_xlsx.html" class="external-link">writexl::write_xlsx()</a></code></td></tr></table><p>If there are other data file types you would like to upload using this
-function, please <a href="https://github.com/ScotGovAnalysis/objr/issues/new" class="external-link">open an issue on the GitHub repository</a>.</p>
+write the data and any additional arguments (<code>...</code>) will be passed to these.</p><table class="table table"><tr><td>File Type</td><td>Function</td></tr><tr><td>csv</td><td><code><a href="https://readr.tidyverse.org/reference/write_delim.html" class="external-link">readr::write_csv()</a></code></td></tr><tr><td>rds</td><td><code><a href="https://readr.tidyverse.org/reference/read_rds.html" class="external-link">readr::write_rds()</a></code></td></tr><tr><td>xlsx</td><td><code><a href="https://docs.ropensci.org/writexl//reference/write_xlsx.html" class="external-link">writexl::write_xlsx()</a></code></td></tr><tr><td>parquet</td><td><code>nanoparquet::write_parquet()</code></td></tr></table><p>If there are other data file types you would like to upload using this
+function, please
+<a href="https://github.com/ScotGovAnalysis/objr/issues/new" class="external-link">open an issue on
+the GitHub repository</a>.</p>
 <p>More details on the endpoints used by these functions are available in the
 API documentation:</p><ul><li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocument" class="external-link"><code>write_data</code></a></p></li>
 <li><p><a href="https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createDocumentVersion_1" class="external-link"><code>write_data_version</code></a></p></li>
 </ul></div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other Read/write functions:
+<code><a href="download_file.html">download_file()</a></code>,
+<code><a href="read_data.html">read_data()</a></code>,
+<code><a href="upload_file.html">upload_file()</a></code></p></div>
+    </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by the Scottish Government  <a href="mailto:statistics.enquiries@gov.scot"><i class="fas fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
+  <p>Developed by the Scottish Government  <a href="https://www.gov.scot" class="external-link"><i class="fa-solid fa-arrow-pointer" aria-hidden="true"></i><span class="visually-hidden">Scottish Government Website&gt;</span></a>  <a href="mailto:statistics.enquiries@gov.scot"><i class="fa-solid fa-envelope" aria-hidden="true"></i><span class="visually-hidden">Email Scottish Government&gt;</span></a>  <a href="https://github.com/scotgovanalysis" class="external-link"><i class="fa-brands fa-github" aria-hidden="true"></i><span class="visually-hidden">Scottish Government GitHub profile&gt;</span></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

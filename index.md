@@ -1,6 +1,7 @@
 # objr
 
-objr aims to provide a convenient method of interacting with [Objective
+objr (pronounced “ob-jar”) aims to provide a convenient method of
+interacting with [Objective
 Connect](https://secure.objectiveconnect.co.uk) using R, making use of
 the [Objective Connect
 API](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html).
@@ -50,7 +51,7 @@ library(objr)
 ```
 
 Help files for each function in the package can be found on the
-[References](https://ScotGovAnalysis.github.io/objr/reference) page of
+[References](https://ScotGovAnalysis.github.io/objr/reference/) page of
 the package website. Alternatively, type `?function_name` into the
 RStudio console. For example:
 
@@ -59,12 +60,12 @@ RStudio console. For example:
 ```
 
 There is also a demonstration of a simple workflow using the package in
-[`vignette("objr")`](https://scotgovanalysis.github.io/objr/articles/objr.md).
+[`vignette("objr")`](https://ScotGovAnalysis.github.io/objr/articles/objr.md).
 
 ## Licence
 
 Unless stated otherwise, the codebase is released under [the MIT
-Licence](https://scotgovanalysis.github.io/objr/LICENCE). This covers
+Licence](https://ScotGovAnalysis.github.io/objr/LICENCE). This covers
 both the codebase and any sample code in the documentation.
 
 The documentation is [© Crown

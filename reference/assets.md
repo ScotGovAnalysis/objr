@@ -7,7 +7,7 @@ Get data frame of assets in workspace
 ``` r
 assets(
   workspace_uuid,
-  type = list("document", "folder", "link"),
+  type = NULL,
   page = NULL,
   size = NULL,
   use_proxy = FALSE
@@ -22,8 +22,8 @@ assets(
 
 - type:
 
-  List of asset types to return. Defaults to all types; document, folder
-  and link.
+  Asset type to filter results by. Either "document", "folder" or
+  "link". Default returns all asset types.
 
 - page:
 
@@ -35,7 +35,7 @@ assets(
 
 - use_proxy:
 
-  Logical to indicate whether to use proxy
+  Logical to indicate whether to use proxy.
 
 ## Value
 
@@ -45,3 +45,11 @@ A tibble
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/getAssets).
+
+## See also
+
+Other Asset functions:
+[`asset_info()`](https://ScotGovAnalysis.github.io/objr/reference/asset_info.md),
+[`create_folder()`](https://ScotGovAnalysis.github.io/objr/reference/create_folder.md),
+[`delete_asset()`](https://ScotGovAnalysis.github.io/objr/reference/delete_asset.md),
+[`rename_asset()`](https://ScotGovAnalysis.github.io/objr/reference/rename_asset.md)

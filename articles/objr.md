@@ -43,7 +43,7 @@ and the UUID for the workgroup is
 
 To interact with the Objective Connect API, you must provide valid
 authentication. This is explained in more detail in
-[`vignette("authentication")`](https://scotgovanalysis.github.io/objr/articles/authentication.md).
+[`vignette("authentication")`](https://ScotGovAnalysis.github.io/objr/articles/authentication.md).
 
 It might be a good idea to test your authentication, especially if it’s
 your first time using the package. There is no specific function for
@@ -80,7 +80,7 @@ asset, you’ll need its UUID.
 > Note: Where workspaces have two-factor authentication (2FA) enabled,
 > participants cannot use the API for workspace level actions unless
 > they have been given permission to bypass 2FA. See
-> [`vignette("two-factor")`](https://scotgovanalysis.github.io/objr/articles/two-factor.md)
+> [`vignette("two-factor")`](https://ScotGovAnalysis.github.io/objr/articles/two-factor.md)
 > for more information.
 
 Use the workspace UUID from `workspaces` to get a data frame of assets
@@ -123,7 +123,7 @@ environment:
 x <- read_data(document_uuid = "l588-e8wp-d6y8-3d01-blby-wag1-ks1s-gmo9")
 ```
 
-Accepted data file formats are csv, rds and xlsx.
+Accepted data file formats are csv, rds, xlsx and parquet.
 
 ## Upload file
 

@@ -36,7 +36,7 @@ create_folder(
 
 - use_proxy:
 
-  Logical to indicate whether to use proxy
+  Logical to indicate whether to use proxy.
 
 ## Value
 
@@ -46,3 +46,11 @@ API response (invisibly)
 
 More details on this endpoint are available in the [API
 documentation](https://secure.objectiveconnect.co.uk/publicapi/1/swagger-ui/index.html?configUrl=/publicapi/1/v3/api-docs/swagger-config#/Assets/createFolder).
+
+## See also
+
+Other Asset functions:
+[`asset_info()`](https://ScotGovAnalysis.github.io/objr/reference/asset_info.md),
+[`assets()`](https://ScotGovAnalysis.github.io/objr/reference/assets.md),
+[`delete_asset()`](https://ScotGovAnalysis.github.io/objr/reference/delete_asset.md),
+[`rename_asset()`](https://ScotGovAnalysis.github.io/objr/reference/rename_asset.md)

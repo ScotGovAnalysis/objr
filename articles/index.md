@@ -2,9 +2,8 @@
 
 ### Articles
 
-- [API
-  Authentication](https://scotgovanalysis.github.io/objr/articles/authentication.md):
+- [Authentication](https://ScotGovAnalysis.github.io/objr/articles/authentication.md):
 - [Two-Factor
-  Authentication](https://scotgovanalysis.github.io/objr/articles/two-factor.md):
+  Authentication](https://ScotGovAnalysis.github.io/objr/articles/two-factor.md):
 - [Frequently Asked
-  Questions](https://scotgovanalysis.github.io/objr/articles/faqs.md):
+  Questions](https://ScotGovAnalysis.github.io/objr/articles/faqs.md):
