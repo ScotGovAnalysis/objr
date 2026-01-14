@@ -48,7 +48,7 @@ library(objr)
 ```
 
 Help files for each function in the package can be found on the
-[References](https://ScotGovAnalysis.github.io/objr/reference) page of the package website. Alternatively, type `?function_name` into the
+[References](https://ScotGovAnalysis.github.io/objr/reference/) page of the package website. Alternatively, type `?function_name` into the
 RStudio console. For example:
 
 ``` r
