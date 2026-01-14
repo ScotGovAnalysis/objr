@@ -6,7 +6,7 @@
 \usage{
 assets(
   workspace_uuid,
-  type = list(),
+  type = NULL,
   page = NULL,
   size = NULL,
   use_proxy = FALSE
@@ -15,13 +15,8 @@ assets(
 \arguments{
 \item{workspace_uuid}{UUID of workspace}
 
-\item{type}{List of asset types to return. Default returns all types;
-"document", "folder" and "link".
-
-List must be empty (default, returns all asset types), or length 1 (e.g.
-\code{list("document")}). This is a temporary measure while a bug in the
-underlying API is outstanding (see
-\href{https://github.com/ScotGovAnalysis/objr/issues/53}{objr#53}).}
+\item{type}{Asset type to filter results by. Either "document", "folder" or
+"link". Default returns all asset types.}
 
 \item{page}{Page number of responses to return (0..N). Default is 0.}
 
