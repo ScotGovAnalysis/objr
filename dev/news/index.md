@@ -2,9 +2,6 @@
 
 ## objr (development version)
 
-- Fix bug when downloaded files have MIME encoded-word syntax
-  ([\#72](https://github.com/ScotGovAnalysis/objr/issues/72)).
-
 ## objr 0.2.0
 
 ### New features
