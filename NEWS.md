@@ -1,6 +1,6 @@
 # objr (development version)
 
-* Fix bug when downloaded files have MIME encoded-word syntax (#72).
+* Fix bug when downloaded files have MIME-encoded syntax (#72).
 
 # objr 0.2.0
 
