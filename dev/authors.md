@@ -18,12 +18,12 @@ Source:
 [`DESCRIPTION`](https://github.com/ScotGovAnalysis/objr/blob/main/DESCRIPTION)
 
 Hannah A (2026). *objr: Wrapper for Objective APIs*. R package version
-0.2.0.9000, <https://github.com/ScotGovAnalysis/objr>.
+0.2.1.9000, <https://github.com/ScotGovAnalysis/objr>.
 
     @Manual{,
       title = {objr: Wrapper for Objective APIs},
       author = {Alice Hannah},
       year = {2026},
-      note = {R package version 0.2.0.9000},
+      note = {R package version 0.2.1.9000},
       url = {https://github.com/ScotGovAnalysis/objr},
     }
