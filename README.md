@@ -13,9 +13,10 @@ objr (pronounced "ob-jar") aims to provide a convenient method of interacting wi
 ## Installation
 
 If you are working within the Scottish Government network, you can
-install objr in the same way as with other R packages. The easiest way to do this is by using the [pkginstaller](https://github.com/ScotGovAnalysis/pkginstaller/tree/main) add-in. Further guidance is available on [eRDM](https://erdm.scotland.gov.uk:8443/documents/A42404229/details).
+install objr in the same way as with other R packages.
 
-Alternatively, objr can be installed directly from GitHub. Note that this method requires the remotes package and may not work from within the Scottish Government network.
+Alternatively, objr can be installed directly from GitHub. 
+Note that this method requires the remotes package and may not work from within the Scottish Government network.
 
 ``` r
 remotes::install_github(

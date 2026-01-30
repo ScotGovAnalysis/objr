@@ -280,4 +280,24 @@ test_that("Correct value returned", {
     ),
     "ayrshire & arran.csv"
   )
+
+  expect_equal(
+    file_name_from_header(
+      httr2::response(
+        headers = list(
+          `Content-Disposition` =
+            "filename=\"=?UTF-8?Q?ayrshire%20%26%20arran.csv?=\""
+        )
+      )
+    ),
+    "ayrshire & arran.csv"
+  )
+})
+
+
+# decode_mime ----
+
+test_that("Correct value returned", {
+  expect_equal(decode_mime("test.csv"), "test.csv")
+  expect_equal(decode_mime("=?UTF-8?Q?test.csv?="), "test.csv")
 })

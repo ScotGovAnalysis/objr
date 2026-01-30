@@ -236,6 +236,7 @@ file_name_from_header <- function(response,
       cont_disp,
       m = regexpr("(?<=filename=\\\").*(?=\\\")", cont_disp, perl = TRUE)
     ) %>%
+    decode_mime() %>%
     utils::URLdecode()
 
   if (length(file_name) == 0) {
@@ -250,4 +251,8 @@ file_name_from_header <- function(response,
 
   file_name
 
+}
+
+decode_mime <- function(string) {
+  gsub("(^=\\?UTF-8\\?Q\\?)|(\\?=$)", replacement = "", string)
 }
